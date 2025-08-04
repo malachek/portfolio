@@ -8,8 +8,8 @@
       font-family: sans-serif;
       text-align: center;
       padding: 100px;
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: #05091C;
+      color: #DCF1FF;
     }
     h1 {
       font-size: 2.5em;
@@ -18,28 +18,33 @@
     p {
       font-size: 1.2em;
     }
-    a {
-      display: block;
-      margin: 0.5em 0;
+    .link-row {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .link-row a {
       font-size: 1.1em;
-      color: #0077cc;
+      color: #98AFF1;
       text-decoration: none;
     }
-    a:hover {
+    .link-row a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <h1>🚧 Under Construction 🚧</h1>
-  <p>While I work, check out:</p>
+  <h1>Portfolio Under Construction!</h1>
+  <p>While I work, please check out my...</p>
 
-  <div id="links"></div>
+  <div id="links" class="link-row"></div>
 
   <script>
     const links = [
-      { name: "My Itch", url: "https://malachek.itch.io/" },
+      { name: "Itch.io", url: "https://malachek.itch.io/" },
       { name: "LinkedIn", url: "https://www.linkedin.com/in/malachykennedy/" },
       { name: "GitHub", url: "https://github.com/malachek" }
     ];
