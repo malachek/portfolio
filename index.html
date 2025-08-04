@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Under Construction</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 100px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+    }
+    p {
+      font-size: 1.2em;
+    }
+    a {
+      display: block;
+      margin: 0.5em 0;
+      font-size: 1.1em;
+      color: #0077cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚧 Under Construction 🚧</h1>
+  <p>While I work, check out:</p>
+
+  <div id="links"></div>
+
+  <script>
+    const links = [
+      { name: "My Portfolio", url: "https://yourportfolio.com" },
+      { name: "GitHub", url: "https://github.com/yourusername" },
+      { name: "LinkedIn", url: "https://linkedin.com/in/yourprofile" }
+    ];
+
+    const container = document.getElementById("links");
+    links.forEach(link => {
+      const a = document.createElement("a");
+      a.href = link.url;
+      a.textContent = link.name;
+      a.target = "_blank";
+      container.appendChild(a);
+    });
+  </script>
+
+</body>
+</html>
