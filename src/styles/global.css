@@ -1,0 +1,122 @@
+@import './tokens.css';
+
+/* ---- Reset ------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; }
+body {
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-compact);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, picture, video, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+a { color: inherit; }
+h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: inherit; }
+
+/* ---- Accessibility ---------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--panel);
+  color: var(--text);
+  border: 2px solid var(--focus);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+}
+.skip-link:focus { top: 8px; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Shared text styles ----------------------------------------------- */
+
+/* Body copy inside a capsule. Paragraph rhythm matches the file: 12px after the
+   first paragraph, 8px after the rest. */
+.prose {
+  max-width: var(--text-w);
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose);
+}
+.prose > * + * { margin-top: var(--list-gap); }
+.prose > :first-child + * { margin-top: var(--para-gap); }
+.prose strong { font-weight: 700; }
+.prose a { color: var(--text); text-underline-offset: 0.15em; }
+.prose a:hover { color: #fff; }
+.prose ul, .prose ol { padding-left: var(--list-indent); line-height: var(--lh-compact); }
+.prose li + li { margin-top: var(--list-gap); }
+
+/* Bullet list at the compact measure (the "manifest" lists). */
+.bullets {
+  max-width: var(--list-w);
+  padding-left: var(--list-indent);
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-compact);
+}
+.bullets li + li { margin-top: var(--list-gap); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-eyebrow);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--nav);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: 1;
+  color: var(--text);
+}
+
+.rule {
+  height: var(--rule-section);
+  background: var(--magenta);
+  border: 0;
+}
+
+/* Layout helper: the 1080 / 800 / fluid column with section padding. */
+.wrap {
+  width: 100%;
+  max-width: var(--section-max);
+  margin-inline: auto;
+  padding-inline: var(--section-pad-x);
+}
+@media (max-width: 1279.98px) { .wrap { max-width: 800px; } }
+@media (max-width: 799.98px) { .wrap { max-width: none; } }

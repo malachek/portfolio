@@ -1,0 +1,63 @@
+---
+/**
+ * Site footer (Figma "Universal / Footer", 1:4119): the header row repeated,
+ * then availability and contact. Fixes 00-SITE-WIDE.md §1: every contact line is
+ * a real link to its own destination, and the availability line is plain text.
+ */
+import Header from '@/components/site/Header.astro';
+
+interface Props {
+  name: string;
+  email: string;
+  github: string;
+  linkedin: string;
+  availability: string;
+  nav: { label: string; href: string }[];
+  homeHref?: string;
+}
+
+const { name, email, github, linkedin, availability, nav, homeHref } = Astro.props;
+const bare = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+<footer class="site-footer">
+  <Header name={name} github={github} linkedin={linkedin} nav={nav} homeHref={homeHref} as="div" navLabel="Footer" />
+  <div class="site-footer__body eyebrow">
+    <p class="site-footer__line">{availability}</p>
+    <a class="site-footer__line" href={`mailto:${email}`}>{email}</a>
+    <a class="site-footer__line" href={github} rel="me">{bare(github)}</a>
+    <a class="site-footer__line" href={linkedin} rel="me">{bare(linkedin)}</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ground);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .site-footer__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: var(--section-max);
+    margin-inline: auto;
+    padding: 0 var(--section-pad-x) 24px;
+    line-height: var(--lh-compact);
+  }
+  .site-footer__line {
+    max-width: 480px;
+    text-decoration: none;
+    color: var(--nav);
+  }
+  a.site-footer__line:hover { color: var(--text); text-decoration: underline; }
+
+  @media (max-width: 1279.98px) {
+    .site-footer__body { max-width: 800px; }
+  }
+  @media (max-width: 799.98px) {
+    .site-footer { gap: 4px; }
+    .site-footer__body { align-items: flex-start; max-width: 374px; padding-inline: 16px; }
+  }
+</style>

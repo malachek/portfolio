@@ -1,0 +1,34 @@
+---
+/**
+ * Capsule (Figma "Project/Section/Capsule/*"): the panel every block sits in.
+ *   standard - panel fill, 24/32 padding (24/24 tablet, 24/16 mobile)
+ *   over     - 40% black, for hero and card overlays
+ * Text, media rows and galleries are all children of a standard capsule; the
+ * live site pads media capsules the same as text ones.
+ */
+interface Props {
+  variant?: 'standard' | 'over';
+  /** Media capsules round to 24px on mobile, text capsules stay at 32. */
+  media?: boolean;
+  as?: 'div' | 'article' | 'aside';
+  class?: string;
+}
+const { variant = 'standard', media = false, as: Tag = 'div', class: className } = Astro.props;
+---
+<Tag class:list={['capsule', `capsule--${variant}`, { 'capsule--media': media }, className]}>
+  <slot />
+</Tag>
+
+<style>
+  .capsule {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap);
+    padding: var(--capsule-pad-y) var(--capsule-pad-x);
+    border-radius: var(--capsule-radius);
+    background: var(--panel);
+    overflow: clip;
+  }
+  .capsule--over { background: var(--scrim-40); }
+  .capsule--media { border-radius: var(--capsule-media-radius); }
+</style>

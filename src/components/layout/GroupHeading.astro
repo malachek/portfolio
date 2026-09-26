@@ -1,0 +1,44 @@
+---
+/**
+ * Group heading (component spec §3b): eyebrow + Jersey 10 title + magenta rule.
+ * The third structural level, for sections with many subsections. The spec
+ * allows the eyebrow in #6B7DA8 (5.04:1); it uses --nav, the same colour.
+ */
+interface Props { eyebrow: string; title: string; level?: 3 | 4; id?: string }
+const { eyebrow, title, level = 3, id } = Astro.props;
+const H = `h${level}` as 'h3' | 'h4';
+---
+<div class="group" id={id}>
+  <p class="group__eyebrow">{eyebrow}</p>
+  <H class="group__title">{title}</H>
+  <div class="group__rule" aria-hidden="true"></div>
+</div>
+
+<style>
+  .group { display: flex; flex-direction: column; padding-top: 80px; padding-bottom: 8px; }
+  .group__eyebrow {
+    font-weight: 700;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--nav);
+    margin-bottom: 4px;
+  }
+  .group__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-group);
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .group__rule { height: var(--rule-group); background: var(--magenta); }
+  @media (max-width: 1279.98px) {
+    .group { padding-top: 56px; }
+    .group__eyebrow { letter-spacing: 1px; }
+  }
+  @media (max-width: 799.98px) {
+    .group { padding-top: 40px; }
+    .group__eyebrow { margin-bottom: 2px; }
+    .group__title { margin-bottom: 6px; }
+  }
+</style>

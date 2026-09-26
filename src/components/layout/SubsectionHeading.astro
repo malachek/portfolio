@@ -1,0 +1,18 @@
+---
+/** Subsection heading (Figma "Project/Section/Subsection Heading"): Roboto Black, 36px above. */
+interface Props { level?: 3 | 4; id?: string }
+const { level = 3, id } = Astro.props;
+const H = `h${level}` as 'h3' | 'h4';
+---
+<H class="subsection" id={id}><slot /></H>
+
+<style>
+  .subsection {
+    padding-top: 36px;
+    font-family: var(--font-body);
+    font-weight: 900;
+    font-size: var(--fs-subsection);
+    line-height: 1;
+    color: var(--text);
+  }
+</style>

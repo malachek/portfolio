@@ -1,0 +1,32 @@
+---
+/**
+ * Row of media items (Figma "2 Media" wrap row; spec components 8 + 9).
+ *   cols 1 -> one item, full content width (888 / 688 / fluid)
+ *   cols 2 -> 2 x 428 desktop, 2 x 332 tablet, 1-up mobile
+ *   cols 3 -> 3 x 274 desktop, collapses to 2-up at tablet, 1-up mobile
+ * Galleries (4+ items) use cols 3 and wrap.
+ */
+interface Props { cols?: 1 | 2 | 3 }
+const { cols = 3 } = Astro.props;
+---
+<div class="media-row" data-cols={cols}>
+  <slot />
+</div>
+
+<style>
+  .media-row[data-cols='1'] { --cols: 1; }
+  .media-row[data-cols='2'] { --cols: 2; }
+  .media-row[data-cols='3'] { --cols: 3; }
+  .media-row {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: var(--grid-gap);
+    align-items: start;
+  }
+  @media (max-width: 1279.98px) {
+    .media-row[data-cols='3'] { --cols: 2; }
+  }
+  @media (max-width: 799.98px) {
+    .media-row[data-cols] { --cols: 1; }
+  }
+</style>

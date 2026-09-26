@@ -1,0 +1,52 @@
+---
+/**
+ * Brand and utility icons as inline SVG, so they inherit `currentColor`, scale
+ * crisply and cost no extra requests. Brand paths come from the simple-icons
+ * package (CC0); LinkedIn is no longer in simple-icons, so its glyph is drawn here.
+ */
+import { siGithub, siSteam, siItchdotio } from 'simple-icons';
+import type { IconName } from './icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  /** Accessible label. Omit when the icon sits inside a link that already has one. */
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 24, label, class: className } = Astro.props;
+
+const filled: Partial<Record<IconName, string>> = {
+  github: siGithub.path,
+  steam: siSteam.path,
+  itch: siItchdotio.path,
+  // LinkedIn "in" glyph on a rounded square, 24x24 grid.
+  linkedin:
+    'M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z',
+};
+
+const stroked: Partial<Record<IconName, string>> = {
+  globe:
+    'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z',
+  link: 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71',
+};
+
+const isStroke = name in stroked;
+const d = isStroke ? stroked[name] : filled[name];
+---
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={isStroke ? 'none' : 'currentColor'}
+  stroke={isStroke ? 'currentColor' : undefined}
+  stroke-width={isStroke ? 2 : undefined}
+  stroke-linecap={isStroke ? 'round' : undefined}
+  stroke-linejoin={isStroke ? 'round' : undefined}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+><path d={d} /></svg>

@@ -1,0 +1,104 @@
+---
+/**
+ * "Project Overview" capsule (Figma "Container Project", 1:1552).
+ * Left: title, rule, a label | value table. Right: the Steam store widget (when
+ * the game has a store page) and the code-samples pill. Mobile stacks them.
+ * Rendered as a <dl> so each label is programmatically tied to its value.
+ */
+import LinkPill from '@/components/project/LinkPill.astro';
+
+interface Props {
+  rows: { label: string; value: string }[];
+  steamAppId?: number;
+  code?: { href: string; label: string };
+  heading?: string;
+}
+const { rows, steamAppId, code, heading = 'Project Overview' } = Astro.props;
+---
+<div class="overview wrap">
+  <div class="overview__panel">
+    <div class="overview__left">
+      <h2 class="display overview__title">{heading}</h2>
+      <div class="rule" aria-hidden="true"></div>
+      <dl class="overview__table">
+        {rows.map((r) => (
+          <div class="overview__row">
+            <dt>{r.label}</dt>
+            <dd>{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    {(steamAppId || code) && (
+      <div class="overview__right">
+        {steamAppId && (
+          <iframe
+            class="overview__store"
+            src={`https://store.steampowered.com/widget/${steamAppId}/`}
+            title="Steam store page"
+            loading="lazy"
+            width="646"
+            height="190"
+          ></iframe>
+        )}
+        {code && <LinkPill href={code.href} size="code" underline>{code.label}</LinkPill>}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .overview { display: flex; justify-content: center; padding-bottom: 36px; }
+  .overview__panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    max-width: var(--content-max);
+    padding: 24px var(--capsule-pad-x) 12px;
+    border-radius: var(--capsule-radius);
+    background: var(--panel);
+  }
+  .overview__left { display: flex; flex-direction: column; gap: 12px; }
+  .overview__title { text-align: center; }
+  .overview__left .rule { height: var(--rule-section); }
+  .overview__table {
+    display: grid;
+    grid-template-columns: max-content auto;
+    padding: 0 8px;
+    font-size: var(--fs-body);
+    line-height: var(--lh-compact);
+    color: var(--text);
+  }
+  .overview__row { display: contents; }
+  /* 6px between rows, made from padding so the 1px divider stays continuous. */
+  .overview__row dt,
+  .overview__row dd { padding-block: 3px; }
+  .overview__row dt { padding-right: 8px; }
+  .overview__row dd { padding-left: 8px; border-left: 1px solid #fff; }
+  .overview__row:first-child > * { padding-top: 0; }
+  .overview__row:last-child > * { padding-bottom: 0; }
+  .overview__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 392px;
+  }
+  .overview__store { width: 100%; height: 180px; border: 0; border-radius: 4px; background: #1b2838; }
+
+  @media (max-width: 1279.98px) {
+    .overview__panel { padding-inline: 24px; }
+    .overview__right { flex-basis: 310px; }
+    .overview__store { height: 175px; }
+  }
+  @media (max-width: 799.98px) {
+    .overview__panel { flex-direction: column; gap: 12px; padding-inline: 16px; }
+    .overview__left { align-items: stretch; gap: 8px; width: 100%; }
+    .overview__table { justify-content: center; padding: 0; }
+    .overview__row dt { padding-right: 4px; }
+    .overview__row dd { padding-left: 4px; }
+    .overview__right { flex-basis: auto; width: 100%; }
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+/**
+ * Silent looping gameplay clip, the GIF replacement (00-ASSET-PIPELINE.md).
+ * - MP4 (H.264) required, WebM optional; files live on R2 (media.malachek.com).
+ * - Only plays while on screen; nothing downloads until it is near the viewport.
+ * - prefers-reduced-motion: never autoplays, shows the poster, keeps controls.
+ */
+interface Props {
+  mp4: string;
+  webm?: string;
+  poster?: string;
+  /** Describes what the clip shows, for screen readers. */
+  label: string;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+const { mp4, webm, poster, label, width = 1920, height = 1080, class: className } = Astro.props;
+---
+<video
+  class:list={['clip', className]}
+  data-autoplay-clip
+  muted
+  loop
+  playsinline
+  preload="none"
+  poster={poster}
+  width={width}
+  height={height}
+  aria-label={label}
+>
+  {webm && <source src={webm} type="video/webm" />}
+  <source src={mp4} type="video/mp4" />
+</video>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const clips = document.querySelectorAll<HTMLVideoElement>('video[data-autoplay-clip]');
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const { target, isIntersecting } of entries) {
+        const v = target as HTMLVideoElement;
+        if (reduce.matches) continue;
+        if (isIntersecting) {
+          if (v.preload === 'none') v.preload = 'auto';
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      }
+    },
+    { rootMargin: '200px 0px', threshold: 0.01 },
+  );
+
+  const applyMotionPreference = () => {
+    clips.forEach((v) => {
+      if (reduce.matches) {
+        v.pause();
+        v.controls = true;
+      } else {
+        v.controls = false;
+      }
+    });
+  };
+
+  applyMotionPreference();
+  reduce.addEventListener('change', applyMotionPreference);
+  clips.forEach((v) => io.observe(v));
+</script>
+
+<style>
+  .clip { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+</style>

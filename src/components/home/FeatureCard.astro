@@ -1,0 +1,247 @@
+---
+/**
+ * Home-page feature card: Figma "Home / Project card" (1:4148) and
+ * "Home / Experience" (1:4296). Full-bleed key art under a 40% scrim, a meta row
+ * (category left, dates right), then a scrim panel holding the text column and
+ * the clip. Each project carries its own accent for chips, rule and pill.
+ *
+ *   kind="project"    title = game name (Roboto Black), links beside it
+ *   kind="experience" title = role (Roboto Black), org = company (Medium Italic)
+ */
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Icon from '@/components/icons/Icon.astro';
+import type { IconName } from '@/components/icons/icons';
+import Chip from '@/components/project/Chip.astro';
+import LinkPill from '@/components/project/LinkPill.astro';
+import Media from '@/components/media/Media.astro';
+
+interface Props {
+  kind?: 'project' | 'experience';
+  category: string;
+  dates: string;
+  title: string;
+  org?: string;
+  href: string;
+  links?: { icon: IconName; href: string; label: string }[];
+  chips: string[];
+  bullets: string[];
+  blurb?: string;
+  /** Solid accent, e.g. '#D52FC7'. Chips use it at 60%. */
+  accent: string;
+  background: ImageMetadata | string;
+  media?: { image?: ImageMetadata | string; mp4?: string; poster?: string; alt: string };
+  ctaLabel?: string;
+}
+
+const {
+  kind = 'project',
+  category,
+  dates,
+  title,
+  org,
+  href,
+  links = [],
+  chips,
+  bullets,
+  blurb,
+  accent,
+  background,
+  media,
+  ctaLabel = 'See More',
+} = Astro.props;
+
+const bgUrl =
+  typeof background === 'string'
+    ? background
+    : (await getImage({ src: background, width: 1600, format: 'webp' })).src;
+const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
+---
+<article class:list={['fcard', `fcard--${kind}`]} style={`--accent:${accent}; --fcard-bg:url('${bgUrl}')`}>
+  <div class="fcard__meta">
+    <p>{category}</p>
+    <p>{dates}</p>
+  </div>
+  <div class="fcard__panel">
+    <div class="fcard__text">
+      <div class="fcard__titlebar">
+        <div class="fcard__titles">
+          <h3 class="fcard__title"><a href={href}>{title}</a></h3>
+          {org && <p class="fcard__org">{org}</p>}
+        </div>
+        {links.length > 0 && (
+          <ul class="fcard__links" role="list">
+            {links.map((l) => (
+              <li><a href={l.href} rel="noopener"><Icon name={l.icon} size={36} label={l.label} /></a></li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <ul class="fcard__chips" role="list" aria-label="Technologies">
+        {chips.map((c) => <Chip color={chipBg}>{c}</Chip>)}
+      </ul>
+      <div class="fcard__rule" aria-hidden="true"></div>
+      <ul class="fcard__bullets">
+        {bullets.map((b) => <li>{b}</li>)}
+      </ul>
+      <div class="fcard__cta">
+        <LinkPill href={href} color={accent}>{ctaLabel}<span class="visually-hidden"> about {title}</span></LinkPill>
+      </div>
+    </div>
+    {media && (
+      <div class="fcard__media">
+        <Media {...media} sizes="(max-width: 799px) 100vw, 440px" />
+        {blurb && <p class="fcard__blurb">{blurb}</p>}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .fcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding: 24px 64px;
+    border-radius: 32px;
+    overflow: clip;
+    background:
+      linear-gradient(var(--scrim-40), var(--scrim-40)),
+      var(--fcard-bg) center / cover no-repeat;
+    color: #fff;
+  }
+  .fcard__meta {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1152px;
+    font-size: var(--fs-body);
+    line-height: var(--lh-compact);
+  }
+  .fcard__panel {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    max-width: 1152px;
+    padding: 12px 16px 0;
+    border-radius: 32px;
+    background: var(--scrim-40);
+  }
+  .fcard--experience .fcard__panel { gap: 32px; padding: 12px 16px 0 32px; max-width: 1080px; }
+  .fcard__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 612px;
+    max-width: 100%;
+    padding: 16px 4px 16px 0;
+  }
+  .fcard--experience .fcard__text { flex: 1 1 0; width: auto; gap: 16px; }
+  .fcard__titlebar { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 16px; }
+  .fcard--experience .fcard__titlebar { align-items: flex-end; }
+  .fcard__titles { display: flex; flex-direction: column; gap: 16px; }
+  .fcard__title {
+    font-weight: 900;
+    font-size: var(--fs-card-title);
+    line-height: 1;
+  }
+  .fcard__title a { text-decoration: none; }
+  .fcard__title a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+  .fcard__org { font-weight: 500; font-style: italic; font-size: var(--fs-card-org); line-height: 1; }
+  .fcard__links { display: flex; gap: 16px; align-items: center; }
+  .fcard__links a { display: inline-flex; color: #fff; }
+  .fcard__links :global(svg) { width: 36px; height: 36px; }
+  .fcard__chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; }
+  .fcard__rule { height: 4px; background: var(--accent); }
+  .fcard__bullets {
+    padding-left: var(--list-indent);
+    font-size: var(--fs-body);
+    line-height: var(--lh-prose);
+  }
+  .fcard__bullets li + li { margin-top: var(--list-gap); }
+  .fcard__cta { display: flex; align-items: center; }
+  .fcard__media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 440px;
+    padding: 12px 0 0 8px;
+  }
+  .fcard--experience .fcard__media { flex-basis: 400px; padding: 0 0 16px 24px; }
+  .fcard__media :global(.media) { width: 100%; gap: 0; }
+  .fcard__media :global(.media__img),
+  .fcard__media :global(.clip) { border-radius: 16px; object-fit: contain; }
+  .fcard__blurb {
+    padding-top: 8px;
+    text-align: center;
+    font-size: var(--fs-body);
+    line-height: var(--lh-prose);
+  }
+
+  @media (max-width: 1279.98px) {
+    .fcard { gap: 4px; padding: 16px; }
+    .fcard--experience { gap: 12px; padding: 32px 64px; }
+    .fcard__meta { max-width: 800px; }
+    .fcard__panel { gap: 8px; max-width: 768px; padding: 0 0 16px; background: none; }
+    .fcard--experience .fcard__panel {
+      flex-direction: column-reverse;
+      align-items: center;
+      max-width: 640px;
+      padding: 8px 32px;
+      background: var(--scrim-40);
+    }
+    .fcard__text {
+      flex: 1 1 0;
+      width: auto;
+      padding: 24px 12px 16px;
+      border-radius: 32px;
+      background: var(--scrim-40);
+    }
+    .fcard--experience .fcard__text { padding: 0; background: none; gap: 8px; width: 100%; }
+    .fcard__titlebar, .fcard__chips { padding-inline: 16px; }
+    .fcard--experience .fcard__titlebar, .fcard--experience .fcard__chips { padding-inline: 0; }
+    .fcard__links :global(svg) { width: 24px; height: 24px; }
+    .fcard__cta { justify-content: center; }
+    .fcard__media {
+      flex: 0 0 280px;
+      padding: 0 0 16px;
+      border-radius: 16px;
+      overflow: clip;
+      background: var(--scrim-40);
+      margin-top: 16px;
+    }
+    .fcard--experience .fcard__media { flex: none; width: 320px; padding: 8px 0 0; background: none; margin: 0; }
+    .fcard__blurb { padding: 8px 8px 0; }
+  }
+
+  @media (max-width: 799.98px) {
+    .fcard, .fcard--experience { gap: 8px; padding: 16px; }
+    .fcard--experience { padding-block: 32px; }
+    .fcard__meta { flex-wrap: wrap; justify-content: center; gap: 0 32px; max-width: 374px; }
+    .fcard__panel,
+    .fcard--experience .fcard__panel {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 12px;
+      max-width: 374px;
+      padding: 0;
+      background: var(--scrim-40);
+    }
+    .fcard--experience .fcard__panel { gap: 24px; }
+    .fcard__text,
+    .fcard--experience .fcard__text { padding: 0 12px 16px; background: none; gap: 24px; }
+    .fcard__titlebar { justify-content: center; padding: 0; }
+    .fcard__titles { align-items: center; text-align: center; gap: 12px; }
+    .fcard__chips { flex-wrap: nowrap; overflow-x: auto; padding: 0; }
+    .fcard__links :global(svg) { width: 24px; height: 24px; }
+    .fcard__media,
+    .fcard--experience .fcard__media { flex: none; width: 100%; padding: 0; margin: 0; background: none; }
+    .fcard__blurb { padding: 8px 12px 0; }
+  }
+</style>

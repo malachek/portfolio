@@ -1,0 +1,130 @@
+/*
+ * Design tokens for malachek.com.
+ *
+ * Sources, in order of authority (see docs/design-baseline.md):
+ *   1. Portfolio-Ref Figma file (bxnKAhmMJZwlMsyGW2tpCb): colors, fonts, auto-layout spacing.
+ *   2. The live Figma Sites build, measured with getComputedStyle at 1280 / 800 / 374:
+ *      rendered type sizes per breakpoint (Sites applies per-breakpoint text-style
+ *      overrides that the Figma API does not expose).
+ *   3. The only deliberate changes are WCAG AA text-safe variants (*-text tokens).
+ *
+ * Breakpoints (desktop-first):  desktop >= 1280 | tablet 800-1279 | mobile < 800
+ */
+
+:root {
+  /* ---- Color ---------------------------------------------------------- */
+  --ground: #010210;          /* page background */
+  --panel: #0f1528;           /* capsule fill ("bg-light" in Figma) */
+  --text: #dcf1ff;            /* headings, overview rows, nav-adjacent text */
+  --text-body: #ffffff;       /* capsule body copy renders pure white on the live site */
+  --magenta: #d52fc7;         /* rules, pills, accents. 4.97:1 on ground */
+  --magenta-60: rgb(213 47 199 / 0.6);  /* chips */
+  --magenta-80: rgb(213 47 199 / 0.8);  /* code-sample link pill */
+  --purple: #5858c7;          /* fills, borders, decoration only: 3.57:1, fails as text */
+  --purple-text: #706ef4;     /* any purple text, link or small icon: 5.14 / 4.51 */
+  --muted: #516092;           /* decoration only: 3.38:1, fails as text */
+  --muted-text: #707fb0;      /* captions and secondary text: 5.26 / 4.62 */
+  --nav: #6b7da8;             /* header/footer eyebrow text as in the file: 5.04:1 on ground */
+  --border: rgb(255 255 255 / 0.2);
+  --scrim-40: rgb(0 0 0 / 0.4);
+  --scrim-60: rgb(0 0 0 / 0.6);
+  --focus: #dcf1ff;
+
+  /* ---- Fonts ---------------------------------------------------------- */
+  --font-display: 'Jersey 10', 'Roboto', system-ui, sans-serif;
+  --font-body: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ---- Type scale: desktop values (tablet/mobile overridden below) ----- */
+  --fs-display: 48px;         /* page title, section heading (Jersey 10) */
+  --fs-group: 32px;           /* group heading (Jersey 10) */
+  --fs-subsection: 24px;      /* Roboto Black */
+  --fs-card-title: 40px;      /* home card title, Roboto Black */
+  --fs-card-org: 32px;        /* home experience company, Roboto Medium Italic */
+  --fs-body: 20px;
+  --lh-prose: 1.6;            /* paragraphs */
+  --lh-compact: 1.28;         /* lists, captions, overview rows */
+  --fs-eyebrow: 14px;         /* header/footer, Roboto Bold uppercase */
+  --lh-eyebrow: 1.2;
+  --fs-chip: 16px;
+  --fs-code-link: 16px;       /* overview code-sample pill */
+
+  /* ---- Layout --------------------------------------------------------- */
+  --page-max: 1280px;
+  --section-max: 1080px;
+  --section-pad-x: 64px;
+  --content-max: 952px;       /* capsule width; section padding does the rest */
+  --text-w: 680px;            /* body measure inside a capsule */
+  --list-w: 650px;
+
+  --capsule-pad-y: 24px;
+  --capsule-pad-x: 32px;
+  --capsule-radius: 32px;
+  --capsule-media-radius: 32px;
+  --stack-gap: 24px;          /* between capsules, and between items inside one */
+  --section-pad-bottom: 36px;
+  --heading-pad-top: 36px;
+  --heading-pad-bottom: 8px;
+  --heading-gap: 8px;
+  --rule-section: 3px;
+  --rule-group: 2px;
+  --grid-gap: 32px;
+  --caption-gap: 24px;
+  --para-gap: 12px;
+  --list-gap: 8px;
+  --list-indent: 24px;
+
+  --radius-tile: 8px;
+  --radius-chip: 4px;
+  --radius-pill: 8px;
+
+  --header-h: 36px;
+}
+
+/* Tablet: 800-1279 */
+@media (max-width: 1279.98px) {
+  :root {
+    --fs-display: 40px;
+    --fs-group: 28px;
+    --fs-subsection: 22px;
+    --fs-card-title: 30px;
+    --fs-card-org: 28px;
+    --fs-body: 18px;
+    --fs-eyebrow: 13px;
+    --lh-eyebrow: 1;
+    --fs-chip: 12px;
+    --fs-code-link: 12px;
+
+    --section-pad-x: 32px;
+    --content-max: 736px;
+    --text-w: 100%;
+    --list-w: 100%;
+    --capsule-pad-x: 24px;
+    --grid-gap: 24px;
+  }
+}
+
+/* Mobile: < 800 */
+@media (max-width: 799.98px) {
+  :root {
+    --fs-display: 32px;
+    --fs-group: 24px;
+    --fs-subsection: 20px;
+    --fs-card-title: 28px;
+    --fs-card-org: 20px;
+    --fs-body: 17px;
+    --lh-prose: 1.5;
+    --fs-eyebrow: 12px;
+    --fs-chip: 10px;
+    --fs-code-link: 10px;
+
+    --section-pad-x: 16px;
+    --content-max: 100%;
+    --capsule-pad-x: 16px;
+    --capsule-media-radius: 24px;
+    --heading-pad-top: 57px;
+    --heading-pad-bottom: 6px;
+    --rule-section: 2px;
+    --rule-group: 1px;
+    --grid-gap: 16px;
+  }
+}

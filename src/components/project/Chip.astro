@@ -1,0 +1,21 @@
+---
+/** Tech tag (Figma "Tag"): 60% magenta fill, 4px radius, white text. */
+interface Props { color?: string }
+const { color = 'var(--magenta-60)' } = Astro.props;
+---
+<li class="chip" style={`--chip-bg:${color}`}><slot /></li>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 2px;
+    border-radius: var(--radius-chip);
+    background: var(--chip-bg);
+    color: #fff;
+    font-size: var(--fs-chip);
+    line-height: var(--lh-compact);
+    white-space: nowrap;
+    list-style: none;
+  }
+</style>

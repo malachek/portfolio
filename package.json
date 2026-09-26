@@ -1,0 +1,27 @@
+{
+  "name": "malachek-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "malachek.com: one codebase, role-tailored portfolio variants.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@fontsource/jersey-10": "^5.1.0",
+    "@fontsource/roboto": "^5.1.0",
+    "astro": "^5.5.0",
+    "simple-icons": "^13.0.0",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

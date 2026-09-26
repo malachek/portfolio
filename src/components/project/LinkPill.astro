@@ -1,0 +1,55 @@
+---
+/**
+ * Magenta link pill ("See More", "github.com/malachek/EXO_CodeSamples").
+ * Always a real <a>. Text sits on --magenta-80 over the panel.
+ * Contrast note: #DCF1FF on #D52FC7 is 3.57:1, below AA for regular-weight text
+ * under 24px. See docs/design-baseline.md "Pending visual fixes".
+ */
+interface Props {
+  href: string;
+  size?: 'code' | 'cta';
+  /** Accent override, e.g. a project's own colour on home cards. */
+  color?: string;
+  underline?: boolean;
+  external?: boolean;
+}
+const { href, size = 'cta', color, underline = false, external = /^https?:/.test(href) } = Astro.props;
+---
+<a
+  class:list={['pill', `pill--${size}`, { 'pill--underline': underline }]}
+  href={href}
+  style={color ? `--pill-bg:${color}` : undefined}
+  rel={external ? 'noopener' : undefined}
+><slot /></a>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--pill-bg, var(--magenta));
+    color: var(--text);
+    text-decoration: none;
+    line-height: var(--lh-compact);
+    white-space: nowrap;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
+  }
+  .pill--cta { padding: 6px 16px; font-size: var(--fs-body); }
+  .pill--code {
+    padding: 6px 16px;
+    background: var(--pill-bg, var(--magenta-80));
+    box-shadow: 0 0.5px 4.25px rgb(0 0 0 / 0.75);
+    font-size: var(--fs-code-link);
+  }
+  .pill--underline { text-decoration: underline; text-underline-position: from-font; }
+  .pill:hover { filter: brightness(1.12); }
+
+  @media (max-width: 1279.98px) {
+    .pill--cta, .pill--code { padding: 4px 6px; }
+  }
+  @media (max-width: 799.98px) {
+    .pill--cta, .pill--code { padding: 2px 4px; }
+  }
+</style>

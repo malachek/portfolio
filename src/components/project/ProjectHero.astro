@@ -1,0 +1,111 @@
+---
+/**
+ * Project hero (Figma "Project/Hero", 1:1551 / 1:1711 / 1:1871).
+ * Full-bleed key art, a scrim card with rounded top corners, the page title (the
+ * page's only <h1>), up to three lines of summary, the game's logo, and a 4px
+ * magenta rule closing the card. Mobile stacks the logo above the text.
+ * The home page reuses it with a darker scrim and an extra credential line.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+
+interface Props {
+  title: string;
+  lines: string[];
+  background: ImageMetadata | string;
+  logo?: ImageMetadata | string;
+  logoAlt?: string;
+  /** Home hero uses a 60% scrim; project pages use 40%. */
+  scrim?: 40 | 60;
+  /** Optional uppercase credential line under the summary (home page). */
+  credential?: string;
+}
+
+const { title, lines, background, logo, logoAlt = '', scrim = 40, credential } = Astro.props;
+
+// Background as CSS image so it can sit behind the card; optimised when local.
+const bgUrl =
+  typeof background === 'string'
+    ? background
+    : (await getImage({ src: background, width: 1920, format: 'webp' })).src;
+---
+<div class="hero" style={`--hero-bg: url('${bgUrl}')`} data-scrim={scrim}>
+  <div class="hero__card">
+    <div class="hero__body">
+      <div class="hero__text">
+        <h1 class="display hero__title">{title}</h1>
+        <div class="hero__lines">
+          {lines.map((l) => <p>{l}</p>)}
+        </div>
+        {credential && <p class="eyebrow hero__credential">{credential}</p>}
+        <slot name="text-end" />
+      </div>
+      {(logo || Astro.slots.has('aside')) && (
+        <div class="hero__aside">
+          {logo && (typeof logo === 'string'
+            ? <img class="hero__logo" src={logo} alt={logoAlt} />
+            : <Image class="hero__logo" src={logo} alt={logoAlt} widths={[240, 480]} sizes="237px" loading="eager" />)}
+          <slot name="aside" />
+        </div>
+      )}
+    </div>
+    <div class="hero__rule" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style>
+  .hero {
+    display: flex;
+    justify-content: center;
+    padding: 24px var(--section-pad-x) 0;
+    margin-bottom: 48px;
+    background: var(--hero-bg) center / cover no-repeat, var(--ground);
+  }
+  .hero__card {
+    width: 100%;
+    max-width: var(--content-max);
+    padding-top: 12px;
+    border-radius: var(--capsule-radius) var(--capsule-radius) 0 0;
+    background: var(--scrim-40);
+  }
+  .hero[data-scrim='60'] .hero__card { background: var(--scrim-60); }
+  .hero__body {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    padding: 24px 32px;
+  }
+  .hero__text { flex: 1 1 0; min-width: 0; }
+  .hero__lines {
+    padding: 16px 0;
+    font-size: var(--fs-body);
+    line-height: var(--lh-prose);
+    color: var(--text);
+  }
+  .hero__lines > p + p { margin-top: var(--para-gap); }
+  .hero__credential { line-height: var(--lh-compact); }
+  .hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex: 0 0 237px;
+  }
+  .hero__logo { width: 237px; height: 189px; object-fit: contain; }
+  .hero__rule { height: 4px; background: var(--magenta); }
+
+  @media (max-width: 1279.98px) {
+    .hero { margin-bottom: 36px; }
+    .hero__aside { flex-basis: 180px; }
+    .hero__logo { width: 180px; height: 144px; }
+  }
+
+  @media (max-width: 799.98px) {
+    .hero { margin-bottom: 48px; }
+    .hero__card { padding: 12px 16px 0; }
+    .hero__body { flex-direction: column-reverse; align-items: center; gap: 32px; padding: 24px 0; }
+    .hero__text { width: 100%; }
+    .hero__aside { flex-basis: auto; }
+    .hero__logo { width: 98px; height: 78px; }
+  }
+</style>

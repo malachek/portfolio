@@ -1,0 +1,13 @@
+---
+/** Section frame line (Figma "Project/Section/Subheading"): one line of body text, no panel. */
+---
+<p class="lead"><slot /></p>
+
+<style>
+  .lead {
+    max-width: var(--text-w);
+    font-size: var(--fs-body);
+    line-height: var(--lh-compact);
+    color: var(--text-body);
+  }
+</style>

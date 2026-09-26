@@ -1,0 +1,16 @@
+# Site-wide settings shared by every role variant.
+# Contact details mirror resume-system/master/00-contact.md. Only whitelisted URLs go here.
+
+name: Malachy Kennedy
+email: malachykennedy1@gmail.com
+github: https://github.com/malachek
+linkedin: https://www.linkedin.com/in/malachykennedy/
+
+# Shown in the footer as plain text (not a link).
+availability: Open to Summer 2027 internships and new-grad gameplay engineering & design roles.
+
+nav:
+  - label: Projects
+    href: /#projects
+  - label: Resume
+    href: resume   # resolved per role to that role's PDF
