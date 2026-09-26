@@ -12,6 +12,7 @@ hero:
     - An indie studio with three titles on Steam.
     - Co-Founder & Game Engineer · 10 developers · Apr 2024 – Present
     - 2 shipped · 1 approved for release · Unreal Engine 5 · Unity 6
+  pattern: /art/bog-pattern.jpg
   logo: https://malachek.com/_assets/v11/587204184afaa85ff870c9759eddf2658e9344fd.png
 overview:
   heading: Overview

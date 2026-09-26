@@ -3,7 +3,7 @@
 /* ---- Reset ------------------------------------------------------------ */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; scroll-padding-top: 96px; }
 body {
   min-height: 100vh;
   background: var(--ground);
@@ -88,6 +88,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: 
   line-height: var(--lh-prose);
 }
 .bullets li + li { margin-top: var(--list-gap); }
+/* Figma draws a small dot, not the default disc. */
+.bullets li::marker { font-size: 0.7em; }
 
 .eyebrow {
   font-family: var(--font-body);

@@ -85,6 +85,8 @@ const projects = defineCollection({
     hero: z.object({
       lines: z.array(z.string()).min(1).max(4),
       background: z.string().optional(),
+      /** Tiled texture used instead of key art (e.g. Burnt Out Games), drawn at 300px. */
+      pattern: z.string().optional(),
       logo: z.string().optional(),
       logoAlt: z.string().optional(),
     }),
@@ -111,6 +113,8 @@ const featureCard = z.object({
   href: z.string(),
   accent: z.string().regex(/^#[0-9a-fA-F]{6}$/),
   background: z.string().optional(),
+  /** Tiled texture used instead of key art, drawn at 300px. */
+  pattern: z.string().optional(),
   chips: z.array(z.string()).default([]),
   bullets: z.array(z.string()),
   links: z.array(iconLink).default([]),

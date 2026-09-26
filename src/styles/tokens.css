@@ -94,8 +94,8 @@
     --fs-body: 18px;
     --fs-eyebrow: 13px;
     --lh-eyebrow: 1;
-    --fs-chip: 12px;
-    --fs-code-link: 12px;
+    --fs-chip: 14px; /* Figma 12; raised for legibility */
+    --fs-code-link: 14px;
 
     --section-pad-x: 32px;
     --content-max: 736px;
@@ -117,8 +117,9 @@
     --fs-body: 17px;
     --lh-prose: 1.5;
     --fs-eyebrow: 12px;
-    --fs-chip: 10px;
-    --fs-code-link: 10px;
+    --fs-chip: 12px; /* Figma Sites renders 10; 12 is the legibility floor */
+    --fs-code-link: 12px;
+    --header-h: 48px;
 
     --section-pad-x: 16px;
     --content-max: 100%;

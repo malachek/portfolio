@@ -53,6 +53,8 @@ const H = `h${level}` as 'h2' | 'h3';
   }
   .section__heading--sticky {
     position: sticky;
+    /* Sticks at 0: the sticky site header (z 20) covers the band's top padding,
+       so the heading text lands just under the header, as on the live site. */
     top: 0;
     z-index: 5;
   }
@@ -69,5 +71,9 @@ const H = `h${level}` as 'h2' | 'h3';
     max-width: var(--page-max);
     margin-inline: auto;
     padding-inline: var(--section-pad-x);
+  }
+  @media (max-width: 799.98px) {
+    /* Mobile: the rule lines up with the heading text instead of running edge to edge. */
+    .section--bleed .section__heading .rule { width: auto; margin-inline: var(--section-pad-x); }
   }
 </style>

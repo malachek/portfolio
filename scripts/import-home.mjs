@@ -35,7 +35,7 @@ const CARDS = {
     { icon: 'globe', href: 'https://vgdc-uci.com', label: 'VGDC website' } ] },
 };
 const SMALL = {
-  'Night Walk': { accent: '#43792E' },
+  'Night Walk': { accent: '#43792E', links: [{ icon: 'itch', href: 'https://peteryoon.itch.io/night-walk', label: 'Night Walk on itch.io' }] },
   'Trick or Treat': { accent: '#632E03', links: [{ icon: 'globe', href: 'https://www.roblox.com/games/89963863217995/Trick-or-Treat', label: 'Play Trick or Treat on Roblox' }] },
   Loonage: { accent: '#86BE3A' },
   Limital: { accent: '#60788D', links: [{ icon: 'globe', href: 'https://devpost.com/software/limital', label: 'Limital case study on Devpost' }] },
@@ -110,7 +110,6 @@ for (let k = 0; k < ab.length; k++) {
 const dropped = [];
 const more = ab.find((x) => x.t === 'p' && /Everything else/.test(x.text));
 if (more) dropped.push(`Also Built footer "${more.text}" (malachek.itch.io is not on the whitelist)`);
-dropped.push('Night Walk itch link (peteryoon.itch.io/night-walk is not on the whitelist)');
 
 // Experience + leadership sections
 while (b[i]?.t === 'display' && b[i].text !== 'Skills') {

@@ -19,7 +19,7 @@ interface Props {
 
 const { name, github, linkedin, nav, homeHref = '/', as: Tag = 'header', navLabel = 'Primary' } = Astro.props;
 ---
-<Tag class="site-header">
+<Tag class:list={['site-header', { 'site-header--sticky': Tag === 'header' }]}>
   <div class="site-header__inner">
     <a class="site-header__name eyebrow" href={homeHref}>{name}</a>
     <nav class="site-header__nav" aria-label={navLabel}>
@@ -42,11 +42,18 @@ const { name, github, linkedin, nav, homeHref = '/', as: Tag = 'header', navLabe
     background: var(--ground);
     padding-bottom: 4px;
   }
+  /* The page header stays on screen; section headings stick just below it. */
+  .site-header--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: var(--header-h);
+  }
   .site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: var(--section-max);
+    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
     margin-inline: auto;
     padding: 8px var(--section-pad-x) 0;
     min-height: calc(var(--header-h) - 4px);

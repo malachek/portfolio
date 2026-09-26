@@ -36,4 +36,17 @@ Settled choices. Do not re-ask. Every new decision gets a dated line here.
 - The live site's tablet and phone layouts are missing content that desktop has (e.g. VGDC's Design section, an older EXO Camera block). The rebuild shows the desktop content at every size.
 - Media still streams from malachek.com/_videos and /_assets for now; it moves to R2 before the DNS cutover.
 - Per-page SEO titles/descriptions from resume-system/portfolio/15-seo-metadata.md (em dashes swapped for colons).
-- URLs not on the whitelist were dropped: peteryoon.itch.io/night-walk, malachek.itch.io ("Everything else" line). /resume still embeds the Google Drive PDF until per-role PDFs exist.
+- URLs not on the whitelist were dropped: malachek.itch.io ("Everything else" line). peteryoon.itch.io/night-walk was confirmed correct by Malachy and added to the whitelist. /resume still embeds the Google Drive PDF until per-role PDFs exist.
+
+## Design fidelity pass (2026-09-26)
+Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to web standards.
+- Gameplay videos autoplay muted and looped with no player UI, even with Reduce Motion on (his call). They pause while off screen.
+- Site header is sticky. Section headings stick at the top underneath it, so the heading text lands just below the header, like the live site.
+- Header content spans the same 1080px as the live site on desktop (name at x100).
+- List bullets are small dots (Figma), not the default disc.
+- Chips: 3px 6px padding (Figma's 2px sides read cramped). Chip and code-link text raised to 14px on tablet and 12px on phone, because 10px is below a readable size. Phone chips wrap and center instead of scrolling sideways.
+- Card icons run GitHub, Steam, itch, website (Figma order).
+- Card clips fill their frame (cover, 16px radius) instead of letterboxing on black.
+- Phone cards: date row split left/right, tighter title/chips/rule spacing, section rule inset to line up with the heading text.
+- Burnt Out Games gets its Figma backing: the ember pattern (`public/art/bog-pattern.jpg`, tiled at 300px) behind the page hero and the home experience card. New optional `pattern` field on project heroes and home cards. Re-running the importers with `--force` would drop it.
+- `astro.config.mjs` has a dev-server-only `/__grab` route that saves a Figma asset URL into `public/art/`, so design assets can be pulled while the sandbox has no internet. It is not part of the built site.

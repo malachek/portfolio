@@ -13,6 +13,8 @@ interface Props {
   title: string;
   lines: string[];
   background?: ImageMetadata | string;
+  /** Tiled texture shown instead of key art (repeats at 300px). */
+  pattern?: string;
   logo?: ImageMetadata | string;
   logoAlt?: string;
   /** Home hero uses a 60% scrim; project pages use 40%. */
@@ -25,7 +27,7 @@ interface Props {
   offset?: boolean;
 }
 
-const { title, lines, background, logo, logoAlt = '', scrim = 40, credential, rule = true, offset = false } = Astro.props;
+const { title, lines, background, pattern, logo, logoAlt = '', scrim = 40, credential, rule = true, offset = false } = Astro.props;
 
 // Background as CSS image so it can sit behind the card; optimised when local.
 const bgUrl = !background
@@ -34,7 +36,11 @@ const bgUrl = !background
     ? background
     : (await getImage({ src: background, width: 1920, format: 'webp' })).src;
 ---
-<div class:list={['hero', { 'hero--offset': offset }]} style={bgUrl ? `--hero-bg: url('${bgUrl}')` : undefined} data-scrim={scrim}>
+<div
+  class:list={['hero', { 'hero--offset': offset, 'hero--pattern': !bgUrl && pattern }]}
+  style={bgUrl ? `--hero-bg: url('${bgUrl}')` : pattern ? `--hero-bg: url('${pattern}')` : undefined}
+  data-scrim={scrim}
+>
   <div class="hero__card">
     <div class="hero__body">
       <div class="hero__text">
@@ -66,6 +72,7 @@ const bgUrl = !background
     margin-bottom: 48px;
     background: var(--hero-bg, none) center / cover no-repeat, var(--ground);
   }
+  .hero--pattern { background: var(--hero-bg) top left / 300px 300px repeat, var(--ground); }
   .hero--offset { margin-top: 24px; margin-bottom: 24px; }
   .hero__card {
     width: 100%;

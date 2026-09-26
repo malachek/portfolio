@@ -136,6 +136,10 @@ alsoBuilt:
       blurb: First person horror experience. UE5.7
       image: https://malachek.com/_assets/v11/846f5c5a4d18e88e13060454a449403ca73d7d0c.png?w=512
       accent: "#43792E"
+      links:
+        - icon: itch
+          href: https://peteryoon.itch.io/night-walk
+          label: Night Walk on itch.io
     - title: Trick or Treat
       blurb: Multiplayer Roblox game. Lua.
       image: https://malachek.com/_assets/v11/69e737e96ab6c05a527fd453ecd6c8d9be9fa539.png?w=512
@@ -178,6 +182,7 @@ experience:
           - Turned playtest and post-release feedback into shipped design revisions, including post-launch clarity fixes.
         title: Co-Founder & Game Engineer
         org: Burnt Out Games, LLC
+        pattern: /art/bog-pattern.jpg
         media:
           kind: image
           src: https://malachek.com/_assets/v11/587204184afaa85ff870c9759eddf2658e9344fd.png?w=512

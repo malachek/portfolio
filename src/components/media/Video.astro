@@ -1,9 +1,10 @@
 ---
 /**
  * Silent looping gameplay clip, the GIF replacement (00-ASSET-PIPELINE.md).
- * - MP4 (H.264) required, WebM optional; files live on R2 (media.malachek.com).
- * - Only plays while on screen; nothing downloads until it is near the viewport.
- * - prefers-reduced-motion: never autoplays, shows the poster, keeps controls.
+ * Behaves like a GIF: autoplays, loops, muted, no player controls (Malachy's call,
+ * 2026-09-26, including when the OS asks for reduced motion).
+ * - MP4 (H.264) required, WebM optional; files move to R2 (media.malachek.com).
+ * - Downloads only as it nears the viewport, and pauses while off screen.
  */
 interface Props {
   mp4: string;
@@ -19,11 +20,14 @@ const { mp4, webm, poster, label, width = 1920, height = 1080, class: className 
 ---
 <video
   class:list={['clip', className]}
-  data-autoplay-clip
+  data-clip
+  autoplay
   muted
   loop
   playsinline
-  preload="none"
+  disablepictureinpicture
+  disableremoteplayback
+  preload="metadata"
   poster={poster}
   width={width}
   height={height}
@@ -34,41 +38,27 @@ const { mp4, webm, poster, label, width = 1920, height = 1080, class: className 
 </video>
 
 <script>
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const clips = document.querySelectorAll<HTMLVideoElement>('video[data-autoplay-clip]');
-
+  const clips = document.querySelectorAll<HTMLVideoElement>('video[data-clip]');
   const io = new IntersectionObserver(
     (entries) => {
       for (const { target, isIntersecting } of entries) {
         const v = target as HTMLVideoElement;
-        if (reduce.matches) continue;
         if (isIntersecting) {
-          if (v.preload === 'none') v.preload = 'auto';
+          v.muted = true; // property, not just the attribute, or some browsers refuse autoplay
           v.play().catch(() => {});
         } else {
           v.pause();
         }
       }
     },
-    { rootMargin: '200px 0px', threshold: 0.01 },
+    { rootMargin: '300px 0px', threshold: 0.01 },
   );
-
-  const applyMotionPreference = () => {
-    clips.forEach((v) => {
-      if (reduce.matches) {
-        v.pause();
-        v.controls = true;
-      } else {
-        v.controls = false;
-      }
-    });
-  };
-
-  applyMotionPreference();
-  reduce.addEventListener('change', applyMotionPreference);
-  clips.forEach((v) => io.observe(v));
+  clips.forEach((v) => {
+    v.controls = false;
+    io.observe(v);
+  });
 </script>
 
 <style>
-  .clip { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+  .clip { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; pointer-events: none; }
 </style>
