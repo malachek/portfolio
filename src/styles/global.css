@@ -62,7 +62,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: 
 /* ---- Shared text styles ----------------------------------------------- */
 
 /* Body copy inside a capsule. Paragraph rhythm matches the file: 12px after the
-   first paragraph, 8px after the rest. */
+   first paragraph, 8px after the rest. Figma Sites renders multi-paragraph text at
+   1.6 and a lone paragraph at 1.28; both reproduced here. */
 .prose {
   max-width: var(--text-w);
   color: var(--text-body);
@@ -74,7 +75,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: 
 .prose strong { font-weight: 700; }
 .prose a { color: var(--text); text-underline-offset: 0.15em; }
 .prose a:hover { color: #fff; }
-.prose ul, .prose ol { padding-left: var(--list-indent); line-height: var(--lh-compact); }
+.prose ul, .prose ol { padding-left: var(--list-indent); }
+.prose:has(> p:only-child) { line-height: var(--lh-compact); }
 .prose li + li { margin-top: var(--list-gap); }
 
 /* Bullet list at the compact measure (the "manifest" lists). */
@@ -83,7 +85,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: 
   padding-left: var(--list-indent);
   color: var(--text-body);
   font-size: var(--fs-body);
-  line-height: var(--lh-compact);
+  line-height: var(--lh-prose);
 }
 .bullets li + li { margin-top: var(--list-gap); }
 
@@ -107,7 +109,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: inherit; font-size: inherit; line-height: 
 
 .rule {
   height: var(--rule-section);
-  background: var(--magenta);
+  background: var(--accent);
   border: 0;
 }
 

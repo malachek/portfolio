@@ -1,0 +1,93 @@
+---
+/**
+ * Renders a section's blocks with the Figma components:
+ *   subsection -> SubsectionHeading
+ *   text       -> Capsule + prose (optional inline title as <h4>)
+ *   bullets    -> Capsule + compact bullet list
+ *   media      -> Capsule + MediaRow of Media items
+ *   link       -> centred magenta pill
+ */
+import type { CollectionEntry } from 'astro:content';
+import Capsule from '@/components/layout/Capsule.astro';
+import SubsectionHeading from '@/components/layout/SubsectionHeading.astro';
+import MediaRow from '@/components/media/MediaRow.astro';
+import Media from '@/components/media/Media.astro';
+import LinkPill from '@/components/project/LinkPill.astro';
+import { renderMarkdown, renderInline } from '@/lib/markdown';
+
+type Block = CollectionEntry<'projects'>['data']['sections'][number]['blocks'][number];
+interface Props { blocks: Block[] }
+const { blocks } = Astro.props;
+
+const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px) 100vw, 428px', 3: '(max-width: 799px) 100vw, (max-width: 1279px) 332px, 274px' } as const;
+---
+{blocks.map((b) => {
+  switch (b.type) {
+    case 'subsection':
+      return <SubsectionHeading id={b.id}>{b.title}</SubsectionHeading>;
+    case 'text':
+      return (
+        <Capsule>
+          <div class:list={['text-block', { 'text-block--embed': b.embed }]}>
+            <div class:list={['prose', { 'prose--wide': b.wide }]} data-block={b.id}>
+              {b.title && <h4 class="capsule-title">{b.title}</h4>}
+              <Fragment set:html={renderMarkdown(b.md)} />
+            </div>
+            {b.embed && (
+              <iframe class="embed-page" src={b.embed.src} title={b.embed.title} width={b.embed.width} height={b.embed.height} loading="lazy"></iframe>
+            )}
+          </div>
+        </Capsule>
+      );
+    case 'bullets':
+      return (
+        <Capsule>
+          <ul class="bullets" data-block={b.id}>
+            {b.items.map((i) => <li set:html={renderInline(i)} />)}
+          </ul>
+        </Capsule>
+      );
+    case 'media':
+      return (
+        <Capsule media>
+          <MediaRow cols={b.cols}>
+            {b.items.map((m) =>
+              m.kind === 'video'
+                ? <Media mp4={m.src} poster={m.poster} alt={m.alt} caption={m.caption} />
+                : <Media image={m.src} alt={m.alt} caption={m.caption} sizes={mediaSizes[b.cols]} />,
+            )}
+          </MediaRow>
+        </Capsule>
+      );
+    case 'embed':
+      return (
+        <Capsule media>
+          <figure class="embed-fig">
+            <iframe class="embed" src={b.src} title={b.title} loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+            {b.caption && <figcaption class="embed-caption">{b.caption}</figcaption>}
+          </figure>
+        </Capsule>
+      );
+    case 'link':
+      return (
+        <div class="block-link">
+          <LinkPill href={b.href} size="code-lg">{b.label}</LinkPill>
+        </div>
+      );
+  }
+})}
+
+<style>
+  .capsule-title { font: inherit; }
+  .prose--wide { max-width: none; }
+  .embed-fig { display: flex; flex-direction: column; gap: var(--caption-gap); }
+  .embed { width: 100%; aspect-ratio: 3 / 2; border: 0; }
+  .embed-caption { text-align: center; color: var(--text-body); line-height: var(--lh-compact); }
+  .text-block--embed { display: flex; gap: 32px; align-items: flex-start; }
+  .text-block--embed .prose { flex: 1 1 0; }
+  .embed-page { flex: 0 0 auto; width: min(392px, 100%); border: 0; background: #fff; }
+  @media (max-width: 799.98px) {
+    .text-block--embed { flex-direction: column; }
+  }
+  .block-link { display: flex; justify-content: center; }
+</style>

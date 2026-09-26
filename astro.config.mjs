@@ -22,6 +22,11 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: { format: 'directory' },
   integrations: [stripDevPages],
+  // Old and alternate paths that links in the wild may use. Real 301s move to the
+  // Worker at deploy time; these keep them working in every environment meanwhile.
+  redirects: {
+    '/cora': '/taralumen-cora',
+  },
   vite: {
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   },

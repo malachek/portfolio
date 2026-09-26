@@ -20,6 +20,9 @@
   --magenta: #d52fc7;         /* rules, pills, accents. 4.97:1 on ground */
   --magenta-60: rgb(213 47 199 / 0.6);  /* chips */
   --magenta-80: rgb(213 47 199 / 0.8);  /* code-sample link pill */
+  /* Per-page accent. Each project page sets --accent on <body>; everything
+     accent-coloured (rules, pills, chips) derives from it. */
+  --accent: var(--magenta);
   --purple: #5858c7;          /* fills, borders, decoration only: 3.57:1, fails as text */
   --purple-text: #706ef4;     /* any purple text, link or small icon: 5.14 / 4.51 */
   --muted: #516092;           /* decoration only: 3.38:1, fails as text */
@@ -41,8 +44,8 @@
   --fs-card-title: 40px;      /* home card title, Roboto Black */
   --fs-card-org: 32px;        /* home experience company, Roboto Medium Italic */
   --fs-body: 20px;
-  --lh-prose: 1.6;            /* paragraphs */
-  --lh-compact: 1.28;         /* lists, captions, overview rows */
+  --lh-prose: 1.6;            /* multi-paragraph copy and lists */
+  --lh-compact: 1.28;         /* single-line/single-paragraph text, overview rows */
   --fs-eyebrow: 14px;         /* header/footer, Roboto Bold uppercase */
   --lh-eyebrow: 1.2;
   --fs-chip: 16px;
@@ -54,7 +57,7 @@
   --section-pad-x: 64px;
   --content-max: 952px;       /* capsule width; section padding does the rest */
   --text-w: 680px;            /* body measure inside a capsule */
-  --list-w: 650px;
+  --list-w: 680px;           /* the file's list frame; bullets indent 24 inside it */
 
   --capsule-pad-y: 24px;
   --capsule-pad-x: 32px;

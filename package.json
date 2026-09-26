@@ -8,20 +8,28 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "baseline": "node scripts/capture-live.mjs"
   },
   "dependencies": {
     "@fontsource/jersey-10": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
     "astro": "^5.5.0",
+    "marked": "^15.0.0",
     "simple-icons": "^13.0.0",
     "yaml": "^2.6.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "playwright": "^1.56.0",
     "typescript": "^5.6.0"
   },
   "engines": {
     "node": ">=20"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "esbuild@0.27.7": true,
+    "esbuild@0.25.12": true
   }
 }

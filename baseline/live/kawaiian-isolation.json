@@ -1,0 +1,740 @@
+{
+  "path": "/kawaiian-isolation",
+  "title": "Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games",
+  "description": "Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.",
+  "ogImage": "https://malachek.com/_assets/v11/fbd26f77b1c0249258a43c8cfc29baa04b039aa9.png",
+  "blocks": [
+    {
+      "t": "p",
+      "text": "Skip to main content",
+      "font": "ui-sans-serif 400 16px",
+      "href": null
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/c122267c0dd96616744b0da7a45051bd2f598f1d.png",
+      "poster": null,
+      "alt": null,
+      "w": 1280,
+      "h": 352
+    },
+    {
+      "t": "display",
+      "text": "Kawai’ian Isolation",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "First-person narrative adventure. A tragedy about the beauty and horror of identity.",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Technical Director & Engineer · 6 core, 30+ contributors · Unreal Engine 5.3",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Shipped on Steam, reaching 10,000+ claims in the first 100 hours.",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/5e20111865f706bd15b7d90449d40bb7373405d0.png?w=256",
+      "poster": null,
+      "alt": "Burning Out Logo",
+      "w": 237,
+      "h": 189
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "display",
+          "text": "Project Overview",
+          "font": "Jersey 10:Regular 400 48px"
+        },
+        {
+          "t": "p",
+          "text": "Type",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Genre",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Role",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Size",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Duration",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Engine",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Tools",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Status",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Commercial Release (Steam)",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Narrative Adventure Horror",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Technical Director & Engineer",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "6 Core, 30+ Contributors",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Apr 2024 - May 2026",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Unreal Engine 5.3",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Blueprints, Wwise, Perforce,\nApps Script, Miro, Sheets",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Released on Steam with\n10,000+ claims in 100 hours.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "iframe",
+          "src": "https://store.steampowered.com/widget/3812810/"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Project Description",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Kawai'ian Isolation is a first-person narrative adventure turned survival horror. The player controls Mayumi as she explores her memories of Kawai'i and the lived purgatory of Paradise.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "It began as a two-quarter pitch project at UCI's Video Game Development Club and continued under Burnt Out Games through polish and commercial release. The core problem: how do you move a player through a story when nothing in the design is allowed to force them?",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "iframe",
+          "src": "https://www.youtube-nocookie.com/embed/-8HKhfh5VAc?autoplay=1"
+        },
+        {
+          "t": "p",
+          "text": "Trailer. Wrote, recorded, and edited by me (in Premiere Pro)",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "How do you move a player through a story when nothing in the design is allowed to force them? Waypoints work, and they announce that the game is steering.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "So I borrowed from level design and used it inside narrative design: landmarks, framing, and fear paced deliberately. (It took a LOT of playtesting.)",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Writers author 56 pages of dialogue in a spreadsheet and the build reads it, so the VA director and the Wwise engineer never have to open Unreal.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "We had twice the script we could implement. Cutting half of it is what turned the timeline jump into the mystery.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "I served as Technical Director across Audio, Design, Programming and Writing, and worked as Tools Engineer, Narrative Designer and Writer, and Gameplay Designer.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "What I Built",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "sub",
+      "text": "Tools Engineering",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Automating 56 pages of dialogue outside of engine, into Unreal.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "CSV to Unreal to Wwise dialogue pipeline for 56 pages of dialogue ↓",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Google Sheet and Apps Script front end, so VO authoring never opens the build",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Runtime ingest: AkAudioEvent caching from the Wwise project, per-scene asset resolution, gamestate-context chunk loading",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Branching playback auto-advancing against Wwise event length, player action and world state",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "10 custom Agile tools in Miro and Sheets: scheduling calendar, progress tracker, visual Kanban",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/a0672772e180688f62c40ccd74a1e4f36a5b2620.png",
+          "poster": null,
+          "alt": null,
+          "w": 428,
+          "h": 241
+        },
+        {
+          "t": "p",
+          "text": "One of ten production tools",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/0d7af7a4109d916f9cde17db2ac300b4c137c02e.png",
+          "poster": null,
+          "alt": null,
+          "w": 428,
+          "h": 241
+        },
+        {
+          "t": "p",
+          "text": "Scheduling against the dependency graph",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Technical Design & Scripting",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "22 scenes, with none allowing forceful control of the player",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "22 single-player scenes scripted in Blueprints and project-proprietary tools",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "AI direction, dialogue events, Blackboard checks",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Player pathing, progression and collision",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Save system, coded animations, and calls into tech-art systems like weather",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/dbc971671304f87737b5a14c5ca0985e68a2cec2.png",
+          "poster": null,
+          "alt": null,
+          "w": 447,
+          "h": 335
+        },
+        {
+          "t": "p",
+          "text": "Branding playback, auto-advancing with Wwise calls",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/d4522998bba0b0f2f4fe90c827e931d7f811c3de.png",
+          "poster": null,
+          "alt": null,
+          "w": 597,
+          "h": 448
+        },
+        {
+          "t": "p",
+          "text": "A scripted scene playing out",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Direction & Production",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "I made custom production tools to accommodate our many teams across many scenes.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "Technical department of 18+ contributors across four disciplines",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "AWS EC2 Perforce server, provisioned and administered",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Onboarding docs and tutorials that brought 30+ contributors into the pipeline",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Narrative Design & Writing",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Building characters to stay coherent and feel real across 22 scenes.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "56-page screenplay across 22 scenes, with a second writer and two consulting narrative designers",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "One-page character template: Characterization, Development, Motivation, Need, Hamartia",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Character psychology drawn from Jungian theory, Objective Personality and the Enneagram",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Timeline restructure that halved implementation scope without breaking flow",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/e0a1d08d70a7327af183fea43ef9835993f5872e.png",
+          "poster": null,
+          "alt": null,
+          "w": 428,
+          "h": 241
+        },
+        {
+          "t": "p",
+          "text": "The template every character is built from",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/28f2f99645084424865b67d3fffd012c1bb9ec5f.png",
+          "poster": null,
+          "alt": null,
+          "w": 428,
+          "h": 241
+        },
+        {
+          "t": "p",
+          "text": "Character sheet for Annabelle, our companion’s foil",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Breakdown",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "sub",
+      "text": "The dialogue pipeline",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "56 pages of dialogue, a VA director, a Wwise engineer and 30+ contributors, none of whom should need to open Unreal to do their job. So I designed the content pipeline around that constraint instead of around the engine.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "A Google Sheet with Apps Script externalizes VO authoring, so the VA director and the Wwise engineer work cued to dialogue without ever touching the build. The runtime tool ingests the CSV, caches AkAudioEvent files from their source location in the Wwise project, resolves the assets each scene needs, loads chunks into memory against the gamestate context, and auto-advances playback against Wwise event length, player actions and world state.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Branching playback selects lines from cached player choices and world state, so a scene plays differently depending on what the player did three scenes ago.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Writers author in a spreadsheet, the tool reads it, and the build is downstream of both.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/f29a995b1aa4875cd6b60251e8269b2732fac37f.png?w=512",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Authoring Sheet with JS",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/768dd53413a39aa8a76900f59e19242a9bd5734b.png?w=512",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Import to Unreal",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/dbc971671304f87737b5a14c5ca0985e68a2cec2.png",
+          "poster": null,
+          "alt": null,
+          "w": 282,
+          "h": 212
+        },
+        {
+          "t": "p",
+          "text": "Dialogue Playback",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Design",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "sub",
+      "text": "Designing Direction Without Force",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Automating 56 pages of dialogue outside of engine, into Unreal.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "A linear game can close the door behind you. Kawai'ian Isolation is open and semi-linear, so the player can stand still, walk the wrong way, or miss the thing the next scene depends on. Nothing in the design is allowed to grab them, and the story still has to land in order.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The cheap answers are waypoints, objective markers, and a character telling you where to go. All of them work, and all of them announce that the game is steering.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "So I borrowed from level design and used it inside narrative design. Landmarks to draw attention. Framing to establish the objective without stating it. Fear, paced deliberately, to keep the player walking forward instead of exploring backward. It took a lot of playtesting.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Cutting half the game without breaking it We had far more script written than we had capacity to implement, and a generic cut would have broken the flow. The flow was the game.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The original script ran chronologically: Past, then Present, then Paradise. Restructuring it made the jump between timelines part of the mystery. The change in location told the player a jump had happened with nobody explaining it, and every playtester understood it. Lore from the Present went in as teasers, so players piece the events together across playthroughs.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "It halved the scenes we had to implement, and it made the game better, because it forced us to cut everything that wasn't essential. The voice came out very strong despite saying almost nothing.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Making the characters feel real",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Direction only works if the player wants to follow the story, and that comes down to whether the characters read as people. Immersion is the whole product on a narrative game; a player who stops believing a character stops caring where that character is going.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "For the psychology underneath them I drew on Jungian theory, Objective Personality and the Enneagram.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Those gave me a formula characterization is a byproduct of, so I could work out what would make a character break down, what that breakdown would look like, and how it would function in the story.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Then I built a one-page template to force consistency: Characterization, Development, Motivation, Need, and Hamartia. Need and Hamartia are the two that actually drive a character somewhere, and they're why the template exists at all.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Reception",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "10,000+ claims in the first 100 hours on Steam",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "30+ contributors across a two-year development",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Featured in New University: a behind-the-scenes on Burnt Out Games & Kawai'ian Isolation",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "iframe",
+          "src": "https://newuniversity.org/2026/05/10/a-behind-the-scenes-of-burnt-out-games-kawaiian-isolation/"
+        }
+      ]
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "eyebrow",
+      "text": "OPEN TO SUMMER 2027 INTERNSHIPS AND NEW-GRAD GAMEPLAY ENGINEERING & DESIGN ROLES.",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHYKENNEDY1@GMAIL.COM",
+      "font": "Roboto:Bold 700 14px",
+      "href": "mailto:malachykennedy1@gmail.com"
+    },
+    {
+      "t": "eyebrow",
+      "text": "GITHUB.COM/MALACHEK",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://github.com/malachek/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "LINKEDIN.COM/IN/MALACHYKENNEDY",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://linkedin.com/in/malachykennedy/"
+    }
+  ]
+}

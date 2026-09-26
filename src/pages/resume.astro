@@ -1,0 +1,19 @@
+---
+/**
+ * /resume. For now it matches the live site: the resume PDF embedded from Google
+ * Drive. Build step 3 replaces this with each role's own PDF served from this site.
+ */
+import Base from '@/layouts/Base.astro';
+const drivePreview = 'https://drive.google.com/file/d/11GmRucSaYkZY_A7n7Q8QrWW1sRfZgipw/preview';
+---
+<Base title="Resume | Malachy Kennedy" description="Malachy Kennedy's resume: gameplay and systems engineer, UE5 and Unity, two titles shipped on Steam.">
+  <section class="wrap resume">
+    <h1 class="visually-hidden">Resume</h1>
+    <iframe src={drivePreview} title="Malachy Kennedy resume (PDF)" loading="eager"></iframe>
+  </section>
+</Base>
+
+<style>
+  .resume { padding-block: 24px 48px; }
+  .resume iframe { width: 100%; height: min(1200px, 85vh); border: 0; border-radius: 8px; background: #fff; }
+</style>

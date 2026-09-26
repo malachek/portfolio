@@ -25,6 +25,8 @@ interface Props {
   resumeHref?: string;
   homeHref?: string;
   noindex?: boolean;
+  /** Page accent (#rrggbb): rules, pills, chips. Defaults to magenta. */
+  accent?: string;
 }
 
 const {
@@ -35,6 +37,7 @@ const {
   resumeHref = '/resume',
   homeHref = '/',
   noindex = false,
+  accent,
 } = Astro.props;
 
 const site = (await getEntry('site', 'site'))!.data;
@@ -60,7 +63,7 @@ const nav = site.nav.map((n) => ({ ...n, href: n.href === 'resume' ? resumeHref 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <slot name="head" />
   </head>
-  <body>
+  <body style={accent ? `--accent:${accent}` : undefined}>
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header name={site.name} github={site.github} linkedin={site.linkedin} nav={nav} homeHref={homeHref} />
     <main id="main" tabindex="-1">

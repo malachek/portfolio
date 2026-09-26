@@ -1,0 +1,16 @@
+---
+/**
+ * Project pages at their original Figma Sites paths (/exo, /the-fallen, ...), so
+ * links already sent to recruiters keep working. Role variants arrive in step 3.
+ */
+import { getCollection } from 'astro:content';
+import ProjectPage from '@/layouts/ProjectPage.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { project: p.data.path.slice(1) }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+---
+<ProjectPage page={entry.data} canonical={new URL(entry.data.path, Astro.site).href} />

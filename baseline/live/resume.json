@@ -1,0 +1,35 @@
+{
+  "path": "/resume",
+  "title": "Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games",
+  "description": "Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.",
+  "ogImage": "https://malachek.com/_assets/v11/fbd26f77b1c0249258a43c8cfc29baa04b039aa9.png",
+  "blocks": [
+    {
+      "t": "p",
+      "text": "Skip to main content",
+      "font": "ui-sans-serif 400 16px",
+      "href": null
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "iframe",
+      "src": "https://drive.google.com/file/d/11GmRucSaYkZY_A7n7Q8QrWW1sRfZgipw/preview"
+    }
+  ]
+}

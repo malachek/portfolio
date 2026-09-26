@@ -12,24 +12,29 @@ import { Image, getImage } from 'astro:assets';
 interface Props {
   title: string;
   lines: string[];
-  background: ImageMetadata | string;
+  background?: ImageMetadata | string;
   logo?: ImageMetadata | string;
   logoAlt?: string;
   /** Home hero uses a 60% scrim; project pages use 40%. */
   scrim?: 40 | 60;
   /** Optional uppercase credential line under the summary (home page). */
   credential?: string;
+  /** Project pages close the card with the accent rule; the home hero has none. */
+  rule?: boolean;
+  /** Space above the hero art (the home hero sits 24px below the header). */
+  offset?: boolean;
 }
 
-const { title, lines, background, logo, logoAlt = '', scrim = 40, credential } = Astro.props;
+const { title, lines, background, logo, logoAlt = '', scrim = 40, credential, rule = true, offset = false } = Astro.props;
 
 // Background as CSS image so it can sit behind the card; optimised when local.
-const bgUrl =
-  typeof background === 'string'
+const bgUrl = !background
+  ? undefined
+  : typeof background === 'string'
     ? background
     : (await getImage({ src: background, width: 1920, format: 'webp' })).src;
 ---
-<div class="hero" style={`--hero-bg: url('${bgUrl}')`} data-scrim={scrim}>
+<div class:list={['hero', { 'hero--offset': offset }]} style={bgUrl ? `--hero-bg: url('${bgUrl}')` : undefined} data-scrim={scrim}>
   <div class="hero__card">
     <div class="hero__body">
       <div class="hero__text">
@@ -49,7 +54,7 @@ const bgUrl =
         </div>
       )}
     </div>
-    <div class="hero__rule" aria-hidden="true"></div>
+    {rule && <div class="hero__rule" aria-hidden="true"></div>}
   </div>
 </div>
 
@@ -59,8 +64,9 @@ const bgUrl =
     justify-content: center;
     padding: 24px var(--section-pad-x) 0;
     margin-bottom: 48px;
-    background: var(--hero-bg) center / cover no-repeat, var(--ground);
+    background: var(--hero-bg, none) center / cover no-repeat, var(--ground);
   }
+  .hero--offset { margin-top: 24px; margin-bottom: 24px; }
   .hero__card {
     width: 100%;
     max-width: var(--content-max);
@@ -92,7 +98,7 @@ const bgUrl =
     flex: 0 0 237px;
   }
   .hero__logo { width: 237px; height: 189px; object-fit: contain; }
-  .hero__rule { height: 4px; background: var(--magenta); }
+  .hero__rule { height: 4px; background: var(--accent); }
 
   @media (max-width: 1279.98px) {
     .hero { margin-bottom: 36px; }

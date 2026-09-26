@@ -29,8 +29,10 @@ interface Props {
   blurb?: string;
   /** Solid accent, e.g. '#D52FC7'. Chips use it at 60%. */
   accent: string;
-  background: ImageMetadata | string;
-  media?: { image?: ImageMetadata | string; mp4?: string; poster?: string; alt: string };
+  background?: ImageMetadata | string;
+  media?: { kind: 'video' | 'image'; src: string; poster?: string; alt: string };
+  /** Game logo laid over the bottom-left of the clip. */
+  logo?: string;
   ctaLabel?: string;
 }
 
@@ -48,16 +50,18 @@ const {
   accent,
   background,
   media,
+  logo,
   ctaLabel = 'See More',
 } = Astro.props;
 
-const bgUrl =
-  typeof background === 'string'
+const bgUrl = !background
+  ? undefined
+  : typeof background === 'string'
     ? background
     : (await getImage({ src: background, width: 1600, format: 'webp' })).src;
 const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
 ---
-<article class:list={['fcard', `fcard--${kind}`]} style={`--accent:${accent}; --fcard-bg:url('${bgUrl}')`}>
+<article class:list={['fcard', `fcard--${kind}`, { 'fcard--nobg': !bgUrl }]} style={`--accent:${accent};${bgUrl ? ` --fcard-bg:url('${bgUrl}')` : ''}`}>
   <div class="fcard__meta">
     <p>{category}</p>
     <p>{dates}</p>
@@ -90,7 +94,12 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     </div>
     {media && (
       <div class="fcard__media">
-        <Media {...media} sizes="(max-width: 799px) 100vw, 440px" />
+        <div class="fcard__clip">
+          {media.kind === 'video'
+            ? <Media mp4={media.src} poster={media.poster} alt={media.alt} />
+            : <Media image={media.src} alt={media.alt} sizes="(max-width: 799px) 100vw, 440px" />}
+          {logo && <img class="fcard__logo" src={logo} alt="" loading="lazy" />}
+        </div>
         {blurb && <p class="fcard__blurb">{blurb}</p>}
       </div>
     )}
@@ -115,8 +124,23 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
       var(--fcard-bg) center / cover no-repeat;
     color: #fff;
   }
+  .fcard--experience { border-radius: 0; }
+  .fcard--nobg { background: none; }
+  .fcard__clip { position: relative; width: 100%; }
+  .fcard__logo {
+    position: absolute;
+    left: 16px;
+    bottom: 8px;
+    width: 120px;
+    height: 90px;
+    object-fit: contain;
+    object-position: left bottom;
+    pointer-events: none;
+  }
   .fcard__meta {
     display: flex;
+    align-items: center;
+    min-height: 31px;
     justify-content: space-between;
     width: 100%;
     max-width: 1152px;
@@ -126,6 +150,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
   .fcard__panel {
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     gap: 24px;
     width: 100%;
     max-width: 1152px;
@@ -138,7 +163,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 612px;
+    width: 616px;
     max-width: 100%;
     padding: 16px 4px 16px 0;
   }
@@ -165,7 +190,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     line-height: var(--lh-prose);
   }
   .fcard__bullets li + li { margin-top: var(--list-gap); }
-  .fcard__cta { display: flex; align-items: center; }
+  .fcard__cta { display: flex; align-items: center; margin-top: 4px; }
   .fcard__media {
     display: flex;
     flex-direction: column;

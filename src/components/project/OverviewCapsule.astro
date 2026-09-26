@@ -9,11 +9,11 @@ import LinkPill from '@/components/project/LinkPill.astro';
 
 interface Props {
   rows: { label: string; value: string }[];
-  steamAppId?: number;
+  steamAppIds?: number[];
   code?: { href: string; label: string };
   heading?: string;
 }
-const { rows, steamAppId, code, heading = 'Project Overview' } = Astro.props;
+const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.props;
 ---
 <div class="overview wrap">
   <div class="overview__panel">
@@ -29,18 +29,18 @@ const { rows, steamAppId, code, heading = 'Project Overview' } = Astro.props;
         ))}
       </dl>
     </div>
-    {(steamAppId || code) && (
+    {(steamAppIds.length > 0 || code) && (
       <div class="overview__right">
-        {steamAppId && (
+        {steamAppIds.map((id) => (
           <iframe
             class="overview__store"
-            src={`https://store.steampowered.com/widget/${steamAppId}/`}
+            src={`https://store.steampowered.com/widget/${id}/`}
             title="Steam store page"
             loading="lazy"
             width="646"
             height="190"
           ></iframe>
-        )}
+        ))}
         {code && <LinkPill href={code.href} size="code" underline>{code.label}</LinkPill>}
       </div>
     )}

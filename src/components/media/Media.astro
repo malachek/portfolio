@@ -43,7 +43,11 @@ const isLocal = typeof image === 'object';
   ) : (
     <div class="media__placeholder" role="img" aria-label={alt}></div>
   )}
-  {caption && <figcaption class="media__caption">{caption}</figcaption>}
+  {caption && (
+    <figcaption class:list={['media__caption', { 'media__caption--multi': caption.includes('\n') }]}>
+      {caption.split('\n').map((line) => <span>{line}</span>)}
+    </figcaption>
+  )}
 </figure>
 
 <style>
@@ -60,9 +64,13 @@ const isLocal = typeof image === 'object';
     border: 1px dashed var(--border);
   }
   .media__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     text-align: center;
     color: var(--text-body);
     font-size: var(--fs-body);
     line-height: var(--lh-compact);
   }
+  .media__caption--multi { line-height: var(--lh-prose); }
 </style>

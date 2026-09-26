@@ -1,0 +1,388 @@
+{
+  "path": "/taralumen-cora",
+  "title": "Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games",
+  "description": "Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.",
+  "ogImage": "https://malachek.com/_assets/v11/fbd26f77b1c0249258a43c8cfc29baa04b039aa9.png",
+  "blocks": [
+    {
+      "t": "p",
+      "text": "Skip to main content",
+      "font": "ui-sans-serif 400 16px",
+      "href": null
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/03e1803a382b085deaf0be0a6105fe77a5965a80.png?w=1536",
+      "poster": null,
+      "alt": null,
+      "w": 1280,
+      "h": 320
+    },
+    {
+      "t": "display",
+      "text": "CORA",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "A 2.5D multi-plane metroidvania about confronting anxiety through play.",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Game Development Intern at Taralumen Games · Unity 6, C#",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Apr 2025 – Mar 2026 · Under NDA",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/a98d4015968683d1996141dca36f065312aaae24.png?w=256",
+      "poster": null,
+      "alt": "Burning Out Logo",
+      "w": 237,
+      "h": 189
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "display",
+          "text": "Project Overview",
+          "font": "Jersey 10:Regular 400 48px"
+        },
+        {
+          "t": "p",
+          "text": "Type",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Genre",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Role",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Team",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Duration",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Engine",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Tools",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Internship Project",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "2.5D Platformer Metroidvania",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Game Development Intern",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Reporting to CEO and board",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Apr 2025 - Mar 2026",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Unity 6",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "C#, Unity 6, Git, Trello",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "github.com/malachek/CORA_CodeSamples",
+          "font": "Roboto:Regular 400 16px",
+          "href": "https://github.com/malachek/CORA_CodeSamples"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Project Description",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "CORA is a 2.5D multi-plane adventure game about navigating depth and solving puzzles across overlapping planes of space. Its mechanics, levels, and narrative teach players to confront anxiety using real-world coping strategies.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Over the internship I completed a fully-fledged demo: 3 environment levels and 30+ production-ready mechanics, delivered across 40+ playable builds on a twice-weekly review cadence, iterating directly on CEO and board feedback. That demo is now the reference build a co-development studio is using for official production.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "I built the codebase for constant iteration, using modular systems, swappable behavior, and custom tooling, so designs could change without the architecture fighting back.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "What I Built",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "The codebase. Why it was built for constant change is in Designing to Stick With You, below.",
+      "font": "Roboto:Regular 400 20px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The build is under NDA. The architecture is what I can show.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The defining constraint was the cadence. Twice-weekly reviews for a year, 40+ playable builds, and any mechanic could be revised or cut between one review and the next.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "A codebase optimized for the design you have is the wrong target when the design moves every three days. The real requirement was absorbing change cheaply: 6,208 lines across 67 scripts, built so I could swap a mechanic without touching the systems around it.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Selected Files",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "MoveMods.cs (Architecture & Scalability): Strategy Pattern alongside a data pipeline. SOLID code that scales without a horrendous Update() loop, so new movement mods drop in without touching the existing ones.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "ObjectFinder.cs (Tools Programming & Advanced C#): Generics, LINQ, and Func delegates behind a robust, reusable lookup layer. It replaces Unity's FindObjectsOfType<T>(), which scans the full scene graph on every call.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "CoroutineRunner.cs (Systems Management & Memory Control): a dedicated manager that iterates tracked lists and objects with built-in sentinel abort logic, so async work tears down deterministically instead of outliving whatever started it.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "MovementBase.cs (Input Abstraction & Dependency Injection): a form of Dependency Injection with Unity's New Input System, passing lambdas into swappable movement strategies for the MovementPipeline.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "GroundChecks.cs (Optimization & Bitwise Operations): maps physical layers onto tightly controlled state enums and filters physics queries with bitmasks, to keep spatial queries reliable and performant on a non-standard platforming base.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Depth-based collision: layer bitmasking and raycasts that resolve which plane an object occupies, so a 2.5D space with overlapping geometry sorts correctly for both movement and combat.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Designing to Stick With You",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "The design problem my time at Tarallumen is built around.",
+      "font": "Roboto:Regular 400 20px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "CORA teaches real anxiety coping mechanisms, and the design question is whether any of it survives the player closing the game.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The enemies represent anxiety. The abilities counter them, and each one maps to a real active relief technique.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The player practices the coping mechanism repeatedly, because it's how you win the fight. The story covers the same ground, so mechanic and narrative argue for the same thing.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Teaching without a wall of text",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The cheap version of this game explains itself in a tutorial popup. That fails twice: nobody reads it, and a lecture about anxiety is the opposite of the experience I wanted.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "So everything teaches diegetically. The player learns a technique by needing it, using it, and watching it work on something that was hurting them a second ago.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Designing for a very wide audience",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "CORA is aimed at a wide audience, young children included. That set a hard bar on ease of use and how fast the game is to pick up, and it's why the build went through 40+ playable versions on a twice-weekly review cadence.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "If a mechanic needed explaining, it wasn't finished. That standard is what most of those 40+ builds were spent on, and it's the reason the demo became the reference build a co-development studio is now working from.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Outcome",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "40+ playable builds delivered on a twice-weekly review cadence",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "30+ production-ready mechanics across 3 environments",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Demo adopted by a co-development studio as its production reference",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "eyebrow",
+      "text": "OPEN TO SUMMER 2027 INTERNSHIPS AND NEW-GRAD GAMEPLAY ENGINEERING & DESIGN ROLES.",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHYKENNEDY1@GMAIL.COM",
+      "font": "Roboto:Bold 700 14px",
+      "href": "mailto:malachykennedy1@gmail.com"
+    },
+    {
+      "t": "eyebrow",
+      "text": "GITHUB.COM/MALACHEK",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://github.com/malachek/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "LINKEDIN.COM/IN/MALACHYKENNEDY",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://linkedin.com/in/malachykennedy/"
+    }
+  ]
+}
