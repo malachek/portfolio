@@ -116,7 +116,7 @@ sections:
   - id: output
     heading: Output
     blocks:
-      - id: output-text
+      - id: output-summary
         type: text
         md: |-
           2025-2026 stats:

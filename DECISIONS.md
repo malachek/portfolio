@@ -77,3 +77,11 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Per-role sitemap.xml; robots.txt per host (from the Worker on role hosts); a 404 page.
 - No custom domains in wrangler.jsonc yet: adding them is the DNS step and waits for Malachy's go.
 - Dev-server helpers (never in the build): /__grab saves a Figma asset into public/art; /__task?name=check|build runs that npm script and returns the output, so the assistant can type-check from its sandbox.
+
+## Build step 7: editor (2026-09-26)
+- Sveltia CMS at /admin/ (public/admin/index.html). Its config is generated at build time from the content folders (`src/pages/cms-config.yml.ts` → /cms-config.yml), so new projects and roles appear in the editor automatically.
+- Views: one collection per role site ("Gameplay site: projects"), one per project ("Project: EXO", its _base plus every role file), and "Role sites and site settings".
+- Sign-in: "Work with Local Repository" (Chrome, on his Mac) and GitHub fine-grained access token work with no server. The OAuth Worker for "Sign In with GitHub" is optional and not set up.
+- Images upload to public/art; videos are R2 URLs (`npm run media:upload`).
+- Found and fixed a duplicate block id in vgdc/_base.md (`output-text` twice; the second is now `output-summary`). Block ids must now be unique per project (schema check).
+- EDITING.md written for both paths (editor and VS Code).

@@ -27,3 +27,9 @@ Collected while working unattended. Nothing here blocks the build: each one says
 11. **"Collegiate" / "club".** The brief says avoid them, but 08-cautions says you stand behind "North America's largest collegiate game dev club". I kept that line on the Gameplay card and left it out of Tools and Design. OK?
 12. **Comments card** (Design site) has no image and I picked its color (#3A6EA5). Send an image, or tell me to drop it.
 13. **Which projects on which role.** First pass is on http://localhost:4321/lab/matrix (Gameplay leads EXO, Tools leads EXO then Kawai'ian Isolation with CORA first under Experience, Design leads The Fallen with Limital and Comments in Also Built). Change anything?
+
+## Editor, video and deploy (build steps 7 and 9)
+14. **R2 bucket for videos.** `npm run media:upload` expects a bucket named `malachek-media` served at `media.malachek.com`. OK to create those in your Cloudflare account (next session, with you there), or different names?
+15. **Editor sign-in.** The editor works today on your Mac ("Work with Local Repository" in Chrome) and from anywhere with a GitHub access token (EDITING.md §4). A "Sign In with GitHub" button also needs a small sign-in Worker on Cloudflare. Want that, or is the token enough?
+16. **GitHub repo.** The local repo has no GitHub remote yet. Create `malachek/portfolio` (public, as chosen) and push? That's needed before the Cloudflare preview.
+17. **EDITING.md screenshots.** The brief asks for screenshots of the editor. I can take them once you've picked the folder in Chrome once ("Work with Local Repository"), since I can't pick a folder for you.

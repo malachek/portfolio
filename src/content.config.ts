@@ -146,6 +146,11 @@ const projects = defineCollection({
     .superRefine((p, ctx) => {
       if (p.page && (!p.path || !p.seo || !p.hero))
         ctx.addIssue({ code: 'custom', message: 'A project with a page needs path, seo and hero (or set page: false).' });
+      const seen = new Set<string>();
+      for (const id of p.sections.flatMap((s) => s.blocks.map((b) => b.id))) {
+        if (seen.has(id)) ctx.addIssue({ code: 'custom', message: `Block id "${id}" is used twice; block ids must be unique within a project.` });
+        seen.add(id);
+      }
     }),
 });
 
