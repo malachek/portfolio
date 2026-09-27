@@ -1,9 +1,19 @@
 ---
-/** Tech tag (Figma "Tag"): 60% magenta fill, 4px radius, white text. */
-interface Props { color?: string }
-const { color = 'color-mix(in srgb, var(--accent) 60%, transparent)' } = Astro.props;
+/**
+ * Tech tag (Figma "Tag"): 60% accent fill, 4px radius, white text.
+ * Hover: the tag grows and tilts a little (each tag has its own tilt), and
+ * hovering the row gives every tag a smaller ruffle, like riffling a deck.
+ */
+interface Props {
+  color?: string;
+  /** Degrees this tag tilts on hover (small, e.g. -4..4). */
+  tilt?: number;
+  /** Position in its row, for the staggered ruffle. */
+  index?: number;
+}
+const { color = 'color-mix(in srgb, var(--accent) 60%, transparent)', tilt = 0, index = 0 } = Astro.props;
 ---
-<li class="chip" style={`--chip-bg:${color}`}><slot /></li>
+<li class="chip" style={`--chip-bg:${color};--tilt:${tilt}deg;--i:${index}`}><slot /></li>
 
 <style>
   .chip {
@@ -17,5 +27,17 @@ const { color = 'color-mix(in srgb, var(--accent) 60%, transparent)' } = Astro.p
     line-height: var(--lh-compact);
     white-space: nowrap;
     list-style: none;
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 160ms ease;
+    transition-delay: calc(var(--i) * 25ms);
+  }
+  /* Row hovered: every tag ruffles slightly, one after another. */
+  :global(:is(ul, ol):hover) > .chip { transform: rotate(calc(var(--tilt) * 0.5)) translateY(-1px); }
+  /* The tag under the pointer grows and tilts fully. */
+  :global(:is(ul, ol)) > .chip:hover {
+    transform: rotate(var(--tilt)) scale(1.14);
+    transition-delay: 0ms;
+    background: color-mix(in srgb, var(--chip-bg), #fff 12%);
+    z-index: 1;
+    position: relative;
   }
 </style>

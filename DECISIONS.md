@@ -101,3 +101,10 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - One resume per role, built with resume-system rules (output/portfolio-<role>/, accepted copies in final/). Malachy uploaded them to Google Drive (shared: anyone with the link can view).
 - `roles/<role>.yaml → resumeDriveId` holds the Drive file id; each role's /resume page embeds its own PDF. Generalist: Game Engineer; Gameplay: Gameplay Engineer; Tools: Tools Engineer; Design: Technical Game Designer.
 - EXO release date: set when the publisher says; every "Q3 2026" removed from the site.
+
+## Card and tag hovers, header options (2026-09-27)
+- Homepage cards have two hover targets: the text part and the media part, each a link to the project, each with an accent ring drawn outside it (outline, 4px offset) and a slight darken. Hovering the media part zooms the clip 5%.
+- Tags grow and tilt on hover; each tag has its own stable pseudo-random tilt (-4..4°), and hovering a row ruffles every tag a little with a staggered delay, like riffling a deck. Clicking a tag opens the project.
+- These hover motions stay on under Reduce Motion (small, pointer-triggered, no loops), matching the call on autoplay clips.
+- Header layout options B–E at /lab/header-options (A = current).
+- Preview live at malachek-portfolio.malachykennedy1.workers.dev (Workers Builds from GitHub main). Checked: all roles, pages, trailing-slash redirects, /cora, sitemaps, admin; drafts and /lab are absent.
