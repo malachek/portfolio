@@ -38,7 +38,7 @@ overview:
     - label: Output
       value: |-
         2 titles shipped, 1 approved
-        for Q3 2026
+        for release
   steamAppIds:
     - 4587490
     - 3812810
@@ -159,7 +159,7 @@ card:
   kind: experience
   chips: []
   bullets:
-  - Co-founded a 10-developer studio and shipped 2 Steam titles, with a third approved for Q3 2026 release.
+  - Co-founded a 10-developer studio and shipped 2 Steam titles, with a third approved for release.
   - Lead programmer on the studio's Unreal titles, setting the C++ architecture other developers build against.
   - 'Technical Director across concurrent projects: engine upgrades from UE 5.3 through 5.8, Perforce administration, and build pipelines.'
   - Turned playtest and post-release feedback into shipped design revisions, including post-launch clarity fixes.

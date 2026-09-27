@@ -11,7 +11,7 @@ hero:
   lines:
     - Third-person movement shooter on spherical planets, where speed is the weapon.
     - Game Engineer & Tech Lead · Sole programmer on a team of 11 · Unreal Engine 5.6
-    - 3rd Place, ICS Project Expo · Steam-approved, pending Q3 2026
+    - 3rd Place, ICS Project Expo · Approved on Steam, release date to be set with a publisher
   background: https://malachek.com/_assets/v11/54f4922f342c7cdc6cea7b862e628ecadcd39aeb.png
   logo: https://malachek.com/_assets/v11/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png
 overview:
@@ -30,7 +30,7 @@ overview:
     - label: Tools
       value: C++, UE5 Blueprints, GAS, Perforce
     - label: Status
-      value: On Steam. Pending Q3 2026.
+      value: Approved on Steam. Release date to be set with a publisher.
   steamAppIds:
     - 4587490
   code:
@@ -331,7 +331,7 @@ sections:
 
           Demoed at the VGDC Z3 Games Expo (400+ attendance) and the SGDA Summit
 
-          Steam-approved, pending Q3 2026 release
+          Approved on Steam; the release date will be set with a publisher
 
           Now it’s time to polish it up and work on publishing!
   - id: code

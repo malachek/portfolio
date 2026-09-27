@@ -16,9 +16,9 @@ Collected while working unattended. Nothing here blocks the build: each one says
 7. **Live-site link bugs not ported:** on malachek.figma.site the hero paragraph and the three Skills rows are all links to vgdc-uci.com (a Figma Sites slip). The rebuild leaves them as plain text.
 
 ## Role sites (build steps 3 to 6)
-8. **EXO release date.** The live site says "Steam-approved, pending Q3 2026" (EXO page) and "a third approved for Q3 2026 release" (Burnt Out Games card). Your master file (09-clarifications, 2026-09-25) says EXO is unreleased with **no release date** until a publisher signs. Which is right?
+8. ✅ ANSWERED (set when the publisher says; all Q3 2026 dates removed). **EXO release date.** The live site says "Steam-approved, pending Q3 2026" (EXO page) and "a third approved for Q3 2026 release" (Burnt Out Games card). Your master file (09-clarifications, 2026-09-25) says EXO is unreleased with **no release date** until a publisher signs. Which is right?
    *Meanwhile:* the new Gameplay / Tools / Design copy says "approved on Steam" with no date; the Generalist site still carries the live wording.
-9. **Resume per role.** Each role's Resume link currently opens the same Google Drive PDF. Which PDF should each role link to (Gameplay, Tools, Design, Generalist)? Once you say, I'll serve them from the site, e.g. /resume/Malachy_Kennedy_Gameplay_Resume.pdf.
+9. ✅ ANSWERED: one per role; drafts made in resume-system/output/portfolio-<role>/, waiting for approval. **Resume per role.** Each role's Resume link currently opens the same Google Drive PDF. Which PDF should each role link to (Gameplay, Tools, Design, Generalist)? Once you say, I'll serve them from the site, e.g. /resume/Malachy_Kennedy_Gameplay_Resume.pdf.
 10. **New copy to check** (everything else is word for word from your master files):
     - Tools hero, line 2: "I build the architecture and pipelines other people work in: modular C# codebases, data-driven content pipelines, and the source control and release tooling behind them."
     - Design, EXO card: "Ran three playtest rounds, lifting player engagement from 43% to 95% (top-two-box)."
@@ -29,9 +29,9 @@ Collected while working unattended. Nothing here blocks the build: each one says
 13. **Which projects on which role.** First pass is on http://localhost:4321/lab/matrix (Gameplay leads EXO, Tools leads EXO then Kawai'ian Isolation with CORA first under Experience, Design leads The Fallen with Limital and Comments in Also Built). Change anything?
 
 ## Editor, video and deploy (build steps 7 and 9)
-14. **R2 bucket for videos.** `npm run media:upload` expects a bucket named `malachek-media` served at `media.malachek.com`. OK to create those in your Cloudflare account (next session, with you there), or different names?
+14. ✅ ANSWERED: OK. **R2 bucket for videos.** `npm run media:upload` expects a bucket named `malachek-media` served at `media.malachek.com`. OK to create those in your Cloudflare account (next session, with you there), or different names?
 15. **Editor sign-in.** The editor works today on your Mac ("Work with Local Repository" in Chrome) and from anywhere with a GitHub access token (EDITING.md §4). A "Sign In with GitHub" button also needs a small sign-in Worker on Cloudflare. Want that, or is the token enough?
-16. **GitHub repo.** The local repo has no GitHub remote yet. Create `malachek/portfolio` (public, as chosen) and push? That's needed before the Cloudflare preview.
+16. ✅ ANSWERED: yes. **GitHub repo.** The local repo has no GitHub remote yet. Create `malachek/portfolio` (public, as chosen) and push? That's needed before the Cloudflare preview.
 17. **EDITING.md screenshots.** The brief asks for screenshots of the editor. I can take them once you've picked the folder in Chrome once ("Work with Local Repository"), since I can't pick a folder for you.
 
 ## New pages (build step 8)
