@@ -72,7 +72,7 @@ sections:
           - "Depth-based collision: layer bitmasking and raycasts that resolve which plane an object occupies, so a 2.5D space with overlapping geometry sorts correctly for both movement and combat."
   - id: designing-to-stick-with-you
     heading: Designing to Stick With You
-    lead: The design problem my time at Tarallumen is built around.
+    lead: The design problem my time at Taralumen is built around.
     blocks:
       - id: designing-to-stick-with-you-text
         type: text

@@ -221,7 +221,7 @@ sections:
       - id: architecture-list
         type: bullets
         items:
-          - C++ combat core bridged to Blueprint with typed callbacks used to spawn damage numbers consistently
+          - C++ combat core bridged to UE5 Blueprints with typed callbacks used to spawn damage numbers consistently
           - C++ classes for UI hooks to optimize stat check calls and provide to UI Designer
           - Cooldowns, lifesteal and deferred damage kept consistent across every system
           - Data Structures to store player and enemy stats to test scaling

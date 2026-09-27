@@ -70,7 +70,7 @@ sections:
           Souls tie the two halves together: kill to earn them, spend them to accelerate. You're never choosing which game you're playing.
       - id: project-description-frame
         type: text
-        md: I’m the sole programmer on a team of 11, working from systems design through C++ implementation, Blueprint scripting, and the Perforce pipeline the rest of the team builds against.
+        md: I’m the sole programmer on a team of 11, working from systems design through C++ implementation, UE5 Blueprints scripting, and the Perforce pipeline the rest of the team builds against.
   - id: what-i-built
     heading: What I Built
     lead: Sole programmer! Every system below is mine.
@@ -184,8 +184,8 @@ sections:
             caption: Hit detection component (viewport)
           - kind: image
             src: https://malachek.com/_assets/v11/946397ef4e3615639f54b7707d7aa91001214803.png
-            alt: "EXO: Ability coodowns"
-            caption: Ability coodowns
+            alt: "EXO: Ability cooldowns"
+            caption: Ability cooldowns
       - id: enemy-ai
         type: subsection
         title: Enemy AI
