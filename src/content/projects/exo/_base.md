@@ -344,4 +344,35 @@ sections:
         type: link
         href: https://github.com/malachek/EXO_CodeSamples
         label: github.com/malachek/EXO_CodeSamples
+# Homepage card (Selected Work). Role overlays can override any field.
+card:
+  kind: project
+  chips:
+  - Unreal Engine 5.6
+  - C++
+  - UE5 Blueprints
+  - GAS
+  - Wwise
+  - Perforce
+  bullets:
+  - Sole programmer on a team of 11. 3rd Place, ICS Project Expo.
+  - Rebuilt Unreal's velocity model for spherical traversal, carrying velocity across surface curvature so the player stays on the planet at 300 MPH.
+  - 'Designed enemy archetypes around what stays readable at speed: predictive drones, and arcing chargers whose telegraph is also their hitbox.'
+  - 'Built the C++ layer underneath: four tick groups, O(1) intrusive pooling, GAS attribute clamping, and Discord OAuth2 with PKCE.'
+  background: https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
+  media:
+    kind: video
+    src: https://malachek.com/_videos/v1/4dd3d3ae56b170bec92f22b4f777b5288b179c98
+    alt: 'EXO: Third-person movement shooter on spherical planets, where speed is the weapon.'
+  logo: https://malachek.com/_assets/v11/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png
+  blurb: Third-person movement shooter on spherical planets, where speed is the weapon.
+  category: Game Project
+  dates: Aug 2024 - Present
+  links:
+  - icon: steam
+    href: https://store.steampowered.com/app/4587490/EXO
+    label: EXO on Steam
+  - icon: github
+    href: https://github.com/malachek/EXO_CodeSamples
+    label: EXO code samples on GitHub
 ---

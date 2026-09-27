@@ -155,4 +155,30 @@ sections:
           100+ playtesters across classroom sessions and a public expo booth
 
           Boothed at the UCI Z3 Games Expo 2025
+# Homepage card (Selected Work). Role overlays can override any field.
+card:
+  kind: project
+  chips:
+  - Unity 6
+  - C#
+  - Mirror Networking
+  - Steamworks
+  - Git
+  bullets:
+  - 'Shipped on Steam: the studio''s first release, and the reason Burnt Out Games exists.'
+  - Designed a networked inventory on Mirror with custom OOP containers and item templates, keeping item state consistent across clients.
+  - 'Built the torch-and-fire system as the tension mechanic: dynamic lighting, flame behavior, and torchwood burndown.'
+  background: https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/85d884655a3b88c20276494b61c5e5960337ed91.png
+    alt: 'Burning Out: Co-op horror maze escape, lit and lived only by sharing fire.'
+  logo: https://malachek.com/_assets/v11/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png?w=128
+  blurb: Co-op horror maze escape, lit and lived only by sharing fire.
+  category: Game Project
+  dates: Jan 2025 - Sep 2026
+  links:
+  - icon: steam
+    href: https://store.steampowered.com/app/3795170/Burning_Out
+    label: Burning Out on Steam
 ---

@@ -1,0 +1,106 @@
+---
+/**
+ * DEV ONLY: the whole content system at a glance. Rows are projects, columns are
+ * roles. Each cell says whether that role has an overlay for the project and where
+ * the role's homepage puts it. Click a cell to open the file in VS Code.
+ * http://localhost:4321/lab/matrix  (stripped from production builds)
+ */
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import { getRoles, roleBase } from '@/lib/content';
+
+const roles = await getRoles({ includeDisabled: true });
+const projects = (await getCollection('projects')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const overlays = new Set((await getCollection('overlays')).map((o) => o.id));
+const root = process.cwd();
+const vscode = (rel: string) => `vscode://file/${root}/${rel}`;
+
+type Cell = { has: boolean; where: string[]; warn?: string; file: string; page?: string };
+const cell = (slug: string, role: (typeof roles)[number]): Cell => {
+  const r = role.data;
+  const where: string[] = [];
+  const f = r.featured.indexOf(slug);
+  if (f >= 0) where.push(`Featured ${f + 1}`);
+  const a = r.alsoBuilt.indexOf(slug);
+  if (a >= 0) where.push(`Also Built ${a + 1}`);
+  r.experience.forEach((g) => {
+    const i = g.items.indexOf(slug);
+    if (i >= 0) where.push(`${g.heading.replace(' Experience', '')} ${i + 1}`);
+  });
+  const has = overlays.has(`${slug}/${role.id}`);
+  const p = projects.find((x) => x.id === slug)!.data;
+  let warn: string | undefined;
+  if (where.length && !has) warn = 'Listed in the role file but has no overlay, so it is hidden.';
+  const inHome = where.length > 0;
+  if (inHome && where.some((w) => w.startsWith('Featured') || !w.startsWith('Also')) && !p.card) warn = 'Listed as a big card but _base.md has no card: section.';
+  if (where.some((w) => w.startsWith('Also')) && !p.small) warn = 'Listed in Also Built but _base.md has no small: section.';
+  return { has, where, warn, file: `src/content/projects/${slug}/${role.id}.md`, page: has && p.page && p.path ? `${roleBase(role.id)}${p.path}` : undefined };
+};
+const rows = projects.map((p) => ({ p, cells: roles.map((r) => cell(p.id, r)) }));
+const warnings = rows.flatMap((row) => row.cells.map((c, i) => (c.warn ? `${row.p.data.title} on ${roles[i].data.label}: ${c.warn}` : ''))).filter(Boolean);
+---
+<Base title="Content matrix (dev)" description="Projects by role" noindex>
+  <div class="mx wrap">
+    <h1 class="display">Content matrix</h1>
+    <p class="intro">
+      Rows are projects, columns are role sites. A filled cell means that role has an overlay file for the project
+      (so the project is on that site); the label says where the homepage puts it. Click a cell to open its file in VS Code.
+      Role files: {roles.map((r, i) => <>{i > 0 && ' · '}<a href={vscode(`src/content/roles/${r.id}.yaml`)}>{r.id}.yaml</a></>)}
+    </p>
+    {warnings.length > 0 && (
+      <ul class="warn" role="list">{warnings.map((w) => <li>⚠ {w}</li>)}</ul>
+    )}
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            {roles.map((r) => (
+              <th scope="col">
+                <a href={`${roleBase(r.id)}/`}>{r.data.label}</a>
+                <span class="host">{r.data.host}{!r.data.enabled && ' (off)'}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ p, cells }) => (
+            <tr>
+              <th scope="row">
+                <a href={vscode(`src/content/projects/${p.id}/_base.md`)}>{p.data.title}</a>
+                <span class="host">{p.id}{p.data.page ? ` · ${p.data.path}` : ' · no page'}</span>
+              </th>
+              {cells.map((c) => (
+                <td class:list={[{ on: c.has, warn: c.warn }]}>
+                  <a href={vscode(c.file)} title={c.warn ?? (c.has ? 'Edit overlay' : 'Create this file to add the project to this role')}>
+                    {c.has ? (c.where.length ? c.where.join(', ') : 'page only') : '+'}
+                  </a>
+                  {c.page && <a class="view" href={c.page}>view</a>}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .mx { padding-block: 32px 64px; }
+  .intro { margin: 12px 0 20px; max-width: 760px; line-height: 1.5; color: var(--text); }
+  .intro a { color: var(--purple-text); }
+  .warn { margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; background: rgb(255 180 0 / 0.12); color: #ffd166; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  thead th { position: sticky; top: var(--header-h); background: var(--ground); }
+  .host { display: block; font-size: 12px; font-weight: 400; color: var(--muted-text); }
+  th a, td a { color: var(--text); text-decoration: none; }
+  td a:hover, th a:hover { text-decoration: underline; }
+  td { color: var(--muted-text); }
+  td.on { background: rgb(213 47 199 / 0.12); }
+  td.on a { font-weight: 700; }
+  td.warn { background: rgb(255 180 0 / 0.14); }
+  .view { display: inline-block; margin-top: 4px; font-size: 12px; font-weight: 400 !important; color: var(--purple-text) !important; }
+</style>

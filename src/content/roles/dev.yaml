@@ -1,0 +1,76 @@
+# Generalist variant, served at malachek.com (dev.malachek.com redirects here).
+# Lists name projects by folder name (src/content/projects/<name>). Order = order on the page.
+label: Generalist
+order: 0
+enabled: true
+host: malachek.com
+seo:
+  title: Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games
+  description: Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.
+resume: /resume
+hero:
+  background: https://malachek.com/_assets/v11/5c0ff451fe0703358a25a21a8ca3383790cfae48.png
+  tiles:
+  - https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
+  - https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
+  - https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
+  - https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
+  bullets:
+  - President // Video Game Development Club at UC Irvine
+  - Co-Founder & Game Engineer // Burnt Out Games, LLC
+  - Game Design B.S. & SWE B.S. // UC Irvine, class of 2027
+  lines:
+  - Gameplay and systems engineer with shipped UE5 and Unity titles on Steam, specializing in combat systems, animation pipelines, and engine-level tooling.
+  - 'I design the systems and then build them, in C++ and UE5 Blueprints: ability kits, enemy rosters, movement, and the tools and pipelines the rest of the team works in.'
+  title: Malachy Kennedy
+  credential: 2 SHIPPED STEAM TITLES · 1 APPROVED FOR RELEASE // UNREAL ENGINE 5 · UNITY 6
+  avatar: https://malachek.com/_assets/v11/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.png
+featured:
+- exo
+- the-fallen
+- kawaiian-isolation
+- burning-out
+alsoBuilt:
+- night-walk
+- trick-or-treat
+- loonage
+- limital
+- search-engine
+- pintos
+experience:
+- heading: Professional Experience
+  items:
+  - burnt-out-games-llc
+  - taralumen-cora
+  - vgdc
+skills:
+  heading: Skills
+  lines:
+  - label: Languages
+    items:
+    - C++
+    - C#
+    - Python
+    - UE5 Blueprints
+    - C
+    - Lua
+    - Java
+    - JavaScript
+  - label: Engines & Tools
+    items:
+    - Unreal Engine 5 (5.3–5.8)
+    - Unity 6
+    - Gameplay Ability System
+    - Niagara
+    - Wwise
+    - Perforce
+    - Git
+    - Roblox Studio
+  - label: Systems
+    items:
+    - Combat systems
+    - Animation pipelines
+    - Enemy AI
+    - Networked multiplayer (Mirror)
+    - Custom physics
+    - Build & content pipelines

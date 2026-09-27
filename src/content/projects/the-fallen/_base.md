@@ -344,4 +344,31 @@ sections:
           One week: a rewritten damage pipeline, a 4-hit chain with three ability tiers, two interacting status systems, nine derived stats, and an animation system with buffering, cancelling, hitstop, and i-frames. Tuned until it stopped feeling like a jam build.
 
           Outcome: A very proud team with the work we did. We all impressed ourselves and eachother :)
+# Homepage card (Selected Work). Role overlays can override any field.
+card:
+  kind: project
+  chips:
+  - Unreal Engine 5.8
+  - C++
+  - UE5 Blueprints
+  - GAS
+  - Perforce
+  bullets:
+  - Solo-programmed all player combat on a team of 8, in a one-week jam.
+  - 'Built the animation system the kit runs on: input buffering, two continuation windows, cancel windows on specific frames, and AnimNotify hitboxes.'
+  - Rewrote the GAS damage pipeline in C++ so a single hit resolves differently by attack type, target state, and what landed before it.
+  - Designed Decay, a status that re-resolves every later attack against its target, over 9 derived stats on diminishing-returns curves.
+  background: https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/7b823eb48ccbe1e948493a81dd054c86f4a48f06.png
+    alt: 'The Fallen: Action RPG combat kit built in one week, tuned to shipped-game feel.'
+  logo: https://malachek.com/_assets/v11/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png?w=128
+  blurb: Action RPG combat kit built in one week, tuned to shipped-game feel.
+  category: Game Jam
+  dates: Jun 2026 - Jul 2026
+  links:
+  - icon: itch
+    href: https://kkartin.itch.io/fallen
+    label: The Fallen on itch.io
 ---

@@ -1,0 +1,70 @@
+---
+/**
+ * "Viewing: Generalist · Gameplay · Tools · Design" — switches between the role
+ * sites. Links carry data-lens so the production Worker can point them at each
+ * role's own host (gameplay.malachek.com …); locally they are /gameplay/ paths.
+ */
+import { getRoles, roleBase } from '@/lib/content';
+
+interface Props { current: string }
+const { current } = Astro.props;
+const roles = await getRoles();
+---
+{roles.length > 1 && (
+  <nav class="lens" aria-label="Portfolio focus">
+    <div class="lens__inner">
+      <span class="lens__label" id="lens-label">Viewing</span>
+      <ul role="list" aria-labelledby="lens-label">
+        {roles.map((r) => (
+          <li>
+            <a
+              href={`${roleBase(r.id)}/`}
+              data-lens={r.id}
+              aria-current={r.id === current ? 'page' : undefined}
+            >{r.data.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+
+<style>
+  .lens { border-bottom: 1px solid rgb(255 255 255 / 0.06); }
+  .lens__inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
+    margin-inline: auto;
+    padding: 10px var(--section-pad-x);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .lens__label {
+    flex: none;
+    font: 700 var(--fs-eyebrow) / 1 var(--font-body);
+    text-transform: uppercase;
+    color: var(--muted-text);
+  }
+  ul { display: flex; gap: 6px; }
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    font-size: 15px;
+    white-space: nowrap;
+    color: var(--text);
+    text-decoration: none;
+    transition: background-color 120ms ease, border-color 120ms ease;
+  }
+  a:hover { border-color: rgb(255 255 255 / 0.4); }
+  a[aria-current='page'] { background: var(--magenta); border-color: var(--magenta); color: #fff; font-weight: 700; }
+  @media (max-width: 799.98px) {
+    .lens__inner { gap: 10px; padding-block: 8px; }
+    a { padding: 0 12px; font-size: 14px; }
+  }
+</style>

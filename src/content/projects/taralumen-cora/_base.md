@@ -109,4 +109,30 @@ sections:
           - 40+ playable builds delivered on a twice-weekly review cadence
           - 30+ production-ready mechanics across 3 environments
           - Demo adopted by a co-development studio as its production reference
+# Homepage card (Experience). Role overlays can override any field.
+card:
+  kind: experience
+  chips:
+  - Unity 6
+  - C#
+  - Trello
+  - Git
+  bullets:
+  - Delivered 40+ playable builds on a twice-weekly review cadence, iterating on direct CEO and board feedback.
+  - 'Architected a 6,208-line C# codebase on SOLID, Strategy Pattern and Dependency Injection: 67 scripts, 31 prefabs, 15 scenes.'
+  - Prototyped 30+ production-ready mechanics across 3 environments; the demo is now the reference build a Co-Development studio is using for official production.
+  background: https://malachek.com/_assets/v11/03e1803a382b085deaf0be0a6105fe77a5965a80.png?w=1536
+  title: Game Development Intern
+  org: Taralumen Games
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/5846242125d925a57c8c909b4827d6d716848ec9.png?w=512
+    alt: 'Game Development Intern: CORA - 2.5D metroidvania about confronting anxiety, Under NDA.'
+  blurb: CORA - 2.5D metroidvania about confronting anxiety, Under NDA.
+  category: Internship
+  dates: Apr 2025 - Mar 2026
+  links:
+  - icon: github
+    href: https://github.com/malachek/CORA_CodeSamples
+    label: CORA code samples on GitHub
 ---

@@ -1,9 +1,9 @@
 ---
 /**
  * A project / experience page: hero, overview capsule, then its sections.
- * Takes the merged page data (base + role overlay once step 3 lands).
+ * Takes the merged page data (_base + the role's overlay, see src/lib/content.ts).
  */
-import type { CollectionEntry } from 'astro:content';
+import type { Project } from '@/lib/content';
 import Base from '@/layouts/Base.astro';
 import ProjectHero from '@/components/project/ProjectHero.astro';
 import OverviewCapsule from '@/components/project/OverviewCapsule.astro';
@@ -12,19 +12,22 @@ import Lead from '@/components/layout/Lead.astro';
 import Blocks from '@/components/project/Blocks.astro';
 
 interface Props {
-  page: CollectionEntry<'projects'>['data'];
+  page: Project;
+  roleId: string;
   canonical?: string;
 }
-const { page, canonical } = Astro.props;
+const { page, roleId, canonical } = Astro.props;
+const seo = page.seo!;
+const hero = page.hero!;
 ---
-<Base title={page.seo.title} description={page.seo.description} canonical={canonical} accent={page.accent}>
+<Base title={seo.title} description={seo.description} canonical={canonical} accent={page.accent} roleId={roleId}>
   <ProjectHero
     title={page.title}
-    lines={page.hero.lines}
-    background={page.hero.background}
-    pattern={page.hero.pattern}
-    logo={page.hero.logo}
-    logoAlt={page.hero.logoAlt ?? `${page.title} logo`}
+    lines={hero.lines}
+    background={hero.background}
+    pattern={hero.pattern}
+    logo={hero.logo}
+    logoAlt={hero.logoAlt ?? `${page.title} logo`}
   />
   {page.overview && (
     <OverviewCapsule

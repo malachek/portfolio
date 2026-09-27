@@ -128,4 +128,27 @@ sections:
           - Increased acquisition 25%
 
           There are more stats to come as VGDC enters its first year with a Marketing department. I look forward to it \>:)
+# Homepage card (Experience). Role overlays can override any field.
+card:
+  kind: experience
+  chips: []
+  bullets:
+  - Grew the club into North America's largest collegiate game dev organization during a single presidency.
+  - Increased funding 106%, engagement 104% and attendance 57% through data-driven leadership.
+  - Rewrote the constitution from 26 to 51 pages, defining departmental output and securing the funding increase.
+  - Built Sheets and Apps Script tooling that turns internal planning into published views the club reads, with no second copy to maintain.
+  background: https://malachek.com/_assets/v11/b8d3b3d41c694befed1739793eab8c1eb439c412.png?w=1536
+  title: President
+  org: Video Game Development Club at UCI
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/19f4ece0d28ece85b041d544fa15d302c2f97ee6.png?w=512
+    alt: 'President: North America’s largest collegiate game development club. 600+ yearly members, 44 officers, 13 departments.'
+  blurb: North America’s largest collegiate game development club. 600+ yearly members, 44 officers, 13 departments.
+  category: Leadership Experience
+  dates: Jan 2024 - Present
+  links:
+  - icon: globe
+    href: https://vgdc-uci.com
+    label: VGDC website
 ---

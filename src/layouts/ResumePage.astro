@@ -1,0 +1,22 @@
+---
+/**
+ * A role's /resume page. Until each role has its own PDF (see docs/QUESTIONS.md),
+ * it embeds the current resume from Google Drive, as the live site does.
+ */
+import Base from '@/layouts/Base.astro';
+import { absUrl, type Role } from '@/lib/content';
+interface Props { role: Role }
+const { role } = Astro.props;
+const drivePreview = 'https://drive.google.com/file/d/11GmRucSaYkZY_A7n7Q8QrWW1sRfZgipw/preview';
+---
+<Base title="Resume | Malachy Kennedy" description="Malachy Kennedy's resume: gameplay and systems engineer, UE5 and Unity, two titles shipped on Steam." canonical={absUrl(role, '/resume')} roleId={role.id}>
+  <section class="wrap resume">
+    <h1 class="visually-hidden">Resume</h1>
+    <iframe src={drivePreview} title="Malachy Kennedy resume (PDF)" loading="eager"></iframe>
+  </section>
+</Base>
+
+<style>
+  .resume { padding-block: 24px 48px; }
+  .resume iframe { width: 100%; height: min(1200px, 85vh); border: 0; border-radius: 8px; background: #fff; }
+</style>

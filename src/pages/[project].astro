@@ -1,16 +1,18 @@
 ---
 /**
- * Project pages at their original Figma Sites paths (/exo, /the-fallen, ...), so
- * links already sent to recruiters keep working. Role variants arrive in step 3.
+ * Generalist project pages at their original Figma Sites paths (/exo,
+ * /the-fallen, ...), so links already sent to recruiters keep working.
+ * Other roles: src/pages/[role]/[project].astro.
  */
-import { getCollection } from 'astro:content';
 import ProjectPage from '@/layouts/ProjectPage.astro';
+import { APEX_ROLE, absUrl, getRole, rolePages } from '@/lib/content';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((p) => ({ params: { project: p.data.path.slice(1) }, props: { entry: p } }));
+  const pages = await rolePages(APEX_ROLE);
+  return pages.map((page) => ({ params: { project: page.path!.slice(1) }, props: { page } }));
 }
 
-const { entry } = Astro.props;
+const { page } = Astro.props;
+const role = await getRole(APEX_ROLE);
 ---
-<ProjectPage page={entry.data} canonical={new URL(entry.data.path, Astro.site).href} />
+<ProjectPage page={page} roleId={APEX_ROLE} canonical={absUrl(role, page.path!)} />

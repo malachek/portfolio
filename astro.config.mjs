@@ -4,14 +4,14 @@ import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 /**
- * Dev-only pages live under src/pages/dev (component showcase, and later /_matrix).
+ * Dev-only pages live under src/pages/lab (component showcase, hero options, the matrix).
  * They are useful locally and must never ship, so they are deleted from the build output.
  */
 const stripDevPages = {
   name: 'strip-dev-pages',
   hooks: {
     'astro:build:done': async ({ dir }) => {
-      await rm(new URL('./dev/', dir), { recursive: true, force: true });
+      await rm(new URL('./lab/', dir), { recursive: true, force: true });
     },
   },
 };
@@ -65,4 +65,6 @@ export default defineConfig({
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   },
 });
+
+
 

@@ -1,0 +1,77 @@
+---
+/**
+ * A role's homepage: hero, Selected Work cards, Also Built, experience cards,
+ * skills. Content: src/content/roles/<role>.yaml plus each project's card data.
+ */
+import Base from '@/layouts/Base.astro';
+import ProjectHero from '@/components/project/ProjectHero.astro';
+import Section from '@/components/layout/Section.astro';
+import FeatureCard from '@/components/home/FeatureCard.astro';
+import AlsoBuilt from '@/components/home/AlsoBuilt.astro';
+import Skills from '@/components/home/Skills.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { getEntry } from 'astro:content';
+import { absUrl, resolveHome, type Role } from '@/lib/content';
+
+interface Props { role: Role }
+const { role } = Astro.props;
+const home = await resolveHome(role);
+const site = (await getEntry('site', 'site'))!.data;
+---
+<Base title={role.data.seo.title} description={role.data.seo.description} canonical={absUrl(role, '/')} roleId={role.id} lens>
+  <ProjectHero title={home.hero.title} lines={home.hero.lines} background={home.hero.tiles ? undefined : home.hero.background} tiles={home.hero.tiles} scrim={60} rule={false} offset>
+    <Fragment slot="text-end">
+      {home.hero.bullets.length > 0 && (
+        <ul class="hero-bullets">{home.hero.bullets.map((b) => <li>{b}</li>)}</ul>
+      )}
+      {home.hero.credential && <p class="eyebrow hero-credential">{home.hero.credential}</p>}
+    </Fragment>
+    <Fragment slot="aside">
+      {home.hero.avatar && <img class="hero-avatar" src={home.hero.avatar} alt="Malachy Kennedy" width="237" height="189" />}
+      <a class="hero-email" href={`mailto:${site.email}`}>{site.email}</a>
+      <div class="hero-icons">
+        <a href={site.github} rel="me"><Icon name="github" size={24} label="GitHub" /></a>
+        <a href={site.linkedin} rel="me"><Icon name="linkedin" size={24} label="LinkedIn" /></a>
+      </div>
+    </Fragment>
+  </ProjectHero>
+
+  <Section heading={home.selectedWorkHeading} id="projects" fullBleed>
+    <div class="cards">
+      {home.featured.map((c) => <FeatureCard {...c} />)}
+    </div>
+    {home.alsoBuilt.length > 0 && <AlsoBuilt label={home.alsoBuiltLabel} cards={home.alsoBuilt} />}
+  </Section>
+
+  {home.experience.filter((g) => g.cards.length > 0).map((group) => (
+    <Section heading={group.heading} fullBleed>
+      <div class="cards">
+        {group.cards.map((c) => <FeatureCard {...c} />)}
+      </div>
+    </Section>
+  ))}
+
+  <Skills heading={home.skills.heading} groups={home.skills.lines} />
+</Base>
+
+<style>
+  .cards { display: flex; flex-direction: column; gap: 24px; }
+  .hero-bullets {
+    padding: 0 0 16px var(--list-indent);
+    font-size: var(--fs-body);
+    line-height: var(--lh-prose);
+    color: var(--text);
+  }
+  .hero-bullets li + li { margin-top: var(--list-gap); }
+  .hero-credential { line-height: var(--lh-compact); }
+  .hero-avatar { width: 237px; height: 189px; object-fit: contain; }
+  .hero-email {
+    font-weight: 700;
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    color: var(--text);
+    text-underline-position: from-font;
+  }
+  .hero-icons { display: flex; gap: 16px; }
+  .hero-icons a { display: inline-flex; color: #fff; }
+</style>

@@ -14,6 +14,8 @@ import '@/styles/global.css';
 import { getEntry } from 'astro:content';
 import Header from '@/components/site/Header.astro';
 import Footer from '@/components/site/Footer.astro';
+import LensSwitcher from '@/components/site/LensSwitcher.astro';
+import { APEX_ROLE, getRole, href } from '@/lib/content';
 
 interface Props {
   title: string;
@@ -21,9 +23,10 @@ interface Props {
   /** Absolute canonical URL for this page on its own variant's host. */
   canonical?: string;
   ogImage?: string;
-  /** Resolved href for the nav "Resume" link (the role's PDF). */
-  resumeHref?: string;
-  homeHref?: string;
+  /** Which role site this page belongs to (default: the generalist apex). */
+  roleId?: string;
+  /** Show the role switcher under the header (homepages). */
+  lens?: boolean;
   noindex?: boolean;
   /** Page accent (#rrggbb): rules, pills, chips. Defaults to magenta. */
   accent?: string;
@@ -34,14 +37,16 @@ const {
   description,
   canonical,
   ogImage,
-  resumeHref = '/resume',
-  homeHref = '/',
+  roleId = APEX_ROLE,
+  lens = false,
   noindex = false,
   accent,
 } = Astro.props;
 
 const site = (await getEntry('site', 'site'))!.data;
-const nav = site.nav.map((n) => ({ ...n, href: n.href === 'resume' ? resumeHref : n.href }));
+const role = await getRole(roleId);
+const homeHref = href(roleId, '/');
+const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' ? role.data.resume : n.href) }));
 ---
 <!doctype html>
 <html lang="en">
@@ -66,6 +71,7 @@ const nav = site.nav.map((n) => ({ ...n, href: n.href === 'resume' ? resumeHref 
   <body style={accent ? `--accent:${accent}` : undefined}>
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header name={site.name} github={site.github} linkedin={site.linkedin} nav={nav} homeHref={homeHref} />
+    {lens && <LensSwitcher current={roleId} />}
     <main id="main" tabindex="-1">
       <slot />
     </main>

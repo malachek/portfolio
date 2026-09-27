@@ -6,9 +6,13 @@ import { parse } from 'yaml';
  * Content collections. Every collection has a schema, so a bad edit fails the
  * build instead of shipping.
  *
- *   site      src/content/site.yaml               contact, nav, footer
- *   projects  src/content/projects/<slug>/_base.md  one file per project page
- *   (roles + per-role overlays arrive in build step 3)
+ *   site      src/content/site.yaml                   contact, nav, footer
+ *   roles     src/content/roles/<role>.yaml            one per role site (dev = malachek.com)
+ *   projects  src/content/projects/<name>/_base.md     shared facts + full page
+ *   overlays  src/content/projects/<name>/<role>.md    that project on that role
+ *
+ * Merge rule: page = _base + overlay, overlay wins field by field. No overlay
+ * file for a role = the project is not on that role's site. See EDITING.md.
  */
 
 const url = z.string().url();
@@ -69,49 +73,16 @@ const section = z.object({
   blocks: z.array(block),
 });
 
-const projects = defineCollection({
-  loader: glob({
-    pattern: '*/_base.md',
-    base: './src/content/projects',
-    generateId: ({ entry }) => entry.split('/')[0],
-  }),
-  schema: z.object({
-    title: z.string(),
-    /** The page's accent: rules, pills and chips. Matches the project's home card. */
-    accent: z.string().regex(/^#[0-9a-fA-F]{6}$/),
-    /** Old Figma path this page must keep answering at, e.g. /exo */
-    path: z.string().startsWith('/'),
-    seo: z.object({ title: z.string(), description: z.string() }),
-    hero: z.object({
-      lines: z.array(z.string()).min(1).max(4),
-      background: z.string().optional(),
-      /** Tiled texture used instead of key art (e.g. Burnt Out Games), drawn at 300px. */
-      pattern: z.string().optional(),
-      logo: z.string().optional(),
-      logoAlt: z.string().optional(),
-    }),
-    overview: z
-      .object({
-        heading: z.string().default('Project Overview'),
-        rows: z.array(z.object({ label: z.string(), value: z.string() })),
-        /** Steam store widgets shown beside the table, one per app id. */
-        steamAppIds: z.array(z.number().int()).default([]),
-        code: z.object({ href: url, label: z.string() }).optional(),
-      })
-      .optional(),
-    sections: z.array(section),
-  }),
-});
+const iconLink = z.object({ icon: z.enum(['github', 'linkedin', 'steam', 'itch', 'globe', 'link', 'mail']), href: url, label: z.string() });
 
-const iconLink = z.object({ icon: z.enum(['github', 'linkedin', 'steam', 'itch', 'globe', 'link']), href: url, label: z.string() });
-const featureCard = z.object({
+/** Homepage feature card (Selected Work / Experience). Title, accent and link default to the project's. */
+const card = z.object({
   kind: z.enum(['project', 'experience']),
   category: z.string(),
   dates: z.string(),
-  title: z.string(),
+  title: z.string().optional(),
   org: z.string().optional(),
-  href: z.string(),
-  accent: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+  accent: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional(),
   background: z.string().optional(),
   /** Tiled texture used instead of key art, drawn at 300px. */
   pattern: z.string().optional(),
@@ -120,14 +91,110 @@ const featureCard = z.object({
   links: z.array(iconLink).default([]),
   media: mediaItem.omit({ caption: true }).optional(),
   logo: z.string().optional(),
-  orgLogo: z.string().optional(),
   blurb: z.string().optional(),
 });
 
-/** The homepage (generalist variant). Role variants reorder/override it in step 3. */
-const home = defineCollection({
-  loader: file('src/content/home.yaml', { parser: (text) => ({ home: parse(text) }) }),
+/** Small "Also Built" card. Links to the project page when there is one. */
+const small = z.object({
+  blurb: z.string(),
+  image: z.string().optional(),
+  links: z.array(iconLink).default([]),
+});
+
+const hero = z.object({
+  lines: z.array(z.string()).min(1).max(4),
+  background: z.string().optional(),
+  /** Tiled texture used instead of key art (e.g. Burnt Out Games), drawn at 300px. */
+  pattern: z.string().optional(),
+  logo: z.string().optional(),
+  logoAlt: z.string().optional(),
+});
+
+const overview = z.object({
+  heading: z.string().default('Project Overview'),
+  rows: z.array(z.object({ label: z.string(), value: z.string() })),
+  /** Steam store widgets shown beside the table, one per app id. */
+  steamAppIds: z.array(z.number().int()).default([]),
+  code: z.object({ href: url, label: z.string() }).optional(),
+});
+
+/**
+ * projects/<name>/_base.md — the shared facts and the full page, for every role.
+ * A project with `page: false` has no page of its own (an Also Built card only).
+ */
+const projects = defineCollection({
+  loader: glob({
+    pattern: '*/_base.md',
+    base: './src/content/projects',
+    generateId: ({ entry }) => entry.split('/')[0],
+  }),
+  schema: z
+    .object({
+      title: z.string(),
+      /** The page's accent: rules, pills and chips. Matches the project's home card. */
+      accent: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+      page: z.boolean().default(true),
+      /** URL path of the page, e.g. /exo. Old Figma paths must keep working. */
+      path: z.string().startsWith('/').optional(),
+      seo: z.object({ title: z.string(), description: z.string() }).optional(),
+      hero: hero.optional(),
+      overview: overview.optional(),
+      sections: z.array(section).default([]),
+      card: card.optional(),
+      small: small.optional(),
+    })
+    .superRefine((p, ctx) => {
+      if (p.page && (!p.path || !p.seo || !p.hero))
+        ctx.addIssue({ code: 'custom', message: 'A project with a page needs path, seo and hero (or set page: false).' });
+    }),
+});
+
+/**
+ * projects/<name>/<role>.md — how that project appears on one role's site.
+ * The file existing is what puts the project on that role. Every field is
+ * optional; whatever is set wins over _base.md, field by field.
+ */
+const overlays = defineCollection({
+  loader: glob({
+    pattern: ['*/*.md', '!*/_base.md'],
+    base: './src/content/projects',
+    generateId: ({ entry }) => entry.replace(/\.md$/, ''),
+  }),
   schema: z.object({
+    seo: z.object({ title: z.string().optional(), description: z.string().optional() }).optional(),
+    hero: hero.partial().optional(),
+    overview: overview.partial().optional(),
+    /** Section ids in the order to show them. Leave out to show every section in _base order. */
+    sections: z.array(z.string()).optional(),
+    /** Block ids to hide on this role. */
+    hideBlocks: z.array(z.string()).optional(),
+    /** Replace parts of a section by id: heading, lead, or its whole block list. */
+    sectionOverrides: z.record(z.string(), z.object({
+      heading: z.string().optional(),
+      lead: z.string().optional(),
+      blocks: z.array(block).optional(),
+    })).optional(),
+    /** Replace fields of a block by id (e.g. its md text, its bullet items). */
+    blockOverrides: z.record(z.string(), z.record(z.string(), z.any())).optional(),
+    /** Sections that exist only on this role. `after` places one after a section id (default: end). */
+    extraSections: z.array(section.extend({ after: z.string().optional() })).optional(),
+    card: card.partial().optional(),
+    small: small.partial().optional(),
+  }),
+});
+
+/** roles/<role>.yaml — one file per role site: its hero, what it features, in what order. */
+const roles = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/content/roles', generateId: ({ entry }) => entry.replace(/\.yaml$/, '') }),
+  schema: z.object({
+    label: z.string(),
+    order: z.number().int(),
+    enabled: z.boolean().default(true),
+    /** Production host for this role, e.g. gameplay.malachek.com */
+    host: z.string(),
+    seo: z.object({ title: z.string(), description: z.string() }),
+    /** Where the nav "Resume" link goes (a PDF path, or /resume). */
+    resume: z.string(),
     hero: z.object({
       title: z.string(),
       background: z.string().optional(),
@@ -138,22 +205,14 @@ const home = defineCollection({
       credential: z.string().optional(),
       avatar: z.string().optional(),
     }),
-    selectedWork: z.object({ heading: z.string(), cards: z.array(featureCard) }),
-    alsoBuilt: z.object({
-      label: z.string().default('Also Built'),
-      dates: z.string().optional(),
-      cards: z.array(z.object({
-        title: z.string(),
-        blurb: z.string(),
-        image: z.string().optional(),
-        accent: z.string(),
-        href: z.string().optional(),
-        links: z.array(iconLink).default([]),
-      })),
-    }),
-    experience: z.array(z.object({ heading: z.string(), cards: z.array(featureCard) })),
-    skills: z.object({ heading: z.string(), lines: z.array(z.object({ label: z.string(), items: z.array(z.string()) })) }),
+    selectedWorkHeading: z.string().default('Selected Work'),
+    /** Project folder names for the big cards, in order. */
+    featured: z.array(z.string()),
+    alsoBuiltLabel: z.string().default('Also Built'),
+    alsoBuilt: z.array(z.string()).default([]),
+    experience: z.array(z.object({ heading: z.string(), items: z.array(z.string()) })).default([]),
+    skills: z.object({ heading: z.string().default('Skills'), lines: z.array(z.object({ label: z.string(), items: z.array(z.string()) })) }),
   }),
 });
 
-export const collections = { site, projects, home };
+export const collections = { site, projects, overlays, roles };

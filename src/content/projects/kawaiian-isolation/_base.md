@@ -239,4 +239,32 @@ sections:
           title: Press feature
           width: 392
           height: 459
+# Homepage card (Selected Work). Role overlays can override any field.
+card:
+  kind: project
+  chips:
+  - Unreal Engine 5.3
+  - UE5 Blueprints
+  - Wwise
+  - Perforce
+  - Apps Script
+  - Steam
+  bullets:
+  - Shipped on Steam, reaching 10,000+ claims in its first 100 hours.
+  - Engineered a CSV-to-Unreal-to-Wwise dialogue pipeline with branching playback that selects lines from cached player choices and world state, so 56 pages of dialogue were authored outside the build.
+  - Scripted mechanics, levels, and sequencing for 22 single-player scenes in UE5 Blueprints, covering AI direction, dialogue events, Blackboard checks, the save system, coded animations, and player pathing.
+  - Technical Director for 18+ contributors across audio, design, programming and writing; ran the AWS EC2 Perforce server for 30+.
+  background: https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/82674e6a2c6d8afa01cf8dc7acfdf908325797a0.png
+    alt: 'Kawai’ian Isolation: First-person narrative adventure horror. 30+ contributors.'
+  logo: https://malachek.com/_assets/v11/5e20111865f706bd15b7d90449d40bb7373405d0.png?w=128
+  blurb: First-person narrative adventure horror. 30+ contributors.
+  category: Game Project
+  dates: Apr 2024 - Jan 2026
+  links:
+  - icon: steam
+    href: https://store.steampowered.com/app/3812810/Kawaiian_Isolation
+    label: Kawai'ian Isolation on Steam
 ---

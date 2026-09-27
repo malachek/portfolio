@@ -1,0 +1,18 @@
+---
+/** Project pages of every non-apex role site: /gameplay/exo, /tools/taralumen-cora … */
+import ProjectPage from '@/layouts/ProjectPage.astro';
+import { APEX_ROLE, absUrl, getRoles, rolePages } from '@/lib/content';
+
+export async function getStaticPaths() {
+  const roles = (await getRoles()).filter((r) => r.id !== APEX_ROLE);
+  const paths = [];
+  for (const role of roles) {
+    for (const page of await rolePages(role.id)) {
+      paths.push({ params: { role: role.id, project: page.path!.slice(1) }, props: { page, role } });
+    }
+  }
+  return paths;
+}
+const { page, role } = Astro.props;
+---
+<ProjectPage page={page} roleId={role.id} canonical={absUrl(role, page.path!)} />

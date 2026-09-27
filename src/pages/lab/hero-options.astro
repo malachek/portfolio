@@ -2,16 +2,17 @@
 /**
  * DEV ONLY: three proposals for the homepage hero, built from the real content
  * so they can be judged at every screen size. Stripped from production builds.
- * Open http://localhost:4321/dev/hero-options
+ * Open http://localhost:4321/lab/hero-options
  */
 import { getEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Icon from '@/components/icons/Icon.astro';
+import { getRole, resolveHome } from '@/lib/content';
 
-const home = (await getEntry('home', 'home'))!.data;
+const home = await resolveHome(await getRole('dev'));
 const site = (await getEntry('site', 'site'))!.data;
 const h = home.hero;
-const games = home.selectedWork.cards.map((c) => ({
+const games = home.featured.map((c) => ({
   title: c.title, href: c.href, art: c.background, logo: c.logo, accent: c.accent, blurb: c.blurb,
 }));
 const role = 'Gameplay & Systems Engineer';

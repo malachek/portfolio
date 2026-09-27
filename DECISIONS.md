@@ -60,3 +60,13 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Header rebuilt as one row at every size, 48px tall, with a hairline and a light blur. Icons sit after the links; they drop out below 360px wide. Section titles stick just below it.
 - Footer rebuilt: name and availability on the left, email / GitHub / LinkedIn with icons on the right, then a base row with the copyright and page links. The file's footer repeated the header, which read as a second header.
 - Questions raised while working unattended live in `docs/QUESTIONS.md`.
+
+## Build steps 3 to 6: content model and role sites (2026-09-26)
+- Files: `src/content/roles/<role>.yaml` (one per site), `src/content/projects/<name>/_base.md` (shared facts, the full page, the homepage `card:` and the Also Built `small:` card), and `src/content/projects/<name>/<role>.md` overlays. The homepage data that used to live in `home.yaml` now lives in the role file (hero, order, skills) and in each project's `card:`.
+- Merge rule (src/lib/content.ts): overlay wins field by field; objects merge key by key, lists replace whole. An overlay file existing is what puts a project on that role.
+- Deviation from the brief, for less typing: an overlay that does not list `sections:` shows every section in `_base` order. Listing `sections:` sets order and visibility. `hideBlocks`, `blockOverrides`, `sectionOverrides` and `extraSections` cover the rest.
+- Projects without a page (`page: false`): Night Walk, Trick or Treat, Loonage, Limital, Comments, Search Engine, Pintos. They appear as Also Built cards.
+- URL layout in the build: generalist at the root (/, /exo …, the old Figma paths), other roles under /gameplay/, /tools/, /design/. Links inside a role are prefixed paths. In production the Worker serves each role at its own host and rewrites those prefixed links (see `worker/`).
+- Dev-only pages moved from /dev to /lab (so /dev never collides with a role): /lab/components, /lab/hero-options, /lab/matrix (the projects x roles grid; click a cell to open its file in VS Code).
+- Role switcher ("Viewing: Generalist · Gameplay · Tools · Design") sits under the header on every role homepage.
+- Role copy comes from the per-track bullets in resume-system/master; each overlay's comment names its source. New sentences are listed in docs/QUESTIONS.md.

@@ -154,4 +154,26 @@ sections:
           - Booths for Burning Out and EXO.
           - GDC, with our own business cards.
           - A conversation with the Mycopunk team on taking a student team through to a Devolver Digital pickup.
+# Homepage card (Experience). Role overlays can override any field.
+card:
+  kind: experience
+  chips: []
+  bullets:
+  - Co-founded a 10-developer studio and shipped 2 Steam titles, with a third approved for Q3 2026 release.
+  - Lead programmer on the studio's Unreal titles, setting the C++ architecture other developers build against.
+  - 'Technical Director across concurrent projects: engine upgrades from UE 5.3 through 5.8, Perforce administration, and build pipelines.'
+  - Turned playtest and post-release feedback into shipped design revisions, including post-launch clarity fixes.
+  title: Co-Founder & Game Engineer
+  org: Burnt Out Games, LLC
+  pattern: /art/bog-pattern.jpg
+  media:
+    kind: image
+    src: https://malachek.com/_assets/v11/587204184afaa85ff870c9759eddf2658e9344fd.png?w=512
+    alt: 'Co-Founder & Game Engineer: Professional Experience'
+  category: Professional Experience
+  dates: April 2024 - Present
+  links:
+  - icon: globe
+    href: https://burntoutgames.com
+    label: Burnt Out Games website
 ---
