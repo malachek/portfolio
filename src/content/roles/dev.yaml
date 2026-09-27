@@ -5,7 +5,7 @@ order: 0
 enabled: true
 host: malachek.com
 seo:
-  title: Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games
+  title: Malachy Kennedy (malachek) | UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games
   description: Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.
 resume: /resume
 hero:

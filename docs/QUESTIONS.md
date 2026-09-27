@@ -33,3 +33,13 @@ Collected while working unattended. Nothing here blocks the build: each one says
 15. **Editor sign-in.** The editor works today on your Mac ("Work with Local Repository" in Chrome) and from anywhere with a GitHub access token (EDITING.md §4). A "Sign In with GitHub" button also needs a small sign-in Worker on Cloudflare. Want that, or is the token enough?
 16. **GitHub repo.** The local repo has no GitHub remote yet. Create `malachek/portfolio` (public, as chosen) and push? That's needed before the Cloudflare preview.
 17. **EDITING.md screenshots.** The brief asks for screenshots of the editor. I can take them once you've picked the folder in Chrome once ("Work with Local Repository"), since I can't pick a folder for you.
+
+## New pages (build step 8)
+18. **Five new pages drafted** from your master files, in your voice: /night-walk, /loonage, /limital, /comments, /little-rockstar. Each `_base.md` marks inferred sentences with `# VERIFY`. The ones to read:
+    - Night Walk, Design: "With 72 hours, I cut scope to one loop and spent the time polishing it."
+    - Loonage, Design: "…until riding a disk felt like something the player chose to do."
+    - Limital, description: "it pulls the apps you're juggling into one interface, and lets you choose how much of each one you see."
+19. **Art for the new pages.** None of them has hero art, so their heroes use a soft glow in the page color. Comments and Little Rockstar have no image at all. Send key art / screenshots when you have them (and a clip for Night Walk?).
+20. **Little Rockstar's color** is a placeholder (#E8A33D, amber). Pick one?
+21. **Loonage engine version.** The live card says "Unity 6"; your master file says "Unity" with no version. Which?
+22. **Comments on Devpost.** Your master file says Comments is published on Devpost, but that URL isn't on the whitelist, so the page has no link. Add it to 00-contact.md and I'll link it.

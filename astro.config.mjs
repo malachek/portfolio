@@ -50,7 +50,7 @@ const devAssetGrab = {
 };
 
 /**
- * Dev-server only: GET /__task?name=check|build runs that npm script on this Mac
+ * Dev-server only: GET /__task?name=check|build|qa runs that npm script on this Mac
  * and returns its output, so the assistant can type-check and build while its own
  * sandbox has no npm. Fixed allowlist; the dev server only listens on localhost.
  */
@@ -58,7 +58,7 @@ const devTasks = {
   name: 'dev-tasks',
   apply: /** @type {'serve'} */ ('serve'),
   configureServer(server) {
-    const allowed = { check: ['run', 'check'], build: ['run', 'build'] };
+    const allowed = { check: ['run', 'check'], build: ['run', 'build'], qa: ['run', 'qa'] };
     server.middlewares.use('/__task', (req, res) => {
       const name = new URL(req.url ?? '', 'http://x').searchParams.get('name') ?? '';
       const args = allowed[/** @type {keyof typeof allowed} */ (name)];

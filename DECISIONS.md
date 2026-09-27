@@ -85,3 +85,9 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Images upload to public/art; videos are R2 URLs (`npm run media:upload`).
 - Found and fixed a duplicate block id in vgdc/_base.md (`output-text` twice; the second is now `output-summary`). Block ids must now be unique per project (schema check).
 - EDITING.md written for both paths (editor and VS Code).
+
+## Build step 8 and QA tooling (2026-09-26)
+- New pages drafted from master/06-projects facts in VOICE.md voice: /night-walk, /loonage, /limital, /comments, /little-rockstar (each on the roles that list it; inferred lines marked `# VERIFY` in the files). Pages without key art get a soft accent-colored glow in the hero.
+- Little Rockstar added to the Tools site's Also Built.
+- `npm run qa` (scripts/qa.mjs) checks the built site: outside links against the 00-contact.md whitelist, internal links against dist/, and the fact locks (hard fails) plus review items (UE5 Blueprints, "student", EXO/CORA "shipped", em dashes). First run: PASS; review items are the base copy already listed in the questions.
+- Skills lines use "Languages: C++ · …" instead of an em dash; the generalist SEO title uses "|" instead of an em dash.

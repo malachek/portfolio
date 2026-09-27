@@ -40,7 +40,7 @@ const bgUrl = !background
     : (await getImage({ src: background, width: 1920, format: 'webp' })).src;
 ---
 <div
-  class:list={['hero', { 'hero--offset': offset, 'hero--pattern': !bgUrl && pattern }]}
+  class:list={['hero', { 'hero--offset': offset, 'hero--pattern': !bgUrl && pattern, 'hero--plain': !bgUrl && !pattern && !tiles?.length }]}
   style={bgUrl ? `--hero-bg: url('${bgUrl}')` : pattern ? `--hero-bg: url('${pattern}')` : undefined}
   data-scrim={scrim}
 >
@@ -89,6 +89,13 @@ const bgUrl = !background
     grid-template-columns: repeat(var(--n), 1fr);
   }
   .hero__tile { background: center / cover no-repeat; }
+  /* No key art yet (new pages): a soft glow in the page accent instead of a flat band. */
+  .hero--plain {
+    background:
+      radial-gradient(ellipse 70% 90% at 20% 0%, color-mix(in srgb, var(--accent) 38%, transparent), transparent 70%),
+      radial-gradient(ellipse 50% 70% at 90% 100%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+      var(--ground);
+  }
   .hero--pattern { background: var(--hero-bg) top left / 300px 300px repeat, var(--ground); }
   .hero--offset { margin-top: 24px; margin-bottom: 24px; }
   .hero__card {

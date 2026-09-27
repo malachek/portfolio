@@ -10,7 +10,7 @@ const { heading = 'Skills', groups } = Astro.props;
   <h2 id="skills-h" class="display skills__h">{heading}</h2>
   <ul class="skills__list" role="list">
     {groups.map((g) => (
-      <li><strong>{g.label}</strong> — {g.items.join(' · ')}</li>
+      <li><strong>{g.label}:</strong> {g.items.join(" · ")}</li>
     ))}
   </ul>
 </section>
