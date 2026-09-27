@@ -1,0 +1,67 @@
+# Non-games Software Engineer site: software.malachek.com. PHASE 2, not published (enabled: false).
+# Hero leads with shipped products (09-clarifications); project list leads with Pintos, then Search Engine.
+label: Software
+order: 5
+enabled: false
+host: software.malachek.com
+seo:
+  title: Malachy Kennedy | Software Engineer
+  description: 'Software engineer with shipped commercial products in C++ and C#: real-time systems, networked multiplayer, and content pipeline automation.'
+resume: /resume
+hero:
+  title: Malachy Kennedy
+  tiles:
+  - https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
+  - https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
+  - https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
+  - https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
+  lines:
+  - Software engineer with shipped commercial products in C++ and C#, spanning real-time systems, networked multiplayer, and content pipeline automation.
+  - Two products shipped to a commercial storefront and a third approved for release.
+  bullets:
+  - President // Video Game Development Club at UC Irvine
+  - Co-Founder & Game Engineer // Burnt Out Games, LLC
+  - Game Design B.S. & SWE B.S. // UC Irvine, class of 2027
+  credential: 2 SHIPPED PRODUCTS ON STEAM · 1 APPROVED FOR RELEASE // C++ · C# · PYTHON · C
+  avatar: https://malachek.com/_assets/v11/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.png
+featured:
+- pintos
+- search-engine
+- exo
+- kawaiian-isolation
+alsoBuilt:
+- loonage
+- little-rockstar
+experience:
+- heading: Professional Experience
+  items:
+  - taralumen-cora
+  - burnt-out-games-llc
+  - vgdc
+skills:
+  heading: Skills
+  lines:
+  - label: Languages
+    items:
+    - C++
+    - C#
+    - Python
+    - C
+    - Java
+    - JavaScript
+    - SQL
+  - label: Systems
+    items:
+    - Concurrency & synchronization
+    - Data structures & algorithms
+    - Object pooling (O(1))
+    - SOLID & Dependency Injection
+    - Information retrieval (TF-IDF)
+  - label: Tools
+    items:
+    - Git
+    - Perforce (AWS EC2)
+    - GDB
+    - Visual Studio
+    - Rider
+    - Steamworks

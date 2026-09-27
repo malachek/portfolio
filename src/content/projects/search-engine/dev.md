@@ -1,4 +1,4 @@
 ---
-# search-engine on the Generalist site (malachek.com).
-# Empty = shown exactly as _base.md. Add fields here to change it for this role only.
+# search-engine on the dev site: small card only. The write-up page is on the software site.
+page: false
 ---

@@ -31,7 +31,10 @@ export const absUrl = (role: Role, path: string) => `https://${role.data.host}${
 
 export async function getRoles(opts: { includeDisabled?: boolean } = {}) {
   const roles = await getCollection('roles');
-  return roles.filter((r) => opts.includeDisabled || r.data.enabled).sort((a, b) => a.data.order - b.data.order);
+  // Unpublished roles (enabled: false) still show on the local dev server, so drafts can be previewed.
+  return roles
+    .filter((r) => opts.includeDisabled || r.data.enabled || import.meta.env.DEV)
+    .sort((a, b) => a.data.order - b.data.order);
 }
 
 export async function getRole(id: string) {
@@ -145,7 +148,7 @@ export async function rolePages(roleId: string) {
   for (const p of projects) {
     if (!p.data.page || !p.data.path) continue;
     const page = await resolveProject(p.id, roleId);
-    if (page) out.push(page);
+    if (page?.page) out.push(page);
   }
   return out;
 }

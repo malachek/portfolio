@@ -1,3 +1,4 @@
 ---
-# pintos on the tools site. Only what differs from _base.md goes here.
+# pintos on the tools site: small card only. The write-up page is on the software site.
+page: false
 ---

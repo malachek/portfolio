@@ -91,3 +91,8 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Little Rockstar added to the Tools site's Also Built.
 - `npm run qa` (scripts/qa.mjs) checks the built site: outside links against the 00-contact.md whitelist, internal links against dist/, and the fact locks (hard fails) plus review items (UE5 Blueprints, "student", EXO/CORA "shipped", em dashes). First run: PASS; review items are the base copy already listed in the questions.
 - Skills lines use "Languages: C++ · …" instead of an em dash; the generalist SEO title uses "|" instead of an em dash.
+
+## Phase 2 scaffold (2026-09-26)
+- `roles/software.yaml` (enabled: false): hero leads with shipped products; featured Pintos, Search Engine, EXO, Kawai'ian Isolation. Pintos and Search Engine have write-up pages on this role only; other roles keep them as small cards (`page: false` in their overlay, a new overlay field). No coursework code is linked.
+- Unpublished roles show on the local dev server (switcher marks them "(draft)") and are skipped by the production build.
+- Production: not started, pending the research the brief asks for.

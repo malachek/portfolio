@@ -166,6 +166,8 @@ const overlays = defineCollection({
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
   }),
   schema: z.object({
+    /** false = on this role the project is a card only, with no page of its own. */
+    page: z.boolean().optional(),
     seo: z.object({ title: z.string().optional(), description: z.string().optional() }).optional(),
     hero: hero.partial().optional(),
     overview: overview.partial().optional(),

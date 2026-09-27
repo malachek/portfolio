@@ -21,7 +21,7 @@ const roles = await getRoles();
               href={`${roleBase(r.id)}/`}
               data-lens={r.id}
               aria-current={r.id === current ? 'page' : undefined}
-            >{r.data.label}</a>
+            >{r.data.label}{!r.data.enabled && ' (draft)'}</a>
           </li>
         ))}
       </ul>

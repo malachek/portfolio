@@ -43,3 +43,8 @@ Collected while working unattended. Nothing here blocks the build: each one says
 20. **Little Rockstar's color** is a placeholder (#E8A33D, amber). Pick one?
 21. **Loonage engine version.** The live card says "Unity 6"; your master file says "Unity" with no version. Which?
 22. **Comments on Devpost.** Your master file says Comments is published on Devpost, but that URL isn't on the whitelist, so the page has no link. Add it to 00-contact.md and I'll link it.
+
+## Phase 2 (production., software.)
+23. **Software site drafted, not published** (`roles/software.yaml`, `enabled: false`). Preview it at http://localhost:4321/software/ (the dev server shows drafts; the real build skips them). It leads with Pintos, then Search Engine, with write-up pages for both. **Pintos code is not linked anywhere**; the page says "available on request". Does your course allow publishing it? Also: can your resume-system automation (resume builder, job watcher) be shown as a project, and what are you comfortable disclosing?
+24. **Production site: not started.** The brief asks me to research first whether producer / PM postings at your target studios look at portfolios, and to propose a single case-study page if they don't. Want that research done next session?
+25. **Search Engine page** says "Team project · 4 developers" and "Everything except the UI; ranking and relevance were my main contribution", per 6-11. It never says coursework. OK?
