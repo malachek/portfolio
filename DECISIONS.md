@@ -96,3 +96,8 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - `roles/software.yaml` (enabled: false): hero leads with shipped products; featured Pintos, Search Engine, EXO, Kawai'ian Isolation. Pintos and Search Engine have write-up pages on this role only; other roles keep them as small cards (`page: false` in their overlay, a new overlay field). No coursework code is linked.
 - Unpublished roles show on the local dev server (switcher marks them "(draft)") and are skipped by the production build.
 - Production: not started, pending the research the brief asks for.
+
+## Resumes per role (2026-09-27)
+- One resume per role, built with resume-system rules (output/portfolio-<role>/, accepted copies in final/). Malachy uploaded them to Google Drive (shared: anyone with the link can view).
+- `roles/<role>.yaml → resumeDriveId` holds the Drive file id; each role's /resume page embeds its own PDF. Generalist: Game Engineer; Gameplay: Gameplay Engineer; Tools: Tools Engineer; Design: Technical Game Designer.
+- EXO release date: set when the publisher says; every "Q3 2026" removed from the site.

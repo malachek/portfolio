@@ -18,7 +18,7 @@ Collected while working unattended. Nothing here blocks the build: each one says
 ## Role sites (build steps 3 to 6)
 8. ✅ ANSWERED (set when the publisher says; all Q3 2026 dates removed). **EXO release date.** The live site says "Steam-approved, pending Q3 2026" (EXO page) and "a third approved for Q3 2026 release" (Burnt Out Games card). Your master file (09-clarifications, 2026-09-25) says EXO is unreleased with **no release date** until a publisher signs. Which is right?
    *Meanwhile:* the new Gameplay / Tools / Design copy says "approved on Steam" with no date; the Generalist site still carries the live wording.
-9. ✅ ANSWERED: one per role; drafts made in resume-system/output/portfolio-<role>/, waiting for approval. **Resume per role.** Each role's Resume link currently opens the same Google Drive PDF. Which PDF should each role link to (Gameplay, Tools, Design, Generalist)? Once you say, I'll serve them from the site, e.g. /resume/Malachy_Kennedy_Gameplay_Resume.pdf.
+9. ✅ ANSWERED: one per role; approved and uploaded to Drive; each role's /resume page embeds its own PDF. **Resume per role.** Each role's Resume link currently opens the same Google Drive PDF. Which PDF should each role link to (Gameplay, Tools, Design, Generalist)? Once you say, I'll serve them from the site, e.g. /resume/Malachy_Kennedy_Gameplay_Resume.pdf.
 10. **New copy to check** (everything else is word for word from your master files):
     - Tools hero, line 2: "I build the architecture and pipelines other people work in: modular C# codebases, data-driven content pipelines, and the source control and release tooling behind them."
     - Design, EXO card: "Ran three playtest rounds, lifting player engagement from 43% to 95% (top-two-box)."

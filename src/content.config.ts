@@ -202,6 +202,8 @@ const roles = defineCollection({
     seo: z.object({ title: z.string(), description: z.string() }),
     /** Where the nav "Resume" link goes (a PDF path, or /resume). */
     resume: z.string(),
+    /** Google Drive file id of this role's resume PDF, embedded on its /resume page. */
+    resumeDriveId: z.string().optional(),
     hero: z.object({
       title: z.string(),
       background: z.string().optional(),

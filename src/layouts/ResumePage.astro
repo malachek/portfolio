@@ -1,13 +1,15 @@
 ---
 /**
- * A role's /resume page. Until each role has its own PDF (see docs/QUESTIONS.md),
- * it embeds the current resume from Google Drive, as the live site does.
+ * A role's /resume page: that role's resume PDF, embedded from Google Drive
+ * (roles/<role>.yaml → resumeDriveId). Falls back to the generalist resume.
  */
 import Base from '@/layouts/Base.astro';
-import { absUrl, type Role } from '@/lib/content';
+import { APEX_ROLE, absUrl, getRole, type Role } from '@/lib/content';
 interface Props { role: Role }
 const { role } = Astro.props;
-const drivePreview = 'https://drive.google.com/file/d/11GmRucSaYkZY_A7n7Q8QrWW1sRfZgipw/preview';
+const fallback = (await getRole(APEX_ROLE)).data.resumeDriveId;
+const driveId = role.data.resumeDriveId ?? fallback;
+const drivePreview = `https://drive.google.com/file/d/${driveId}/preview`;
 ---
 <Base title="Resume | Malachy Kennedy" description="Malachy Kennedy's resume: gameplay and systems engineer, UE5 and Unity, two titles shipped on Steam." canonical={absUrl(role, '/resume')} roleId={role.id}>
   <section class="wrap resume">
