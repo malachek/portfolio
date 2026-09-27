@@ -2,7 +2,7 @@
 /**
  * DEV ONLY: three proposals for the homepage hero, built from the real content
  * so they can be judged at every screen size. Stripped from production builds.
- * Open http://localhost:4321/lab/hero-options
+ * Open http://localhost:4321/lab/hero-options (options A–F)
  */
 import { getEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
@@ -14,6 +14,7 @@ const site = (await getEntry('site', 'site'))!.data;
 const h = home.hero;
 const games = home.featured.map((c) => ({
   title: c.title, href: c.href, art: c.background, logo: c.logo, accent: c.accent, blurb: c.blurb,
+  video: c.media?.kind === 'video' ? c.media.src : undefined, dates: c.dates, category: c.category,
 }));
 const role = 'Gameplay & Systems Engineer';
 const stats = [
@@ -103,6 +104,78 @@ const stats = [
       ))}
     </ul>
   </section>
+  <!-- ─────────────── Option D ─────────────── -->
+  <p class="label">Option D · Reel first: gameplay plays full width, name and one line over it</p>
+  <section class="d">
+    {games[0]?.video && <video class="d__vid" src={games[0].video} autoplay muted loop playsinline aria-hidden="true"></video>}
+    <div class="d__shade" aria-hidden="true"></div>
+    <div class="d__in">
+      <p class="a__role">{role}</p>
+      <h1 class="d__name">{h.title}</h1>
+      <p class="d__lead">{h.lines[0]}</p>
+      <div class="a__ctas">
+        <a class="btn btn--primary" href="/#projects">See my work</a>
+        <a class="btn btn--ghost" href="/resume">Resume</a>
+      </div>
+      <p class="d__now">Now playing: <a href={games[0].href}>{games[0].title}</a></p>
+    </div>
+  </section>
+
+  <!-- ─────────────── Option E ─────────────── -->
+  <p class="label">Option E · Game select: pick a game from the menu, the art and blurb swap on hover</p>
+  <section class="e" data-select>
+    <div class="e__menu">
+      <p class="a__role">{role}</p>
+      <h1 class="e__name">{h.title}</h1>
+      <p class="e__lead">{h.lines[0]}</p>
+      <ol class="e__list" role="list">
+        {games.map((g, i) => (
+          <li><a href={g.href} data-i={i} style={`--accent:${g.accent}`} class:list={[{ on: i === 0 }]}>
+            <span class="e__idx">{String(i + 1).padStart(2, '0')}</span><span class="e__t">{g.title}</span><span class="e__d">{g.category}</span>
+          </a></li>
+        ))}
+      </ol>
+    </div>
+    <div class="e__stage">
+      {games.map((g, i) => (
+        <figure class:list={['e__slide', { on: i === 0 }]} data-i={i} style={`--art:url('${g.art}');--accent:${g.accent}`}>
+          {g.logo && <img src={g.logo} alt="" />}
+          <figcaption>{g.blurb}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- ─────────────── Option F ─────────────── -->
+  <p class="label">Option F · Profile card with a shelf: who you are, three numbers, and the four games as logos</p>
+  <section class="f">
+    <div class="f__card">
+      <div class="f__who">
+        {h.avatar && <img class="f__avatar" src={h.avatar} alt="" />}
+        <div>
+          <h1 class="f__name">{h.title}</h1>
+          <p class="a__role">{role}</p>
+        </div>
+      </div>
+      <p class="f__lead">{h.lines[0]}</p>
+      <dl class="f__stats">{stats.map((s) => <div><dt>{s.n}</dt><dd>{s.label}</dd></div>)}</dl>
+      <ul class="f__shelf" role="list">
+        {games.map((g) => <li style={`--art:url('${g.art}');--accent:${g.accent}`}><a href={g.href}>{g.logo ? <img src={g.logo} alt={g.title} /> : <span>{g.title}</span>}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    for (const root of document.querySelectorAll<HTMLElement>('[data-select]')) {
+      const items = root.querySelectorAll<HTMLAnchorElement>('.e__list a');
+      const slides = root.querySelectorAll<HTMLElement>('.e__slide');
+      const pick = (i: string) => {
+        items.forEach((a) => a.classList.toggle('on', a.dataset.i === i));
+        slides.forEach((s) => s.classList.toggle('on', s.dataset.i === i));
+      };
+      items.forEach((a) => { a.addEventListener('mouseenter', () => pick(a.dataset.i!)); a.addEventListener('focus', () => pick(a.dataset.i!)); });
+    }
+  </script>
 </Base>
 
 <style>
@@ -208,5 +281,63 @@ const stats = [
   @media (prefers-reduced-motion: reduce) {
     .b__art, .c__grid a { transition: none; }
     .b__games a:hover .b__art, .c__grid a:hover { transform: none; }
+  }
+  /* ── D ── */
+  .d { position: relative; isolation: isolate; min-height: 560px; display: flex; align-items: flex-end; overflow: clip; }
+  .d__vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .d__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(1 2 16 / .95) 0%, rgb(1 2 16 / .55) 45%, rgb(1 2 16 / .15) 100%), linear-gradient(90deg, rgb(1 2 16 / .7), transparent 60%); }
+  .d__in { width: 100%; max-width: 1080px; margin-inline: auto; padding: 48px var(--section-pad-x); display: flex; flex-direction: column; gap: 14px; }
+  .d__name { font-family: var(--font-display); font-weight: 400; font-size: 88px; line-height: .9; color: var(--text); }
+  .d__lead { max-width: 640px; font-size: 20px; line-height: 1.5; }
+  .d__now { font-size: 14px; color: var(--muted-text); }
+  .d__now a { color: var(--text); }
+
+  /* ── E ── */
+  .e { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px; max-width: 1152px; margin-inline: auto; padding: 40px var(--section-pad-x); align-items: stretch; }
+  .e__menu { display: flex; flex-direction: column; gap: 14px; }
+  .e__name { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: .9; color: var(--text); }
+  .e__lead { font-size: 18px; line-height: 1.5; }
+  .e__list { display: flex; flex-direction: column; margin-top: 8px; border-top: 1px solid rgb(255 255 255 / .1); }
+  .e__list a { display: grid; grid-template-columns: 36px 1fr auto; align-items: baseline; gap: 12px; padding: 14px 8px; border-bottom: 1px solid rgb(255 255 255 / .1); color: var(--muted-text); text-decoration: none; transition: color 150ms, background-color 150ms, padding 150ms; }
+  .e__idx { font-family: var(--font-display); font-size: 18px; }
+  .e__t { font-weight: 900; font-size: 24px; }
+  .e__d { font-size: 13px; }
+  .e__list a.on { color: #fff; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 30%, transparent), transparent); padding-left: 16px; }
+  .e__list a.on .e__idx { color: var(--accent); }
+  .e__stage { position: relative; min-height: 440px; border-radius: 24px; overflow: clip; }
+  .e__slide { position: absolute; inset: 0; margin: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 24px; background: linear-gradient(0deg, rgb(0 0 0 / .85), transparent 55%), var(--art) center / cover no-repeat; opacity: 0; transition: opacity 250ms ease; box-shadow: inset 0 0 0 2px var(--accent); border-radius: inherit; }
+  .e__slide.on { opacity: 1; }
+  .e__slide img { width: 180px; max-height: 90px; object-fit: contain; object-position: left bottom; }
+  .e__slide figcaption { max-width: 460px; font-size: 17px; line-height: 1.45; }
+
+  /* ── F ── */
+  .f { padding: 40px var(--section-pad-x); background: radial-gradient(ellipse 60% 80% at 50% 0%, rgb(213 47 199 / .18), transparent 70%); }
+  .f__card { max-width: 900px; margin-inline: auto; padding: 32px; border-radius: 28px; background: var(--panel); border: 1px solid rgb(255 255 255 / .08); display: flex; flex-direction: column; gap: 20px; }
+  .f__who { display: flex; align-items: center; gap: 18px; }
+  .f__avatar { width: 76px; height: 76px; border-radius: 50%; }
+  .f__name { font-family: var(--font-display); font-weight: 400; font-size: 52px; line-height: .95; color: var(--text); }
+  .f__lead { font-size: 19px; line-height: 1.5; max-width: 720px; }
+  .f__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .f__stats div { padding: 14px 16px; border-radius: 14px; background: rgb(255 255 255 / .04); }
+  .f__stats dt { font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--magenta); }
+  .f__stats dd { font-size: 14px; color: var(--text); }
+  .f__shelf { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .f__shelf a { display: grid; place-items: center; aspect-ratio: 16 / 9; padding: 12px; border-radius: 14px; background: linear-gradient(rgb(0 0 0 / .55), rgb(0 0 0 / .55)), var(--art) center / cover no-repeat; outline: 2px solid transparent; outline-offset: 3px; transition: outline-color 150ms, transform 150ms; color: #fff; font-weight: 900; text-decoration: none; }
+  .f__shelf a:hover { outline-color: var(--accent); transform: translateY(-2px); }
+  .f__shelf img { max-width: 100%; max-height: 64px; object-fit: contain; }
+
+  @media (max-width: 799.98px) {
+    .d { min-height: 480px; }
+    .d__name { font-size: 48px; }
+    .d__lead { font-size: 17px; }
+    .e { grid-template-columns: 1fr; }
+    .e__stage { min-height: 260px; order: -1; }
+    .e__name { font-size: 44px; }
+    .e__d { display: none; }
+    .f__card { padding: 20px; }
+    .f__name { font-size: 36px; }
+    .f__stats { grid-template-columns: 1fr 1fr 1fr; }
+    .f__stats dt { font-size: 32px; }
+    .f__shelf { grid-template-columns: 1fr 1fr; }
   }
 </style>
