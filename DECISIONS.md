@@ -50,3 +50,13 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Phone cards: date row split left/right, tighter title/chips/rule spacing, section rule inset to line up with the heading text.
 - Burnt Out Games gets its Figma backing: the ember pattern (`public/art/bog-pattern.jpg`, tiled at 300px) behind the page hero and the home experience card. New optional `pattern` field on project heroes and home cards. Re-running the importers with `--force` would drop it.
 - `astro.config.mjs` has a dev-server-only `/__grab` route that saves a Figma asset URL into `public/art/`, so design assets can be pulled while the sandbox has no internet. It is not part of the built site.
+
+## Review round 1 fixes (2026-09-26)
+- Media rule: logos and content (videos, screenshots, thumbnails) are **fitted**, never cropped; only backgrounds **fill**.
+- Homepage hero art is the four game key arts side by side (`hero.tiles` in home.yaml): 4 across on desktop and tablet (so tablet shows all four), 2x2 on phones.
+- Homepage cards: the whole inner capsule is the link (as on the live site), with a hover state (darken and accent outline). On tablet, where a card splits into a text capsule and a media capsule, both light up together. Icon links and See More stay separately clickable. Also Built cards with a page or a single outside link are clickable as a whole.
+- Also Built: label only, no date (the band covers many projects). Grid is 3 / 3 / 2 across; titles and icons stay on one line.
+- Phone gutters 24px (file: 16) and roomier card padding.
+- Header rebuilt as one row at every size, 48px tall, with a hairline and a light blur. Icons sit after the links; they drop out below 360px wide. Section titles stick just below it.
+- Footer rebuilt: name and availability on the left, email / GitHub / LinkedIn with icons on the right, then a base row with the copyright and page links. The file's footer repeated the header, which read as a second header.
+- Questions raised while working unattended live in `docs/QUESTIONS.md`.

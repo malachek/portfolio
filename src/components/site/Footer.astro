@@ -1,10 +1,11 @@
 ---
 /**
- * Site footer (Figma "Universal / Footer", 1:4119): the header row repeated,
- * then availability and contact. Fixes 00-SITE-WIDE.md §1: every contact line is
- * a real link to its own destination, and the availability line is plain text.
+ * Site footer. Replaces the file's repeated-header footer (Figma 1:4119), which
+ * read as a second header. Left: name and the availability line (plain text,
+ * 00-SITE-WIDE.md §1). Right: every contact route as its own real link, then the
+ * page links. A hairline separates it from the page.
  */
-import Header from '@/components/site/Header.astro';
+import Icon from '@/components/icons/Icon.astro';
 
 interface Props {
   name: string;
@@ -16,48 +17,86 @@ interface Props {
   homeHref?: string;
 }
 
-const { name, email, github, linkedin, availability, nav, homeHref } = Astro.props;
+const { name, email, github, linkedin, availability, nav, homeHref = '/' } = Astro.props;
 const bare = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
-  <Header name={name} github={github} linkedin={linkedin} nav={nav} homeHref={homeHref} as="div" navLabel="Footer" />
-  <div class="site-footer__body eyebrow">
-    <p class="site-footer__line">{availability}</p>
-    <a class="site-footer__line" href={`mailto:${email}`}>{email}</a>
-    <a class="site-footer__line" href={github} rel="me">{bare(github)}</a>
-    <a class="site-footer__line" href={linkedin} rel="me">{bare(linkedin)}</a>
+  <div class="site-footer__inner">
+    <div class="site-footer__who">
+      <a class="site-footer__name" href={homeHref}>{name}</a>
+      <p class="site-footer__avail">{availability}</p>
+    </div>
+    <ul class="site-footer__contact" role="list" aria-label="Contact">
+      <li><a href={`mailto:${email}`}><Icon name="mail" size={18} />{email}</a></li>
+      <li><a href={github} rel="me"><Icon name="github" size={18} />{bare(github)}</a></li>
+      <li><a href={linkedin} rel="me"><Icon name="linkedin" size={18} />{bare(linkedin)}</a></li>
+    </ul>
+  </div>
+  <div class="site-footer__base">
+    <p>© {year} {name}</p>
+    <nav aria-label="Footer">
+      <ul role="list">
+        {nav.map((item) => <li><a class="eyebrow" href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
   </div>
 </footer>
 
 <style>
   .site-footer {
+    margin-top: 48px;
+    border-top: 1px solid rgb(255 255 255 / 0.08);
     background: var(--ground);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .site-footer__body {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: var(--section-max);
-    margin-inline: auto;
-    padding: 0 var(--section-pad-x) 24px;
-    line-height: var(--lh-compact);
-  }
-  .site-footer__line {
-    max-width: 480px;
-    text-decoration: none;
     color: var(--nav);
   }
-  a.site-footer__line:hover { color: var(--text); text-decoration: underline; }
+  .site-footer__inner,
+  .site-footer__base {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
+    margin-inline: auto;
+    padding-inline: var(--section-pad-x);
+  }
+  .site-footer__inner { padding-block: 40px 32px; align-items: flex-start; }
+  .site-footer__who { display: flex; flex-direction: column; gap: 12px; max-width: 460px; }
+  .site-footer__name {
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .site-footer__avail { font-size: 16px; line-height: 1.5; color: var(--muted-text); }
+  .site-footer__contact { display: flex; flex-direction: column; gap: 12px; }
+  .site-footer__contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .site-footer__contact a :global(svg) { color: var(--nav); flex: none; }
+  .site-footer__contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .site-footer__base {
+    align-items: center;
+    padding-block: 16px 24px;
+    /* Hairline inset to the content width, not the padding. */
+    background: linear-gradient(rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.08)) center top / calc(100% - 2 * var(--section-pad-x)) 1px no-repeat;
+    font-size: 14px;
+  }
+  .site-footer__base ul { display: flex; gap: 24px; }
+  .site-footer__base a { color: var(--nav); text-decoration: none; }
+  .site-footer__base a:hover { color: var(--text); }
 
   @media (max-width: 1279.98px) {
-    .site-footer__body { max-width: 800px; }
+    .site-footer__inner, .site-footer__base { max-width: 800px; }
   }
   @media (max-width: 799.98px) {
-    .site-footer { gap: 4px; }
-    .site-footer__body { align-items: flex-start; max-width: 374px; padding-inline: 16px; }
+    .site-footer__inner { flex-direction: column; gap: 24px; padding-block: 32px 24px; }
+    .site-footer__name { font-size: 28px; }
+    .site-footer__contact a { font-size: 15px; }
   }
 </style>

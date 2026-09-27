@@ -20,7 +20,7 @@ const site = (await getEntry('site', 'site'))!.data;
   description="Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6."
   canonical="https://malachek.com/"
 >
-  <ProjectHero title={home.hero.title} lines={home.hero.lines} background={home.hero.background} scrim={60} rule={false} offset>
+  <ProjectHero title={home.hero.title} lines={home.hero.lines} background={home.hero.tiles ? undefined : home.hero.background} tiles={home.hero.tiles} scrim={60} rule={false} offset>
     <Fragment slot="text-end">
       {home.hero.bullets.length > 0 && (
         <ul class="hero-bullets">{home.hero.bullets.map((b) => <li>{b}</li>)}</ul>
@@ -43,7 +43,6 @@ const site = (await getEntry('site', 'site'))!.data;
     </div>
     <AlsoBuilt
       label={home.alsoBuilt.label}
-      dates={home.alsoBuilt.dates}
       cards={home.alsoBuilt.cards.map((c) => ({ ...c, media: c.image ? { image: c.image, alt: '' } : undefined }))}
     />
   </Section>

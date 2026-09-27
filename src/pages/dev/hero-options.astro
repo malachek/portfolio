@@ -1,0 +1,211 @@
+---
+/**
+ * DEV ONLY: three proposals for the homepage hero, built from the real content
+ * so they can be judged at every screen size. Stripped from production builds.
+ * Open http://localhost:4321/dev/hero-options
+ */
+import { getEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/icons/Icon.astro';
+
+const home = (await getEntry('home', 'home'))!.data;
+const site = (await getEntry('site', 'site'))!.data;
+const h = home.hero;
+const games = home.selectedWork.cards.map((c) => ({
+  title: c.title, href: c.href, art: c.background, logo: c.logo, accent: c.accent, blurb: c.blurb,
+}));
+const role = 'Gameplay & Systems Engineer';
+const stats = [
+  { n: '2', label: 'shipped Steam titles' },
+  { n: '1', label: 'approved for release' },
+  { n: '10', label: 'developer studio co-founded' },
+];
+---
+<Base title="Hero options (dev)" description="Homepage hero proposals" noindex>
+  <!-- ─────────────── Option A ─────────────── -->
+  <p class="label">Option A · Refined current: same layout, clearer hierarchy, real calls to action</p>
+  <section class="a" style={`--t1:url('${h.tiles?.[0]}');--t2:url('${h.tiles?.[1]}');--t3:url('${h.tiles?.[2]}');--t4:url('${h.tiles?.[3]}')`}>
+    <div class="a__art" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="a__card">
+      <div class="a__text">
+        <p class="a__role">{role}</p>
+        <h1 class="a__name">{h.title}</h1>
+        <p class="a__lead">{h.lines[0]}</p>
+        <ul class="a__facts" role="list">
+          {h.bullets.map((b) => <li>{b.replace(' // ', ', ')}</li>)}
+        </ul>
+        <div class="a__ctas">
+          <a class="btn btn--primary" href="/#projects">See my work</a>
+          <a class="btn btn--ghost" href="/resume">Resume</a>
+        </div>
+      </div>
+      <aside class="a__aside">
+        {h.avatar && <img class="a__avatar" src={h.avatar} alt="" width="160" height="160" />}
+        <a class="a__email" href={`mailto:${site.email}`}>{site.email}</a>
+        <div class="a__icons">
+          <a href={site.github} rel="me"><Icon name="github" size={22} label="GitHub" /></a>
+          <a href={site.linkedin} rel="me"><Icon name="linkedin" size={22} label="LinkedIn" /></a>
+        </div>
+      </aside>
+    </div>
+    <p class="a__cred">{h.credential}</p>
+  </section>
+
+  <!-- ─────────────── Option B ─────────────── -->
+  <p class="label">Option B · Game showcase: the four games are the hero, each one a door to its page</p>
+  <section class="b">
+    <div class="b__intro">
+      <h1 class="b__name">{h.title}</h1>
+      <p class="b__role">{role} · Unreal Engine 5 · Unity 6</p>
+      <p class="b__lead">{h.lines[0]}</p>
+      <div class="a__ctas">
+        <a class="btn btn--primary" href="/resume">Resume</a>
+        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email me</a>
+      </div>
+    </div>
+    <ul class="b__games" role="list">
+      {games.map((g) => (
+        <li style={`--accent:${g.accent};--art:url('${g.art}')`}>
+          <a href={g.href}>
+            <span class="b__art" aria-hidden="true"></span>
+            {g.logo ? <img class="b__logo" src={g.logo} alt="" /> : null}
+            <span class:list={['b__title', { 'visually-hidden': g.logo }]}>{g.title}</span>
+            <span class="b__blurb">{g.blurb}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ─────────────── Option C ─────────────── -->
+  <p class="label">Option C · Split with proof: text left, numbers up front, game grid right</p>
+  <section class="c">
+    <div class="c__text">
+      <p class="a__role">{role}</p>
+      <h1 class="a__name">{h.title}</h1>
+      <p class="a__lead">{h.lines[1]}</p>
+      <dl class="c__stats">
+        {stats.map((s) => <div><dt>{s.n}</dt><dd>{s.label}</dd></div>)}
+      </dl>
+      <div class="a__ctas">
+        <a class="btn btn--primary" href="/#projects">See my work</a>
+        <a class="btn btn--ghost" href="/resume">Resume</a>
+        <a class="c__icon" href={site.github} rel="me"><Icon name="github" size={22} label="GitHub" /></a>
+        <a class="c__icon" href={site.linkedin} rel="me"><Icon name="linkedin" size={22} label="LinkedIn" /></a>
+      </div>
+    </div>
+    <ul class="c__grid" role="list">
+      {games.map((g) => (
+        <li style={`--accent:${g.accent};--art:url('${g.art}')`}>
+          <a href={g.href}><span>{g.title}</span></a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .label {
+    max-width: 1152px; margin: 40px auto 12px; padding: 8px var(--section-pad-x);
+    font: 700 13px/1.4 var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: #ffd166;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px;
+    border-radius: 10px; font-weight: 700; font-size: 16px; text-decoration: none; transition: background-color 150ms, border-color 150ms;
+  }
+  .btn--primary { background: var(--magenta); color: #fff; }
+  .btn--primary:hover { background: color-mix(in srgb, var(--magenta) 85%, #fff); }
+  .btn--ghost { border: 1.5px solid rgb(255 255 255 / .45); color: var(--text); }
+  .btn--ghost:hover { border-color: #fff; background: rgb(255 255 255 / .06); }
+
+  /* ── A ── */
+  .a { position: relative; isolation: isolate; padding: 48px var(--section-pad-x) 24px; }
+  .a__art { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .a__art i { background: center / cover no-repeat; }
+  .a__art i:nth-child(1) { background-image: var(--t1); }
+  .a__art i:nth-child(2) { background-image: var(--t2); }
+  .a__art i:nth-child(3) { background-image: var(--t3); }
+  .a__art i:nth-child(4) { background-image: var(--t4); }
+  .a::after { content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgb(1 2 16 / .92) 0%, rgb(1 2 16 / .78) 55%, rgb(1 2 16 / .35) 100%), linear-gradient(0deg, var(--ground) 0%, transparent 30%); }
+  .a__card { display: flex; gap: 48px; align-items: center; max-width: 1080px; margin-inline: auto; }
+  .a__text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+  .a__role { font: 700 14px/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--purple-text); }
+  .a__name { font-family: var(--font-display); font-weight: 400; font-size: 72px; line-height: .9; color: var(--text); }
+  .a__lead { max-width: 620px; font-size: 20px; line-height: 1.55; color: #fff; }
+  .a__facts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .a__facts li { padding: 6px 12px; border-radius: 999px; background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .14); font-size: 15px; color: var(--text); }
+  .a__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
+  .a__aside { flex: none; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .a__avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 0 4px rgb(255 255 255 / .1); }
+  .a__email { font-size: 15px; color: var(--text); }
+  .a__icons { display: flex; gap: 16px; }
+  .a__icons a { color: #fff; display: inline-flex; }
+  .a__cred { max-width: 1080px; margin: 32px auto 0; font: 700 13px/1.4 var(--font-body); letter-spacing: .04em; color: var(--muted-text); }
+
+  /* ── B ── */
+  .b { padding: 48px var(--section-pad-x) 24px; }
+  .b__intro { max-width: 1080px; margin: 0 auto 32px; display: flex; flex-direction: column; gap: 14px; }
+  .b__name { font-family: var(--font-display); font-weight: 400; font-size: 80px; line-height: .9; color: var(--text); }
+  .b__role { font: 700 15px/1.3 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--purple-text); }
+  .b__lead { max-width: 680px; font-size: 20px; line-height: 1.55; }
+  .b__games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 1152px; margin-inline: auto; }
+  .b__games a {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+    aspect-ratio: 3 / 4; padding: 16px; overflow: clip; border-radius: 20px; text-decoration: none; color: #fff;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); transition: box-shadow 150ms;
+  }
+  .b__art { position: absolute; inset: 0; z-index: -1; background: var(--art) center / cover no-repeat; transition: transform 400ms ease; }
+  .b__games a { isolation: isolate; }
+  .b__games a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(0 0 0 / .85) 0%, rgb(0 0 0 / .1) 60%); }
+  .b__games a:hover { box-shadow: inset 0 0 0 3px var(--accent); }
+  .b__games a:hover .b__art { transform: scale(1.05); }
+  .b__logo { width: 70%; max-height: 64px; object-fit: contain; object-position: left bottom; }
+  .b__title { font-weight: 900; font-size: 22px; }
+  .b__blurb { font-size: 14px; line-height: 1.4; color: rgb(255 255 255 / .85); }
+
+  /* ── C ── */
+  .c { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; max-width: 1152px; margin-inline: auto; padding: 48px var(--section-pad-x) 24px; }
+  .c__text { display: flex; flex-direction: column; gap: 16px; }
+  .c__stats { display: flex; gap: 32px; margin: 8px 0; }
+  .c__stats dt { font-family: var(--font-display); font-size: 56px; line-height: 1; color: var(--magenta); }
+  .c__stats dd { max-width: 130px; font-size: 14px; line-height: 1.3; color: var(--text); }
+  .c__icon { display: inline-flex; padding: 8px; color: var(--text); }
+  .c__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .c__grid a {
+    display: flex; align-items: flex-end; aspect-ratio: 4 / 3; padding: 12px 14px; border-radius: 16px; overflow: clip;
+    background: linear-gradient(0deg, rgb(0 0 0 / .8), transparent 55%), var(--art) center / cover no-repeat;
+    color: #fff; font-weight: 900; font-size: 18px; text-decoration: none;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); transition: box-shadow 150ms, transform 150ms;
+  }
+  .c__grid a:hover { box-shadow: inset 0 0 0 3px var(--accent); transform: translateY(-2px); }
+
+  @media (max-width: 1279.98px) {
+    .a__name, .b__name { font-size: 60px; }
+    .b__games { grid-template-columns: repeat(2, 1fr); }
+    .b__games a { aspect-ratio: 16 / 10; }
+    .c { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 799.98px) {
+    .a { padding-top: 32px; }
+    .a__card { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
+    .a__aside { flex-direction: row; flex-wrap: wrap; gap: 12px 16px; }
+    .a__avatar { width: 72px; height: 72px; }
+    .a::after { background: linear-gradient(0deg, rgb(1 2 16 / .95), rgb(1 2 16 / .8)); }
+    .a__art { grid-template-columns: 1fr 1fr; }
+    .a__name, .b__name { font-size: 44px; }
+    .a__lead, .b__lead { font-size: 17px; }
+    .b__games { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .b__games a { aspect-ratio: 3 / 4; padding: 12px; border-radius: 16px; }
+    .b__blurb { display: none; }
+    .b__title { font-size: 17px; }
+    .c__stats { gap: 16px; }
+    .c__stats dt { font-size: 40px; }
+    .btn { flex: 1 1 auto; }
+    .c__icon { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .b__art, .c__grid a { transition: none; }
+    .b__games a:hover .b__art, .c__grid a:hover { transform: none; }
+  }
+</style>

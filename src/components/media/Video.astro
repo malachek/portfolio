@@ -60,5 +60,6 @@ const { mp4, webm, poster, label, width = 1920, height = 1080, class: className 
 </script>
 
 <style>
-  .clip { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #000; pointer-events: none; }
+  /* Content is fitted, never cropped (logos and content fit; only backgrounds fill). */
+  .clip { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; pointer-events: none; }
 </style>

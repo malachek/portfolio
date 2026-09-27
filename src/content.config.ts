@@ -130,7 +130,9 @@ const home = defineCollection({
   schema: z.object({
     hero: z.object({
       title: z.string(),
-      background: z.string(),
+      background: z.string().optional(),
+      /** Key arts laid side by side behind the hero (4 across, 2x2 on phones). */
+      tiles: z.array(z.string()).optional(),
       lines: z.array(z.string()),
       bullets: z.array(z.string()).default([]),
       credential: z.string().optional(),

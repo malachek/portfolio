@@ -1,6 +1,12 @@
 # Homepage content (generalist variant). Ported from the live site; edit freely.
 hero:
   background: https://malachek.com/_assets/v11/5c0ff451fe0703358a25a21a8ca3383790cfae48.png
+  # The four game key arts, left to right (2x2 on phones). Overrides `background`.
+  tiles:
+    - https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
+    - https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
+    - https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
+    - https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
   bullets:
     - President // Video Game Development Club at UC Irvine
     - Co-Founder & Game Engineer // Burnt Out Games, LLC

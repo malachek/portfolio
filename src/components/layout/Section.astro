@@ -53,9 +53,9 @@ const H = `h${level}` as 'h2' | 'h3';
   }
   .section__heading--sticky {
     position: sticky;
-    /* Sticks at 0: the sticky site header (z 20) covers the band's top padding,
-       so the heading text lands just under the header, as on the live site. */
-    top: 0;
+    /* The header covers the band's top padding, so the heading text lands just
+       under the header. */
+    top: calc(var(--header-h) - var(--heading-pad-top));
     z-index: 5;
   }
   .section__heading .rule { height: var(--rule-section); }

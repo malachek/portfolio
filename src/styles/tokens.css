@@ -80,7 +80,7 @@
   --radius-chip: 4px;
   --radius-pill: 8px;
 
-  --header-h: 36px;
+  --header-h: 48px;
 }
 
 /* Tablet: 800-1279 */
@@ -119,11 +119,10 @@
     --fs-eyebrow: 12px;
     --fs-chip: 12px; /* Figma Sites renders 10; 12 is the legibility floor */
     --fs-code-link: 12px;
-    --header-h: 48px;
 
-    --section-pad-x: 16px;
+    --section-pad-x: 24px; /* phone gutters: more breathing room than the file's 16 */
     --content-max: 100%;
-    --capsule-pad-x: 16px;
+    --capsule-pad-x: 20px;
     --capsule-media-radius: 24px;
     --heading-pad-top: 57px;
     --heading-pad-bottom: 6px;

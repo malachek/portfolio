@@ -1,8 +1,10 @@
 ---
 /**
- * "Also Built" band (Figma 1:2127): header row, a wrapping grid of small cards
- * (Figma "Content", 1:4444), and a closing link. Cards are 368 / 240 / 168 wide
- * (3-up desktop, 3-up tablet, 2-up mobile), each tinted with its own accent.
+ * "Also Built" band (Figma 1:2127): a label, a grid of small cards (Figma
+ * "Content", 1:4444) and an optional closing link. 3 across on desktop and
+ * tablet, 2 across on phones, each tinted with its own accent. A card with a
+ * page (or a single outside link) is clickable as a whole.
+ * No date on the label: the band spans many projects, so one range misleads.
  */
 import type { ImageMetadata } from 'astro';
 import Icon from '@/components/icons/Icon.astro';
@@ -25,22 +27,21 @@ interface Props {
   more?: { text: string; href: string; label: string };
 }
 
-const { label = 'Also Built', dates, cards, more } = Astro.props;
+const { label = 'Also Built', cards, more } = Astro.props;
 ---
 <section class="also" aria-labelledby="also-built-h">
-  <div class="also__meta">
-    <h2 id="also-built-h">{label}</h2>
-    {dates && <p>{dates}</p>}
-  </div>
+  <h2 id="also-built-h" class="also__label">{label}</h2>
   <ul class="also__grid" role="list">
-    {cards.map((c) => (
-      <li class="scard" style={`--accent:${c.accent}`}>
+    {cards.map((c) => {
+      const main = c.href ?? (c.links?.length === 1 ? c.links[0].href : undefined);
+      return (
+      <li class:list={['scard', { 'scard--link': main }]} style={`--accent:${c.accent}`}>
         <div class="scard__media">
           {c.media ? <Media {...c.media} sizes="(max-width: 799px) 50vw, 374px" /> : <div class="scard__blank" />}
         </div>
         <div class="scard__body">
           <div class="scard__titlebar">
-            <h3 class="scard__title">{c.href ? <a href={c.href}>{c.title}</a> : c.title}</h3>
+            <h3 class="scard__title">{main ? <a class="scard__main" href={main} rel={c.href ? undefined : 'noopener'}>{c.title}</a> : c.title}</h3>
             {c.links?.map((l) => (
               <a class="scard__icon" href={l.href} rel="noopener"><Icon name={l.icon} size={24} label={l.label} /></a>
             ))}
@@ -48,7 +49,8 @@ const { label = 'Also Built', dates, cards, more } = Astro.props;
           <p class="scard__blurb">{c.blurb}</p>
         </div>
       </li>
-    ))}
+      );
+    })}
   </ul>
   {more && (
     <p class="also__more">{more.text} <a href={more.href} rel="noopener">{more.label}</a></p>
@@ -67,60 +69,71 @@ const { label = 'Also Built', dates, cards, more } = Astro.props;
       radial-gradient(ellipse 64% 50% at 50% 50%, #cc69d5 0%, #9f6ce5 50%, #716ef4 100%);
     color: #fff;
   }
-  .also__meta {
-    display: flex;
-    justify-content: space-between;
+  .also__label {
     width: 100%;
     max-width: 1152px;
     font-size: var(--fs-body);
+    font-weight: 400;
     line-height: var(--lh-compact);
   }
   .also__grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 368px));
     justify-content: center;
     gap: 24px;
     width: 100%;
     max-width: 1152px;
   }
   .scard {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 368px;
+    min-width: 0;
+    transition: box-shadow 150ms ease, background-color 150ms ease;
     padding-bottom: 8px;
     overflow: clip;
     border: 2px solid var(--accent);
     border-radius: 32px;
     background: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), var(--accent);
   }
-  .scard__media { height: 179px; overflow: clip; }
+  .scard__media { position: relative; height: 179px; overflow: clip; background: rgb(0 0 0 / 0.35); }
   .scard__media :global(.media) { gap: 0; height: 100%; }
   .scard__media :global(.media__img),
   .scard__media :global(.clip),
-  .scard__media :global(.media__placeholder) { height: 100%; aspect-ratio: auto; object-fit: cover; }
+  .scard__media :global(.media__placeholder) { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
   .scard__blank { height: 100%; }
   .scard__body { padding: 0 12px 8px; display: flex; flex-direction: column; gap: 4px; }
-  .scard__titlebar { display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 36px; }
+  .scard__titlebar { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 12px; min-height: 36px; }
+  .scard__main::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: 30px; }
+  .scard__main:focus-visible { outline: none; }
+  .scard__main:focus-visible::after { outline: 3px solid var(--text); outline-offset: 3px; }
+  .scard__icon { position: relative; z-index: 2; flex: none; }
+  .scard--link:hover { box-shadow: 0 0 0 2px var(--accent), 0 8px 24px rgb(0 0 0 / 0.35); background: linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)), var(--accent); }
+  .scard--link:hover .scard__title a { text-decoration: underline; text-underline-offset: 3px; }
   .scard__title { font-weight: 700; font-size: var(--fs-body); line-height: var(--lh-prose); text-align: center; }
   .scard__title a { text-decoration: none; }
-  .scard__title a:hover { text-decoration: underline; }
   .scard__icon { display: inline-flex; color: #fff; }
   .scard__blurb { text-align: center; font-size: var(--fs-body); line-height: var(--lh-prose); }
   .also__more { padding: 12px 0 24px; color: var(--text); font-size: var(--fs-body); text-align: center; }
 
   @media (max-width: 1279.98px) {
     .also { padding-inline: 16px; }
-    .scard { width: 240px; gap: 12px; padding-bottom: 4px; }
+    .scard { gap: 12px; padding-bottom: 4px; }
+    .also__grid { grid-template-columns: repeat(3, minmax(0, 240px)); }
     .scard__media { height: 128px; }
     .scard__body { padding-inline: 8px; }
     .scard__titlebar :global(svg) { width: 20px; height: 20px; }
   }
   @media (max-width: 799.98px) {
-    .also__grid { gap: 12px; }
-    .scard { width: 168px; gap: 6px; }
-    .scard__media { height: 74px; }
+    .also { padding-inline: var(--section-pad-x); }
+    .also__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .scard { gap: 6px; border-radius: 24px; }
+    .scard__main::after { border-radius: 22px; }
+    .scard__media { height: auto; aspect-ratio: 16 / 9; }
+    .scard__title, .scard__blurb { font-size: 15px; }
     .scard__body { padding-inline: 6px; }
-    .scard__titlebar { flex-wrap: wrap; gap: 8px; }
+    .scard__titlebar { gap: 6px; }
+    .scard__titlebar :global(svg) { width: 18px; height: 18px; }
   }
 </style>

@@ -1,8 +1,10 @@
 ---
 /**
- * Site header (Figma "Universal / Header", 1:4051).
- * Desktop/tablet: name left, nav right. Mobile: name centred over one row of
- * [GitHub] Projects Resume [LinkedIn], matching the file's mobile variant.
+ * Site header (Figma "Universal / Header", 1:4051), tidied.
+ * One row at every size: name on the left; Projects, Resume, then the GitHub and
+ * LinkedIn icons on the right, all on one vertical centre line. Sticky, with a
+ * hairline under it so content scrolling beneath reads as passing behind it.
+ * Below 360px the icon links drop out (they repeat in the hero and footer).
  */
 import Icon from '@/components/icons/Icon.astro';
 
@@ -12,90 +14,80 @@ interface Props {
   linkedin: string;
   nav: { label: string; href: string }[];
   homeHref?: string;
-  /** The footer repeats this row; it must not be a second banner landmark. */
-  as?: 'header' | 'div';
-  navLabel?: string;
 }
 
-const { name, github, linkedin, nav, homeHref = '/', as: Tag = 'header', navLabel = 'Primary' } = Astro.props;
+const { name, github, linkedin, nav, homeHref = '/' } = Astro.props;
 ---
-<Tag class:list={['site-header', { 'site-header--sticky': Tag === 'header' }]}>
+<header class="site-header">
   <div class="site-header__inner">
     <a class="site-header__name eyebrow" href={homeHref}>{name}</a>
-    <nav class="site-header__nav" aria-label={navLabel}>
-      <a class="site-header__icon site-header__icon--github" href={github} rel="me">
-        <Icon name="github" size={24} label="GitHub" />
-      </a>
-      {nav.map((item) => (
-        <a class="eyebrow site-header__link" href={item.href}>{item.label}</a>
-      ))}
-      <a class="site-header__icon" href={linkedin} rel="me">
-        <Icon name="linkedin" size={24} label="LinkedIn" />
-      </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <ul role="list">
+        {nav.map((item) => (
+          <li><a class="eyebrow site-header__link" href={item.href}>{item.label}</a></li>
+        ))}
+        <li class="site-header__icons">
+          <a class="site-header__icon" href={github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+          <a class="site-header__icon" href={linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+        </li>
+      </ul>
     </nav>
   </div>
-  <slot />
-</Tag>
+</header>
 
 <style>
   .site-header {
-    background: var(--ground);
-    padding-bottom: 4px;
-  }
-  /* The page header stays on screen; section headings stick just below it. */
-  .site-header--sticky {
     position: sticky;
     top: 0;
     z-index: 20;
     height: var(--header-h);
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
   }
   .site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
+    height: 100%;
     max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
     margin-inline: auto;
-    padding: 8px var(--section-pad-x) 0;
-    min-height: calc(var(--header-h) - 4px);
+    padding-inline: var(--section-pad-x);
   }
-  .site-header__name { text-decoration: none; }
-  .site-header__nav {
-    display: flex;
+  .site-header__name { text-decoration: none; white-space: nowrap; }
+  .site-header__nav ul { display: flex; align-items: center; gap: 32px; }
+  .site-header__link,
+  .site-header__name {
+    display: inline-flex;
     align-items: center;
-    gap: 32px;
-  }
-  /* Desktop and tablet order: Projects, Resume, GitHub, LinkedIn */
-  .site-header__icon--github { order: 1; }
-  .site-header__icon:last-child { order: 2; }
-  .site-header__link {
+    min-height: 32px; /* comfortable tap target without growing the bar */
+    color: var(--nav);
     text-decoration: none;
+    transition: color 120ms ease;
   }
   .site-header__link:hover,
   .site-header__name:hover { color: var(--text); }
+  .site-header__icons { display: flex; align-items: center; gap: 16px; }
   .site-header__icon {
     display: inline-flex;
-    color: #fff;
-    opacity: var(--icon-opacity, 0.34);
-    transition: opacity 120ms ease;
+    padding: 6px;
+    margin: -6px;
+    color: var(--nav);
+    transition: color 120ms ease;
   }
   .site-header__icon:hover,
-  .site-header__icon:focus-visible { opacity: 1; }
+  .site-header__icon:focus-visible { color: var(--text); }
 
   @media (max-width: 1279.98px) {
     .site-header__inner { max-width: 800px; }
+    .site-header__nav ul { gap: 24px; }
   }
-
   @media (max-width: 799.98px) {
-    .site-header { padding-bottom: 8px; }
-    .site-header__inner {
-      flex-direction: column;
-      gap: 1px;
-      padding: 6px 24px 0;
-    }
-    .site-header__name { text-align: center; }
-    .site-header__nav { align-items: flex-end; justify-content: center; width: 100%; }
-    /* Mobile order from the file: GitHub, Projects, Resume, LinkedIn */
-    .site-header__icon--github { order: 0; }
-    .site-header__icon :global(svg) { width: 20px; height: 20px; }
+    .site-header__nav ul { gap: 16px; }
+    .site-header__icons { gap: 14px; }
+  }
+  @media (max-width: 359.98px) {
+    .site-header__icons { display: none; }
   }
 </style>

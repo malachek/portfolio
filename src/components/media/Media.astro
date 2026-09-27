@@ -57,7 +57,7 @@ const isLocal = typeof image === 'object';
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain; /* content fits; only backgrounds fill */
   }
   .media__placeholder {
     background: repeating-linear-gradient(45deg, #1a2140 0 12px, #141a33 12px 24px);
