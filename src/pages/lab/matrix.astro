@@ -12,6 +12,7 @@ import { getRoles, roleBase } from '@/lib/content';
 const roles = await getRoles({ includeDisabled: true });
 const projects = (await getCollection('projects')).sort((a, b) => a.data.title.localeCompare(b.data.title));
 const overlays = new Set((await getCollection('overlays')).map((o) => o.id));
+declare const process: { cwd(): string };
 const root = process.cwd();
 const vscode = (rel: string) => `vscode://file/${root}/${rel}`;
 

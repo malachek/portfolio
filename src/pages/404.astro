@@ -1,0 +1,15 @@
+---
+/** Not found. Served by Cloudflare for any missing path on any role host. */
+import Base from '@/layouts/Base.astro';
+---
+<Base title="Page not found | Malachy Kennedy" description="This page does not exist." noindex>
+  <section class="wrap nf">
+    <h1 class="display">Page not found</h1>
+    <p>That link doesn't lead anywhere. The work is on the <a href="/">homepage</a>.</p>
+  </section>
+</Base>
+<style>
+  .nf { padding-block: 96px; display: flex; flex-direction: column; gap: 16px; }
+  .nf p { font-size: var(--fs-body); color: var(--text); }
+  .nf a { color: var(--purple-text); }
+</style>

@@ -1,7 +1,7 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { spawn } from 'node:child_process';
 
 /**
  * Dev-only pages live under src/pages/lab (component showcase, hero options, the matrix).
@@ -49,6 +49,29 @@ const devAssetGrab = {
   },
 };
 
+/**
+ * Dev-server only: GET /__task?name=check|build runs that npm script on this Mac
+ * and returns its output, so the assistant can type-check and build while its own
+ * sandbox has no npm. Fixed allowlist; the dev server only listens on localhost.
+ */
+const devTasks = {
+  name: 'dev-tasks',
+  apply: /** @type {'serve'} */ ('serve'),
+  configureServer(server) {
+    const allowed = { check: ['run', 'check'], build: ['run', 'build'] };
+    server.middlewares.use('/__task', (req, res) => {
+      const name = new URL(req.url ?? '', 'http://x').searchParams.get('name') ?? '';
+      const args = allowed[/** @type {keyof typeof allowed} */ (name)];
+      if (!args) { res.statusCode = 400; return res.end('unknown task'); }
+      const child = spawn('npm', args, { cwd: fileURLToPath(new URL('.', import.meta.url)), env: { ...process.env, FORCE_COLOR: '0' } });
+      let out = '';
+      child.stdout.on('data', (d) => (out += d));
+      child.stderr.on('data', (d) => (out += d));
+      child.on('close', (code) => { res.setHeader('Content-Type', 'text/plain'); res.end(`exit ${code}\n${out.slice(-20000)}`); });
+    });
+  },
+};
+
 export default defineConfig({
   site: 'https://malachek.com',
   output: 'static',
@@ -61,7 +84,7 @@ export default defineConfig({
     '/cora': '/taralumen-cora',
   },
   vite: {
-    plugins: [devAssetGrab],
+    plugins: [devAssetGrab, devTasks],
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   },
 });

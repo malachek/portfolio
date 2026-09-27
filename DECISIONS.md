@@ -70,3 +70,10 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Dev-only pages moved from /dev to /lab (so /dev never collides with a role): /lab/components, /lab/hero-options, /lab/matrix (the projects x roles grid; click a cell to open its file in VS Code).
 - Role switcher ("Viewing: Generalist · Gameplay · Tools · Design") sits under the header on every role homepage.
 - Role copy comes from the per-track bullets in resume-system/master; each overlay's comment names its source. New sentences are listed in docs/QUESTIONS.md.
+
+## Hosting pieces (2026-09-26)
+- `worker/index.js` + `wrangler.jsonc`: one Worker with static assets. Apex serves the root of dist/; each role host serves dist/<role>/ and gets its links de-prefixed with HTMLRewriter; the role switcher points at each role's own host; dev. and www. 301 to the apex; a /gameplay/... path typed on the apex 301s to gameplay.malachek.com. On *.workers.dev everything is served as built (/, /gameplay/, /tools/, /design/), which is the preview.
+- Role to host mapping has one source: roles/*.yaml, published as /roles.json for the Worker.
+- Per-role sitemap.xml; robots.txt per host (from the Worker on role hosts); a 404 page.
+- No custom domains in wrangler.jsonc yet: adding them is the DNS step and waits for Malachy's go.
+- Dev-server helpers (never in the build): /__grab saves a Figma asset into public/art; /__task?name=check|build runs that npm script and returns the output, so the assistant can type-check from its sandbox.
