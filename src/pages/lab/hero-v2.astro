@@ -1,0 +1,328 @@
+---
+/**
+ * DEV ONLY: round 2 of homepage hero proposals, built on D (reel) and E (game
+ * select). Every option carries the full hero content: the name, both
+ * sentences, and all three roles. Stripped from production builds.
+ * Open http://localhost:4321/lab/hero-v2   (?role=gameplay|tools|design to preview a role)
+ */
+import { getEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/icons/Icon.astro';
+import LinkPill from '@/components/project/LinkPill.astro';
+import { getRole, resolveHome, href } from '@/lib/content';
+
+const roleId = Astro.url.searchParams.get('role') ?? 'dev';
+const role = await getRole(roleId);
+const home = await resolveHome(role);
+const site = (await getEntry('site', 'site'))!.data;
+const h = home.hero;
+const roles = h.bullets.map((b) => {
+  const [t, org = ''] = b.split(' // ');
+  return { t, org };
+});
+const games = home.featured.map((c) => ({
+  title: c.title,
+  href: c.href,
+  accent: c.accent,
+  blurb: c.blurb,
+  category: c.category,
+  logo: c.logo,
+  art: c.background,
+  video: c.media?.kind === 'video' ? c.media.src : undefined,
+  still: c.media?.kind === 'image' ? c.media.src : c.background,
+}));
+const resume = href(role.id, role.data.resume);
+const work = href(role.id, '/') + '#projects';
+---
+<Base title="Hero options, round 2 (dev)" description="Homepage hero proposals" roleId={role.id} noindex>
+
+  <!-- ═══════════════ D2 ═══════════════ -->
+  <p class="label">D2 · Reel with roles: the four games play behind you in turn; name, both sentences and the three roles sit on top</p>
+  <section class="d2" data-reel>
+    <div class="reel" aria-hidden="true">
+      {games.map((g, i) => (
+        <div class:list={['reel__item', { on: i === 0 }]} data-i={i}>
+          {g.video
+            ? <video src={g.video} muted loop playsinline preload="metadata" autoplay={i === 0}></video>
+            : <img src={g.still} alt="" />}
+        </div>
+      ))}
+    </div>
+    <div class="d2__shade" aria-hidden="true"></div>
+    <div class="d2__in">
+      <h1 class="name">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="roles" role="list">
+        {roles.map((r) => <li><span class="roles__t">{r.t}</span><span class="roles__o">{r.org}</span></li>)}
+      </ul>
+      <div class="ctas">
+        <LinkPill href={work} color="#D52FC7">See my work</LinkPill>
+        <a class="ghost" href={resume}>Resume</a>
+        <span class="icons"><a class="ic" href={site.github} rel="me"><Icon name="github" size={22} label="GitHub" /></a><a class="ic" href={site.linkedin} rel="me"><Icon name="linkedin" size={22} label="LinkedIn" /></a></span>
+      </div>
+    </div>
+    <a class="now" href={games[0].href} data-now>
+      <span class="now__k">Now playing</span>
+      <span class="now__t" data-now-title>{games[0].title}</span>
+      <span class="now__bar"><i></i></span>
+    </a>
+    <script type="application/json" data-games set:html={JSON.stringify(games.map((g) => ({ title: g.title, href: g.href, accent: g.accent })))} />
+  </section>
+
+  <!-- ═══════════════ E2 ═══════════════ -->
+  <p class="label">E2 · Profile and game select side by side: you on the left, a game screen on the right that you (or a timer) flip through</p>
+  <section class="e2" data-reel>
+    <div class="e2__who">
+      <h1 class="name">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="roles roles--list" role="list">
+        {roles.map((r) => <li><span class="roles__t">{r.t}</span><span class="roles__o">{r.org}</span></li>)}
+      </ul>
+      <div class="ctas">
+        <LinkPill href={work} color="#D52FC7">See my work</LinkPill>
+        <a class="ghost" href={resume}>Resume</a>
+        <span class="icons"><a class="ic" href={site.github} rel="me"><Icon name="github" size={22} label="GitHub" /></a><a class="ic" href={site.linkedin} rel="me"><Icon name="linkedin" size={22} label="LinkedIn" /></a></span>
+      </div>
+    </div>
+    <div class="e2__play">
+      <div class="e2__stage">
+        {games.map((g, i) => (
+          <a class:list={['reel__item', 'e2__slide', { on: i === 0 }]} data-i={i} href={g.href} tabindex="-1" aria-hidden={i === 0 ? undefined : 'true'} style={`--accent:${g.accent}`}>
+            {g.video
+              ? <video src={g.video} muted loop playsinline preload="metadata" autoplay={i === 0}></video>
+              : <img src={g.still} alt="" />}
+            <span class="e2__cap">
+              {g.logo && <img class="e2__logo" src={g.logo} alt="" />}
+              <span>{g.blurb}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+      <ol class="tabs" role="list">
+        {games.map((g, i) => (
+          <li><a class:list={['tab', { on: i === 0 }]} href={g.href} data-tab={i} style={`--accent:${g.accent}`}>
+            <span class="tab__i">{String(i + 1).padStart(2, '0')}</span>
+            <span class="tab__t">{g.title}</span>
+            <span class="tab__bar"><i></i></span>
+          </a></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════ DE ═══════════════ -->
+  <p class="label">DE · Reel plus select: full-width reel behind you, and a game-select bar along the bottom that drives it</p>
+  <section class="de" data-reel>
+    <div class="reel" aria-hidden="true">
+      {games.map((g, i) => (
+        <div class:list={['reel__item', { on: i === 0 }]} data-i={i}>
+          {g.video
+            ? <video src={g.video} muted loop playsinline preload="metadata" autoplay={i === 0}></video>
+            : <img src={g.still} alt="" />}
+        </div>
+      ))}
+    </div>
+    <div class="de__shade" aria-hidden="true"></div>
+    <div class="de__in">
+      <h1 class="name">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="roles roles--row" role="list">
+        {roles.map((r) => <li><span class="roles__t">{r.t}</span><span class="roles__o">{r.org}</span></li>)}
+      </ul>
+      <div class="ctas">
+        <LinkPill href={work} color="#D52FC7">See my work</LinkPill>
+        <a class="ghost" href={resume}>Resume</a>
+        <span class="icons"><a class="ic" href={site.github} rel="me"><Icon name="github" size={22} label="GitHub" /></a><a class="ic" href={site.linkedin} rel="me"><Icon name="linkedin" size={22} label="LinkedIn" /></a></span>
+      </div>
+    </div>
+    <ol class="tabs tabs--bar" role="list">
+      {games.map((g, i) => (
+        <li><a class:list={['tab', { on: i === 0 }]} href={g.href} data-tab={i} style={`--accent:${g.accent}`}>
+          <span class="tab__i">{String(i + 1).padStart(2, '0')}</span>
+          <span class="tab__t">{g.title}</span>
+          <span class="tab__c">{g.category}</span>
+          <span class="tab__bar"><i></i></span>
+        </a></li>
+      ))}
+    </ol>
+  </section>
+
+  <script>
+    const DWELL = 6000;
+    for (const root of document.querySelectorAll<HTMLElement>('[data-reel]')) {
+      const items = [...root.querySelectorAll<HTMLElement>('.reel__item')];
+      const tabs = [...root.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+      const now = root.querySelector<HTMLAnchorElement>('[data-now]');
+      const nowTitle = root.querySelector<HTMLElement>('[data-now-title]');
+      const data = JSON.parse(root.querySelector('[data-games]')?.textContent ?? '[]');
+      let cur = 0;
+      let timer = 0;
+      const show = (i: number) => {
+        cur = (i + items.length) % items.length;
+        items.forEach((el, k) => {
+          const on = k === cur;
+          el.classList.toggle('on', on);
+          if (el.tagName === 'A') el.toggleAttribute('aria-hidden', !on);
+          const v = el.querySelector('video');
+          if (v) on ? v.play().catch(() => {}) : v.pause();
+        });
+        tabs.forEach((t, k) => {
+          t.classList.remove('on');
+          if (k === cur) { void t.offsetWidth; t.classList.add('on'); }
+        });
+        if (now && data[cur]) {
+          now.href = data[cur].href;
+          now.style.setProperty('--accent', data[cur].accent);
+          nowTitle!.textContent = data[cur].title;
+          now.classList.remove('run'); void now.offsetWidth; now.classList.add('run');
+        }
+      };
+      const start = () => { clearInterval(timer); timer = window.setInterval(() => show(cur + 1), DWELL); };
+      tabs.forEach((t) => {
+        const pick = () => { show(Number(t.dataset.tab)); start(); };
+        t.addEventListener('mouseenter', pick);
+        t.addEventListener('focus', pick);
+      });
+      show(0);
+      start();
+    }
+  </script>
+</Base>
+
+<style>
+  .label {
+    max-width: 1152px; margin: 40px auto 12px; padding: 8px var(--section-pad-x);
+    font: 700 13px/1.4 var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: #ffd166;
+  }
+
+  /* ---------- shared pieces ---------- */
+  .name { font-family: var(--font-display); font-weight: 400; font-size: 88px; line-height: .9; color: var(--text); margin: 0; }
+  .lines { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+  .lines p { margin: 0; font-size: 20px; line-height: 1.5; color: var(--text-body); }
+  .lines p + p { color: var(--text); opacity: .86; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 760px; }
+  .roles li {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 12px 14px; border-radius: 12px;
+    background: rgb(1 2 16 / .55); border: 1px solid rgb(255 255 255 / .1);
+    backdrop-filter: blur(6px);
+  }
+  .roles__t { font: 700 12px/1.25 var(--font-body); letter-spacing: .07em; text-transform: uppercase; color: #f06ae4; }
+  .roles__o { font-size: 15px; line-height: 1.35; color: var(--text); }
+  .roles--list { grid-template-columns: 1fr; gap: 0; border-top: 1px solid rgb(255 255 255 / .1); }
+  .roles--list li { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 2px; border: 0; border-bottom: 1px solid rgb(255 255 255 / .1); border-radius: 0; background: none; backdrop-filter: none; }
+  .roles--list .roles__o { text-align: right; }
+
+  .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 6px; }
+  .ghost {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px;
+    border-radius: var(--radius-pill); border: 1.5px solid rgb(255 255 255 / .35);
+    color: var(--text); font-weight: 700; font-size: 18px; text-decoration: none;
+    transition: border-color 150ms, background-color 150ms;
+  }
+  .ghost:hover { border-color: #fff; background: rgb(255 255 255 / .08); }
+  .icons { display: inline-flex; gap: 8px; }
+  .ic { display: inline-flex; padding: 6px; color: var(--nav); transition: color 120ms, transform 120ms; }
+  .ic:hover { color: #fff; transform: scale(1.1); }
+
+  .reel { position: absolute; inset: 0; z-index: -2; }
+  .reel__item { position: absolute; inset: 0; opacity: 0; transition: opacity 700ms ease; }
+  .reel__item.on { opacity: 1; }
+  .reel__item video, .reel__item > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* The EXO capture includes the editor's title bar: anchor to the bottom and
+     overscan so the top few percent never show. Re-exporting the clip without
+     the bar would make this unnecessary. */
+  .reel__item video, .e2__slide video { position: absolute; left: 0; top: -7%; height: 107%; object-position: 50% 100%; }
+  .reel__item.on video, .reel__item.on > img { animation: drift 9s ease-out both; }
+  @keyframes drift { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+  @keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* ---------- D2 ---------- */
+  .d2 { position: relative; isolation: isolate; overflow: clip; min-height: min(760px, calc(100svh - var(--header-h))); display: flex; align-items: flex-end; }
+  .d2__shade { position: absolute; inset: 0; z-index: -1; background:
+      linear-gradient(0deg, rgb(1 2 16 / .96) 0%, rgb(1 2 16 / .6) 45%, rgb(1 2 16 / .2) 100%),
+      linear-gradient(90deg, rgb(1 2 16 / .75), transparent 65%); }
+  .d2__in { width: 100%; max-width: 1152px; margin-inline: auto; padding: 120px var(--section-pad-x) 56px; display: flex; flex-direction: column; gap: 18px; }
+  .now {
+    position: absolute; right: max(var(--section-pad-x), calc((100% - 1152px) / 2)); top: 24px;
+    display: grid; grid-template-columns: auto auto; gap: 6px 10px; align-items: baseline;
+    padding: 10px 14px; border-radius: 12px; background: rgb(1 2 16 / .6); border: 1px solid rgb(255 255 255 / .12);
+    color: var(--text); text-decoration: none; backdrop-filter: blur(6px);
+  }
+  .now:hover { border-color: var(--accent, #fff); }
+  .now__k { font: 700 11px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted-text); }
+  .now__t { font-weight: 900; font-size: 16px; }
+  .now__bar { grid-column: 1 / -1; height: 2px; background: rgb(255 255 255 / .15); overflow: hidden; border-radius: 2px; }
+  .now__bar i { display: block; height: 100%; background: var(--accent, var(--magenta)); transform-origin: left; transform: scaleX(0); }
+  .now.run .now__bar i { animation: fill 6s linear forwards; }
+
+  /* ---------- E2 ---------- */
+  .e2 { max-width: 1216px; margin-inline: auto; padding: 56px var(--section-pad-x); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; align-items: center; }
+  .e2__who { display: flex; flex-direction: column; gap: 18px; }
+  .e2 .name { font-size: 72px; }
+  .e2 .lines p { font-size: 18px; }
+  .e2__play { display: flex; flex-direction: column; gap: 10px; }
+  .e2__stage { position: relative; aspect-ratio: 16 / 10; border-radius: 20px; overflow: clip; background: #000; }
+  .e2__slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 500ms ease; box-shadow: inset 0 0 0 2px var(--accent); border-radius: inherit; }
+  .e2__slide.on { opacity: 1; pointer-events: auto; }
+  .e2__slide video, .e2__slide > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .e2__cap { position: absolute; inset: auto 0 0; display: flex; flex-direction: column; gap: 8px; padding: 48px 20px 18px; background: linear-gradient(0deg, rgb(0 0 0 / .88), transparent); color: var(--text); font-size: 16px; line-height: 1.4; }
+  .e2__logo { width: 150px; max-height: 64px; object-fit: contain; object-position: left bottom; }
+
+  .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .tab {
+    position: relative; display: flex; align-items: baseline; gap: 8px; min-height: 48px;
+    padding: 12px 12px 14px; border-radius: 10px; overflow: hidden;
+    background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .08);
+    color: var(--muted-text); text-decoration: none; transition: color 150ms, background-color 150ms, border-color 150ms;
+  }
+  .tab:hover, .tab.on { color: #fff; background: color-mix(in srgb, var(--accent) 22%, rgb(1 2 16 / .7)); border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+  .tab__i { font-family: var(--font-display); font-size: 16px; color: var(--accent); }
+  .tab__t { font-weight: 700; font-size: 15px; line-height: 1.2; }
+  .tab__c { display: none; }
+  .tab__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; }
+  .tab__bar i { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+  .tab.on .tab__bar i { animation: fill 6s linear forwards; }
+
+  /* ---------- DE ---------- */
+  .de { position: relative; isolation: isolate; overflow: clip; min-height: min(820px, calc(100svh - var(--header-h))); display: flex; flex-direction: column; justify-content: flex-end; }
+  .de__shade { position: absolute; inset: 0; z-index: -1; background:
+      linear-gradient(0deg, rgb(1 2 16 / .98) 0%, rgb(1 2 16 / .55) 50%, rgb(1 2 16 / .25) 100%),
+      linear-gradient(90deg, rgb(1 2 16 / .8), transparent 70%); }
+  .de__in { width: 100%; max-width: 1152px; margin-inline: auto; padding: 120px var(--section-pad-x) 28px; display: flex; flex-direction: column; gap: 18px; }
+  .tabs--bar { width: 100%; max-width: calc(1152px + 2 * var(--section-pad-x)); margin-inline: auto; padding: 0 var(--section-pad-x) 32px; }
+  .tabs--bar .tab { flex-direction: column; gap: 2px; align-items: flex-start; background: rgb(1 2 16 / .55); backdrop-filter: blur(6px); }
+  .tabs--bar .tab__c { display: block; font-size: 13px; color: var(--muted-text); }
+  .tabs--bar .tab__t { font-size: 17px; }
+
+  /* ---------- tablet ---------- */
+  @media (max-width: 1279.98px) {
+    .name { font-size: 72px; }
+    .lines p { font-size: 18px; }
+    .d2__in, .de__in { max-width: 800px; }
+    .tabs--bar { max-width: calc(800px + 2 * var(--section-pad-x)); }
+    .e2 { grid-template-columns: 1fr; gap: 32px; max-width: 800px; }
+    .e2 .name { font-size: 64px; }
+    .now { right: var(--section-pad-x); }
+  }
+
+  /* ---------- phone ---------- */
+  @media (max-width: 799.98px) {
+    .name, .e2 .name { font-size: 48px; }
+    .lines p, .e2 .lines p { font-size: 17px; }
+    /* One compact list on phones: three stacked cards ate a whole screen. */
+    .roles { grid-template-columns: 1fr; gap: 0; border-top: 1px solid rgb(255 255 255 / .12); }
+    .roles li, .roles--list li { flex-direction: column; gap: 2px; padding: 9px 0; border: 0; border-bottom: 1px solid rgb(255 255 255 / .12); border-radius: 0; background: none; backdrop-filter: none; }
+    .roles--list .roles__o { text-align: left; }
+    .d2__in, .de__in { padding: 200px var(--section-pad-x) 24px; gap: 14px; }
+    .now { top: 16px; }
+    .e2 { padding-block: 32px; gap: 24px; }
+    .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tabs--bar { padding-bottom: 24px; }
+    .tabs--bar .tab__c { display: none; }
+    .e2__cap { font-size: 14px; padding: 36px 14px 12px; }
+    .e2__logo { width: 110px; max-height: 44px; }
+  }
+</style>

@@ -115,3 +115,12 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Code-sample link no longer underlined; it breaks after "/" on narrow screens.
 - Steam store widget scales down to fit on phones instead of clipping.
 - Home feature cards: text and media hover separately on desktop and tablet only. On phones (<800px) they are one capsule, so the whole capsule is one link with one ring, and hovering anywhere zooms the video.
+
+## Header option H (2026-09-28)
+- The header now stacks the role's job title (a dropdown) over the name. The dropdown lists every role site by job title and host; its links carry data-lens. The "Viewing" strip under the header is gone.
+- Roles have a `jobTitle` field: Game Engineer (apex), Gameplay Engineer, Tools Engineer, Technical Game Designer, Software Engineer (draft). It matches the resume titles.
+- Header height is 72px (60px on phones). The icons drop out under 460px; they are in the footer.
+
+## Hero round 2 (lab/hero-v2)
+- D2 (reel plus roles), E2 (profile plus game select), DE (reel plus select bar). Each carries the name, both sentences and all three roles. Waiting on his pick.
+- The EXO clip includes the UE editor title bar; the reel overscans the top to hide it. Re-exporting the clip without the bar would be cleaner.
