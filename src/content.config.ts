@@ -195,6 +195,8 @@ const roles = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/roles', generateId: ({ entry }) => entry.replace(/\.yaml$/, '') }),
   schema: z.object({
     label: z.string(),
+    /** Job title shown above the name in the header, e.g. "Gameplay Engineer". */
+    jobTitle: z.string(),
     order: z.number().int(),
     enabled: z.boolean().default(true),
     /** Production host for this role, e.g. gameplay.malachek.com */

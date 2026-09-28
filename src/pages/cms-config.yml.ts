@@ -111,6 +111,7 @@ const overlayFields = (sectionIds: string[], blockIds: string[]): Field[] => [
 
 const roleFields: Field[] = [
   str('label', 'Name in the role switcher', { required: true }),
+  str('jobTitle', 'Job title above your name in the header', { required: true }),
   { name: 'order', label: 'Order in the switcher', widget: 'number', value_type: 'int' },
   bool('enabled', 'Published', { default: true }),
   str('host', 'Web address (e.g. gameplay.malachek.com)'),

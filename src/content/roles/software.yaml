@@ -1,6 +1,7 @@
 # Non-games Software Engineer site: software.malachek.com. PHASE 2, not published (enabled: false).
 # Hero leads with shipped products (09-clarifications); project list leads with Pintos, then Search Engine.
 label: Software
+jobTitle: Software Engineer
 order: 5
 enabled: false
 host: software.malachek.com

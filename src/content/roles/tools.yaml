@@ -1,6 +1,7 @@
 # Tools / Systems Engineer site: tools.malachek.com. Architecture and pipelines lead;
 # CORA (Taralumen) first in Experience. Hero line 1: 01-summaries [2]. Line 2 is new copy (VERIFY).
 label: Tools
+jobTitle: Tools Engineer
 order: 2
 enabled: true
 host: tools.malachek.com

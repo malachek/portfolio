@@ -1,12 +1,13 @@
 ---
 /**
- * Site header (Figma "Universal / Header", 1:4051), tidied.
- * One row at every size: name on the left; Projects, Resume, then the GitHub and
- * LinkedIn icons on the right, all on one vertical centre line. Sticky, with a
- * hairline under it so content scrolling beneath reads as passing behind it.
- * Below 360px the icon links drop out (they repeat in the hero and footer).
+ * Site header, option H (chosen 2026-09-28).
+ * Left: the role's job title as a small dropdown label, stacked over the name.
+ * The dropdown switches between the role sites (links carry data-lens so the
+ * production Worker points them at each role's own host). Right: Projects,
+ * Resume, GitHub, LinkedIn. Sticky, with a hairline under it.
  */
 import Icon from '@/components/icons/Icon.astro';
+import { getRoles, getRole, roleBase } from '@/lib/content';
 
 interface Props {
   name: string;
@@ -14,13 +15,45 @@ interface Props {
   linkedin: string;
   nav: { label: string; href: string }[];
   homeHref?: string;
+  roleId: string;
 }
 
-const { name, github, linkedin, nav, homeHref = '/' } = Astro.props;
+const { name, github, linkedin, nav, homeHref = '/', roleId } = Astro.props;
+const roles = await getRoles();
+const current = await getRole(roleId);
 ---
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="site-header__name eyebrow" href={homeHref}>{name}</a>
+    <div class="brand">
+      {roles.length > 1 ? (
+        <details class="role" data-role-menu>
+          <summary class="role__label">
+            <span class="visually-hidden">Portfolio focus: </span>{current.data.jobTitle}
+            <svg class="role__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </summary>
+          <div class="role__menu">
+            <p class="role__hint">Same work, a different focus</p>
+            <ul role="list">
+              {roles.map((r) => (
+                <li>
+                  <a
+                    href={`${roleBase(r.id)}/`}
+                    data-lens={r.id}
+                    aria-current={r.id === roleId ? 'page' : undefined}
+                  >
+                    <span class="role__title">{r.data.jobTitle}{!r.data.enabled && ' (draft)'}</span>
+                    <small class="role__host">{r.data.host}</small>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      ) : (
+        <p class="role__label">{current.data.jobTitle}</p>
+      )}
+      <a class="brand__name" href={homeHref}>{name}</a>
+    </div>
     <nav class="site-header__nav" aria-label="Primary">
       <ul role="list">
         {nav.map((item) => (
@@ -34,6 +67,21 @@ const { name, github, linkedin, nav, homeHref = '/' } = Astro.props;
     </nav>
   </div>
 </header>
+
+<script>
+  // Close the role menu on outside click or Escape.
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>('[data-role-menu]')) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
 
 <style>
   .site-header {
@@ -55,19 +103,89 @@ const { name, github, linkedin, nav, homeHref = '/' } = Astro.props;
     margin-inline: auto;
     padding-inline: var(--section-pad-x);
   }
-  .site-header__name { text-decoration: none; white-space: nowrap; }
-  .site-header__nav ul { display: flex; align-items: center; gap: 32px; }
-  .site-header__link,
-  .site-header__name {
+
+  /* ---- Brand: role label over the name ---- */
+  .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+  .brand__name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .brand__name:hover { color: #fff; text-shadow: 0 0 18px color-mix(in srgb, var(--magenta) 60%, transparent); }
+
+  .role { position: relative; }
+  .role__label {
     display: inline-flex;
     align-items: center;
-    min-height: 32px; /* comfortable tap target without growing the bar */
+    gap: 6px;
+    margin: 0;
+    font: 700 12px/1 var(--font-body);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    white-space: nowrap;
+  }
+  summary.role__label {
+    list-style: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    margin: -4px -6px;
+    border-radius: 6px;
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+  summary.role__label::-webkit-details-marker { display: none; }
+  summary.role__label:hover { background: rgb(255 255 255 / 0.06); color: #f06ae4; }
+  .role__caret { transition: transform 150ms ease; }
+  .role[open] .role__caret { transform: rotate(180deg); }
+
+  .role__menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: -6px;
+    z-index: 30;
+    min-width: 280px;
+    padding: 8px;
+    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
+  }
+  .role__hint {
+    margin: 4px 10px 8px;
+    font: 700 11px/1.2 var(--font-body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+  }
+  .role__menu a {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .role__menu a:hover { background: rgb(255 255 255 / 0.06); }
+  .role__menu a[aria-current] { background: color-mix(in srgb, var(--magenta) 16%, transparent); box-shadow: inset 3px 0 0 var(--magenta); }
+  .role__title { font-weight: 700; font-size: 16px; }
+  .role__host { font-size: 13px; color: var(--muted-text); }
+
+  /* ---- Nav ---- */
+  .site-header__nav ul { display: flex; align-items: center; gap: 32px; }
+  .site-header__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
     color: var(--nav);
     text-decoration: none;
     transition: color 120ms ease;
   }
-  .site-header__link:hover,
-  .site-header__name:hover { color: var(--text); }
+  .site-header__link:hover { color: var(--text); }
   .site-header__icons { display: flex; align-items: center; gap: 16px; }
   .site-header__icon {
     display: inline-flex;
@@ -84,10 +202,18 @@ const { name, github, linkedin, nav, homeHref = '/' } = Astro.props;
     .site-header__nav ul { gap: 24px; }
   }
   @media (max-width: 799.98px) {
+    .brand__name { font-size: 24px; }
+    .role__label { font-size: 11px; }
     .site-header__nav ul { gap: 16px; }
     .site-header__icons { gap: 14px; }
   }
-  @media (max-width: 359.98px) {
+  @media (max-width: 459.98px) {
+    .site-header__inner { padding-inline: 16px; gap: 8px; }
     .site-header__icons { display: none; }
+    .role__menu { min-width: min(280px, calc(100vw - 32px)); }
+  }
+  @media (max-width: 349.98px) {
+    .brand__name { font-size: 21px; }
+    .site-header__nav ul { gap: 12px; }
   }
 </style>

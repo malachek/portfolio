@@ -1,6 +1,7 @@
 # Generalist variant, served at malachek.com (dev.malachek.com redirects here).
 # Lists name projects by folder name (src/content/projects/<name>). Order = order on the page.
 label: Generalist
+jobTitle: Game Engineer
 order: 0
 enabled: true
 host: malachek.com

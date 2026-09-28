@@ -82,7 +82,7 @@
   --radius-chip: 4px;
   --radius-pill: 8px;
 
-  --header-h: 48px;
+  --header-h: 72px;            /* role label stacked over the name (header option H) */
 }
 
 /* Tablet: 800-1279 */
@@ -111,6 +111,7 @@
 /* Mobile: < 800 */
 @media (max-width: 799.98px) {
   :root {
+    --header-h: 60px;
     --fs-display: 32px;
     --fs-group: 24px;
     --fs-subsection: 20px;
