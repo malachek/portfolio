@@ -325,8 +325,23 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     .fcard__media,
     .fcard--experience .fcard__media { flex: none; width: 100%; padding: 0; margin: 0; background: none; }
     .fcard__blurb { padding: 8px 16px 0; }
-    .fcard__text, .fcard__media { border-radius: 20px; }
-    .fcard__text:hover, .fcard__media:hover { background-color: rgb(0 0 0 / 0.3); }
+    /* Phones: text and media stack inside one capsule, so they hover as one.
+       The title link stretches over the whole panel; one ring around it all. */
+    .fcard__text { position: static; }
+    .fcard__text, .fcard__media { border-radius: 20px; outline: none; }
+    .fcard__text:hover, .fcard__media:hover { background-color: transparent; }
+    .fcard__panel {
+      outline: 2px solid transparent;
+      outline-offset: 4px;
+      transition: background-color 160ms ease, outline-color 160ms ease;
+    }
+    .fcard__panel:hover {
+      background-color: rgb(0 0 0 / 0.4);
+      outline-color: color-mix(in srgb, var(--accent) 85%, transparent);
+    }
+    .fcard__panel:hover .fcard__title a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .fcard__panel:hover .fcard__clip :global(.clip),
+    .fcard__panel:hover .fcard__clip :global(.media__img) { transform: scale(1.05); }
   }
 </style>
 

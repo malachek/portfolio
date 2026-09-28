@@ -108,3 +108,10 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - These hover motions stay on under Reduce Motion (small, pointer-triggered, no loops), matching the call on autoplay clips.
 - Header layout options B–E at /lab/header-options (A = current).
 - Preview live at malachek-portfolio.malachykennedy1.workers.dev (Workers Builds from GitHub main). Checked: all roles, pages, trailing-slash redirects, /cora, sitemaps, admin; drafts and /lab are absent.
+
+## Buttons and mobile card hover (2026-09-28)
+- Link buttons (LinkPill) rebuilt: same padding at every size (40px tall, 44px on phones), bold label, trailing arrow (→ internal, ↗ external, opens a new tab), soft shadow, lift on hover. The cramped Figma-computed 4px/2px tablet and phone padding is gone.
+- Button colours come from src/lib/color.ts: white text on the accent darkened just enough for 4.5:1; pale accents keep their colour and take dark text. Pages expose `--accent-btn` / `--accent-ink` next to `--accent`.
+- Code-sample link no longer underlined; it breaks after "/" on narrow screens.
+- Steam store widget scales down to fit on phones instead of clipping.
+- Home feature cards: text and media hover separately on desktop and tablet only. On phones (<800px) they are one capsule, so the whole capsule is one link with one ring, and hovering anywhere zooms the video.

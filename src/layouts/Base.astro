@@ -16,6 +16,7 @@ import Header from '@/components/site/Header.astro';
 import Footer from '@/components/site/Footer.astro';
 import LensSwitcher from '@/components/site/LensSwitcher.astro';
 import { APEX_ROLE, getRole, href } from '@/lib/content';
+import { accentVars } from '@/lib/color';
 
 interface Props {
   title: string;
@@ -68,7 +69,7 @@ const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <slot name="head" />
   </head>
-  <body style={accent ? `--accent:${accent}` : undefined}>
+  <body style={accent ? accentVars(accent) : undefined}>
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header name={site.name} github={site.github} linkedin={site.linkedin} nav={nav} homeHref={homeHref} />
     {lens && <LensSwitcher current={roleId} />}

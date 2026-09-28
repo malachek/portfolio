@@ -32,16 +32,16 @@ const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.pro
     {(steamAppIds.length > 0 || code) && (
       <div class="overview__right">
         {steamAppIds.map((id) => (
-          <iframe
+          <div class="overview__storewrap"><iframe
             class="overview__store"
             src={`https://store.steampowered.com/widget/${id}/`}
             title="Steam store page"
             loading="lazy"
             width="646"
             height="190"
-          ></iframe>
+          ></iframe></div>
         ))}
-        {code && <LinkPill href={code.href} size="code" underline>{code.label}</LinkPill>}
+        {code && <LinkPill href={code.href} size="code">{code.label.split('/').map((part, i) => i === 0 ? part : <Fragment>/<wbr />{part}</Fragment>)}</LinkPill>}
       </div>
     )}
   </div>
@@ -86,7 +86,8 @@ const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.pro
     gap: 12px;
     flex: 0 0 392px;
   }
-  .overview__store { width: 100%; height: 180px; border: 0; border-radius: 4px; background: #1b2838; }
+  .overview__storewrap { width: 100%; }
+  .overview__store { display: block; width: 100%; height: 180px; border: 0; border-radius: 4px; background: #1b2838; }
 
   @media (max-width: 1279.98px) {
     .overview__panel { padding-inline: 24px; }
@@ -100,5 +101,20 @@ const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.pro
     .overview__row dt { padding-right: 4px; }
     .overview__row dd { padding-left: 4px; }
     .overview__right { flex-basis: auto; width: 100%; }
+    /* Steam's widget has a fixed layout that clips under ~390px. Render it at
+       its natural width and scale it down to fit (script below sets --s). */
+    .overview__storewrap { height: calc(180px * var(--s, 1)); overflow: hidden; border-radius: 4px; }
+    .overview__store { width: 420px; height: 180px; transform: scale(var(--s, 1)); transform-origin: 0 0; }
   }
 </style>
+
+<script>
+  const fit = () => {
+    for (const w of document.querySelectorAll<HTMLElement>('.overview__storewrap')) {
+      const s = Math.min(1, w.clientWidth / 420);
+      w.style.setProperty('--s', String(s));
+    }
+  };
+  fit();
+  addEventListener('resize', fit);
+</script>

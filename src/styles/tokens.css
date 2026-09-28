@@ -23,6 +23,8 @@
   /* Per-page accent. Each project page sets --accent on <body>; everything
      accent-coloured (rules, pills, chips) derives from it. */
   --accent: var(--magenta);
+  --accent-btn: #ca2dbd;      /* magenta darkened for 4.5:1 with white text; see src/lib/color.ts */
+  --accent-ink: #ffffff;
   --purple: #5858c7;          /* fills, borders, decoration only: 3.57:1, fails as text */
   --purple-text: #706ef4;     /* any purple text, link or small icon: 5.14 / 4.51 */
   --muted: #516092;           /* decoration only: 3.38:1, fails as text */
