@@ -162,6 +162,16 @@ export const GET: APIRoute = async () => {
       { name: 'site', label: 'Site settings (contact, nav, availability)', file: 'src/content/site.yaml', fields: [
         str('name', 'Name'), str('email', 'Email'), str('github', 'GitHub URL'), str('linkedin', 'LinkedIn URL'), text('availability', 'Availability line'),
         list('nav', 'Navigation', [str('label', 'Label'), str('href', 'Link (resume = the role\'s resume)')]),
+        obj('about', 'About page', [
+          str('heading', 'Page heading'), text('description', 'Search description'),
+          obj('portrait', 'Portrait', [str('src', 'Image path'), str('alt', 'Alt text')]),
+          textList('intro', 'Intro paragraphs'),
+          str('profileHeading', 'Profile heading'),
+          list('profile', 'Profile rows', [str('label', 'Label'), str('value', 'Value')]),
+          str('favoritesHeading', 'Favorites heading'), strList('favorites', 'Favorite games'),
+          str('photosHeading', 'Photos heading'),
+          list('photos', 'Photos', [str('src', 'Image path'), str('alt', 'Alt text'), str('caption', 'Caption')]),
+        ]),
       ] },
       ...roles.map((r) => ({ name: r.id, label: `${r.data.label} site (${r.data.host})`, file: `src/content/roles/${r.id}.yaml`, fields: roleFields })),
     ],

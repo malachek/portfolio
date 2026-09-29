@@ -1,0 +1,119 @@
+---
+/**
+ * Homepage hero, "T1 chunked" (chosen 2026-09-29).
+ * The four game images sit behind (4 across, 2x2 on phones). The name sits on
+ * the art like a title logo; the two sentences and the "Role // Place" lines
+ * each get their own translucent dark box. No buttons: the header carries
+ * Projects / About / Resume.
+ */
+interface Props {
+  title: string;
+  lines: string[];
+  bullets?: string[];
+  tiles?: string[];
+  background?: string;
+}
+const { title, lines, bullets = [], tiles = [], background } = Astro.props;
+const art = tiles.length ? tiles.slice(0, 4) : background ? [background] : [];
+const roles = bullets.map((b) => {
+  const [t, org = ''] = b.split(' // ');
+  return { t, org };
+});
+---
+<section class="home-hero">
+  <div class:list={['home-hero__bg', { 'home-hero__bg--one': art.length === 1 }]} aria-hidden="true">
+    {art.map((src) => <i style={`background-image:url('${src}')`}></i>)}
+  </div>
+  <div class="home-hero__in">
+    <h1 class="home-hero__name">{title}</h1>
+    <div class="home-hero__box home-hero__lines">
+      {lines.map((l) => <p>{l}</p>)}
+    </div>
+    {roles.length > 0 && (
+      <ul class="home-hero__box home-hero__roles" role="list">
+        {roles.map((r) => (
+          <li>
+            <span>{r.t}</span>
+            {r.org && <span class="sl" aria-hidden="true">{'//'}</span>}
+            {r.org && <span>{r.org}</span>}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>
+
+<style>
+  .home-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    display: flex;
+    align-items: center;
+    min-height: min(760px, calc(100svh - var(--header-h)));
+  }
+  .home-hero__bg { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .home-hero__bg--one { grid-template-columns: 1fr; }
+  .home-hero__bg i { background: center / cover no-repeat; }
+  /* Light shade only: the boxes carry legibility, so the games stay visible. */
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgb(1 2 16 / 0.5), rgb(1 2 16 / 0.15)),
+      linear-gradient(0deg, rgb(1 2 16 / 0.85), transparent 22%);
+  }
+  .home-hero__in {
+    width: 100%;
+    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
+    margin-inline: auto;
+    padding: 64px var(--section-pad-x);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .home-hero__name {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 104px;
+    line-height: 0.85;
+    color: var(--text);
+    text-shadow: 0 4px 0 rgb(0 0 0 / 0.5), 0 0 24px rgb(0 0 0 / 0.45);
+  }
+  .home-hero__box {
+    background: rgb(1 2 16 / 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 20px 24px;
+  }
+  .home-hero__lines { display: flex; flex-direction: column; gap: 8px; max-width: 720px; }
+  .home-hero__lines p { margin: 0; font-size: 20px; line-height: 1.45; color: var(--text-body); }
+  .home-hero__roles { display: flex; flex-direction: column; gap: 2px; font-size: 17px; line-height: 1.5; color: var(--text); }
+  .home-hero__roles li { display: flex; flex-wrap: wrap; column-gap: 8px; }
+  .sl { color: var(--magenta); font-weight: 700; }
+
+  @media (max-width: 1279.98px) {
+    .home-hero__in { max-width: 800px; }
+    .home-hero__name { font-size: 80px; }
+    .home-hero__lines p { font-size: 18px; }
+  }
+  @media (max-width: 799.98px) {
+    .home-hero { min-height: 0; }
+    .home-hero__bg { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+    .home-hero__bg--one { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+    .home-hero::before { background: linear-gradient(0deg, rgb(1 2 16 / 0.6), rgb(1 2 16 / 0.3)); }
+    .home-hero__in { padding: 40px var(--section-pad-x) 48px; gap: 12px; }
+    .home-hero__name { font-size: 54px; }
+    .home-hero__box { padding: 16px 18px; border-radius: 20px; }
+    .home-hero__lines p { font-size: 17px; }
+    .home-hero__roles { font-size: 15px; gap: 4px; }
+  }
+  @media (max-width: 359.98px) {
+    .home-hero__name { font-size: 46px; }
+  }
+</style>

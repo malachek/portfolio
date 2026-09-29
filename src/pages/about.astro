@@ -1,0 +1,7 @@
+---
+/** malachek.com/about (generalist). Other roles: src/pages/[role]/about.astro. */
+import AboutPage from '@/layouts/AboutPage.astro';
+import { APEX_ROLE, getRole } from '@/lib/content';
+const role = await getRole(APEX_ROLE);
+---
+<AboutPage role={role} />

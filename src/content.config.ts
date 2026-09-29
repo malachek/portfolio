@@ -26,6 +26,19 @@ const site = defineCollection({
     linkedin: url,
     availability: z.string(),
     nav: z.array(z.object({ label: z.string(), href: z.string() })),
+    /** The About page (same on every role site). */
+    about: z.object({
+      heading: z.string(),
+      description: z.string(),
+      portrait: z.object({ src: z.string(), alt: z.string() }),
+      intro: z.array(z.string()),
+      profileHeading: z.string(),
+      profile: z.array(z.object({ label: z.string(), value: z.string() })),
+      favoritesHeading: z.string(),
+      favorites: z.array(z.string()),
+      photosHeading: z.string(),
+      photos: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() })),
+    }),
   }),
 });
 

@@ -12,5 +12,63 @@ availability: Open to Summer 2027 internships and new-grad gameplay engineering 
 nav:
   - label: Projects
     href: /#projects
+  - label: About
+    href: /about
   - label: Resume
     href: resume   # resolved per role to that role's PDF
+
+# About page (same on every role site). Photos live in public/art/about/.
+about:
+  heading: About
+  description: Malachy Kennedy, game engineer and designer at UC Irvine, co-founder of Burnt Out Games, LLC and President of the Video Game Development Club at UC Irvine.
+  portrait:
+    src: /art/about/portrait.webp
+    alt: Malachy Kennedy
+  intro:
+    - My name is Malachy Kennedy, a double major in Game Design and Software Engineering at UC Irvine, graduating in June 2027. I fell in love with game development at the age of 5 and have chased that passion ever since.
+    - 'I played Tomb Raider (2013) over winter break, and the moment the credits rolled and showed the team photos, I knew: "I need to be on that team."'
+    - Two ways I am applying that drive. I co-founded Burnt Out Games, LLC, where I engineer our Unreal and Unity titles alongside 10 brilliant developers. I am also President of the Video Game Development Club at UC Irvine, where 600+ members make games together.
+    - My favorite games span story, adventure, action and puzzle, and each one is a cohesive, novel experience I could not have gotten anywhere else. As a player I am an explorer and an achiever. I want to see every corner of a world, then master it.
+  profileHeading: Player Profile
+  profile:
+    - label: Player type
+      value: Explorer / Achiever
+    - label: Genres
+      value: Story, adventure, action, puzzle
+    - label: Based in
+      value: Irvine, CA
+    - label: Looking for
+      value: Summer 2027 internships and new-grad gameplay engineering & design roles
+  favoritesHeading: Favorite games
+  favorites:
+    - 'The Elder Scrolls V: Skyrim'
+    - Genshin Impact
+    - League of Legends (ARAM)
+    - Tomb Raider
+    - "Tony Hawk's Downhill Jam"
+    - Fortnite
+    - What Remains of Edith Finch
+    - Firewatch
+    - Virginia
+    - Hades
+  photosHeading: Around the Industry
+  photos:
+    - src: /art/about/blizzcon.webp
+      alt: Malachy taking a selfie outside the Anaheim Convention Center at BlizzCon 2026
+      caption: BlizzCon 2026
+    - src: /art/about/gdc.webp
+      alt: Malachy sitting under the giant red GDC letters
+      caption: GDC
+    - src: /art/about/obsidian.webp
+      alt: Malachy giving a thumbs up under the Obsidian Entertainment sign
+      caption: Obsidian Entertainment
+    - src: /art/about/riot.webp
+      alt: Malachy standing in front of a large painted mural of characters
+      caption: Riot Games
+    - src: /art/about/blizzcon-diablo.webp
+      alt: Malachy with a plush at the Diablo display at BlizzCon 2026
+      caption: BlizzCon 2026
+    - src: /art/about/blizzard.webp
+      alt: Malachy giving a thumbs up beside the orc statue outside Blizzard Entertainment
+      caption: Blizzard Entertainment
+

@@ -1,0 +1,109 @@
+---
+/**
+ * About page, one per role site (same content everywhere; only the header's
+ * role and the links differ). Content: the `about` block in src/content/site.yaml.
+ */
+import { getEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/layout/Section.astro';
+import Capsule from '@/components/layout/Capsule.astro';
+import Chip from '@/components/project/Chip.astro';
+import { absUrl, type Role } from '@/lib/content';
+
+interface Props { role: Role }
+const { role } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+const a = site.about;
+---
+<Base title={`About | ${site.name}`} description={a.description} canonical={absUrl(role, '/about')} roleId={role.id}>
+  <Section heading={a.heading} id="about" level={2}>
+    <h1 class="visually-hidden">About {site.name}</h1>
+    <Capsule class="about-intro">
+      <img class="about-intro__photo" src={a.portrait.src} alt={a.portrait.alt} width="651" height="700" />
+      <div class="about-intro__text">
+        {a.intro.map((p) => <p>{p}</p>)}
+      </div>
+    </Capsule>
+  </Section>
+
+  <Section heading={a.profileHeading} id="player-profile">
+    <Capsule>
+      <dl class="profile">
+        {a.profile.map((r) => (
+          <div class="profile__row"><dt>{r.label}</dt><dd>{r.value}</dd></div>
+        ))}
+      </dl>
+      {a.favorites.length > 0 && (
+        <div class="favs">
+          <h3 class="favs__h">{a.favoritesHeading}</h3>
+          <ul class="favs__list" role="list">
+            {a.favorites.map((g, i) => <Chip index={i}>{g}</Chip>)}
+          </ul>
+        </div>
+      )}
+    </Capsule>
+  </Section>
+
+  {a.photos.length > 0 && (
+    <Section heading={a.photosHeading} id="around-the-industry">
+      <Capsule media>
+        <ul class="photos" role="list">
+          {a.photos.map((ph) => (
+            <li>
+              <figure>
+                <img src={ph.src} alt={ph.alt} loading="lazy" />
+                {ph.caption && <figcaption>{ph.caption}</figcaption>}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </Capsule>
+    </Section>
+  )}
+</Base>
+
+<style>
+  :global(.about-intro) { flex-direction: row !important; align-items: center; gap: 40px !important; }
+  .about-intro__photo {
+    flex: 0 0 300px;
+    width: 300px;
+    height: auto;
+    aspect-ratio: 651 / 700;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  .about-intro__text { display: flex; flex-direction: column; gap: 14px; max-width: var(--text-w); }
+  .about-intro__text p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-prose); color: var(--text-body); }
+
+  .profile { display: grid; grid-template-columns: max-content 1fr; margin: 0; }
+  .profile__row { display: contents; }
+  .profile dt, .profile dd { margin: 0; padding: 8px 0; font-size: var(--fs-body); line-height: var(--lh-compact); }
+  .profile dt { padding-right: 16px; border-right: 1px solid var(--text); color: var(--text); }
+  .profile dd { padding-left: 16px; color: var(--text-body); }
+
+  .favs { display: flex; flex-direction: column; gap: 12px; }
+  .favs__h { margin: 0; font: 900 var(--fs-body) / 1.2 var(--font-body); color: var(--text); }
+  .favs__list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* Masonry by columns so every photo shows whole (content media scale to fit). */
+  .photos { columns: 3; column-gap: 16px; }
+  .photos li { break-inside: avoid; margin-bottom: 16px; }
+  .photos figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .photos img { width: 100%; height: auto; display: block; border-radius: 16px; }
+  .photos figcaption { font-size: 15px; color: var(--muted-text); text-align: center; }
+
+  @media (max-width: 1279.98px) {
+    :global(.about-intro) { gap: 28px !important; }
+    .about-intro__photo { flex-basis: 240px; width: 240px; }
+  }
+  @media (max-width: 799.98px) {
+    :global(.about-intro) { flex-direction: column !important; align-items: stretch; gap: 20px !important; }
+    .about-intro__photo { width: min(280px, 100%); flex-basis: auto; align-self: center; }
+    .profile { grid-template-columns: 1fr; }
+    .profile dt { border-right: 0; padding: 10px 0 0; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .profile dd { padding: 2px 0 8px; }
+    .photos { columns: 2; column-gap: 10px; }
+    .photos li { margin-bottom: 10px; }
+    .photos figcaption { font-size: 13px; }
+  }
+</style>

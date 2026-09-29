@@ -57,7 +57,7 @@ const current = await getRole(roleId);
     <nav class="site-header__nav" aria-label="Primary">
       <ul role="list">
         {nav.map((item) => (
-          <li><a class="eyebrow site-header__link" href={item.href}>{item.label}</a></li>
+          <li data-nav={item.label.toLowerCase()}><a class="eyebrow site-header__link" href={item.href}>{item.label}</a></li>
         ))}
         <li class="site-header__icons">
           <a class="site-header__icon" href={github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
@@ -210,10 +210,16 @@ const current = await getRole(roleId);
   @media (max-width: 459.98px) {
     .site-header__inner { padding-inline: 16px; gap: 8px; }
     .site-header__icons { display: none; }
+    /* Room for the longest job title: About moves to the footer on phones. */
+    .site-header__nav li[data-nav='about'] { display: none; }
     .role__menu { min-width: min(280px, calc(100vw - 32px)); }
+  }
+  @media (max-width: 399.98px) {
+    .role__label { letter-spacing: 0.03em; }
+    .site-header__link { font-size: 12px; }
+    .site-header__nav ul { gap: 12px; }
   }
   @media (max-width: 349.98px) {
     .brand__name { font-size: 21px; }
-    .site-header__nav ul { gap: 12px; }
   }
 </style>
