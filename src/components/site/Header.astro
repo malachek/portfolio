@@ -147,7 +147,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   }
   .brand__name:hover { color: #fff; }
 
-  /* ---- Role switcher: a centred pill ---- */
+  /* ---- Role switcher: centred text + caret, no button chrome ---- */
   .role { grid-area: role; justify-self: center; position: relative; }
   .role__label {
     display: inline-flex;
@@ -163,14 +163,12 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   summary.role__label {
     list-style: none;
     cursor: pointer;
-    padding: 9px 14px;
-    border: 1px solid color-mix(in srgb, var(--magenta) 45%, transparent);
-    border-radius: 999px;
-    transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+    padding: 6px 4px;
+    transition: color 120ms ease;
   }
   summary.role__label::-webkit-details-marker { display: none; }
-  summary.role__label:hover { background: rgb(255 255 255 / 0.05); color: #f06ae4; border-color: var(--magenta); }
-  .role[open] summary.role__label { background: rgb(255 255 255 / 0.06); border-color: var(--magenta); }
+  summary.role__label:hover,
+  .role[open] summary.role__label { color: #f06ae4; }
   .role__caret { transition: transform 150ms ease; }
   .role[open] .role__caret { transform: rotate(180deg); }
 
@@ -299,7 +297,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
       align-content: center;
     }
     .role { justify-self: start; }
-    summary.role__label { padding: 4px 6px; margin: -4px -6px; border: 0; border-radius: 6px; }
+    summary.role__label { padding: 4px 0; }
     .role__label { font-size: 11px; }
     .role__menu { left: -6px; transform: none; min-width: min(280px, calc(100vw - 32px)); }
     .brand__name { font-size: 16px; }
