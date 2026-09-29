@@ -142,3 +142,7 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - The header's role dropdown now keeps you on the same page when the other role has it (same project, About, Resume); otherwise it lands on that role's homepage. Each link carries data-lens-path and the Worker sends it to https://<role host><path>. The dropdown shows the full address it will open.
 - Project Overview: heading, rule and table share one left edge; labels in the muted nav colour, values in text colour, divider in the page accent with 16px either side; even row spacing and even panel padding. On tablet and phone the Steam box and code link sit under the table; the Steam widget scales to fit at every size.
 - League of Legends shows without "(ARAM)".
+- (2026-09-29) Homepage hero is content height (no min-height), name 88px, so "Selected Work" shows below it on first load at desktop, tablet and phone sizes; the game tiles are no longer tall and thin.
+- Card hover rings hug the capsule (outline-offset 0). On desktop and tablet only video media zooms on hover; still images stay put.
+- Tags: no more row "ruffle". Only the hovered tag reacts: grow 1.08 and half its tilt (About tags: 1.06 and 1.5deg).
+- About: second paragraph reworded (no "Two ways..." sentence); new "Why Games" section, drafted for his edit.

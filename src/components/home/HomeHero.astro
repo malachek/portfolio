@@ -50,7 +50,6 @@ const roles = bullets.map((b) => {
     overflow: clip;
     display: flex;
     align-items: center;
-    min-height: min(760px, calc(100svh - var(--header-h)));
   }
   .home-hero__bg { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: repeat(4, 1fr); }
   .home-hero__bg--one { grid-template-columns: 1fr; }
@@ -69,7 +68,7 @@ const roles = bullets.map((b) => {
     width: 100%;
     max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
     margin-inline: auto;
-    padding: 64px var(--section-pad-x);
+    padding: 44px var(--section-pad-x) 48px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -79,7 +78,7 @@ const roles = bullets.map((b) => {
     margin: 0 0 6px;
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 104px;
+    font-size: 88px;
     line-height: 0.85;
     color: var(--text);
     text-shadow: 0 4px 0 rgb(0 0 0 / 0.5), 0 0 24px rgb(0 0 0 / 0.45);
@@ -99,7 +98,7 @@ const roles = bullets.map((b) => {
 
   @media (max-width: 1279.98px) {
     .home-hero__in { max-width: 800px; }
-    .home-hero__name { font-size: 80px; }
+    .home-hero__name { font-size: 72px; }
     .home-hero__lines p { font-size: 18px; }
   }
   @media (max-width: 799.98px) {

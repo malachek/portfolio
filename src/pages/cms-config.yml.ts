@@ -166,6 +166,7 @@ export const GET: APIRoute = async () => {
           str('heading', 'Page heading'), text('description', 'Search description'),
           obj('portrait', 'Portrait', [str('src', 'Image path'), str('alt', 'Alt text')]),
           textList('intro', 'Intro paragraphs'),
+          str('whyHeading', '"Why games" heading'), textList('why', '"Why games" paragraphs'),
           str('profileHeading', 'Profile heading'),
           list('profile', 'Profile rows', [str('label', 'Label'), str('value', 'Value')]),
           str('topHeading', 'Top 5 heading'), strList('top', 'Top 5 games (in order)'),

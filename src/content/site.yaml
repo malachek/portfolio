@@ -28,8 +28,12 @@ about:
     alt: Malachy Kennedy
   intro:
     - My name is Malachy Kennedy, a double major in Game Design and Software Engineering at UC Irvine, graduating in June 2027. I fell in love with game development at the age of 5 and have chased that passion ever since.
-    - Two ways I am applying that drive. I co-founded Burnt Out Games, LLC, where I engineer our Unreal and Unity titles alongside 10 brilliant developers. I am also President of the Video Game Development Club at UC Irvine, where 600+ members make games together.
+    - Today that drive goes into Burnt Out Games, LLC, the studio I co-founded, where I engineer our Unreal and Unity titles alongside 10 brilliant developers, and into the Video Game Development Club at UC Irvine, where I am President and 600+ members make games together.
     - My favorite games span story, adventure, action and puzzle, and each one is a cohesive, novel experience I could not have gotten anywhere else. As a player I am an explorer and an achiever. I want to see every corner of a world, then master it.
+  whyHeading: Why Games
+  why:
+    - Games are the one medium where you step into a world and it responds to you. The games that stayed with me, like Superliminal, Portal and What Remains of Edith Finch, each built an experience that could only exist as a game, where the idea and the way you play it are one and the same.
+    - That is what I want to spend my career making. Worlds cohesive enough that every system serves the feeling, surprising enough that players still talk about them years later, and built alongside a team of people who care about them as much as I do.
   profileHeading: Player Profile
   profile:
     - label: Player type
@@ -78,4 +82,5 @@ about:
     - src: /art/about/blizzard.webp
       alt: Malachy giving a thumbs up beside the orc statue outside Blizzard Entertainment
       caption: Blizzard Entertainment
+
 

@@ -189,7 +189,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     position: relative;
     border-radius: 24px;
     outline: 2px solid transparent;
-    outline-offset: 4px;
+    outline-offset: 0;
     transition: background-color 160ms ease, outline-color 160ms ease;
   }
   .fcard__title a::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
@@ -205,8 +205,8 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
   .fcard__text:hover .fcard__title a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
   .fcard__clip { overflow: clip; border-radius: 16px; }
   .fcard__clip :global(.clip), .fcard__clip :global(.media__img) { transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1); }
-  .fcard__media:hover .fcard__clip :global(.clip),
-  .fcard__media:hover .fcard__clip :global(.media__img) { transform: scale(1.05); }
+  /* Desktop and tablet: hovering the media zooms a video only; stills stay put. */
+  .fcard__media:hover .fcard__clip :global(.clip) { transform: scale(1.05); }
   .fcard__links a { transition: transform 120ms ease; }
   .fcard__links a:hover { transform: scale(1.1); }
   /* Kept under Reduce Motion: small, pointer-triggered, no looping (Malachy's call, like the autoplay clips). */
@@ -332,7 +332,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     .fcard__text:hover, .fcard__media:hover { background-color: transparent; }
     .fcard__panel {
       outline: 2px solid transparent;
-      outline-offset: 4px;
+      outline-offset: 0;
       transition: background-color 160ms ease, outline-color 160ms ease;
     }
     .fcard__panel:hover {
