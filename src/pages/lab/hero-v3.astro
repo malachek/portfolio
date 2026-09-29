@@ -32,6 +32,50 @@ const work = href(role.id, '/') + '#projects';
 ---
 <Base title="Hero options, round 3 (dev)" description="Homepage hero proposals" roleId={role.id} noindex>
 
+  <!-- ═══════════════ T1-B (chunks) ═══════════════ -->
+  <p class="label">T1 chunked · Name over the art, then separate dark boxes: the two sentences, your roles, and the menu</p>
+  <section class="ts tb" style={tileVars}>
+    <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ts__in">
+      <h1 class="logo">{h.title}</h1>
+      <div class="box lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <div class="tb__row">
+        <ul class="box rl" role="list">{roles.map((r) => <li>{r.t} <span class="sl">//</span> {r.org}</li>)}</ul>
+        <nav class="box menu" aria-label="Start">
+          <a href={work}>Selected Work</a>
+          <a href={resume}>Resume</a>
+          <a href={`mailto:${site.email}`}>Contact</a>
+        </nav>
+      </div>
+    </div>
+    <div class="corner">
+      <a href={site.github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+      <a href={site.linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ T1-A (one box) ═══════════════ -->
+  <p class="label">T1 one box · Everything in a single dark box, like the current site's hero</p>
+  <section class="ts tb" style={tileVars}>
+    <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ts__in">
+      <div class="box box--all">
+        <h1 class="logo">{h.title}</h1>
+        <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+        <ul class="rl" role="list">{roles.map((r) => <li>{r.t} <span class="sl">//</span> {r.org}</li>)}</ul>
+        <nav class="menu" aria-label="Start">
+          <a href={work}>Selected Work</a>
+          <a href={resume}>Resume</a>
+          <a href={`mailto:${site.email}`}>Contact</a>
+        </nav>
+      </div>
+    </div>
+    <div class="corner">
+      <a href={site.github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+      <a href={site.linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+    </div>
+  </section>
+
   <!-- ═══════════════ T1 ═══════════════ -->
   <p class="label">T1 · Main menu (Risk of Rain 2 / Overwatch style): you on the left, the games behind, a menu instead of buttons</p>
   <section class="ts t1" style={tileVars}>
@@ -170,6 +214,24 @@ const work = href(role.id, '/') + '#projects';
   .corner a:hover { color: #fff; }
   .corner--left { left: max(var(--section-pad-x), calc((100% - 1152px) / 2)); right: auto; margin: 0; font: 700 12px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted-text); }
 
+  /* ---------- T1 with boxes ---------- */
+  /* Lighter scrim: the boxes carry legibility, so the games show through more. */
+  .tb::before { background: linear-gradient(90deg, rgb(1 2 16 / .55), rgb(1 2 16 / .25)), linear-gradient(0deg, rgb(1 2 16 / .85), transparent 25%); }
+  .box {
+    background: rgb(1 2 16 / .74);
+    backdrop-filter: blur(6px);
+    border-radius: 24px;
+    padding: 20px 24px;
+  }
+  .tb .ts__in { gap: 14px; }
+  .tb .logo { margin-bottom: 6px; }
+  .tb .lines { max-width: 700px; }
+  .tb__row { display: flex; align-items: stretch; gap: 14px; }
+  .tb .rl { justify-content: center; }
+  .tb .menu { margin-top: 0; padding: 14px 28px 14px 48px; justify-content: center; }
+  .box--all { display: flex; flex-direction: column; gap: 18px; max-width: 760px; padding: 32px 40px 28px; border-radius: 32px; }
+  .box--all .menu { padding-left: 26px; }
+
   /* ---------- T2: press start ---------- */
   .t2::before { background: radial-gradient(ellipse at center, rgb(1 2 16 / .9) 0%, rgb(1 2 16 / .78) 45%, rgb(1 2 16 / .5) 100%); }
   .t2 .ts__in { align-items: center; text-align: center; }
@@ -214,6 +276,13 @@ const work = href(role.id, '/') + '#projects';
     .rl { font-size: 15px; gap: 4px; }
     .menu a { font-size: 28px; }
     .menu a::before { left: -20px; font-size: 18px; }
+    .tb__row { flex-direction: column; }
+    .tb .menu { padding: 14px 24px 14px 44px; }
+    .box { padding: 16px 18px; border-radius: 20px; }
+    .box--all { padding: 24px 20px; }
+    .box--all .logo { font-size: 44px; }
+    .box--all .menu { padding-left: 22px; }
+    .tb::before { background: linear-gradient(0deg, rgb(1 2 16 / .7), rgb(1 2 16 / .35)); }
     .start { font-size: 32px; }
     .menu--row a { font-size: 22px; }
   }
