@@ -1,0 +1,220 @@
+---
+/**
+ * DEV ONLY: round 3 of homepage hero proposals, "title screen".
+ * You first, the four games behind you (as on the live site), roles as his own
+ * tight "//" lines, and the actions as a game main menu instead of buttons.
+ * Open http://localhost:4321/lab/hero-v3   (?role=gameplay|tools|design)
+ */
+import { getEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { getRole, resolveHome, href } from '@/lib/content';
+
+const roleId = Astro.url.searchParams.get('role') ?? 'dev';
+const role = await getRole(roleId);
+const home = await resolveHome(role);
+const site = (await getEntry('site', 'site'))!.data;
+const h = home.hero;
+const roles = h.bullets.map((b) => {
+  const [t, org = ''] = b.split(' // ');
+  // The tighter wording he picked (2026-09-29). Moves into the role yaml once a hero is chosen.
+  const short = org
+    .replace('Video Game Development Club at UC Irvine', 'VGDC at UC Irvine')
+    .replace('UC Irvine, class of 2027', "UC Irvine '27");
+  return { t, org: short };
+});
+const tiles = (h.tiles ?? []).slice(0, 4);
+const tileVars = tiles.map((t, i) => `--t${i + 1}:url('${t}')`).join(';');
+const games = home.featured.slice(0, 4);
+const gameVars = games.map((g, i) => `--t${i + 1}:url('${g.background}')`).join(';');
+const resume = href(role.id, role.data.resume);
+const work = href(role.id, '/') + '#projects';
+---
+<Base title="Hero options, round 3 (dev)" description="Homepage hero proposals" roleId={role.id} noindex>
+
+  <!-- ═══════════════ T1 ═══════════════ -->
+  <p class="label">T1 · Main menu (Risk of Rain 2 / Overwatch style): you on the left, the games behind, a menu instead of buttons</p>
+  <section class="ts t1" style={tileVars}>
+    <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ts__in">
+      <h1 class="logo">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="rl" role="list">{roles.map((r) => <li>{r.t} <span class="sl">//</span> {r.org}</li>)}</ul>
+      <nav class="menu" aria-label="Start">
+        <a href={work}>Selected Work</a>
+        <a href={resume}>Resume</a>
+        <a href={`mailto:${site.email}`}>Contact</a>
+      </nav>
+    </div>
+    <div class="corner">
+      <a href={site.github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+      <a href={site.linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ T2 ═══════════════ -->
+  <p class="label">T2 · Press start (Genshin / Sonic Frontiers style): centered title, the games drifting behind, one blinking prompt</p>
+  <section class="ts t2" style={tileVars}>
+    <div class="bg bg--drift" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ts__in">
+      <h1 class="logo">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="rl" role="list">{roles.map((r) => <li>{r.t} <span class="sl">//</span> {r.org}</li>)}</ul>
+      <a class="start" href={work}><span class="start__caret" aria-hidden="true">▸</span> Press Start</a>
+      <nav class="menu menu--row" aria-label="More">
+        <a href={resume}>Resume</a>
+        <a href={`mailto:${site.email}`}>Contact</a>
+      </nav>
+    </div>
+    <p class="corner corner--left">{role.data.host}</p>
+    <div class="corner">
+      <a href={site.github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+      <a href={site.linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ T3 ═══════════════ -->
+  <p class="label">T3 · Level select: same as T1, but the menu lists the four games; hovering one lights up its panel behind you</p>
+  <section class="ts t1 t3" style={gameVars} data-levels>
+    <div class="bg" aria-hidden="true">{games.map((_, i) => <i data-i={i}></i>)}</div>
+    <div class="ts__in">
+      <h1 class="logo">{h.title}</h1>
+      <div class="lines">{h.lines.map((l) => <p>{l}</p>)}</div>
+      <ul class="rl" role="list">{roles.map((r) => <li>{r.t} <span class="sl">//</span> {r.org}</li>)}</ul>
+      <nav class="menu menu--levels" aria-label="Games">
+        {games.map((g, i) => (
+          <a href={g.href} data-i={i} style={`--accent:${g.accent}`}>
+            <span class="lv">{String(i + 1).padStart(2, '0')}</span>{g.title}
+          </a>
+        ))}
+        <span class="menu__gap" aria-hidden="true"></span>
+        <a href={resume}>Resume</a>
+      </nav>
+    </div>
+    <div class="corner">
+      <a href={site.github} rel="me"><Icon name="github" size={20} label="GitHub" /></a>
+      <a href={site.linkedin} rel="me"><Icon name="linkedin" size={20} label="LinkedIn" /></a>
+    </div>
+  </section>
+
+  <script>
+    for (const root of document.querySelectorAll<HTMLElement>('[data-levels]')) {
+      const tiles = root.querySelectorAll<HTMLElement>('.bg i');
+      const set = (i: string | null) => {
+        root.classList.toggle('picking', i !== null);
+        tiles.forEach((t) => t.classList.toggle('lit', t.dataset.i === i));
+      };
+      for (const a of root.querySelectorAll<HTMLAnchorElement>('.menu--levels a[data-i]')) {
+        a.addEventListener('mouseenter', () => set(a.dataset.i!));
+        a.addEventListener('focus', () => set(a.dataset.i!));
+        a.addEventListener('mouseleave', () => set(null));
+        a.addEventListener('blur', () => set(null));
+      }
+    }
+  </script>
+</Base>
+
+<style>
+  .label {
+    max-width: 1152px; margin: 40px auto 12px; padding: 8px var(--section-pad-x);
+    font: 700 13px/1.4 var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: #ffd166;
+  }
+
+  /* ---------- title screen shell ---------- */
+  .ts {
+    position: relative; isolation: isolate; overflow: clip;
+    min-height: min(820px, calc(100svh - var(--header-h)));
+    display: flex; align-items: center;
+  }
+  .bg { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .bg i { background: var(--t1) center / cover no-repeat; transition: filter 300ms ease, opacity 300ms ease; }
+  .bg i:nth-child(2) { background-image: var(--t2); }
+  .bg i:nth-child(3) { background-image: var(--t3); }
+  .bg i:nth-child(4) { background-image: var(--t4); }
+  .ts::before { content: ''; position: absolute; inset: 0; z-index: -1; }
+  .t1::before { background: linear-gradient(90deg, rgb(1 2 16 / .94) 0%, rgb(1 2 16 / .82) 45%, rgb(1 2 16 / .45) 100%), linear-gradient(0deg, rgb(1 2 16 / .9), transparent 30%); }
+
+  .ts__in {
+    width: 100%; max-width: 1152px; margin-inline: auto; padding: 64px var(--section-pad-x);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
+  }
+  .logo { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 104px; line-height: .85; color: var(--text); text-shadow: 0 4px 0 rgb(0 0 0 / .45); }
+  .lines { display: flex; flex-direction: column; gap: 8px; max-width: 620px; }
+  .lines p { margin: 0; font-size: 20px; line-height: 1.45; color: var(--text-body); }
+
+  /* His own format: "Role // Place", plain lines, no boxes. */
+  .rl { display: flex; flex-direction: column; gap: 2px; font-size: 16px; line-height: 1.5; color: var(--text); }
+  .sl { color: var(--magenta); font-weight: 700; margin-inline: 2px; }
+
+  /* ---------- main menu ---------- */
+  .menu { display: flex; flex-direction: column; align-items: flex-start; margin-top: 12px; }
+  .menu a {
+    position: relative; display: inline-flex; align-items: baseline; gap: 12px;
+    padding: 4px 0;
+    font-family: var(--font-display); font-size: 34px; line-height: 1; text-transform: uppercase;
+    color: rgb(220 241 255 / .78); text-decoration: none;
+    transition: color 120ms ease, transform 120ms ease;
+  }
+  .menu a::before {
+    content: '▸'; position: absolute; left: -26px; top: 50%; translate: 0 -52%;
+    font-family: var(--font-body); font-size: 22px; color: var(--accent, var(--magenta));
+    opacity: 0; transition: opacity 120ms ease;
+  }
+  .menu a:hover, .menu a:focus-visible { color: #fff; transform: translateX(6px); outline: none; }
+  .menu a:hover::before, .menu a:focus-visible::before { opacity: 1; }
+  .menu__gap { height: 14px; }
+  .lv { font-size: 18px; color: var(--accent); opacity: .9; }
+
+  .corner { position: absolute; right: max(var(--section-pad-x), calc((100% - 1152px) / 2)); bottom: 24px; display: flex; gap: 16px; }
+  .corner a { display: inline-flex; color: var(--nav); transition: color 120ms; }
+  .corner a:hover { color: #fff; }
+  .corner--left { left: max(var(--section-pad-x), calc((100% - 1152px) / 2)); right: auto; margin: 0; font: 700 12px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted-text); }
+
+  /* ---------- T2: press start ---------- */
+  .t2::before { background: radial-gradient(ellipse at center, rgb(1 2 16 / .9) 0%, rgb(1 2 16 / .78) 45%, rgb(1 2 16 / .5) 100%); }
+  .t2 .ts__in { align-items: center; text-align: center; }
+  .t2 .lines { align-items: center; }
+  .t2 .rl { align-items: center; }
+  .bg--drift { inset: -4%; animation: drift 24s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: translateX(-2%) scale(1.02); } to { transform: translateX(2%) scale(1.06); } }
+  .start {
+    margin-top: 20px; display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--font-display); font-size: 40px; line-height: 1; text-transform: uppercase;
+    color: #fff; text-decoration: none; animation: blink 1.6s ease-in-out infinite;
+  }
+  .start__caret { color: var(--magenta); font-family: var(--font-body); font-size: 26px; }
+  .start:hover, .start:focus-visible { animation: none; text-shadow: 0 0 18px color-mix(in srgb, var(--magenta) 70%, transparent); outline: none; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+  .menu--row { flex-direction: row; gap: 28px; margin-top: 4px; }
+  .menu--row a { font-size: 24px; }
+  .menu--row a::before { font-size: 16px; }
+
+  /* ---------- T3: level select ---------- */
+  .t3.picking .bg i { filter: grayscale(.8) brightness(.45); }
+  .t3.picking .bg i.lit { filter: none; }
+
+  /* ---------- tablet ---------- */
+  @media (max-width: 1279.98px) {
+    .ts__in { max-width: 800px; }
+    .logo { font-size: 80px; }
+    .lines p { font-size: 18px; }
+    .menu a { font-size: 30px; }
+    .corner { right: var(--section-pad-x); }
+    .corner--left { left: var(--section-pad-x); }
+  }
+
+  /* ---------- phone ---------- */
+  @media (max-width: 799.98px) {
+    .ts { min-height: 0; }
+    .bg { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+    .t1::before { background: linear-gradient(0deg, rgb(1 2 16 / .95) 0%, rgb(1 2 16 / .8) 60%, rgb(1 2 16 / .6) 100%); }
+    .ts__in { padding: 48px var(--section-pad-x) 72px; gap: 16px; }
+    .logo { font-size: 54px; }
+    .lines p { font-size: 17px; }
+    .rl { font-size: 15px; gap: 4px; }
+    .menu a { font-size: 28px; }
+    .menu a::before { left: -20px; font-size: 18px; }
+    .start { font-size: 32px; }
+    .menu--row a { font-size: 22px; }
+  }
+</style>

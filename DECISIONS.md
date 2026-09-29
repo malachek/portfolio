@@ -124,3 +124,8 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 ## Hero round 2 (lab/hero-v2)
 - D2 (reel plus roles), E2 (profile plus game select), DE (reel plus select bar). Each carries the name, both sentences and all three roles. Waiting on his pick.
 - The EXO clip includes the UE editor title bar; the reel overscans the top to hide it. Re-exporting the clip without the bar would be cleaner.
+
+## Buttons, round 2, and hero round 3 (2026-09-29)
+- He found the reworked buttons and the boxed roles "AI-looking". LinkPill is back to the flat Figma pill (regular weight, no arrow, no lift or shadow); only the contrast-safe colours and the consistent padding stay.
+- Hero direction from his answers: him first, the four games behind him as on the live site, the roles as his own tight "Role // Place" lines (short forms: "VGDC at UC Irvine", "UC Irvine '27"), and a game title-screen feel drawn from games he likes.
+- lab/hero-v3: T1 main menu, T2 press start, T3 level select. The actions are menu items, not pill buttons. Waiting on his pick.
