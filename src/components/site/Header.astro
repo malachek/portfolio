@@ -7,7 +7,7 @@
  * Resume, GitHub, LinkedIn. Sticky, with a hairline under it.
  */
 import Icon from '@/components/icons/Icon.astro';
-import { getRoles, getRole, roleBase } from '@/lib/content';
+import { getRoles, getRole, roleBase, href, rolePaths } from '@/lib/content';
 
 interface Props {
   name: string;
@@ -21,6 +21,18 @@ interface Props {
 const { name, github, linkedin, nav, homeHref = '/', roleId } = Astro.props;
 const roles = await getRoles();
 const current = await getRole(roleId);
+
+// Switching role keeps you on the same page when the other role has it (the same
+// project, About, Resume); otherwise it lands on that role's homepage.
+const base = roleBase(roleId);
+const here = (Astro.url.pathname.startsWith(`${base}/`) || base === '' ? Astro.url.pathname.slice(base.length) : '/').replace(/\/+$/, '') || '/';
+const targets = await Promise.all(
+  roles.map(async (r) => {
+    const keep = (await rolePaths(r.id)).has(here) ? here : '/';
+    return { id: r.id, path: keep, href: href(r.id, keep) };
+  }),
+);
+const target = (id: string) => targets.find((t) => t.id === id)!;
 ---
 <header class="site-header">
   <div class="site-header__inner">
@@ -37,12 +49,13 @@ const current = await getRole(roleId);
               {roles.map((r) => (
                 <li>
                   <a
-                    href={`${roleBase(r.id)}/`}
+                    href={target(r.id).href}
                     data-lens={r.id}
+                    data-lens-path={target(r.id).path}
                     aria-current={r.id === roleId ? 'page' : undefined}
                   >
                     <span class="role__title">{r.data.jobTitle}{!r.data.enabled && ' (draft)'}</span>
-                    <small class="role__host">{r.data.host}</small>
+                    <small class="role__host">{r.data.host}{target(r.id).path !== '/' && target(r.id).path}</small>
                   </a>
                 </li>
               ))}

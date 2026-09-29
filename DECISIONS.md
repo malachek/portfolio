@@ -137,3 +137,8 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Left out on purpose: the suit headshot (kept locally, unused), the GDC group photo (other people's faces) and the blurry Riot sign selfie.
 - Header nav gains About; on phones under 460px About hides in the header (it is in the footer) so the longest job title fits.
 - (2026-09-29) About page is sent to every studio, so nothing on it may be aimed at one: the Tomb Raider credits story (Crystal Dynamics letter material) is out. Favorites split into his Top 5 (Superliminal, Skyrim, Portal, What Remains of Edith Finch, League of Legends (ARAM)) and other all-time favorites (adds Hollow Knight, Baba Is You; Tomb Raider is "Tomb Raider (2013)"). Favorite tags are solid and hover with a small grow (1.06) and a very slight alternating tilt.
+
+## Role switcher keeps the page; Project Overview tidy (2026-09-29)
+- The header's role dropdown now keeps you on the same page when the other role has it (same project, About, Resume); otherwise it lands on that role's homepage. Each link carries data-lens-path and the Worker sends it to https://<role host><path>. The dropdown shows the full address it will open.
+- Project Overview: heading, rule and table share one left edge; labels in the muted nav colour, values in text colour, divider in the page accent with 16px either side; even row spacing and even panel padding. On tablet and phone the Steam box and code link sit under the table; the Steam widget scales to fit at every size.
+- League of Legends shows without "(ARAM)".

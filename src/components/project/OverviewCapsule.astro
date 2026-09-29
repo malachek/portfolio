@@ -48,63 +48,67 @@ const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.pro
 </div>
 
 <style>
+  /* Spec-sheet layout: heading, rule and table share one left edge; the
+     label | value divider sits in the accent colour with even space either
+     side; rows breathe equally; the panel pads evenly on all sides. */
   .overview { display: flex; justify-content: center; padding-bottom: 36px; }
   .overview__panel {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 24px;
+    gap: 40px;
     width: 100%;
     max-width: var(--content-max);
-    padding: 24px var(--capsule-pad-x) 12px;
+    padding: 28px var(--capsule-pad-x);
     border-radius: var(--capsule-radius);
     background: var(--panel);
   }
-  .overview__left { display: flex; flex-direction: column; gap: 12px; }
-  .overview__title { text-align: center; }
+  .overview__left { display: flex; flex-direction: column; gap: 14px; flex: 1 1 auto; min-width: 0; }
+  .overview__title { text-align: left; }
   .overview__left .rule { height: var(--rule-section); }
   .overview__table {
     display: grid;
-    grid-template-columns: max-content auto;
-    padding: 0 8px;
+    grid-template-columns: max-content 1fr;
+    margin: 4px 0 0;
     font-size: var(--fs-body);
-    line-height: var(--lh-compact);
-    color: var(--text);
+    line-height: 1.3;
   }
   .overview__row { display: contents; }
-  /* 6px between rows, made from padding so the 1px divider stays continuous. */
   .overview__row dt,
-  .overview__row dd { padding-block: 3px; }
-  .overview__row dt { padding-right: 8px; }
-  .overview__row dd { padding-left: 8px; border-left: 1px solid #fff; }
-  .overview__row:first-child > * { padding-top: 0; }
-  .overview__row:last-child > * { padding-bottom: 0; }
+  .overview__row dd { margin: 0; padding-block: 5px; }
+  .overview__row dt { padding-right: 16px; color: var(--nav); }
+  .overview__row dd { padding-left: 16px; color: var(--text); border-left: 2px solid color-mix(in srgb, var(--accent) 70%, transparent); }
+  .overview__row:first-child > * { padding-top: 2px; }
+  .overview__row:last-child > * { padding-bottom: 2px; }
   .overview__right {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     flex: 0 0 392px;
+    min-width: 0;
+    padding-top: 4px;
   }
-  .overview__storewrap { width: 100%; }
-  .overview__store { display: block; width: 100%; height: 180px; border: 0; border-radius: 4px; background: #1b2838; }
+  /* Steam's widget has a fixed layout that clips when narrow. Render it at its
+     natural width and scale it to fit the column (script below sets --s). */
+  .overview__storewrap { width: 100%; height: calc(180px * var(--s, 1)); overflow: hidden; border-radius: 4px; }
+  .overview__store { display: block; width: 420px; height: 180px; border: 0; border-radius: 4px; background: #1b2838; transform: scale(var(--s, 1)); transform-origin: 0 0; }
 
   @media (max-width: 1279.98px) {
-    .overview__panel { padding-inline: 24px; }
-    .overview__right { flex-basis: 310px; }
-    .overview__store { height: 175px; }
+    .overview__panel { gap: 28px; padding: 24px; }
+    .overview__right { flex-basis: 340px; }
+  }
+  /* Tablet: the table needs the width, so the store box moves below it. */
+  @media (max-width: 1279.98px) {
+    .overview__panel { flex-direction: column; align-items: stretch; gap: 22px; }
+    .overview__right { flex-basis: auto; width: 100%; max-width: 440px; align-self: center; padding-top: 0; }
   }
   @media (max-width: 799.98px) {
-    .overview__panel { flex-direction: column; gap: 12px; padding-inline: 16px; }
-    .overview__left { align-items: stretch; gap: 8px; width: 100%; }
-    .overview__table { justify-content: center; padding: 0; }
-    .overview__row dt { padding-right: 4px; }
-    .overview__row dd { padding-left: 4px; }
-    .overview__right { flex-basis: auto; width: 100%; }
-    /* Steam's widget has a fixed layout that clips under ~390px. Render it at
-       its natural width and scale it down to fit (script below sets --s). */
-    .overview__storewrap { height: calc(180px * var(--s, 1)); overflow: hidden; border-radius: 4px; }
-    .overview__store { width: 420px; height: 180px; transform: scale(var(--s, 1)); transform-origin: 0 0; }
+    .overview__panel { flex-direction: column; align-items: stretch; gap: 20px; padding: 22px 18px; }
+    .overview__left { gap: 12px; }
+    .overview__row dt { padding-right: 12px; }
+    .overview__row dd { padding-left: 12px; }
+    .overview__right { flex-basis: auto; width: 100%; padding-top: 0; }
   }
 </style>
 

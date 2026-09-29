@@ -7,8 +7,8 @@
  *   *.workers.dev (preview)   → dist/ as built: /, /gameplay/, /tools/ … side by side
  *
  * Pages are built with role-prefixed links (/gameplay/exo). On a role's own host
- * the Worker strips that prefix from links, and points the role switcher at each
- * role's own host. Role → host comes from /roles.json (built from roles/*.yaml).
+ * the Worker strips that prefix from links, and points the role switcher at the
+ * same page (data-lens-path) on each role's own host. Role → host comes from /roles.json (built from roles/*.yaml).
  */
 
 const APEX = 'malachek.com';
@@ -37,7 +37,9 @@ class LinkRewriter {
     const lens = el.getAttribute('data-lens');
     if (lens) {
       const host = this.cfg.roles[lens];
-      if (host) el.setAttribute(attr, `https://${host}/`);
+      // Keep the page when the other role has it (Header sets data-lens-path).
+      const path = el.getAttribute('data-lens-path') || '/';
+      if (host) el.setAttribute(attr, `https://${host}${path}`);
       return;
     }
     if (this.role && (href === `/${this.role}` || href.startsWith(`/${this.role}/`))) {

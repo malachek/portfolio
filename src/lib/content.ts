@@ -142,6 +142,15 @@ export async function resolveHome(role: Role) {
 }
 
 /** Every project page a role publishes (base has a page and the role has an overlay). */
+/** Role-relative paths that exist on a role's site ('/', '/about', '/resume', '/exo' ...). Memoized per build. */
+const pathCache = new Map<string, Promise<Set<string>>>();
+export function rolePaths(roleId: string) {
+  if (!pathCache.has(roleId)) {
+    pathCache.set(roleId, rolePages(roleId).then((pages) => new Set(['/', '/about', '/resume', ...pages.map((p) => p.path!)])));
+  }
+  return pathCache.get(roleId)!;
+}
+
 export async function rolePages(roleId: string) {
   const projects = await getCollection('projects');
   const out = [];
