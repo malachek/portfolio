@@ -33,6 +33,14 @@ const a = site.about;
           <div class="profile__row"><dt>{r.label}</dt><dd>{r.value}</dd></div>
         ))}
       </dl>
+      {a.top.length > 0 && (
+        <div class="favs">
+          <h3 class="favs__h">{a.topHeading}</h3>
+          <ol class="top" role="list">
+            {a.top.map((g, i) => <li><span class="top__n" aria-hidden="true">{i + 1}</span>{g}</li>)}
+          </ol>
+        </div>
+      )}
       {a.favorites.length > 0 && (
         <div class="favs">
           <h3 class="favs__h">{a.favoritesHeading}</h3>
@@ -83,7 +91,17 @@ const a = site.about;
 
   .favs { display: flex; flex-direction: column; gap: 12px; }
   .favs__h { margin: 0; font: 900 var(--fs-body) / 1.2 var(--font-body); color: var(--text); }
+  .top { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+  .top li { display: flex; align-items: baseline; gap: 10px; font-size: var(--fs-body); color: var(--text); }
+  .top__n { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--magenta); }
+
   .favs__list { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* Favorite-game tags: solid (not translucent), and a gentler hover than the
+     homepage chips: a small grow with a very slight tilt, alternating sides. */
+  .favs__list :global(.chip) { background: var(--accent-btn, #ca2dbd); color: #fff; }
+  .favs__list :global(.chip:hover) { background: color-mix(in srgb, var(--accent-btn, #ca2dbd), #fff 10%); }
+  .favs__list :global(.chip:nth-child(odd):hover) { transform: rotate(-1.5deg) scale(1.06); }
+  .favs__list :global(.chip:nth-child(even):hover) { transform: rotate(1.5deg) scale(1.06); }
 
   /* Masonry by columns so every photo shows whole (content media scale to fit). */
   .photos { columns: 3; column-gap: 16px; }

@@ -34,6 +34,8 @@ const site = defineCollection({
       intro: z.array(z.string()),
       profileHeading: z.string(),
       profile: z.array(z.object({ label: z.string(), value: z.string() })),
+      topHeading: z.string(),
+      top: z.array(z.string()),
       favoritesHeading: z.string(),
       favorites: z.array(z.string()),
       photosHeading: z.string(),
