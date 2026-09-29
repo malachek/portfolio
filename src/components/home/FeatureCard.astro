@@ -264,7 +264,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
   @media (max-width: 1279.98px) {
     .fcard { gap: 4px; padding: 16px; }
     .fcard--experience { gap: 12px; padding: 32px 64px; }
-    .fcard__meta { max-width: 800px; }
+    .fcard__meta { max-width: var(--frame-max); padding-inline: var(--section-pad-x); } /* text lines up with the header and headings */
     .fcard__panel { gap: 8px; max-width: 768px; padding: 0 0 16px; background: none; }
     .fcard--experience .fcard__panel {
       flex-direction: column-reverse;

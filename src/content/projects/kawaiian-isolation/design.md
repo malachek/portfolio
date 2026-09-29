@@ -1,6 +1,7 @@
 ---
 # kawaiian-isolation on the design site. Only what differs from _base.md goes here.
 # Card bullets: 11-proven-lines and 6-3 [3].
+roleTitle: Narrative Designer & Technical Director   # from the design resume
 sections:
 - project-description
 - design

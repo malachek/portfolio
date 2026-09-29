@@ -185,6 +185,9 @@ const overlays = defineCollection({
   schema: z.object({
     /** false = on this role the project is a card only, with no page of its own. */
     page: z.boolean().optional(),
+    /** Job title on this role's version (e.g. "Technical Director & Tools Engineer").
+        Replaces the Role row in Project Overview and the same words in the hero lines. */
+    roleTitle: z.string().optional(),
     seo: z.object({ title: z.string().optional(), description: z.string().optional() }).optional(),
     hero: hero.partial().optional(),
     overview: overview.partial().optional(),

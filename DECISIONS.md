@@ -146,3 +146,10 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Card hover rings hug the capsule (outline-offset 0). On desktop and tablet only video media zooms on hover; still images stay put.
 - Tags: no more row "ruffle". Only the hovered tag reacts: grow 1.08 and half its tilt (About tags: 1.06 and 1.5deg).
 - About: second paragraph reworded (no "Two ways..." sentence); new "Why Games" section, drafted for his edit.
+
+## Alignment, hamburger, per-role project titles (2026-09-29)
+- One layout frame (--frame-max: 1280 desktop, 800 tablet, full width on phones, inset by --section-pad-x) for the header, hero, homepage section headings, card meta line and footer, so their left edges line up at every width.
+- Below 640px the header links fold into a hamburger menu (Projects, About, Resume, GitHub, LinkedIn). The About-hiding workaround is gone.
+- Role dropdown stays stacked over the name (not centred): the title and name read as one unit.
+- Project overlays can set `roleTitle`: it replaces the Role row and the same words in the hero line. Set from the role resumes: design/the-fallen "Combat & Systems Designer", design/exo "Systems & Combat Designer, Tech Lead", design/kawaiian-isolation "Narrative Designer & Technical Director", tools/kawaiian-isolation "Technical Director & Tools Engineer". tools/exo keeps the base title (the resume's "Sole Programmer" would repeat the hero's "Sole programmer on a team of 11").
+- tools/kawaiian-isolation now opens on the dialogue pipeline and Perforce/onboarding work, and leaves the narrative "Design" essay off. Other projects' role versions still share the base opening: to review next.

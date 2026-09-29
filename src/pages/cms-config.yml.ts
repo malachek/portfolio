@@ -92,6 +92,7 @@ const baseFields: Field[] = [
 ];
 
 const overlayFields = (sectionIds: string[], blockIds: string[]): Field[] => [
+  str('roleTitle', 'Your job title on this role (replaces the Role row and hero line)'),
   ...(sectionIds.length
     ? [
         { name: 'sections', label: 'Sections to show, in order (leave empty to show all)', widget: 'select', multiple: true, required: false, options: sectionIds },

@@ -78,12 +78,28 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
         </li>
       </ul>
     </nav>
+    <details class="navmenu" data-menu>
+      <summary class="navmenu__btn">
+        <span class="visually-hidden">Menu</span>
+        <svg class="navmenu__open" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        <svg class="navmenu__close" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </summary>
+      <div class="navmenu__panel">
+        <ul role="list">
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          <li class="navmenu__social">
+            <a href={github} rel="me"><Icon name="github" size={20} /> GitHub</a>
+            <a href={linkedin} rel="me"><Icon name="linkedin" size={20} /> LinkedIn</a>
+          </li>
+        </ul>
+      </div>
+    </details>
   </div>
 </header>
 
 <script>
-  // Close the role menu on outside click or Escape.
-  for (const menu of document.querySelectorAll<HTMLDetailsElement>('[data-role-menu]')) {
+  // Close the role menu and the hamburger menu on outside click or Escape.
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>('[data-role-menu], [data-menu]')) {
     document.addEventListener('click', (e) => {
       if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
     });
@@ -112,7 +128,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     justify-content: space-between;
     gap: 16px;
     height: 100%;
-    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
+    max-width: var(--frame-max);
     margin-inline: auto;
     padding-inline: var(--section-pad-x);
   }
@@ -220,17 +236,60 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     .site-header__nav ul { gap: 16px; }
     .site-header__icons { gap: 14px; }
   }
-  @media (max-width: 459.98px) {
-    .site-header__inner { padding-inline: 16px; gap: 8px; }
-    .site-header__icons { display: none; }
-    /* Room for the longest job title: About moves to the footer on phones. */
-    .site-header__nav li[data-nav='about'] { display: none; }
+  /* ---- Hamburger: when the links no longer fit beside the name ---- */
+  .navmenu { display: none; position: relative; }
+  .navmenu__btn {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    border-radius: 10px;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .navmenu__btn::-webkit-details-marker { display: none; }
+  .navmenu__btn:hover { background: rgb(255 255 255 / 0.06); }
+  .navmenu__close { display: none; }
+  .navmenu[open] .navmenu__open { display: none; }
+  .navmenu[open] .navmenu__close { display: block; }
+  .navmenu__panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: -10px;
+    z-index: 30;
+    min-width: 220px;
+    padding: 8px;
+    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
+  }
+  .navmenu__panel a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font: 700 15px/1 var(--font-body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .navmenu__panel a:hover { background: rgb(255 255 255 / 0.06); }
+  .navmenu__social { display: flex; flex-direction: column; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgb(255 255 255 / 0.08); }
+  .navmenu__social a { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--nav); }
+
+  @media (max-width: 639.98px) {
+    .site-header__nav { display: none; }
+    .navmenu { display: block; }
     .role__menu { min-width: min(280px, calc(100vw - 32px)); }
   }
   @media (max-width: 399.98px) {
     .role__label { letter-spacing: 0.03em; }
-    .site-header__link { font-size: 12px; }
-    .site-header__nav ul { gap: 12px; }
   }
   @media (max-width: 349.98px) {
     .brand__name { font-size: 21px; }

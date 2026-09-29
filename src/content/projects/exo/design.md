@@ -1,6 +1,7 @@
 ---
 # exo on the design site. Only what differs from _base.md goes here.
 # Card bullets: 11-proven-lines (enemy archetypes) and 6-1 [3]. VERIFY the playtest wording.
+roleTitle: Systems & Combat Designer, Tech Lead   # from the design resume
 sections:
 - project-description
 - design

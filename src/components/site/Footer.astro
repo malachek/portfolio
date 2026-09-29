@@ -55,7 +55,7 @@ const year = new Date().getFullYear();
     display: flex;
     justify-content: space-between;
     gap: 32px;
-    max-width: calc(var(--section-max) + 2 * var(--section-pad-x));
+    max-width: var(--frame-max);
     margin-inline: auto;
     padding-inline: var(--section-pad-x);
   }
@@ -92,7 +92,7 @@ const year = new Date().getFullYear();
   .site-footer__base a:hover { color: var(--text); }
 
   @media (max-width: 1279.98px) {
-    .site-footer__inner, .site-footer__base { max-width: 800px; }
+    .site-footer__inner, .site-footer__base { max-width: var(--frame-max); }
   }
   @media (max-width: 799.98px) {
     .site-footer__inner { flex-direction: column; gap: 24px; padding-block: 32px 24px; }

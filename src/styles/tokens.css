@@ -55,6 +55,9 @@
 
   /* ---- Layout --------------------------------------------------------- */
   --page-max: 1280px;
+  /* One frame for header, hero, homepage section headings and footer, so their
+     left edges line up. Padding inside it is --section-pad-x. */
+  --frame-max: 1280px;
   --section-max: 1080px;
   --section-pad-x: 64px;
   --content-max: 952px;       /* capsule width; section padding does the rest */
@@ -100,6 +103,7 @@
     --fs-code-link: 14px;
 
     --section-pad-x: 32px;
+    --frame-max: 800px;
     --content-max: 736px;
     --text-w: 100%;
     --list-w: 100%;
@@ -123,6 +127,7 @@
     --fs-chip: 12px; /* Figma Sites renders 10; 12 is the legibility floor */
     --fs-code-link: 12px;
 
+    --frame-max: 100%;
     --section-pad-x: 24px; /* phone gutters: more breathing room than the file's 16 */
     --content-max: 100%;
     --capsule-pad-x: 20px;

@@ -67,8 +67,16 @@ export async function resolveProject(slug: string, roleId: string): Promise<(Pro
   const ov = await getOverlay(slug, roleId);
   if (!ov) return undefined;
 
-  const { sections: order, hideBlocks = [], sectionOverrides = {}, blockOverrides = {}, extraSections = [], ...fields } = ov;
+  const { sections: order, hideBlocks = [], sectionOverrides = {}, blockOverrides = {}, extraSections = [], roleTitle, ...fields } = ov;
   const merged = merge(base, fields) as Project;
+
+  // Per-role job title: swap the Role row and the same words in the hero lines.
+  if (roleTitle && merged.overview) {
+    const row = merged.overview.rows.find((r) => r.label === 'Role');
+    const old = row?.value;
+    merged.overview = { ...merged.overview, rows: merged.overview.rows.map((r) => (r.label === 'Role' ? { ...r, value: roleTitle } : r)) };
+    if (old && merged.hero) merged.hero = { ...merged.hero, lines: merged.hero.lines.map((l) => l.replace(old, roleTitle)) };
+  }
 
   let sections = base.sections.map((s) => {
     const o = sectionOverrides[s.id];

@@ -1,6 +1,7 @@
 ---
 # the-fallen on the design site. Only what differs from _base.md goes here.
 # Card bullets: 6-2 [3]; the first two are marked strongest / mandatory in the entry.
+roleTitle: Combat & Systems Designer   # from the design resume
 sections:
 - project-description
 - design
