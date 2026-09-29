@@ -1,0 +1,1094 @@
+{
+  "path": "/the-fallen",
+  "title": "Malachy Kennedy (malachek) — UE5/C++ Gameplay Engineer | Shipped on Steam, Burnt Out Games",
+  "description": "Two shipped Steam titles and a third approved for release. C++ combat systems, animation pipelines, and engine-level tooling in Unreal Engine 5 and Unity 6.",
+  "ogImage": "https://malachek.com/_assets/v11/fbd26f77b1c0249258a43c8cfc29baa04b039aa9.png",
+  "blocks": [
+    {
+      "t": "p",
+      "text": "Skip to main content",
+      "font": "ui-sans-serif 400 16px",
+      "href": null
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536",
+      "poster": null,
+      "alt": null,
+      "w": 1280,
+      "h": 320
+    },
+    {
+      "t": "display",
+      "text": "The Fallen",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "Action RPG combat kit built in one week, tuned to shipped-game feel.",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Combat Engineer & Designer · Solo-programmed all player combat on a team of 8",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "p",
+      "text": "Unreal Engine 5.8, C++, GAS · UniJam 2026",
+      "font": "Roboto:Regular 400 20px",
+      "href": "https://vgdc-uci.com"
+    },
+    {
+      "t": "media",
+      "kind": "img",
+      "src": "https://malachek.com/_assets/v11/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png?w=256",
+      "poster": null,
+      "alt": "Burning Out Logo",
+      "w": 237,
+      "h": 189
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "display",
+          "text": "Project Overview",
+          "font": "Jersey 10:Regular 400 48px"
+        },
+        {
+          "t": "p",
+          "text": "Type",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Genre",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Role",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Duration",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Engine",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Tools",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Status",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Game Jam · 8 developers",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Action RPG Combat Demo",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Combat Engineer & Designer",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Jun 2026 - July 2026 (1 week)",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Unreal Engine 5.8",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "C++, Blueprints, GAS, Perforce",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Released on itch.io",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "iframe",
+          "src": "https://itch.io/embed/4796957"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Project Description",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The Fallen is an action RPG combat kit I built in one week for UniJam 2026.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The genre I was pulling from gives you variety by swapping characters mid-fight, and the more characters there are the more that compounds. I wanted it out of one character, which meant everything had to fit in a single kit and stay interesting for a whole fight instead of a four-second window.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "I wondered... how hard could it be? (Spoiler: it was hard, but I got them all in, and they feel pretty damn good.)",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "References: Genshin Impact's systems, Zenless Zone Zero's feel and its stagger meter, League of Legends' kit complexity, Dislyte's interactions, Infinity Blade's progression.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/2b11a8062517fd5f4ee7822fab28170affa696d8",
+          "poster": null,
+          "alt": null,
+          "w": 888,
+          "h": 499
+        },
+        {
+          "t": "p",
+          "text": "C++ targeting, anim warping, direction camera shake, kockback",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Animation cancelling is the core of the whole thing. My special doubles as an attack-chain reset, so pressing it keeps you attacking.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Add input buffering and two continuation windows on top, and the order you press things in becomes a real decision.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "On top of that is game feel with directional hitstop to give impact and visceral immersion into the game.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "I also rewrote GAS’s damage pipeline in C++ for a large variety of stats to create variety in player builds and playstyles.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/16e5e08f9add5cf8188c2ca78020fe071cbd284b",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Directional hitstop and cancel windows",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/7a2a5e02af751cc339118cd4832071912950dd70",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Ultimate State",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/f626bfff7116dddffce8bb0fda79cab97f633813",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Combo sequence",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "I solo-programmed all player combat and core game logic, plus the hooks for UI, audio and VFX, and worked with the AI programmer on special interactions.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "What I Built",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "p",
+      "text": "Solo-programmed all player combat on a team of 8. One week.",
+      "font": "Roboto:Regular 400 20px"
+    },
+    {
+      "t": "sub",
+      "text": "Damage and Stats",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "I rewrote GAS’s damage pipeline to account for custom interactions and complex systematic interactions.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "Rewrote the GAS damage pipeline in C++: custom damage types, formula-driven resolution, layered modifiers, split callbacks",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Nine derived stats over four exposed resources: health, stamina, energy, daze",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Diminishing-returns curves on every scaling stat",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Pierce: percentage defense ignore, plus on-hit decay damage scaled to enemy max health",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Impact: flat-to-daze conversion on direct hits only, damage-over-time excluded",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Dark Proficiency and Dark Mastery: scaling into decaying targets and into ultimate lifesteal",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Crit chance, crit damage, attack speed, defense, magic damage and energy recharge, all through the same pipeline",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/4a984b7cfbd967c42443d2284968b717a01196a2",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Standard damages",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "img",
+          "src": "https://malachek.com/_assets/v11/06805e885a08d8a4a63fcaec558b72a4fe7969a0.png",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "← Stats in this",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Dark on Dark interaction",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "p",
+      "text": "The design problem all of the above was built to answer (and solve).",
+      "font": "Roboto:Regular 400 20px"
+    },
+    {
+      "t": "sub",
+      "text": "Animation System & Feel",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Where the variety comes from. Input-driven Animation System.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "Four-hit chain into charged attack, special and ultimate, sequenced through AnimNotify hitboxes",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Input buffering: inputs sent mid-action queue and fire the instant recovery ends",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Attack stringing with two continuation windows and dynamic blending by input timing",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Animation cancelling into charged, special, ultimate and dash-sprint ↓",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Cancel windows on specific frames",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Timeout-driven reset to neutral on a dropped combo",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Hitstop with per-attack-type durations, tripled on dark-imbued hits",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Directional camera shake oriented to the swing, differing for punch, kick, sword and elemental",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Invulnerability frames on dodge and on specific ability startups",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Parry and dodge windows with time dilation and a damage bonus",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/17de6c169858c7c638b78c555e1d4d0a24782f2e",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Animation Cancelling Attack with Ability into Attack",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/e483936287537041290b8ce91483c0deed50d0a6",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Standard Attack Chain",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/3fddefcc065b9dd29801ef3a3e43b93a8287e11e",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Directional Hitstop and Camera Shake & Zoom",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Status Systems",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "What decides which route through the kit is right for this enemy.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "Decay : A damage-over-time debuff that re-resolves the entire kit against that target, with bonus dark damage scaling off current health, energy returned on dark damage, healing on kill, and mass detonation by the ultimate",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Daze: a stagger meter. Stuns at max, increases damage taken, strips 50% defense, doubles pierced damage. Mine is the implementation and the tuning.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Impact-to-daze values tuned per attack, per ability and per interaction",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "The two fed from deliberately separate stats, so both stay worth building",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/e9579fff6b7d174be741e9c179d34480e75c768c",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Decay",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Dark Attack on Decaying Enemy",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/5067a4afd95e78db1e90298e025300b1e834fce8",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Stunning Enemy with Daze",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Abilities & Targeting",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "An ability has to give value and variety to the kit.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "Special ability doubling as an auto-attack reset",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Ultimate: detonates every active decay instance, refunds energy per pop, then drains health and converts all dark damage to lifesteal; self-extending on correct sequencing, early recast refunds health equal to decay damage dealt",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "C++ targeting that blends player movement into attacks with custom anim warping",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Knockback resolution reading the direction of the hit",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Charged attack doubles as an accessible ability at the cost of time, with a reward of critting on dash, and parrying enemy attacks.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/38cee28fab7dc99050b3b414ec33ed4e4e4be10e",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Ultimate Ability State",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/bebceacd2f77e6cfb1ff7834d60bf5ec11afe87a",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Anim Warping",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/be45ff33f9f0a78fd2644a1f9a59938b04ccd110",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Charged Attack Parry",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Architecture",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Seven people building against combat without breaking it",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "li",
+          "text": "C++ combat core bridged to Blueprint with typed callbacks used to spawn damage numbers consistently",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "C++ classes for UI hooks to optimize stat check calls and provide to UI Designer",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Cooldowns, lifesteal and deferred damage kept consistent across every system",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Data Structures to store player and enemy stats to test scaling",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Save system to save and load player stats as they progress run-to-run",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "li",
+          "text": "Designers could build against combat without being able to break it",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Breakdowns",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "sub",
+      "text": "How one character can hold the field (animations)",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The challenge was one character, and the genre I was borrowing from builds variety by swapping. So the variety had to come from somewhere else, and at its core it came from the animation system.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "A basic attack is committed. An ability is not. The basic chain cancels on any non-basic input, and my special doubles as an attack-chain reset, so pressing it puts you back at the start of the chain instead of waiting out the animation. That's the Eula's-E pattern, and it means an ability is an animation-layer decision before it's a damage decision.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Once cancelling exists, the order and timing of your inputs changes your output, not just your stat sheet. Input buffering queues anything sent mid-action and fires it the instant recovery ends. Two continuation windows blend the chain differently depending on when you press. Cancel windows open on specific frames into dash, special or ultimate.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "So there isn't one optimal rotation, there are several valid routes through the same kit.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/e483936287537041290b8ce91483c0deed50d0a6",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Standard Combo Chain",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/60949edc904ff94b8d3bddc4bf5468def5d6b389",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Standard Combo Chain with Input Buffering",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/e7b50b970e9efc3704779826d6f71115f31b04a6",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Hitboxes authored on the timeline",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "sub",
+      "text": "Decay & Daze",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The systems layer on top of cancelling. It decides which of those routes is right for the enemy in front of you.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Daze is a stagger meter inspired by ZZZ’s. It fills as the enemy takes damage based on the applying attack/ability, stuns at max, raises damage taken, strips half their defense and doubles pierced damage. What is mine there is the implementation and the tuning, which is most of the work in practice.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Decay is a custom system I built for The Fallen when designing the Dark element and how it should play as a hypercarry. Decay is a damage-over-time debuff that changes what the rest of the kit does to a target: bonus dark damage scaling off current health, energy returned on dark damage, healing on kill, and every active instance detonated at once by the ultimate. Nothing in the kit resolves the same way against a decaying enemy as against a healthy one.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The interaction between the two is the part I spent the most time on. Impact converts a flat number into daze on direct hits only, and decay's damage-over-time is deliberately immune to it, so stacking Impact rewards on-hit pressure and stacking Dark Proficiency rewards applying decay and letting it tick. Neither can double-dip into the other, so both stay worth building.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "That closes the loop. Attack speed feeds daze, daze opens a window pierce exploits, pierce adds decay damage, decay returns energy, energy pays for the ultimate, and the ultimate detonates decay.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/4a984b7cfbd967c42443d2284968b717a01196a2",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Attack + Decay Attack",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/e9579fff6b7d174be741e9c179d34480e75c768c",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Decay DOT",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "media",
+          "kind": "video",
+          "src": "https://malachek.com/_videos/v1/5067a4afd95e78db1e90298e025300b1e834fce8",
+          "poster": null,
+          "alt": null,
+          "w": 274,
+          "h": 154
+        },
+        {
+          "t": "p",
+          "text": "Daze to Stun",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Design",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "sub",
+      "text": "Designing Variety into One Character",
+      "font": "Roboto:Black 900 24px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The genre I wanted to explore hands the player variety through parties. Genshin, ZZZ and Dislyte build depth by swapping characters mid-rotation, and the more characters there are, the more that variety compounds.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "I wanted that depth inside one character.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "That constraint drove everything after it. If the player never swaps, every source of variety has to live in one kit, and that kit has to stay interesting for a whole fight instead of a four-second window.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "What makes an ability feel like an ability",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "An ability is an attack that can't behave like one. It can't be spammable, it needs a reason to press that a basic attack never needs, and it has to give value to the kit and take value back out.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "In Genshin, players use Eula's E as an auto-attack reset rather than for its damage. That pattern holds across hypercarries built for high on-field uptime, which was my constraint exactly. So the ability earns its place inside the attack chain: pressing it keeps you attacking.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "That's an animation-layer mechanic. I wanted a systems layer on top of it.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "So what is dark, actually",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Genshin is my main inspiration, so the character needed an element. I picked dark, because I don't think games have really explored it.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Dark magic in film and books is a shadow, and shadow goes through things. So a dark attack should ignore the armor in front of it, and it should hinder what it hits. Pierce came straight out of that. For the hindering half I used a stagger meter, which is ZZZ's, not mine.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Pierce and a stagger meter alone still leave one optimal loop: some normals, cancel with E, cancel E with dash, repeat. So dark got Decay. That one is entirely my design: it changes how every later attack resolves against that target, and scales up as their health drops.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Now the ability does two things at once. It resets the chain in the animation layer and changes the target's state in the systems layer, and each makes the other worth doing.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "The fantasy the ultimate is for",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The dark overlord version of the power fantasy is specific: sacrifice your own life force to destroy theirs and take it for yourself. So the ultimate drains your health the whole time it's active, converts your dark damage to lifesteal, and pays you back at the end for every point of decay damage it dealt.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "Bundling the level-ups",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "The usual problem with stat upgrades is that one of them is always correct, so the pick isn't really a pick. So I bundled them: roughly 25 options, most granting a weighted mix of two or three stats. Taking the stat you want usually means taking something else with it, and there's no always-choose-crit answer.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Bundling gave me somewhere to put flavor, too. Once an option is a combination and not a number, it earns a name, and Damnate, Decayer and Pray can do lore work that \"Crit Rate +5%\" never could.",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "display",
+      "text": "Reception",
+      "font": "Jersey 10:Regular 400 48px"
+    },
+    {
+      "t": "capsule",
+      "items": [
+        {
+          "t": "p",
+          "text": "One week: a rewritten damage pipeline, a 4-hit chain with three ability tiers, two interacting status systems, nine derived stats, and an animation system with buffering, cancelling, hitstop, and i-frames. Tuned until it stopped feeling like a jam build.",
+          "font": "Roboto:Regular 400 20px"
+        },
+        {
+          "t": "p",
+          "text": "Outcome: A very proud team with the work we did. We all impressed ourselves and eachother :)",
+          "font": "Roboto:Regular 400 20px"
+        }
+      ]
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHY KENNEDY",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "PROJECTS",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "RESUME",
+      "font": "Roboto:Bold 700 14px",
+      "href": "/resume"
+    },
+    {
+      "t": "eyebrow",
+      "text": "OPEN TO SUMMER 2027 INTERNSHIPS AND NEW-GRAD GAMEPLAY ENGINEERING & DESIGN ROLES.",
+      "font": "Roboto:Bold 700 14px"
+    },
+    {
+      "t": "eyebrow",
+      "text": "MALACHYKENNEDY1@GMAIL.COM",
+      "font": "Roboto:Bold 700 14px",
+      "href": "mailto:malachykennedy1@gmail.com"
+    },
+    {
+      "t": "eyebrow",
+      "text": "GITHUB.COM/MALACHEK",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://github.com/malachek/"
+    },
+    {
+      "t": "eyebrow",
+      "text": "LINKEDIN.COM/IN/MALACHYKENNEDY",
+      "font": "Roboto:Bold 700 14px",
+      "href": "https://linkedin.com/in/malachykennedy/"
+    }
+  ]
+}
