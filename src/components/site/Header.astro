@@ -1,7 +1,7 @@
 ---
 /**
- * Site header, option H (chosen 2026-09-28).
- * Left: the role's job title as a small dropdown label, stacked over the name.
+ * Site header. Left: the name. Centre: the role's job title as a dropdown that
+ * switches role site (on phones it sits above the name).
  * The dropdown switches between the role sites (links carry data-lens so the
  * production Worker points them at each role's own host). Right: Projects,
  * Resume, GitHub, LinkedIn. Sticky, with a hairline under it.
@@ -36,8 +36,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
 ---
 <header class="site-header">
   <div class="site-header__inner">
-    <div class="brand">
-      {roles.length > 1 ? (
+    {roles.length > 1 ? (
         <details class="role" data-role-menu>
           <summary class="role__label">
             <span class="visually-hidden">Portfolio focus: </span>{current.data.jobTitle}
@@ -63,10 +62,9 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
           </div>
         </details>
       ) : (
-        <p class="role__label">{current.data.jobTitle}</p>
+        <p class="role role__label">{current.data.jobTitle}</p>
       )}
-      <a class="brand__name" href={homeHref}>{name}</a>
-    </div>
+    <a class="eyebrow brand__name" href={homeHref}>{name}</a>
     <nav class="site-header__nav" aria-label="Primary">
       <ul role="list">
         {nav.map((item) => (
@@ -86,7 +84,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
       </summary>
       <div class="navmenu__panel">
         <ul role="list">
-          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          {nav.map((item) => <li><a class="eyebrow" href={item.href}>{item.label}</a></li>)}
           <li class="navmenu__social">
             <a href={github} rel="me"><Icon name="github" size={20} /> GitHub</a>
             <a href={linkedin} rel="me"><Icon name="linkedin" size={20} /> LinkedIn</a>
@@ -123,34 +121,38 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     border-bottom: 1px solid rgb(255 255 255 / 0.08);
   }
   .site-header__inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: 'name role nav';
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    column-gap: 16px;
     height: 100%;
     max-width: var(--frame-max);
     margin-inline: auto;
     padding-inline: var(--section-pad-x);
   }
+  .site-header__nav, .navmenu { grid-area: nav; justify-self: end; }
 
-  /* ---- Brand: role label over the name ---- */
-  .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+  /* ---- Name: same type family as the nav, a step larger, in text colour.
+     (The pixel display face is kept for page and section headings.) ---- */
   .brand__name {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1;
+    grid-area: name;
+    justify-self: start;
+    font-size: 17px;
+    letter-spacing: 0.04em;
     color: var(--text);
     text-decoration: none;
     white-space: nowrap;
+    transition: color 120ms ease;
   }
-  .brand__name:hover { color: #fff; text-shadow: 0 0 18px color-mix(in srgb, var(--magenta) 60%, transparent); }
+  .brand__name:hover { color: #fff; }
 
-  .role { position: relative; }
+  /* ---- Role switcher: a centred pill ---- */
+  .role { grid-area: role; justify-self: center; position: relative; }
   .role__label {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin: 0;
     font: 700 12px/1 var(--font-body);
     letter-spacing: 0.08em;
@@ -161,20 +163,22 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   summary.role__label {
     list-style: none;
     cursor: pointer;
-    padding: 4px 6px;
-    margin: -4px -6px;
-    border-radius: 6px;
-    transition: background-color 120ms ease, color 120ms ease;
+    padding: 9px 14px;
+    border: 1px solid color-mix(in srgb, var(--magenta) 45%, transparent);
+    border-radius: 999px;
+    transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
   }
   summary.role__label::-webkit-details-marker { display: none; }
-  summary.role__label:hover { background: rgb(255 255 255 / 0.06); color: #f06ae4; }
+  summary.role__label:hover { background: rgb(255 255 255 / 0.05); color: #f06ae4; border-color: var(--magenta); }
+  .role[open] summary.role__label { background: rgb(255 255 255 / 0.06); border-color: var(--magenta); }
   .role__caret { transition: transform 150ms ease; }
   .role[open] .role__caret { transform: rotate(180deg); }
 
   .role__menu {
     position: absolute;
     top: calc(100% + 12px);
-    left: -6px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 30;
     min-width: 280px;
     padding: 8px;
@@ -231,7 +235,6 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     .site-header__nav ul { gap: 24px; }
   }
   @media (max-width: 799.98px) {
-    .brand__name { font-size: 24px; }
     .role__label { font-size: 11px; }
     .site-header__nav ul { gap: 16px; }
     .site-header__icons { gap: 14px; }
@@ -275,23 +278,33 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     border-radius: 8px;
     color: var(--text);
     text-decoration: none;
-    font: 700 15px/1 var(--font-body);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
   }
   .navmenu__panel a:hover { background: rgb(255 255 255 / 0.06); }
   .navmenu__social { display: flex; flex-direction: column; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgb(255 255 255 / 0.08); }
-  .navmenu__social a { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--nav); }
+  .navmenu__social a { font-size: 15px; color: var(--nav); }
+  .navmenu__panel a.eyebrow { color: var(--text); }
 
-  @media (max-width: 639.98px) {
+  /* The centred title needs equal side columns; below ~960px the links fold
+     into the hamburger so the title can stay centred. */
+  @media (max-width: 959.98px) {
     .site-header__nav { display: none; }
     .navmenu { display: block; }
-    .role__menu { min-width: min(280px, calc(100vw - 32px)); }
+  }
+  @media (max-width: 639.98px) {
+    /* Phones: the title sits above the name (plain label, no pill); menu on the right. */
+    .site-header__inner {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: 'role nav' 'name nav';
+      row-gap: 5px;
+      align-content: center;
+    }
+    .role { justify-self: start; }
+    summary.role__label { padding: 4px 6px; margin: -4px -6px; border: 0; border-radius: 6px; }
+    .role__label { font-size: 11px; }
+    .role__menu { left: -6px; transform: none; min-width: min(280px, calc(100vw - 32px)); }
+    .brand__name { font-size: 16px; }
   }
   @media (max-width: 399.98px) {
     .role__label { letter-spacing: 0.03em; }
-  }
-  @media (max-width: 349.98px) {
-    .brand__name { font-size: 21px; }
   }
 </style>

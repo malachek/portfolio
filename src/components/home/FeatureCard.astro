@@ -192,6 +192,8 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     outline-offset: 0;
     transition: background-color 160ms ease, outline-color 160ms ease;
   }
+  /* Concentric corners: 16px media + 12px padding = 28px ring. */
+  .fcard__media { border-radius: 28px; }
   .fcard__title a::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
   .fcard__cover { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
   .fcard__title a:focus-visible { outline: none; }
