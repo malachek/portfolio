@@ -178,3 +178,6 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 
 ## Git: commits happen on the Mac only (2026-09-30)
 - Claude's git commands from the linked VM corrupted the repo (objects were left as temp files because the shared folder can't delete, and moving those aside lost a blob). Repo was re-cloned as portfolio-clean. From now on Claude edits files only; Malachy commits and pushes from GitHub Desktop or Terminal.
+
+## Videos on R2 (2026-09-30)
+- All 30 videos that were still loading from the Figma site were copied to the R2 bucket `malachek-media` (key `live/<hash>.mp4`) and are served from https://media.malachek.com (bucket custom domain, connected by Malachy). Content now points there; none point at malachek.com/_videos any more, so the Figma site can go away after the DNS cutover without breaking video. Checked: all 30 load in the browser.
