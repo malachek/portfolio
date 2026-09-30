@@ -19,7 +19,9 @@ const a = site.about;
   <Section heading={a.heading} id="about" level={2}>
     <h1 class="visually-hidden">About {site.name}</h1>
     <Capsule class="about-intro">
-      <img class="about-intro__photo" src={a.portrait.src} alt={a.portrait.alt} width="651" height="700" />
+      <button type="button" class="about-intro__zoom" data-zoom aria-label={`View larger: ${a.portrait.alt}`}>
+        <img class="about-intro__photo" src={a.portrait.src} alt={a.portrait.alt} width="651" height="700" />
+      </button>
       <div class="about-intro__text">
         {a.intro.map((p) => <p>{p}</p>)}
       </div>
@@ -67,7 +69,9 @@ const a = site.about;
           {a.photos.map((ph) => (
             <li>
               <figure>
-                <img src={ph.src} alt={ph.alt} loading="lazy" />
+                <button type="button" class="photos__zoom" data-zoom aria-label={`View larger: ${ph.alt}`}>
+                  <img src={ph.src} alt={ph.alt} loading="lazy" />
+                </button>
                 {ph.caption && <figcaption>{ph.caption}</figcaption>}
               </figure>
             </li>
@@ -79,6 +83,16 @@ const a = site.about;
 </Base>
 
 <style>
+  .about-intro__zoom,
+  .photos__zoom { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 20px; }
+  .about-intro__zoom { flex: 0 0 auto; align-self: center; }
+  .photos__zoom { width: 100%; border-radius: 12px; }
+  .about-intro__zoom img,
+  .photos__zoom img { display: block; transition: opacity 150ms ease; }
+  .about-intro__zoom:hover img,
+  .photos__zoom:hover img { opacity: 0.88; }
+  .about-intro__zoom:focus-visible,
+  .photos__zoom:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   :global(.about-intro) { flex-direction: row !important; align-items: center; gap: 40px !important; }
   .about-intro__photo {
     flex: 0 0 300px;

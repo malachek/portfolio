@@ -21,14 +21,22 @@ interface Props {
   /** Rendered width in CSS px at desktop, used for srcset sizing. */
   sizes?: string;
   eager?: boolean;
+  /** Wrap the image in a button that opens the image viewer (Lightbox.astro). */
+  zoom?: boolean;
 }
 
-const { image, mp4, webm, poster, alt, caption, sizes = '(max-width: 799px) 100vw, 888px', eager = false } = Astro.props;
+const { image, mp4, webm, poster, alt, caption, sizes = '(max-width: 799px) 100vw, 888px', eager = false, zoom = false } = Astro.props;
 const isLocal = typeof image === 'object';
 ---
 <figure class="media">
   {mp4 ? (
     <Video mp4={mp4} webm={webm} poster={poster} label={alt} />
+  ) : image && zoom ? (
+    <button type="button" class="media__zoom" data-zoom aria-label={`View larger: ${alt}`}>
+      {isLocal
+        ? <Image src={image as ImageMetadata} alt={alt} widths={[360, 720, 1080, 1440, 2048]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} class="media__img" />
+        : <img src={image as string} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class="media__img" />}
+    </button>
   ) : isLocal ? (
     <Image
       src={image as ImageMetadata}
@@ -59,6 +67,19 @@ const isLocal = typeof image === 'object';
     aspect-ratio: 16 / 9;
     object-fit: contain; /* content fits; only backgrounds fill */
   }
+  .media__zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: zoom-in;
+    border-radius: 4px;
+  }
+  .media__zoom .media__img { display: block; transition: opacity 150ms ease; }
+  .media__zoom:hover .media__img { opacity: 0.88; }
+  .media__zoom:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   .media__placeholder {
     background: repeating-linear-gradient(45deg, #1a2140 0 12px, #141a33 12px 24px);
     border: 1px dashed var(--border);

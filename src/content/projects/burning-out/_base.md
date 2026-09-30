@@ -12,8 +12,8 @@ hero:
     - Co-op horror maze escape, lit and lived only by sharing fire.
     - Gameplay & Network Engineer · 7 core developers · Unity 6, Mirror Networking
     - Shipped on Steam, the studio's first release
-  background: https://malachek.com/_assets/v11/f700424867b8be9c9457bdccc5e522d4f83863a6.png
-  logo: https://malachek.com/_assets/v11/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png?w=256
+  background: /art/live/f700424867b8be9c9457bdccc5e522d4f83863a6.png.png
+  logo: /art/live/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png-w256.png
   logoAlt: Burning Out Logo
 overview:
   heading: Project Overview
@@ -82,15 +82,15 @@ sections:
         cols: 3
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/85d884655a3b88c20276494b61c5e5960337ed91.png
+            src: /art/live/85d884655a3b88c20276494b61c5e5960337ed91.png.gif
             alt: "Burning Out: Pick-Up & Light"
             caption: Pick-Up & Light
           - kind: image
-            src: https://malachek.com/_assets/v11/e72927781df4f58d88516a90dc2c3e8f7fdb8697.png
+            src: /art/live/e72927781df4f58d88516a90dc2c3e8f7fdb8697.png.gif
             alt: "Burning Out: Dominance Swap & Drop"
             caption: Dominance Swap & Drop
           - kind: image
-            src: https://malachek.com/_assets/v11/8ad59aa08a8e38124ce839a36bcf7f4178605485.png
+            src: /art/live/8ad59aa08a8e38124ce839a36bcf7f4178605485.png.gif
             alt: "Burning Out: Fire Sharing"
             caption: Fire Sharing
       - id: systems-and-network-engineering
@@ -123,10 +123,10 @@ sections:
         cols: 2
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/bc190e277b256de7cbb769e624d0657634d417d8.png?w=512
+            src: /art/live/bc190e277b256de7cbb769e624d0657634d417d8.png-w512.png
             alt: "Burning Out: gameplay"
           - kind: image
-            src: https://malachek.com/_assets/v11/fccf4c50f5f1686f0741cd81f59d4092ce1d9fcd.png?w=512
+            src: /art/live/fccf4c50f5f1686f0741cd81f59d4092ce1d9fcd.png-w512.png
             alt: "Burning Out: gameplay"
   - id: design
     heading: Design
@@ -168,12 +168,12 @@ card:
   - 'Shipped on Steam: the studio''s first release, and the reason Burnt Out Games exists.'
   - Designed a networked inventory on Mirror with custom OOP containers and item templates, keeping item state consistent across clients.
   - 'Built the torch-and-fire system as the tension mechanic: dynamic lighting, flame behavior, and torchwood burndown.'
-  background: https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
+  background: /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.png.png
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/85d884655a3b88c20276494b61c5e5960337ed91.png
+    src: /art/live/85d884655a3b88c20276494b61c5e5960337ed91.png.gif
     alt: 'Burning Out: Co-op horror maze escape, lit and lived only by sharing fire.'
-  logo: https://malachek.com/_assets/v11/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png?w=128
+  logo: /art/live/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png-w128.png
   blurb: Co-op horror maze escape, lit and lived only by sharing fire.
   category: Game Project
   dates: Jan 2025 - Sep 2026

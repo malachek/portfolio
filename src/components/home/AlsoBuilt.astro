@@ -1,15 +1,16 @@
 ---
 /**
- * "Also Built" band (Figma 1:2127): a label, a grid of small cards (Figma
- * "Content", 1:4444) and an optional closing link. 3 across on desktop and
- * tablet, 2 across on phones, each tinted with its own accent. A card with a
- * page (or a single outside link) is clickable as a whole.
+ * "Also Built" band: a label, then wide, short capsules with the clip or image
+ * on one side and the text on the other. Two across on wide screens, one across
+ * below. A project with a page of its own gets a See More button and the whole
+ * capsule links to it; one with only an outside link links there.
  * No date on the label: the band spans many projects, so one range misleads.
  */
 import type { ImageMetadata } from 'astro';
 import Icon from '@/components/icons/Icon.astro';
 import type { IconName } from '@/components/icons/icons';
 import Media from '@/components/media/Media.astro';
+import LinkPill from '@/components/project/LinkPill.astro';
 
 export interface SmallCard {
   title: string;
@@ -35,20 +36,23 @@ const { label = 'Also Built', cards, more } = Astro.props;
     {cards.map((c) => {
       const main = c.href ?? (c.links?.length === 1 ? c.links[0].href : undefined);
       return (
-      <li class:list={['scard', { 'scard--link': main }]} style={`--accent:${c.accent}`}>
-        <div class="scard__media">
-          {c.media ? <Media {...c.media} sizes="(max-width: 799px) 50vw, 374px" /> : <div class="scard__blank" />}
-        </div>
-        <div class="scard__body">
-          <div class="scard__titlebar">
-            <h3 class="scard__title">{main ? <a class="scard__main" href={main} rel={c.href ? undefined : 'noopener'}>{c.title}</a> : c.title}</h3>
-            {c.links?.map((l) => (
-              <a class="scard__icon" href={l.href} rel="noopener"><Icon name={l.icon} size={24} label={l.label} /></a>
-            ))}
+        <li class:list={['wcard', { 'wcard--link': main }]} style={`--accent:${c.accent}`}>
+          <div class="wcard__media">
+            {c.media ? <Media {...c.media} sizes="(max-width: 799px) 40vw, 220px" /> : <div class="wcard__blank" />}
           </div>
-          <p class="scard__blurb">{c.blurb}</p>
-        </div>
-      </li>
+          <div class="wcard__body">
+            <div class="wcard__titlebar">
+              <h3 class="wcard__title">{main ? <a class="wcard__main" href={main} rel={c.href ? undefined : 'noopener'}>{c.title}</a> : c.title}</h3>
+              {c.links?.map((l) => (
+                <a class="wcard__icon" href={l.href} rel="noopener"><Icon name={l.icon} size={22} label={l.label} /></a>
+              ))}
+            </div>
+            <p class="wcard__blurb">{c.blurb}</p>
+            {c.href && (
+              <div class="wcard__cta"><LinkPill href={c.href} size="sm" color={c.accent}>See More<span class="visually-hidden"> about {c.title}</span></LinkPill></div>
+            )}
+          </div>
+        </li>
       );
     })}
   </ul>
@@ -62,78 +66,78 @@ const { label = 'Also Built', cards, more } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    padding: 24px 64px;
+    gap: 20px;
+    padding: 28px 0 36px;
     background:
       linear-gradient(rgb(1 2 16 / 0.85), rgb(1 2 16 / 0.85)),
       radial-gradient(ellipse 64% 50% at 50% 50%, #cc69d5 0%, #9f6ce5 50%, #716ef4 100%);
     color: #fff;
   }
-  .also__label {
+  /* Label and grid sit on the same frame as the header and headings. */
+  .also__label,
+  .also__grid {
     width: 100%;
-    max-width: 1152px;
+    max-width: var(--frame-max);
+    padding-inline: var(--section-pad-x);
+  }
+  .also__label {
+    margin: 0;
     font-size: var(--fs-body);
-    font-weight: 400;
+    font-weight: 700;
     line-height: var(--lh-compact);
   }
   .also__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 368px));
-    justify-content: center;
-    gap: 24px;
-    width: 100%;
-    max-width: 1152px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
-  .scard {
+
+  .wcard {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-width: 0;
-    transition: box-shadow 150ms ease, background-color 150ms ease;
-    padding-bottom: 8px;
-    overflow: clip;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    padding: 12px;
     border: 2px solid var(--accent);
-    border-radius: 32px;
+    border-radius: 24px;
     background: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), var(--accent);
+    transition: box-shadow 150ms ease, background-color 150ms ease;
   }
-  .scard__media { position: relative; height: 179px; overflow: clip; background: rgb(0 0 0 / 0.35); }
-  .scard__media :global(.media) { gap: 0; height: 100%; }
-  .scard__media :global(.media__img),
-  .scard__media :global(.clip),
-  .scard__media :global(.media__placeholder) { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
-  .scard__blank { height: 100%; }
-  .scard__body { padding: 0 12px 8px; display: flex; flex-direction: column; gap: 4px; }
-  .scard__titlebar { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 12px; min-height: 36px; }
-  .scard__main::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: 30px; }
-  .scard__main:focus-visible { outline: none; }
-  .scard__main:focus-visible::after { outline: 3px solid var(--text); outline-offset: 3px; }
-  .scard__icon { position: relative; z-index: 2; flex: none; }
-  .scard--link:hover { box-shadow: 0 0 0 2px var(--accent), 0 8px 24px rgb(0 0 0 / 0.35); background: linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)), var(--accent); }
-  .scard--link:hover .scard__title a { text-decoration: underline; text-underline-offset: 3px; }
-  .scard__title { font-weight: 700; font-size: var(--fs-body); line-height: var(--lh-prose); text-align: center; }
-  .scard__title a { text-decoration: none; }
-  .scard__icon { display: inline-flex; color: #fff; }
-  .scard__blurb { text-align: center; font-size: var(--fs-body); line-height: var(--lh-prose); }
-  .also__more { padding: 12px 0 24px; color: var(--text); font-size: var(--fs-body); text-align: center; }
+  .wcard__media { position: relative; aspect-ratio: 16 / 10; border-radius: 14px; overflow: clip; background: rgb(0 0 0 / 0.45); }
+  .wcard__media :global(.media) { gap: 0; height: 100%; }
+  .wcard__media :global(.media__img),
+  .wcard__media :global(.clip),
+  .wcard__media :global(.media__placeholder) { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
+  .wcard__blank { height: 100%; }
+  .wcard__body { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; padding-right: 6px; }
+  .wcard__titlebar { display: flex; align-items: center; gap: 10px; }
+  .wcard__title { margin: 0; font-weight: 700; font-size: var(--fs-body); line-height: 1.25; }
+  .wcard__title a { text-decoration: none; }
+  .wcard__main::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: 22px; }
+  .wcard__main:focus-visible { outline: none; }
+  .wcard__main:focus-visible::after { outline: 3px solid var(--text); outline-offset: 3px; }
+  .wcard__icon { position: relative; z-index: 2; display: inline-flex; flex: none; color: #fff; }
+  .wcard__cta { position: relative; z-index: 2; margin-top: 4px; }
+  .wcard__blurb { margin: 0; font-size: 16px; line-height: 1.45; color: var(--text); }
+  .wcard--link:hover { box-shadow: 0 0 0 2px var(--accent); background: linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)), var(--accent); }
+  .wcard--link:hover .wcard__title a { text-decoration: underline; text-underline-offset: 3px; }
+  .also__more { padding: 4px var(--section-pad-x) 0; color: var(--text); font-size: var(--fs-body); text-align: center; }
 
   @media (max-width: 1279.98px) {
-    .also { padding-inline: 16px; }
-    .scard { gap: 12px; padding-bottom: 4px; }
-    .also__grid { grid-template-columns: repeat(3, minmax(0, 240px)); }
-    .scard__media { height: 128px; }
-    .scard__body { padding-inline: 8px; }
-    .scard__titlebar :global(svg) { width: 20px; height: 20px; }
+    .also__grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 799.98px) {
-    .also { padding-inline: var(--section-pad-x); }
-    .also__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .scard { gap: 6px; border-radius: 24px; }
-    .scard__main::after { border-radius: 22px; }
-    .scard__media { height: auto; aspect-ratio: 16 / 9; }
-    .scard__title, .scard__blurb { font-size: 15px; }
-    .scard__body { padding-inline: 6px; }
-    .scard__titlebar { gap: 6px; }
-    .scard__titlebar :global(svg) { width: 18px; height: 18px; }
+    .also { padding-block: 24px 28px; }
+    .also__grid { gap: 12px; }
+    .wcard { grid-template-columns: 132px minmax(0, 1fr); gap: 12px; padding: 10px; border-radius: 20px; }
+    .wcard__main::after { border-radius: 18px; }
+    .wcard__media { border-radius: 12px; }
+    .wcard__title { font-size: 16px; }
+    .wcard__blurb { font-size: 14px; }
+  }
+  @media (max-width: 419.98px) {
+    .wcard { grid-template-columns: 1fr; }
+    .wcard__media { aspect-ratio: 16 / 9; }
   }
 </style>

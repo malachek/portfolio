@@ -12,8 +12,8 @@ hero:
     - Action RPG combat kit built in one week, tuned to shipped-game feel.
     - Combat Engineer & Designer · Solo-programmed all player combat on a team of 8
     - Unreal Engine 5.8, C++, GAS · UniJam 2026
-  background: https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
-  logo: https://malachek.com/_assets/v11/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png?w=256
+  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
+  logo: /art/live/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png-w256.png
 overview:
   heading: Project Overview
   rows:
@@ -111,7 +111,7 @@ sections:
             alt: "The Fallen: Standard damages"
             caption: Standard damages
           - kind: image
-            src: https://malachek.com/_assets/v11/06805e885a08d8a4a63fcaec558b72a4fe7969a0.png
+            src: /art/live/06805e885a08d8a4a63fcaec558b72a4fe7969a0.png.png
             alt: "The Fallen: ← Stats in this"
             caption: ← Stats in this
           - kind: video
@@ -358,12 +358,12 @@ card:
   - 'Built the animation system the kit runs on: input buffering, two continuation windows, cancel windows on specific frames, and AnimNotify hitboxes.'
   - Rewrote the GAS damage pipeline in C++ so a single hit resolves differently by attack type, target state, and what landed before it.
   - Designed Decay, a status that re-resolves every later attack against its target, over 9 derived stats on diminishing-returns curves.
-  background: https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
+  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/7b823eb48ccbe1e948493a81dd054c86f4a48f06.png
+    src: /art/live/7b823eb48ccbe1e948493a81dd054c86f4a48f06.png.gif
     alt: 'The Fallen: Action RPG combat kit built in one week, tuned to shipped-game feel.'
-  logo: https://malachek.com/_assets/v11/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png?w=128
+  logo: /art/live/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png-w128.png
   blurb: Action RPG combat kit built in one week, tuned to shipped-game feel.
   category: Game Jam
   dates: Jun 2026 - Jul 2026

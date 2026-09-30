@@ -1,5 +1,5 @@
 ---
-# Search Engine: write-up page drafted 2026-09-26 from master/06-projects/6-11. Shown as a page only on the software role (other roles: page: false in their overlay). No code is published.
+# Search Engine: write-up from master/06-projects/6-11 plus the crawl report in the team repo (2026-09-29). Page on dev, tools and software. No code is published.
 title: Web Crawler & Search Engine
 accent: '#5A565F'
 path: /search-engine
@@ -41,8 +41,9 @@ sections:
         cols: 1
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png?w=512
+            src: /art/live/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png-w512.png
             alt: "The search engine's results page"
+            caption: The search interface (built by a teammate)
   - id: what-i-built
     heading: What I Built
     blocks:
@@ -71,6 +72,17 @@ sections:
         items:
           - "Domain scoping, politeness delays, and defenses against spider traps, infinite calendar loops, and query-parameter explosions"
           - "Exact duplicate detection with MD5 content hashing, plus length-based filtering of low-value pages before they reach the index"
+          - "Trap rules from what the crawl actually hit: calendar and event pages, iCal links, URLs over 300 characters, and URLs carrying too many query parameters"
+          - "Size and content limits: pages over 2 MB are skipped, and pages under 50 words never reach the index"
+  - id: crawl
+    heading: The Crawl
+    blocks:
+      - id: crawl-text
+        type: text
+        md: |-
+          The crawler covered UCI's ICS web domains and found 6,708 unique pages. The longest held 24,983 words.
+
+          Most of the work was deciding what not to crawl. Calendars, event listings and search pages can generate endless near-identical URLs, so each rule above came from a trap the crawler walked into.
 card:
   kind: project
   category: Team Project
@@ -86,10 +98,10 @@ card:
   - Team of 4; I built everything except the UI.
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png?w=512
+    src: /art/live/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png-w512.png
     alt: Search engine results page
   blurb: Search engine and web crawler over 6,700+ pages.
 small:
   blurb: TF-IDF inverted index. Python.
-  image: https://malachek.com/_assets/v11/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png?w=512
+  image: /art/live/74a23f142bbb0792c91d030e7f21f10bbcbcc276.png-w512.png
 ---

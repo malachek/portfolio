@@ -1,0 +1,280 @@
+---
+/**
+ * Image viewer. Any <button data-zoom> wrapping an <img> opens it here, full
+ * screen, with its caption. Included once, in Base.astro.
+ *
+ * Zoom: click or double-tap toggles 1x / 2.5x at that point; wheel or pinch
+ * zooms smoothly; drag pans while zoomed; + / - / 0 on the keyboard.
+ * Browse: arrows, swipe (at 1x), or the side buttons, across every zoomable
+ * image on the page. Close: Esc, the X, or a click on the dark backdrop.
+ */
+---
+<dialog class="lb" aria-label="Image viewer" data-lb>
+  <div class="lb__stage" data-lb-stage>
+    <img class="lb__img" data-lb-img alt="" draggable="false" />
+  </div>
+  <div class="lb__bar lb__bar--top">
+    <span class="lb__count" data-lb-count aria-live="polite"></span>
+    <div class="lb__tools">
+      <button type="button" class="lb__btn" data-lb-out aria-label="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+      <button type="button" class="lb__btn" data-lb-in aria-label="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button type="button" class="lb__btn" data-lb-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <button type="button" class="lb__btn lb__nav lb__nav--prev" data-lb-prev aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="lb__btn lb__nav lb__nav--next" data-lb-next aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <p class="lb__caption" data-lb-caption></p>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lb]');
+  if (dlg) {
+    const q = <T extends Element>(s: string) => dlg.querySelector(s) as T;
+    const stage = q<HTMLDivElement>('[data-lb-stage]');
+    const img = q<HTMLImageElement>('[data-lb-img]');
+    const cap = q<HTMLParagraphElement>('[data-lb-caption]');
+    const count = q<HTMLSpanElement>('[data-lb-count]');
+    const prevB = q<HTMLButtonElement>('[data-lb-prev]');
+    const nextB = q<HTMLButtonElement>('[data-lb-next]');
+    const MAX = 5, STEP = 2.5;
+
+    let items: HTMLButtonElement[] = [];
+    let i = 0, s = 1, x = 0, y = 0;
+    let opener: HTMLElement | null = null;
+
+    const apply = (animate = false) => {
+      img.style.transition = animate ? 'transform 180ms ease' : 'none';
+      img.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+      dlg.classList.toggle('is-zoomed', s > 1.01);
+    };
+    // Keep the zoomed image covering the view: no panning past its edges.
+    const clamp = () => {
+      const w = img.offsetWidth * s, h = img.offsetHeight * s;
+      const mx = Math.max(0, (w - stage.clientWidth) / 2), my = Math.max(0, (h - stage.clientHeight) / 2);
+      x = Math.min(mx, Math.max(-mx, x));
+      y = Math.min(my, Math.max(-my, y));
+    };
+    // Zoom to `ns`, keeping the screen point (cx, cy) fixed under the cursor.
+    const zoomAt = (ns: number, cx: number, cy: number, animate = false) => {
+      ns = Math.min(MAX, Math.max(1, ns));
+      const r = stage.getBoundingClientRect();
+      const px = cx - (r.left + r.width / 2), py = cy - (r.top + r.height / 2);
+      x = px - ((px - x) * ns) / s;
+      y = py - ((py - y) * ns) / s;
+      s = ns;
+      if (s === 1) { x = 0; y = 0; }
+      clamp(); apply(animate);
+    };
+    const center = () => { const r = stage.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+    const reset = () => { s = 1; x = 0; y = 0; apply(); };
+
+    const show = (n: number) => {
+      i = (n + items.length) % items.length;
+      const b = items[i];
+      const src = b.querySelector('img')!;
+      img.src = src.currentSrc || src.src;
+      // Swap to the largest candidate once known (Astro images carry a srcset).
+      const set = src.getAttribute('srcset');
+      if (set) {
+        const best = set.split(',').map((c) => c.trim().split(/\s+/)).sort((a, z) => parseInt(z[1]) - parseInt(a[1]))[0];
+        if (best?.[0]) img.src = best[0];
+      }
+      img.alt = src.alt;
+      const c = b.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || '';
+      cap.textContent = c;
+      cap.hidden = !c;
+      const many = items.length > 1;
+      count.textContent = many ? `${i + 1} / ${items.length}` : '';
+      prevB.hidden = nextB.hidden = !many;
+      reset();
+    };
+
+    const open = (b: HTMLButtonElement) => {
+      items = [...document.querySelectorAll<HTMLButtonElement>('[data-zoom]')];
+      opener = b;
+      show(items.indexOf(b));
+      document.documentElement.style.overflow = 'hidden';
+      dlg.showModal();
+    };
+    const close = () => dlg.close();
+    dlg.addEventListener('close', () => {
+      document.documentElement.style.overflow = '';
+      img.removeAttribute('src');
+      opener?.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('[data-zoom]');
+      if (b) { e.preventDefault(); open(b); }
+    });
+
+    q('[data-lb-close]').addEventListener('click', close);
+    // Clicks on the empty bars around the stage close too.
+    dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target === cap || (e.target as Element).classList.contains('lb__bar')) close(); });
+    prevB.addEventListener('click', () => show(i - 1));
+    nextB.addEventListener('click', () => show(i + 1));
+    q('[data-lb-in]').addEventListener('click', () => { const [cx, cy] = center(); zoomAt(s * 1.6, cx, cy, true); });
+    q('[data-lb-out]').addEventListener('click', () => { const [cx, cy] = center(); zoomAt(s / 1.6, cx, cy, true); });
+
+    dlg.addEventListener('keydown', (e) => {
+      const [cx, cy] = center();
+      if (e.key === 'ArrowLeft' && s === 1) show(i - 1);
+      else if (e.key === 'ArrowRight' && s === 1) show(i + 1);
+      else if (e.key === '+' || e.key === '=') zoomAt(s * 1.6, cx, cy, true);
+      else if (e.key === '-') zoomAt(s / 1.6, cx, cy, true);
+      else if (e.key === '0') { reset(); }
+      else return;
+      e.preventDefault();
+    });
+
+    stage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      zoomAt(s * Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0025)), e.clientX, e.clientY);
+    }, { passive: false });
+
+    // Pointer handling: tap toggles zoom, drag pans (zoomed) or swipes (1x),
+    // two fingers pinch. A tap on the backdrop (outside the picture) at 1x closes.
+    const pts = new Map<number, { x: number; y: number }>();
+    let start = { x: 0, y: 0, t: 0, sx: 0, sy: 0 };
+    let pinch = { d: 0, s: 1 };
+    let moved = false;
+    let closeOnClick = false;
+    stage.addEventListener('click', () => { if (closeOnClick) { closeOnClick = false; close(); } });
+    const dist = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y); };
+    const mid = () => { const [a, b] = [...pts.values()]; return [(a.x + b.x) / 2, (a.y + b.y) / 2]; };
+
+    stage.addEventListener('pointerdown', (e) => {
+      try { stage.setPointerCapture(e.pointerId); } catch {}
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 1) { start = { x: e.clientX, y: e.clientY, t: performance.now(), sx: x, sy: y }; moved = false; closeOnClick = false; }
+      if (pts.size === 2) { pinch = { d: dist(), s }; moved = true; }
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!pts.has(e.pointerId)) return;
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 2) { const [mx, my] = mid(); zoomAt(pinch.s * (dist() / pinch.d), mx, my); return; }
+      const dx = e.clientX - start.x, dy = e.clientY - start.y;
+      if (Math.hypot(dx, dy) > 6) moved = true;
+      if (s > 1) { x = start.sx + dx; y = start.sy + dy; clamp(); apply(); }
+      else if (moved) { img.style.transition = 'none'; img.style.transform = `translateX(${dx}px)`; }
+    });
+    const end = (e: PointerEvent) => {
+      if (!pts.has(e.pointerId)) return;
+      pts.delete(e.pointerId);
+      if (pts.size > 0) { const p = [...pts.values()][0]; start = { x: p.x, y: p.y, t: performance.now(), sx: x, sy: y }; return; }
+      const dx = e.clientX - start.x;
+      if (!moved) {
+        // Pointer capture makes the stage the target, so hit-test the picture itself.
+        const r = img.getBoundingClientRect();
+        const onImg = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (s > 1) zoomAt(1, e.clientX, e.clientY, true);
+        else if (onImg) zoomAt(STEP, e.clientX, e.clientY, true);
+        else closeOnClick = true; // close on the click that follows, so it can't fall through to the page
+      } else if (s === 1) {
+        if (Math.abs(dx) > 60 && items.length > 1) show(dx < 0 ? i + 1 : i - 1);
+        else apply(true);
+      }
+    };
+    stage.addEventListener('pointerup', end);
+    stage.addEventListener('pointercancel', end);
+    window.addEventListener('resize', () => { if (dlg.open) { clamp(); apply(); } });
+  }
+</script>
+
+<style>
+  .lb {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(1 2 16 / 0.94);
+    color: var(--text);
+    overflow: hidden;
+  }
+  .lb::backdrop { background: rgb(1 2 16 / 0.6); }
+  .lb[open] { display: block; animation: lb-in 160ms ease; }
+  @keyframes lb-in { from { opacity: 0; } }
+
+  .lb__stage {
+    position: absolute;
+    inset: 64px 16px 72px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+  }
+  .lb__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: zoom-in;
+    transform-origin: center;
+    will-change: transform;
+  }
+  .lb.is-zoomed .lb__img { cursor: grab; border-radius: 0; }
+  .lb.is-zoomed .lb__img:active { cursor: grabbing; }
+
+  .lb__bar {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px 0 24px;
+  }
+  .lb__count { font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.06em; color: var(--nav); }
+  .lb__tools { display: flex; gap: 8px; }
+  .lb__btn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.08);
+    color: var(--text);
+    cursor: pointer;
+    transition: background-color 120ms ease;
+  }
+  .lb__btn:hover { background: rgb(255 255 255 / 0.18); }
+  .lb__btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .lb__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .lb__btn[hidden] { display: none; }
+  .lb__nav { position: absolute; top: 50%; translate: 0 -50%; width: 52px; height: 52px; }
+  .lb__nav--prev { left: 16px; }
+  .lb__nav--next { right: 16px; }
+  .lb.is-zoomed .lb__nav { opacity: 0; pointer-events: none; }
+
+  .lb__caption {
+    position: absolute;
+    inset: auto 0 0;
+    min-height: 72px;
+    margin: 0;
+    padding: 12px var(--section-pad-x) 20px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--text-body);
+  }
+  .lb__caption[hidden] { display: none; }
+
+  @media (max-width: 799.98px) {
+    .lb__stage { inset: 60px 0 64px; }
+    .lb__nav { display: none; } /* swipe on phones and tablets */
+    .lb__caption { font-size: 15px; padding-inline: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lb[open] { animation: none; }
+  }
+</style>

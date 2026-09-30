@@ -9,7 +9,7 @@ import { buttonColors } from '@/lib/color';
 
 interface Props {
   href: string;
-  size?: 'code' | 'code-lg' | 'cta';
+  size?: 'code' | 'code-lg' | 'cta' | 'sm';
   /** Accent override, e.g. a project's own colour on home cards. */
   color?: string;
   external?: boolean;
@@ -43,6 +43,7 @@ const c = color ? buttonColors(color) : null;
   }
   .pill:hover { filter: brightness(1.12); }
   .pill--cta { font-size: var(--fs-body); white-space: nowrap; }
+  .pill--sm { padding: 5px 14px; font-size: 15px; white-space: nowrap; }
   .pill--code { font-size: var(--fs-code-link); overflow-wrap: break-word; text-align: left; }
   .pill--code-lg { padding: 8px 16px; font-size: var(--fs-body); line-height: var(--lh-prose); font-weight: 700; font-style: italic; overflow-wrap: anywhere; }
 </style>

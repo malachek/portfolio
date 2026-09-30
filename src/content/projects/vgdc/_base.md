@@ -12,7 +12,7 @@ hero:
     - North America's largest collegiate game development club.
     - President 2026 – Present · VGDC board since Jan 2024
     - 600+ yearly active members · 44 board members · 13 departments
-  logo: https://malachek.com/_assets/v11/19f4ece0d28ece85b041d544fa15d302c2f97ee6.png?w=256
+  logo: /art/live/19f4ece0d28ece85b041d544fa15d302c2f97ee6.png-w256.jpg
 overview:
   heading: Overview
   rows:
@@ -137,12 +137,12 @@ card:
   - Increased funding 106%, engagement 104% and attendance 57% through data-driven leadership.
   - Rewrote the constitution from 26 to 51 pages, defining departmental output and securing the funding increase.
   - Built Sheets and Apps Script tooling that turns internal planning into published views the club reads, with no second copy to maintain.
-  background: https://malachek.com/_assets/v11/b8d3b3d41c694befed1739793eab8c1eb439c412.png?w=1536
+  background: /art/live/b8d3b3d41c694befed1739793eab8c1eb439c412.png-w1536.png
   title: President
   org: Video Game Development Club at UCI
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/19f4ece0d28ece85b041d544fa15d302c2f97ee6.png?w=512
+    src: /art/live/19f4ece0d28ece85b041d544fa15d302c2f97ee6.png-w512.jpg
     alt: 'President: North America’s largest collegiate game development club. 600+ yearly members, 44 officers, 13 departments.'
   blurb: North America’s largest collegiate game development club. 600+ yearly members, 44 officers, 13 departments.
   category: Leadership Experience

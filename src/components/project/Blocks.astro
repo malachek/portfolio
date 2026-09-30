@@ -54,7 +54,7 @@ const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px
             {b.items.map((m) =>
               m.kind === 'video'
                 ? <Media mp4={m.src} poster={m.poster} alt={m.alt} caption={m.caption} />
-                : <Media image={m.src} alt={m.alt} caption={m.caption} sizes={mediaSizes[b.cols]} />,
+                : <Media image={m.src} alt={m.alt} caption={m.caption} sizes={mediaSizes[b.cols]} zoom />,
             )}
           </MediaRow>
         </Capsule>

@@ -1,4 +1,3 @@
 ---
-# pintos on the tools site: small card only. The write-up page is on the software site.
-page: false
+# pintos on the tools site: full page (design write-up; no code is published).
 ---

@@ -58,7 +58,13 @@ const devTasks = {
   name: 'dev-tasks',
   apply: /** @type {'serve'} */ ('serve'),
   configureServer(server) {
-    const allowed = { check: ['run', 'check'], build: ['run', 'build'], qa: ['run', 'qa'] };
+    const allowed = {
+      check: ['run', 'check'], build: ['run', 'build'], qa: ['run', 'qa'],
+      'media-scan': ['run', 'media:migrate', '--', 'scan'],
+      'media-setup': ['run', 'media:migrate', '--', 'setup'],
+      'media-images': ['run', 'media:migrate', '--', 'images'],
+      'media-videos': ['run', 'media:migrate', '--', 'videos'],
+    };
     server.middlewares.use('/__task', (req, res) => {
       const name = new URL(req.url ?? '', 'http://x').searchParams.get('name') ?? '';
       const args = allowed[/** @type {keyof typeof allowed} */ (name)];
@@ -88,6 +94,11 @@ export default defineConfig({
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   },
 });
+
+
+
+
+
 
 
 

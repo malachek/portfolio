@@ -13,7 +13,7 @@ hero:
     - Co-Founder & Game Engineer · 10 developers · Apr 2024 – Present
     - 2 shipped · 1 approved for release · Unreal Engine 5 · Unity 6
   pattern: /art/bog-pattern.jpg
-  logo: https://malachek.com/_assets/v11/587204184afaa85ff870c9759eddf2658e9344fd.png
+  logo: /art/live/587204184afaa85ff870c9759eddf2658e9344fd.png.png
 overview:
   heading: Overview
   rows:
@@ -168,7 +168,7 @@ card:
   pattern: /art/bog-pattern.jpg
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/587204184afaa85ff870c9759eddf2658e9344fd.png?w=512
+    src: /art/live/587204184afaa85ff870c9759eddf2658e9344fd.png.png?w=512
     alt: 'Co-Founder & Game Engineer: Professional Experience'
   category: Professional Experience
   dates: April 2024 - Present

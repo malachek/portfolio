@@ -11,6 +11,7 @@ hero:
     - First-person horror experience where the camcorder is your only light.
     - Engineer, Designer & Tech Artist · Team of 5 · Unreal Engine 5.7
     - Spring ZotJam 2026 · 72 hours
+  background: /art/night-walk/path.webp
 overview:
   heading: Project Overview
   rows:
@@ -38,11 +39,24 @@ sections:
           The camcorder is the only light source and the double-barrel shotgun is the only defense, so every look into the dark costs you your weapon.
       - id: project-description-media
         type: media
-        cols: 1
+        cols: 2
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/846f5c5a4d18e88e13060454a449403ca73d7d0c.png?w=512
-            alt: "Night Walk: the night-vision camcorder view"
+            src: /art/night-walk/forest.webp
+            alt: "Night Walk: a misty forest clearing under the stars"
+            caption: The forest at night
+          - kind: image
+            src: /art/night-walk/night-vision.webp
+            alt: "Night Walk: the camcorder's night-vision view in green"
+            caption: Camcorder night vision
+          - kind: image
+            src: /art/night-walk/camcorder.webp
+            alt: "Night Walk: the camcorder viewfinder with timer and battery"
+            caption: The camcorder viewfinder UI
+          - kind: image
+            src: /art/night-walk/path.webp
+            alt: "Night Walk: a trail winding into the fog"
+            caption: The trail into the fog
   - id: what-i-built
     heading: What I Built
     blocks:
@@ -87,7 +101,7 @@ sections:
         label: Play Night Walk on itch.io
 small:
   blurb: First person horror experience. UE5.7
-  image: https://malachek.com/_assets/v11/846f5c5a4d18e88e13060454a449403ca73d7d0c.png?w=512
+  image: /art/night-walk/night-vision.webp
   links:
   - icon: itch
     href: https://peteryoon.itch.io/night-walk

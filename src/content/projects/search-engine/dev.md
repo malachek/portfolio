@@ -1,4 +1,3 @@
 ---
-# search-engine on the dev site: small card only. The write-up page is on the software site.
-page: false
+# search-engine on the dev site: full page (write-up; no code is published).
 ---

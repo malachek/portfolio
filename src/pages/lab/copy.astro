@@ -1,0 +1,109 @@
+---
+/**
+ * DEV ONLY: every word on the site in one scroll, for proofreading.
+ * http://localhost:4321/lab/copy            all role sites
+ * http://localhost:4321/lab/copy?role=tools one role site
+ * Text only (no styling, no media): hero, overview, sections, homepage card text,
+ * the About page. Edit in the editor (/admin/index.html) or the content files.
+ * Stripped from production builds.
+ */
+import { getEntry } from 'astro:content';
+import { getRoles, rolePages, resolveHome, href } from '@/lib/content';
+
+const only = Astro.url.searchParams.get('role');
+const allRoles = await getRoles({ includeDisabled: true });
+const roles = allRoles.filter((r) => !only || r.id === only);
+const site = (await getEntry('site', 'site'))!.data;
+const data = await Promise.all(
+  roles.map(async (r) => ({ role: r, home: await resolveHome(r), pages: await rolePages(r.id) })),
+);
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copy review (dev)</title>
+  <meta name="robots" content="noindex" />
+</head>
+<body>
+  <header>
+    <h1>Copy review</h1>
+    <p>Every word on the site, by role site. <a href="/lab/copy">All</a>{allRoles.map((r) => <> · <a href={`/lab/copy?role=${r.id}`}>{r.data.jobTitle}</a></>)}</p>
+  </header>
+
+  {!only && (
+    <section class="role">
+      <h2>About page <small>(same on every role site)</small></h2>
+      {site.about.intro.map((p) => <p>{p}</p>)}
+      <h3>{site.about.whyHeading}</h3>
+      {site.about.why.map((p) => <p>{p}</p>)}
+      <h3>{site.about.profileHeading}</h3>
+      <dl>{site.about.profile.map((r) => <><dt>{r.label}</dt><dd>{r.value}</dd></>)}</dl>
+      <p><b>{site.about.topHeading}:</b> {site.about.top.join(' · ')}</p>
+      <p><b>{site.about.favoritesHeading}:</b> {site.about.favorites.join(' · ')}</p>
+      <p><b>Photo captions:</b> {site.about.photos.map((p) => p.caption).join(' · ')}</p>
+      <p><b>Footer:</b> {site.availability}</p>
+    </section>
+  )}
+
+  {data.map(({ role, home, pages }) => (
+    <section class="role">
+      <h2>{role.data.jobTitle} <small>{role.data.host}{!role.data.enabled && ' (draft, not published)'}</small></h2>
+
+      <h3>Homepage hero</h3>
+      {home.hero.lines.map((l) => <p>{l}</p>)}
+      <ul>{home.hero.bullets.map((b) => <li>{b}</li>)}</ul>
+
+      <h3>Homepage cards</h3>
+      {[...home.featured, ...home.experience.flatMap((g) => g.cards)].map((c) => (
+        <div class="card">
+          <p><b>{c.title}</b> <small>{c.category} · {c.dates}</small></p>
+          {c.blurb && <p><i>{c.blurb}</i></p>}
+          <ul>{(c.bullets ?? []).map((b) => <li>{b}</li>)}</ul>
+        </div>
+      ))}
+      <h3>Also Built</h3>
+      <ul>{home.alsoBuilt.map((c) => <li><b>{c.title}:</b> {c.blurb}</li>)}</ul>
+
+      {pages.map((p) => (
+        <article>
+          <h3><a href={href(role.id, p.path!)}>{p.title}</a> <small>{href(role.id, p.path!)}</small></h3>
+          {p.hero?.lines.map((l) => <p class="hero">{l}</p>)}
+          {p.overview && <dl>{p.overview.rows.map((r) => <><dt>{r.label}</dt><dd>{r.value}</dd></>)}</dl>}
+          {p.sections.map((s) => (
+            <div class="sec">
+              <h4>{s.heading}</h4>
+              {s.blocks.map((b: any) => (
+                b.type === 'subsection' ? <h5>{b.title}</h5>
+                : b.type === 'text' ? <>{b.title && <h5>{b.title}</h5>}{String(b.md).split(/\n\s*\n/).map((para: string) => <p>{para}</p>)}</>
+                : b.type === 'bullets' ? <ul>{b.items.map((i: string) => <li>{i}</li>)}</ul>
+                : b.type === 'media' ? <p class="cap">{b.items.map((i: any) => i.caption || `[${i.alt}]`).join(' · ')}</p>
+                : b.type === 'embed' ? <p class="cap">[video: {b.title}]{b.caption && ` ${b.caption}`}</p>
+                : b.type === 'link' ? <p class="cap">[link] {b.label}</p>
+                : null
+              ))}
+            </div>
+          ))}
+        </article>
+      ))}
+    </section>
+  ))}
+</body>
+</html>
+
+<style>
+  body { max-width: 760px; margin: 40px auto; padding: 0 20px; font: 17px/1.6 Georgia, serif; color: #1b1b1b; background: #fbfaf7; }
+  h1 { font: 700 28px/1.2 system-ui, sans-serif; }
+  h2 { font: 800 24px/1.2 system-ui, sans-serif; margin-top: 64px; padding-top: 16px; border-top: 3px solid #d52fc7; }
+  h3 { font: 700 20px/1.3 system-ui, sans-serif; margin-top: 36px; }
+  h4 { font: 700 15px/1.3 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .06em; color: #8a1f82; margin: 22px 0 6px; }
+  h5 { font: 700 16px/1.3 system-ui, sans-serif; margin: 14px 0 4px; }
+  small { font: 400 13px system-ui, sans-serif; color: #777; }
+  .hero { font-style: italic; margin: 2px 0; }
+  .cap { font: 13px/1.4 system-ui, sans-serif; color: #666; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 16px; font: 15px/1.5 system-ui, sans-serif; }
+  dt { color: #777; }
+  dd { margin: 0; }
+  .card { border-left: 3px solid #ddd; padding-left: 12px; margin: 12px 0; }
+  article { border-top: 1px solid #e5e2da; margin-top: 28px; }
+  a { color: #8a1f82; }
+</style>

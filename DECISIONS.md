@@ -155,3 +155,26 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - tools/kawaiian-isolation now opens on the dialogue pipeline and Perforce/onboarding work, and leaves the narrative "Design" essay off. Other projects' role versions still share the base opening: to review next.
 - (2026-09-29, later) Header reworked at his request: name left (nav type family, text colour, a step larger; the pixel face stays for headings so the name no longer looks like a sticky heading), role switcher as a centred pill, links right. Links fold into the hamburger below 960px so the pill can stay centred; below 640px the title sits above the name as a plain label. Header is 64px (60px on phones). Hamburger links use the same eyebrow type as the nav.
 - Card media hover ring: 28px corners (16px media + 12px padding) so the ring is concentric with the rounded video.
+
+## Media off Figma, Also Built, new pages (2026-09-29)
+- All 48 images the site loaded from Figma Sites (malachek.com/_assets/...) now live in public/art/live/ (scripts/migrate-media.mjs, `npm run media:migrate -- images`). The 30 videos (malachek.com/_videos/...) are still on Figma: R2 is not enabled on the Cloudflare account yet. Once it is, `media:migrate -- videos` uploads them to the malachek-media bucket and rewrites the URLs. Blocks the DNS cutover.
+- 12 of those images are animated GIFs of 4-10 MB each (~70 MB). Converting them to MP4 would cut that roughly tenfold.
+- Also Built: wide, short cards (media left, text right), two across on desktop, one below; See More when the project has a page. Label aligned to the frame.
+- Footer: About and Projects links under the name.
+- Limital: walkthrough video (YouTube TZCZhlhYBUA, added to the 00-contact.md whitelist), four screens, and the full Devpost case study on the page (one em dash turned into a comma).
+- Night Walk: four screenshots. Note: the in-game HUD reads "Rifle" while the page says "double-barrel shotgun". Ask him.
+- Pintos and Web Crawler & Search Engine now have pages on the main and Tools sites too. Pintos adds a Design section from threads/DESIGNDOC.txt; Search Engine adds the crawl results (6,708 pages) and trap rules from the team repo's report and scraper. No code is published. The team repo's history stops at the start of the indexer and has no commits under his name; the ranking claims come from master/06-projects/6-11.
+- Comments and Little Rockstar added to the main site's Also Built.
+- /lab/copy: every word of every role site in one plain page for proofreading (dev only).
+- "student" is fine; qa no longer flags it.
+
+## Comments and Little Rockstar media (2026-09-29)
+- Comments: hero art is the wall shot; concept video (youtube.com/watch?v=iwf9BdnlUsU, added to the master whitelist) plus sign, wall and mascot images; card thumbnail is the mascot.
+- Little Rockstar: the logo Malachy sent sits on the hero, and the accent now matches the logo red (#D5473C). Room, VR hands and the Unity Act 1 editor shot go in the description; the card thumbnail is the room.
+- The web crawler image has not arrived yet (the image labelled "webcrawler" was the Little Rockstar logo).
+
+## Image viewer (2026-09-30)
+- Clicking a project-page image, the About portrait or an About photo opens it full screen (src/components/media/Lightbox.astro, mounted once in Base.astro). Click or tap zooms 2.5x at that point; wheel or pinch zooms up to 5x; drag pans; arrows, swipe or side buttons browse every image on the page; Esc, X or a backdrop click closes. Cards that link to pages do not open it (Media's `zoom` prop is off by default).
+
+## Git: commits happen on the Mac only (2026-09-30)
+- Claude's git commands from the linked VM corrupted the repo (objects were left as temp files because the shared folder can't delete, and moving those aside lost a blob). Repo was re-cloned as portfolio-clean. From now on Claude edits files only; Malachy commits and pushes from GitHub Desktop or Terminal.

@@ -7,3 +7,6 @@ dist/
 !.env.example
 *.log
 .shots/
+
+# downloaded videos on their way to R2
+.media-cache/

@@ -1,5 +1,5 @@
 ---
-# Comments: page drafted 2026-09-26 from master/06-projects/6-10-comments.md. Lines marked VERIFY are inferred; check them. No image yet.
+# Comments: page drafted 2026-09-26 from master/06-projects/6-10-comments.md. Lines marked VERIFY are inferred; check them. Images and video added 2026-09-29.
 title: Comments
 accent: '#3A6EA5'
 path: /comments
@@ -11,6 +11,7 @@ hero:
     - Anonymous notes anchored to real places, read through wearable AR glasses.
     - Designer, UX Researcher & Writer · Team of 4 · Figma, After Effects
     - UCI Design-a-thon 2026 · 48 hours
+  background: /art/comments/wall.webp
 overview:
   heading: Project Overview
   rows:
@@ -34,6 +35,27 @@ sections:
           Comments is a spatial XR platform for wearable AR glasses: you leave an anonymous note at a real place, and whoever passes through later can read it and reply.
 
           It draws on Nintendo StreetPass and Pokémon GO, then anchors communication to places instead of to people.
+      - id: project-description-video
+        type: embed
+        src: https://www.youtube-nocookie.com/embed/iwf9BdnlUsU
+        title: Comments concept video
+        caption: Concept video
+      - id: project-description-media
+        type: media
+        cols: 3
+        items:
+          - kind: image
+            src: /art/comments/sign.webp
+            alt: "Comments: anonymous notes floating around a campus health sign"
+            caption: Notes left on a campus sign
+          - kind: image
+            src: /art/comments/wall.webp
+            alt: "Comments: a person reaching toward notes pinned in the air"
+            caption: Reaching for a note in the prototype
+          - kind: image
+            src: /art/comments/mascot.webp
+            alt: "Comments: notes anchored to a UCI mascot cutout"
+            caption: Notes anchored to a campus landmark
   - id: research
     heading: Research
     blocks:
@@ -54,4 +76,5 @@ sections:
           - "The prototyping call: after evaluating XR hardware prototyping, I split the deliverables across Figma and After Effects to stay on schedule"
 small:
   blurb: Asynchronous XR notes anchored to real places, for wearable AR glasses. UCI Design-a-thon 2026. Figma, After Effects.
+  image: /art/comments/mascot.webp
 ---

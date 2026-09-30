@@ -55,7 +55,7 @@ const LOCKS = [
   { re: /\bHattas\b/i, msg: 'Hattas is cancelled; never mention it' },
   { re: /\bGames Director\b/i, msg: '"Games Director" is retired' },
   { re: /(?<!UE5 )\bBlueprints?\b/, msg: 'Always "UE5 Blueprints"', soft: true },
-  { re: /\bstudents?\b/i, msg: 'Avoid "student"', soft: true },
+  // "student" is fine (Malachy, 2026-09-29), so it is no longer flagged.
   { re: /[^.!?]*\b(EXO|CORA)\b[^.!?]*\bshipped\b[^.!?]*/i, msg: 'EXO / CORA are never "shipped"', soft: true },
   { re: /[^.!?]*\b(The Fallen|Night Walk|Loonage)\b[^.!?]*\b(\d+(st|nd|rd|th) place|ranked|placed|winner)\b/i, msg: 'No rankings for The Fallen, Night Walk, Loonage' },
   { re: /\bPintos\b[^.!?]*github\.com/i, msg: 'Pintos code is never published' },

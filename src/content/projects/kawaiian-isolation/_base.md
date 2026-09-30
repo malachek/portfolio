@@ -12,8 +12,8 @@ hero:
     - First-person narrative adventure. A tragedy about the beauty and horror of identity.
     - Technical Director & Engineer · 6 core, 30+ contributors · Unreal Engine 5.3
     - Shipped on Steam, reaching 10,000+ claims in the first 100 hours.
-  background: https://malachek.com/_assets/v11/c122267c0dd96616744b0da7a45051bd2f598f1d.png
-  logo: https://malachek.com/_assets/v11/5e20111865f706bd15b7d90449d40bb7373405d0.png?w=256
+  background: /art/live/c122267c0dd96616744b0da7a45051bd2f598f1d.png.png
+  logo: /art/live/5e20111865f706bd15b7d90449d40bb7373405d0.png-w256.png
 overview:
   heading: Project Overview
   rows:
@@ -89,11 +89,11 @@ sections:
         cols: 2
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/a0672772e180688f62c40ccd74a1e4f36a5b2620.png
+            src: /art/live/a0672772e180688f62c40ccd74a1e4f36a5b2620.png.png
             alt: "Kawai’ian Isolation: One of ten production tools"
             caption: One of ten production tools
           - kind: image
-            src: https://malachek.com/_assets/v11/0d7af7a4109d916f9cde17db2ac300b4c137c02e.png
+            src: /art/live/0d7af7a4109d916f9cde17db2ac300b4c137c02e.png.png
             alt: "Kawai’ian Isolation: Scheduling against the dependency graph"
             caption: Scheduling against the dependency graph
       - id: technical-design-and-scripting
@@ -114,11 +114,11 @@ sections:
         cols: 2
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/dbc971671304f87737b5a14c5ca0985e68a2cec2.png
+            src: /art/live/dbc971671304f87737b5a14c5ca0985e68a2cec2.png.gif
             alt: "Kawai’ian Isolation: Branding playback, auto-advancing with Wwise calls"
             caption: Branding playback, auto-advancing with Wwise calls
           - kind: image
-            src: https://malachek.com/_assets/v11/d4522998bba0b0f2f4fe90c827e931d7f811c3de.png
+            src: /art/live/d4522998bba0b0f2f4fe90c827e931d7f811c3de.png.gif
             alt: "Kawai’ian Isolation: A scripted scene playing out"
             caption: A scripted scene playing out
       - id: direction-and-production
@@ -151,11 +151,11 @@ sections:
         cols: 2
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/e0a1d08d70a7327af183fea43ef9835993f5872e.png
+            src: /art/live/e0a1d08d70a7327af183fea43ef9835993f5872e.png.png
             alt: "Kawai’ian Isolation: The template every character is built from"
             caption: The template every character is built from
           - kind: image
-            src: https://malachek.com/_assets/v11/28f2f99645084424865b67d3fffd012c1bb9ec5f.png
+            src: /art/live/28f2f99645084424865b67d3fffd012c1bb9ec5f.png.png
             alt: "Kawai’ian Isolation: Character sheet for Annabelle, our companion’s foil"
             caption: Character sheet for Annabelle, our companion’s foil
   - id: breakdown
@@ -176,15 +176,15 @@ sections:
         cols: 3
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/f29a995b1aa4875cd6b60251e8269b2732fac37f.png?w=512
+            src: /art/live/f29a995b1aa4875cd6b60251e8269b2732fac37f.png-w512.png
             alt: "Kawai’ian Isolation: Authoring Sheet with JS"
             caption: Authoring Sheet with JS
           - kind: image
-            src: https://malachek.com/_assets/v11/768dd53413a39aa8a76900f59e19242a9bd5734b.png?w=512
+            src: /art/live/768dd53413a39aa8a76900f59e19242a9bd5734b.png-w512.png
             alt: "Kawai’ian Isolation: Import to Unreal"
             caption: Import to Unreal
           - kind: image
-            src: https://malachek.com/_assets/v11/dbc971671304f87737b5a14c5ca0985e68a2cec2.png
+            src: /art/live/dbc971671304f87737b5a14c5ca0985e68a2cec2.png.gif
             alt: "Kawai’ian Isolation: Dialogue Playback"
             caption: Dialogue Playback
   - id: design
@@ -254,12 +254,12 @@ card:
   - Engineered a CSV-to-Unreal-to-Wwise dialogue pipeline with branching playback that selects lines from cached player choices and world state, so 56 pages of dialogue were authored outside the build.
   - Scripted mechanics, levels, and sequencing for 22 single-player scenes in UE5 Blueprints, covering AI direction, dialogue events, Blackboard checks, the save system, coded animations, and player pathing.
   - Technical Director for 18+ contributors across audio, design, programming and writing; ran the AWS EC2 Perforce server for 30+.
-  background: https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
+  background: /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.png.png
   media:
     kind: image
-    src: https://malachek.com/_assets/v11/82674e6a2c6d8afa01cf8dc7acfdf908325797a0.png
+    src: /art/live/82674e6a2c6d8afa01cf8dc7acfdf908325797a0.png.gif
     alt: 'Kawai’ian Isolation: First-person narrative adventure horror. 30+ contributors.'
-  logo: https://malachek.com/_assets/v11/5e20111865f706bd15b7d90449d40bb7373405d0.png?w=128
+  logo: /art/live/5e20111865f706bd15b7d90449d40bb7373405d0.png-w128.png
   blurb: First-person narrative adventure horror. 30+ contributors.
   category: Game Project
   dates: Apr 2024 - Jan 2026

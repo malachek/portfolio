@@ -41,7 +41,7 @@ sections:
         cols: 1
         items:
           - kind: image
-            src: https://malachek.com/_assets/v11/14f7f7f1c050a0883747fbcdf47bcfe8f7dd0588.png?w=512
+            src: /art/live/14f7f7f1c050a0883747fbcdf47bcfe8f7dd0588.png-w512.png
             alt: "Loonage: the stacked spinning disks"
   - id: what-i-built
     heading: What I Built
@@ -68,5 +68,5 @@ sections:
         # VERIFY: expands 6-6 [3] "Tuned angular pushback, ground clamping, and jump arcs so rotating-surface momentum reads as intentional."
 small:
   blurb: Custom radial physics system using polar coordinates. Unity 6, C#.
-  image: https://malachek.com/_assets/v11/14f7f7f1c050a0883747fbcdf47bcfe8f7dd0588.png?w=512
+  image: /art/live/14f7f7f1c050a0883747fbcdf47bcfe8f7dd0588.png-w512.png
 ---

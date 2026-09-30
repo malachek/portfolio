@@ -12,8 +12,8 @@ hero:
     - Third-person movement shooter on spherical planets, where speed is the weapon.
     - Game Engineer & Tech Lead · Sole programmer on a team of 11 · Unreal Engine 5.6
     - 3rd Place, ICS Project Expo · Approved on Steam, release date to be set with a publisher
-  background: https://malachek.com/_assets/v11/54f4922f342c7cdc6cea7b862e628ecadcd39aeb.png
-  logo: https://malachek.com/_assets/v11/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png
+  background: /art/live/54f4922f342c7cdc6cea7b862e628ecadcd39aeb.png.png
+  logo: /art/live/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png.png
 overview:
   heading: Project Overview
   rows:
@@ -152,7 +152,7 @@ sections:
             alt: "EXO: You steer along one line and fire along another"
             caption: You steer along one line and fire along another
           - kind: image
-            src: https://malachek.com/_assets/v11/9601174302ed32f8be4443c1faacf40c346d858e.png
+            src: /art/live/9601174302ed32f8be4443c1faacf40c346d858e.png.gif
             alt: "EXO: Auto Targeting"
             caption: Auto Targeting
       - id: combat-systems
@@ -183,7 +183,7 @@ sections:
             alt: "EXO: Hit detection component (viewport)"
             caption: Hit detection component (viewport)
           - kind: image
-            src: https://malachek.com/_assets/v11/946397ef4e3615639f54b7707d7aa91001214803.png
+            src: /art/live/946397ef4e3615639f54b7707d7aa91001214803.png.gif
             alt: "EXO: Ability cooldowns"
             caption: Ability cooldowns
       - id: enemy-ai
@@ -359,12 +359,12 @@ card:
   - Rebuilt Unreal's velocity model for spherical traversal, carrying velocity across surface curvature so the player stays on the planet at 300 MPH.
   - 'Designed enemy archetypes around what stays readable at speed: predictive drones, and arcing chargers whose telegraph is also their hitbox.'
   - 'Built the C++ layer underneath: four tick groups, O(1) intrusive pooling, GAS attribute clamping, and Discord OAuth2 with PKCE.'
-  background: https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
+  background: /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.png.png
   media:
     kind: video
     src: https://malachek.com/_videos/v1/4dd3d3ae56b170bec92f22b4f777b5288b179c98
     alt: 'EXO: Third-person movement shooter on spherical planets, where speed is the weapon.'
-  logo: https://malachek.com/_assets/v11/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png
+  logo: /art/live/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png.png
   blurb: Third-person movement shooter on spherical planets, where speed is the weapon.
   category: Game Project
   dates: Aug 2024 - Present

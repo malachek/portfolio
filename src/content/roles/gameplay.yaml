@@ -13,10 +13,10 @@ resumeDriveId: 1OYvPuAruqXYZdI9Vi5QCoDjRgND1-n_F
 hero:
   title: Malachy Kennedy
   tiles:
-  - https://malachek.com/_assets/v11/9be49ad03c738b0097d663bfd53d30329406dbec.png
-  - https://malachek.com/_assets/v11/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png?w=1536
-  - https://malachek.com/_assets/v11/d43cbfd72790816057b2b227ecb49fb376f08c41.png
-  - https://malachek.com/_assets/v11/8c465e7c96003b6ee15585450a362f8bd8006dcc.png
+  - /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.png.png
+  - /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
+  - /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.png.png
+  - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.png.png
   lines:
   - Gameplay engineer with shipped UE5 and Unity titles on Steam, specializing in combat systems, animation pipelines, and engine-level tooling.
   - Passionate about deep, responsive player experiences in action and narrative games.
@@ -25,7 +25,7 @@ hero:
   - Co-Founder & Game Engineer // Burnt Out Games, LLC
   - Game Design B.S. & SWE B.S. // UC Irvine '27
   credential: 2 SHIPPED STEAM TITLES · 1 APPROVED FOR RELEASE // UNREAL ENGINE 5 · UNITY 6
-  avatar: https://malachek.com/_assets/v11/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.png
+  avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.png.png
 featured:
 - exo
 - the-fallen
