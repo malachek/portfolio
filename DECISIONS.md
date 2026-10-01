@@ -201,3 +201,9 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Also Built: heading uses the group-heading type (Jersey 10, --fs-group); cards are the same dark translucent capsule as the feature cards (accent only on the hover ring and button) instead of solid accent borders and tinted fills.
 - Radius scale tidied: 4 chips, 8 pills/buttons, 12 small-card media, 16 media, 24 small capsules, 28 concentric media ring, 32 capsules. (14, 10 and 20 retired.)
 - About: "Top 5" / "All-time favorites" use the subsection heading size (24/900); Skills heading line-height matches the other display headings.
+
+## Site icon and font loading (2026-09-30)
+- Site icon is the MK avatar again (public/favicon.ico 16/32/48, icons/favicon-32.png, apple-touch-icon.png 180, icons/icon-192/512.png), generated from /art/live/bafbd8….webp. Placeholder favicon.svg retired.
+- Fonts are self-hosted from public/fonts (Latin subset, copied from @fontsource; the packages stay in package.json as the source). @font-face lives in src/styles/fonts.css.
+- First-visit jitter measured on the live site (cold cache, throttled): phone CLS 0.24 when fonts arrived ~1.1s, because the fallback (system-ui) wrapped the hero text differently; fonts only began downloading after the CSS finished.
+- Fix: preload Roboto 400/700 and Jersey 10 in <head>; metric-matched fallbacks ('Roboto Fallback' = Arial with Roboto's size/ascent/descent, 'Jersey Fallback' = Arial at 74%, matching line wraps on ~99% of heading/width combinations); Jersey uses font-display: block (no lookalike to flash), Roboto keeps swap.

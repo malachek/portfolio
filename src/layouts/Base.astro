@@ -3,12 +3,7 @@
  * Page shell: <head> metadata, self-hosted fonts, skip link, header, <main>, footer.
  * Every page (every role variant) renders through this.
  */
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500-italic.css';
-import '@fontsource/roboto/700.css';
-import '@fontsource/roboto/700-italic.css';
-import '@fontsource/roboto/900.css';
-import '@fontsource/jersey-10/400.css';
+import '@/styles/fonts.css';
 import '@/styles/global.css';
 
 import { getEntry } from 'astro:content';
@@ -65,7 +60,12 @@ const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' 
     {canonical && <meta property="og:url" content={canonical} />}
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jersey-10-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <slot name="head" />
   </head>
   <body style={accent ? accentVars(accent) : undefined}>

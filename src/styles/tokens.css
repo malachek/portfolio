@@ -36,8 +36,8 @@
   --focus: #dcf1ff;
 
   /* ---- Fonts ---------------------------------------------------------- */
-  --font-display: 'Jersey 10', 'Roboto', system-ui, sans-serif;
-  --font-body: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Jersey 10', 'Jersey Fallback', system-ui, sans-serif;
+  --font-body: 'Roboto', 'Roboto Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* ---- Type scale: desktop values (tablet/mobile overridden below) ----- */
   --fs-display: 48px;         /* page title, section heading (Jersey 10) */
