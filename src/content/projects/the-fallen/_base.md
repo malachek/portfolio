@@ -12,7 +12,7 @@ hero:
     - Action RPG combat kit built in one week, tuned to shipped-game feel.
     - Combat Engineer & Designer · Solo-programmed all player combat on a team of 8
     - Unreal Engine 5.8, C++, GAS · UniJam 2026
-  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
+  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.webp
   logo: /art/live/fbf1649d27509ee2bebf2a989d1dec035697ffa1.png-w256.png
 overview:
   heading: Project Overview
@@ -111,7 +111,7 @@ sections:
             alt: "The Fallen: Standard damages"
             caption: Standard damages
           - kind: image
-            src: /art/live/06805e885a08d8a4a63fcaec558b72a4fe7969a0.png.png
+            src: /art/live/06805e885a08d8a4a63fcaec558b72a4fe7969a0.webp
             alt: "The Fallen: ← Stats in this"
             caption: ← Stats in this
           - kind: video
@@ -358,7 +358,7 @@ card:
   - 'Built the animation system the kit runs on: input buffering, two continuation windows, cancel windows on specific frames, and AnimNotify hitboxes.'
   - Rewrote the GAS damage pipeline in C++ so a single hit resolves differently by attack type, target state, and what landed before it.
   - Designed Decay, a status that re-resolves every later attack against its target, over 9 derived stats on diminishing-returns curves.
-  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
+  background: /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.webp
   media:
     kind: image
     src: /art/live/7b823eb48ccbe1e948493a81dd054c86f4a48f06.png.gif

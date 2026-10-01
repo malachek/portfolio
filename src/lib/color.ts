@@ -39,7 +39,7 @@ export function buttonColors(accent: string): { bg: string; ink: string } {
   // darken (near-white, pale) keep their colour and take dark ink instead.
   let k = 1;
   let cur = rgb;
-  while (contrast(lum(cur), 1) < 4.5 && k > 0.3) {
+  while (contrast(lum(cur), 1) < 4.6 && k > 0.3) { // 4.6, not 4.5: rounding to hex can drop it just under
     k -= 0.01;
     cur = rgb.map((v) => v * k) as [number, number, number];
   }

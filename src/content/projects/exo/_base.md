@@ -12,7 +12,7 @@ hero:
     - Third-person movement shooter on spherical planets, where speed is the weapon.
     - Game Engineer & Tech Lead · Sole programmer on a team of 11 · Unreal Engine 5.6
     - 3rd Place, ICS Project Expo · Approved on Steam, release date to be set with a publisher
-  background: /art/live/54f4922f342c7cdc6cea7b862e628ecadcd39aeb.png.png
+  background: /art/live/54f4922f342c7cdc6cea7b862e628ecadcd39aeb.webp
   logo: /art/live/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png.png
 overview:
   heading: Project Overview
@@ -359,7 +359,7 @@ card:
   - Rebuilt Unreal's velocity model for spherical traversal, carrying velocity across surface curvature so the player stays on the planet at 300 MPH.
   - 'Designed enemy archetypes around what stays readable at speed: predictive drones, and arcing chargers whose telegraph is also their hitbox.'
   - 'Built the C++ layer underneath: four tick groups, O(1) intrusive pooling, GAS attribute clamping, and Discord OAuth2 with PKCE.'
-  background: /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.png.png
+  background: /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.webp
   media:
     kind: video
     src: https://media.malachek.com/live/4dd3d3ae56b170bec92f22b4f777b5288b179c98.mp4

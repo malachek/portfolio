@@ -12,7 +12,7 @@ hero:
     - First-person narrative adventure. A tragedy about the beauty and horror of identity.
     - Technical Director & Engineer · 6 core, 30+ contributors · Unreal Engine 5.3
     - Shipped on Steam, reaching 10,000+ claims in the first 100 hours.
-  background: /art/live/c122267c0dd96616744b0da7a45051bd2f598f1d.png.png
+  background: /art/live/c122267c0dd96616744b0da7a45051bd2f598f1d.webp
   logo: /art/live/5e20111865f706bd15b7d90449d40bb7373405d0.png-w256.png
 overview:
   heading: Project Overview
@@ -89,11 +89,11 @@ sections:
         cols: 2
         items:
           - kind: image
-            src: /art/live/a0672772e180688f62c40ccd74a1e4f36a5b2620.png.png
+            src: /art/live/a0672772e180688f62c40ccd74a1e4f36a5b2620.webp
             alt: "Kawai’ian Isolation: One of ten production tools"
             caption: One of ten production tools
           - kind: image
-            src: /art/live/0d7af7a4109d916f9cde17db2ac300b4c137c02e.png.png
+            src: /art/live/0d7af7a4109d916f9cde17db2ac300b4c137c02e.webp
             alt: "Kawai’ian Isolation: Scheduling against the dependency graph"
             caption: Scheduling against the dependency graph
       - id: technical-design-and-scripting
@@ -254,7 +254,7 @@ card:
   - Engineered a CSV-to-Unreal-to-Wwise dialogue pipeline with branching playback that selects lines from cached player choices and world state, so 56 pages of dialogue were authored outside the build.
   - Scripted mechanics, levels, and sequencing for 22 single-player scenes in UE5 Blueprints, covering AI direction, dialogue events, Blackboard checks, the save system, coded animations, and player pathing.
   - Technical Director for 18+ contributors across audio, design, programming and writing; ran the AWS EC2 Perforce server for 30+.
-  background: /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.png.png
+  background: /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.webp
   media:
     kind: image
     src: /art/live/82674e6a2c6d8afa01cf8dc7acfdf908325797a0.png.gif

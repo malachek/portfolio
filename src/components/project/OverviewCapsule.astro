@@ -76,7 +76,7 @@ const { rows, steamAppIds = [], code, heading = 'Project Overview' } = Astro.pro
   .overview__row { display: contents; }
   .overview__row dt,
   .overview__row dd { margin: 0; padding-block: 5px; }
-  .overview__row dt { padding-right: 16px; color: var(--nav); }
+  .overview__row dt { padding-right: 16px; color: var(--muted-text); } /* --nav is 4.42:1 on the panel */
   .overview__row dd { padding-left: 16px; color: var(--text); border-left: 2px solid color-mix(in srgb, var(--accent) 70%, transparent); }
   .overview__row:first-child > * { padding-top: 2px; }
   .overview__row:last-child > * { padding-bottom: 2px; }

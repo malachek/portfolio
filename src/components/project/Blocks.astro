@@ -21,7 +21,10 @@ const { blocks } = Astro.props;
 
 const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px) 100vw, 428px', 3: '(max-width: 799px) 100vw, (max-width: 1279px) 332px, 274px' } as const;
 ---
-{blocks.map((b) => {
+{blocks.map((b, i) => {
+  // A text title sits under a subsection heading (h3) when one came before it
+  // in this section; otherwise directly under the section heading (h2).
+  const TitleTag = blocks.slice(0, i).some((x) => x.type === 'subsection') ? 'h4' : 'h3';
   switch (b.type) {
     case 'subsection':
       return <SubsectionHeading id={b.id}>{b.title}</SubsectionHeading>;
@@ -30,7 +33,7 @@ const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px
         <Capsule>
           <div class:list={['text-block', { 'text-block--embed': b.embed }]}>
             <div class:list={['prose', { 'prose--wide': b.wide }]} data-block={b.id}>
-              {b.title && <h4 class="capsule-title">{b.title}</h4>}
+              {b.title && <TitleTag class="capsule-title">{b.title}</TitleTag>}
               <Fragment set:html={renderMarkdown(b.md)} />
             </div>
             {b.embed && (

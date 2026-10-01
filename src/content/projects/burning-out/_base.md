@@ -12,7 +12,7 @@ hero:
     - Co-op horror maze escape, lit and lived only by sharing fire.
     - Gameplay & Network Engineer · 7 core developers · Unity 6, Mirror Networking
     - Shipped on Steam, the studio's first release
-  background: /art/live/f700424867b8be9c9457bdccc5e522d4f83863a6.png.png
+  background: /art/live/f700424867b8be9c9457bdccc5e522d4f83863a6.webp
   logo: /art/live/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png-w256.png
   logoAlt: Burning Out Logo
 overview:
@@ -168,7 +168,7 @@ card:
   - 'Shipped on Steam: the studio''s first release, and the reason Burnt Out Games exists.'
   - Designed a networked inventory on Mirror with custom OOP containers and item templates, keeping item state consistent across clients.
   - 'Built the torch-and-fire system as the tension mechanic: dynamic lighting, flame behavior, and torchwood burndown.'
-  background: /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.png.png
+  background: /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
   media:
     kind: image
     src: /art/live/85d884655a3b88c20276494b61c5e5960337ed91.png.gif

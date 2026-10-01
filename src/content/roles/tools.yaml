@@ -13,10 +13,10 @@ resumeDriveId: 1ykztbjtfbuMv9ZF38ZQZETupRZNGEvIM
 hero:
   title: Malachy Kennedy
   tiles:
-  - /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.png.png
-  - /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.png.png
-  - /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.png-w1536.png
-  - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.png.png
+  - /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.webp
+  - /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.webp
+  - /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.webp
+  - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
   lines:
   - Gameplay and systems engineer with shipped titles across Unreal Engine 5 and Unity 6, specializing in combat systems, custom physics, and engine-level tooling.
   - 'I build the architecture and pipelines other people work in: modular C# codebases, data-driven content pipelines, and the source control and release tooling behind them.'
@@ -25,7 +25,7 @@ hero:
   - Co-Founder & Game Engineer // Burnt Out Games, LLC
   - Game Design B.S. & SWE B.S. // UC Irvine '27
   credential: 2 SHIPPED STEAM TITLES · 1 APPROVED FOR RELEASE // UNREAL ENGINE 5 · UNITY 6
-  avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.png.png
+  avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.webp
 featured:
 - exo
 - kawaiian-isolation
