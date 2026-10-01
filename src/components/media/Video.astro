@@ -5,6 +5,7 @@
  * 2026-09-26, including when the OS asks for reduced motion).
  * - MP4 (H.264) required, WebM optional; files move to R2 (media.malachek.com).
  * - Downloads only as it nears the viewport, and pauses while off screen.
+ * - Poster: public/art/posters/<hash>.webp, made from the clip (ffmpeg, 1s in).
  */
 interface Props {
   mp4: string;
@@ -16,7 +17,12 @@ interface Props {
   height?: number;
   class?: string;
 }
-const { mp4, webm, poster, label, width = 1920, height = 1080, class: className } = Astro.props;
+const { mp4, webm, poster: posterProp, label, width = 1920, height = 1080, class: className } = Astro.props;
+// Every clip on R2 has a still of its first second at /art/posters/<hash>.webp, so
+// something shows before playback and whenever a browser blocks autoplay
+// (Safari in Low Power Mode, data saver).
+const r2 = mp4.match(/media\.malachek\.com\/live\/([0-9a-f]+)\.mp4$/);
+const poster = posterProp ?? (r2 ? `/art/posters/${r2[1]}.webp` : undefined);
 ---
 <video
   class:list={['clip', className]}

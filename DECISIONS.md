@@ -191,3 +191,13 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 
 ## Launch (2026-09-30)
 - malachek.com, www, gameplay., tools., design. and dev. now point at the malachek-portfolio Worker. Rollback values and the check list are in docs/DNS-CUTOVER.md.
+
+## Style pass (2026-09-30)
+- Every R2 clip gets a poster still (public/art/posters/<hash>.webp, ffmpeg frame at 1s). Video.astro picks it up from the clip's filename, so content files don't list posters. New clips: run ffmpeg the same way after `media-videos`. Reason: with autoplay blocked (Safari Low Power Mode, data saver) a clip with no poster rendered as an empty box (the "EXO video missing" report).
+- Header menus (role switcher + hamburger) rebuilt in the site's language: eyebrow type (14px/700 uppercase, --nav), current role in the light magenta #f06ae4 (4.5:1 on the panel), opaque --panel capsule, 24px radius, 16px item radius. Removed: "Same work, a different focus" hint, hostnames, 11/12/13px text, letter-spacing, hairline border, drop shadow, inset accent bar.
+- Gotcha: inside the blurred sticky header (backdrop-filter), any translucent background (or a second backdrop-filter) renders see-through in Chromium. Menu backgrounds must stay fully opaque.
+- One grey: --nav now equals --muted-text (#707fb0); #6b7da8 retired.
+- Name in header: no letter-spacing (matches the nav eyebrows).
+- Also Built: heading uses the group-heading type (Jersey 10, --fs-group); cards are the same dark translucent capsule as the feature cards (accent only on the hover ring and button) instead of solid accent borders and tinted fills.
+- Radius scale tidied: 4 chips, 8 pills/buttons, 12 small-card media, 16 media, 24 small capsules, 28 concentric media ring, 32 capsules. (14, 10 and 20 retired.)
+- About: "Top 5" / "All-time favorites" use the subsection heading size (24/900); Skills heading line-height matches the other display headings.

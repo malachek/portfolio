@@ -29,7 +29,7 @@
   --purple-text: #706ef4;     /* any purple text, link or small icon: 5.14 / 4.51 */
   --muted: #516092;           /* decoration only: 3.38:1, fails as text */
   --muted-text: #707fb0;      /* captions and secondary text: 5.26 / 4.62 */
-  --nav: #6b7da8;             /* header/footer eyebrow text as in the file: 5.04:1 on ground */
+  --nav: var(--muted-text);   /* header/footer eyebrow text: one grey site-wide (was #6b7da8, a near-duplicate) */
   --border: rgb(255 255 255 / 0.2);
   --scrim-40: rgb(0 0 0 / 0.4);
   --scrim-60: rgb(0 0 0 / 0.6);

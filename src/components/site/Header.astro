@@ -38,23 +38,22 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   <div class="site-header__inner">
     {roles.length > 1 ? (
         <details class="role" data-role-menu>
-          <summary class="role__label">
+          <summary class="eyebrow role__label">
             <span class="visually-hidden">Portfolio focus: </span>{current.data.jobTitle}
             <svg class="role__caret" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
           </summary>
           <div class="role__menu">
-            <p class="role__hint">Same work, a different focus</p>
             <ul role="list">
               {roles.map((r) => (
                 <li>
                   <a
+                    class="eyebrow"
                     href={target(r.id).href}
                     data-lens={r.id}
                     data-lens-path={target(r.id).path}
                     aria-current={r.id === roleId ? 'page' : undefined}
                   >
-                    <span class="role__title">{r.data.jobTitle}{!r.data.enabled && ' (draft)'}</span>
-                    <small class="role__host">{r.data.host}{target(r.id).path !== '/' && target(r.id).path}</small>
+                    {r.data.jobTitle}{!r.data.enabled && ' (draft)'}
                   </a>
                 </li>
               ))}
@@ -62,7 +61,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
           </div>
         </details>
       ) : (
-        <p class="role role__label">{current.data.jobTitle}</p>
+        <p class="eyebrow role role__label">{current.data.jobTitle}</p>
       )}
     <a class="eyebrow brand__name" href={homeHref}>{name}</a>
     <nav class="site-header__nav" aria-label="Primary">
@@ -86,8 +85,8 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
         <ul role="list">
           {nav.map((item) => <li><a class="eyebrow" href={item.href}>{item.label}</a></li>)}
           <li class="navmenu__social">
-            <a href={github} rel="me"><Icon name="github" size={20} /> GitHub</a>
-            <a href={linkedin} rel="me"><Icon name="linkedin" size={20} /> LinkedIn</a>
+            <a class="eyebrow" href={github} rel="me"><Icon name="github" size={18} /> GitHub</a>
+            <a class="eyebrow" href={linkedin} rel="me"><Icon name="linkedin" size={18} /> LinkedIn</a>
           </li>
         </ul>
       </div>
@@ -139,7 +138,6 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     grid-area: name;
     justify-self: start;
     font-size: 17px;
-    letter-spacing: 0.04em;
     color: var(--text);
     text-decoration: none;
     white-space: nowrap;
@@ -154,9 +152,6 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     align-items: center;
     gap: 8px;
     margin: 0;
-    font: 700 12px/1 var(--font-body);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--magenta);
     white-space: nowrap;
   }
@@ -172,39 +167,36 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   .role__caret { transition: transform 150ms ease; }
   .role[open] .role__caret { transform: rotate(180deg); }
 
-  .role__menu {
+  /* Both header menus (role switcher and hamburger) use the site's own language:
+     a capsule in the site's panel colour, nav-style links, the current one in
+     the accent colour. No hairline border, no drop shadow. */
+  .role__menu,
+  .navmenu__panel {
     position: absolute;
     top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 30;
-    min-width: 280px;
     padding: 8px;
-    border-radius: 14px;
+    border-radius: 24px;
+    /* Opaque capsule colour. Inside the blurred header, anything translucent
+       renders see-through in Chromium, so no alpha and no blur here. */
     background: var(--panel);
-    border: 1px solid rgb(255 255 255 / 0.1);
-    box-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
   }
-  .role__hint {
-    margin: 4px 10px 8px;
-    font: 700 11px/1.2 var(--font-body);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted-text);
-  }
-  .role__menu a {
+  .role__menu { left: 50%; transform: translateX(-50%); min-width: 260px; }
+  .role__menu a,
+  .navmenu__panel a {
     display: flex;
-    flex-direction: column;
-    gap: 3px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    color: var(--text);
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    color: var(--nav);
     text-decoration: none;
+    white-space: nowrap;
+    transition: color 120ms ease, background-color 120ms ease;
   }
-  .role__menu a:hover { background: rgb(255 255 255 / 0.06); }
-  .role__menu a[aria-current] { background: color-mix(in srgb, var(--magenta) 16%, transparent); box-shadow: inset 3px 0 0 var(--magenta); }
-  .role__title { font-weight: 700; font-size: 16px; }
-  .role__host { font-size: 13px; color: var(--muted-text); }
+  .role__menu a:hover,
+  .navmenu__panel a:hover { color: var(--text); background: rgb(255 255 255 / 0.06); }
+  .role__menu a[aria-current] { color: #f06ae4; } /* the hover magenta: --magenta is 4.36:1 on the panel */
 
   /* ---- Nav ---- */
   .site-header__nav ul { display: flex; align-items: center; gap: 32px; }
@@ -233,7 +225,6 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     .site-header__nav ul { gap: 24px; }
   }
   @media (max-width: 799.98px) {
-    .role__label { font-size: 11px; }
     .site-header__nav ul { gap: 16px; }
     .site-header__icons { gap: 14px; }
   }
@@ -247,7 +238,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     width: 44px;
     height: 44px;
     margin-right: -10px;
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--text);
     cursor: pointer;
   }
@@ -256,31 +247,8 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
   .navmenu__close { display: none; }
   .navmenu[open] .navmenu__open { display: none; }
   .navmenu[open] .navmenu__close { display: block; }
-  .navmenu__panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: -10px;
-    z-index: 30;
-    min-width: 220px;
-    padding: 8px;
-    border-radius: 14px;
-    background: var(--panel);
-    border: 1px solid rgb(255 255 255 / 0.1);
-    box-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
-  }
-  .navmenu__panel a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
-    border-radius: 8px;
-    color: var(--text);
-    text-decoration: none;
-  }
-  .navmenu__panel a:hover { background: rgb(255 255 255 / 0.06); }
-  .navmenu__social { display: flex; flex-direction: column; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgb(255 255 255 / 0.08); }
-  .navmenu__social a { font-size: 15px; color: var(--nav); }
-  .navmenu__panel a.eyebrow { color: var(--text); }
+  .navmenu__panel { right: -10px; min-width: 220px; }
+  .navmenu__social { display: flex; flex-direction: column; margin-top: 4px; padding-top: 4px; border-top: 1px solid rgb(255 255 255 / 0.08); }
 
   /* The centred title needs equal side columns; below ~960px the links fold
      into the hamburger so the title can stay centred. */
@@ -298,11 +266,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
     }
     .role { justify-self: start; }
     summary.role__label { padding: 4px 0; }
-    .role__label { font-size: 11px; }
-    .role__menu { left: -6px; transform: none; min-width: min(280px, calc(100vw - 32px)); }
+    .role__menu { left: -8px; transform: none; min-width: min(260px, calc(100vw - 32px)); }
     .brand__name { font-size: 16px; }
-  }
-  @media (max-width: 399.98px) {
-    .role__label { letter-spacing: 0.03em; }
   }
 </style>

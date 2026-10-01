@@ -80,11 +80,14 @@ const { label = 'Also Built', cards, more } = Astro.props;
     max-width: var(--frame-max);
     padding-inline: var(--section-pad-x);
   }
+  /* Same type as the group headings ("Burnt Out Games, LLC" style group titles use Jersey 10). */
   .also__label {
     margin: 0;
-    font-size: var(--fs-body);
-    font-weight: 700;
-    line-height: var(--lh-compact);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--fs-group);
+    line-height: 1;
+    color: var(--text);
   }
   .also__grid {
     display: grid;
@@ -99,12 +102,15 @@ const { label = 'Also Built', cards, more } = Astro.props;
     align-items: center;
     gap: 18px;
     padding: 12px;
-    border: 2px solid var(--accent);
+    /* Same capsule as the feature cards: dark and translucent, accent only on the
+       hover ring and the button. */
     border-radius: 24px;
-    background: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), var(--accent);
-    transition: box-shadow 150ms ease, background-color 150ms ease;
+    background: var(--scrim-40);
+    outline: 2px solid transparent;
+    outline-offset: 0;
+    transition: outline-color 160ms ease, background-color 160ms ease;
   }
-  .wcard__media { position: relative; aspect-ratio: 16 / 10; border-radius: 14px; overflow: clip; background: rgb(0 0 0 / 0.45); }
+  .wcard__media { position: relative; aspect-ratio: 16 / 10; border-radius: 12px; overflow: clip; background: rgb(0 0 0 / 0.45); }
   .wcard__media :global(.media) { gap: 0; height: 100%; }
   .wcard__media :global(.media__img),
   .wcard__media :global(.clip),
@@ -120,7 +126,7 @@ const { label = 'Also Built', cards, more } = Astro.props;
   .wcard__icon { position: relative; z-index: 2; display: inline-flex; flex: none; color: #fff; }
   .wcard__cta { position: relative; z-index: 2; margin-top: 4px; }
   .wcard__blurb { margin: 0; font-size: 16px; line-height: 1.45; color: var(--text); }
-  .wcard--link:hover { box-shadow: 0 0 0 2px var(--accent); background: linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)), var(--accent); }
+  .wcard--link:hover { background-color: rgb(0 0 0 / 0.55); outline-color: color-mix(in srgb, var(--accent) 85%, transparent); }
   .wcard--link:hover .wcard__title a { text-decoration: underline; text-underline-offset: 3px; }
   .also__more { padding: 4px var(--section-pad-x) 0; color: var(--text); font-size: var(--fs-body); text-align: center; }
 
