@@ -132,6 +132,20 @@ if (mode === 'scan') {
     }
   }
   console.log(`\nRewrote ${rewrite(map)} files. ${map.size}/${videos.length} videos moved.`);
+} else if (mode === 'reupload') {
+  // Re-upload the faststart copies in .media-cache/fast/ (moov atom first, made with
+  // `ffmpeg -c copy -movflags +faststart`) under live/v2/ with an explicit
+  // video/mp4 type, then point the content at them. New keys, so no stale edge cache.
+  const dir = join(CACHE, 'fast');
+  const map = new Map();
+  for (const f of readdirSync(dir).filter((n) => n.endsWith('.mp4'))) {
+    const hash = f.replace(/\.mp4$/, '');
+    const put = wrangler(['r2', 'object', 'put', `${BUCKET}/live/v2/${f}`, '--file', join(dir, f), '--remote', '--content-type', 'video/mp4', '--cache-control', 'public, max-age=31536000, immutable']);
+    if (!put.ok) { console.log(`ERR ${f}`); continue; }
+    map.set(`${MEDIA_BASE}/live/${hash}.mp4`, `${MEDIA_BASE}/live/v2/${hash}.mp4`);
+    console.log(`ok  live/v2/${f}`);
+  }
+  console.log(`\nRewrote ${rewrite(map)} files. ${map.size} videos re-uploaded.`);
 } else {
-  console.log('Usage: npm run media:migrate -- scan|setup|images|videos');
+  console.log('Usage: npm run media:migrate -- scan|setup|images|videos|reupload');
 }

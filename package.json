@@ -13,7 +13,8 @@
     "shots": "node scripts/shot-server.mjs",
     "media:upload": "node scripts/media-upload.mjs",
     "qa": "node scripts/qa.mjs",
-    "media:migrate": "node scripts/migrate-media.mjs"
+    "media:migrate": "node scripts/migrate-media.mjs",
+    "media:check": "node scripts/media-check.mjs"
   },
   "dependencies": {
     "@fontsource/jersey-10": "^5.1.0",

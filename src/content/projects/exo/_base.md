@@ -53,7 +53,7 @@ sections:
         cols: 1
         items:
           - kind: video
-            src: https://media.malachek.com/live/4dd3d3ae56b170bec92f22b4f777b5288b179c98.mp4
+            src: https://media.malachek.com/live/v2/4dd3d3ae56b170bec92f22b4f777b5288b179c98.mp4
             alt: "EXO: Spherical traversal at high speeds (in Unreal Editor, showing Hit Debugs to compensate for no audio)"
             caption: |-
               Spherical traversal at high speeds
@@ -96,15 +96,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/f0f8eb7ea168c8c6ad3757976fc2cc726fd6f16f.mp4
+            src: https://media.malachek.com/live/v2/f0f8eb7ea168c8c6ad3757976fc2cc726fd6f16f.mp4
             alt: "EXO: Large spherical force wrapping around the planet."
             caption: Large spherical force wrapping around the planet.
           - kind: video
-            src: https://media.malachek.com/live/22f3bef1b162b6f670ea4e42ba3cfd31af6e4467.mp4
+            src: https://media.malachek.com/live/v2/22f3bef1b162b6f670ea4e42ba3cfd31af6e4467.mp4
             alt: "EXO: Entering Overdrive (note the Soul-Health Bar and the MPH)"
             caption: Entering Overdrive (note the Soul-Health Bar and the MPH)
           - kind: video
-            src: https://media.malachek.com/live/64751e8beecb8dcf2f17f52965f4b8d0db323520.mp4
+            src: https://media.malachek.com/live/v2/64751e8beecb8dcf2f17f52965f4b8d0db323520.mp4
             alt: "EXO: Spherical force component: Jump, Dash, Jump and Dash"
             caption: "Spherical force component: Jump, Dash, Jump and Dash"
       - id: architecture-and-performance
@@ -144,11 +144,11 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/ed90c15cb12c1f613b227f7c78e39cc6e1b0e0f6.mp4
+            src: https://media.malachek.com/live/v2/ed90c15cb12c1f613b227f7c78e39cc6e1b0e0f6.mp4
             alt: "EXO: Motion streaks & edge warping"
             caption: Motion streaks & edge warping
           - kind: video
-            src: https://media.malachek.com/live/75330ac92a4487fc6420b5822dd5aa1c71189cb8.mp4
+            src: https://media.malachek.com/live/v2/75330ac92a4487fc6420b5822dd5aa1c71189cb8.mp4
             alt: "EXO: You steer along one line and fire along another"
             caption: You steer along one line and fire along another
           - kind: image
@@ -175,11 +175,11 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/e70be8e665bcb769c13361267212c138fd4c582f.mp4
+            src: https://media.malachek.com/live/v2/e70be8e665bcb769c13361267212c138fd4c582f.mp4
             alt: "EXO: Scan-and-multi-dash ability"
             caption: Scan-and-multi-dash ability
           - kind: video
-            src: https://media.malachek.com/live/4f7d51412c1c55f282880134280ed8e462dddf3b.mp4
+            src: https://media.malachek.com/live/v2/4f7d51412c1c55f282880134280ed8e462dddf3b.mp4
             alt: "EXO: Hit detection component (viewport)"
             caption: Hit detection component (viewport)
           - kind: image
@@ -207,15 +207,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/19decf4fb9d95896dfddd342616f5bb5b2231253.mp4
+            src: https://media.malachek.com/live/v2/19decf4fb9d95896dfddd342616f5bb5b2231253.mp4
             alt: "EXO: Drone: predict, telegraph, fire"
             caption: "Drone: predict, telegraph, fire"
           - kind: video
-            src: https://media.malachek.com/live/ac4dbeba79d6e7c9d55fa6ddc140e246ab965a43.mp4
+            src: https://media.malachek.com/live/v2/ac4dbeba79d6e7c9d55fa6ddc140e246ab965a43.mp4
             alt: "EXO: Husk: arcing to run AT player"
             caption: "Husk: arcing to run AT player"
           - kind: video
-            src: https://media.malachek.com/live/fa00d2a1cbb6108d337775e686f6d53d3180c27f.mp4
+            src: https://media.malachek.com/live/v2/fa00d2a1cbb6108d337775e686f6d53d3180c27f.mp4
             alt: "EXO: Enemies spawn at readable distance and position"
             caption: Enemies spawn at readable distance and position
       - id: world-and-progression
@@ -235,15 +235,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/059d22ebcd3abd7c34530f7bc92b02d4cc703678.mp4
+            src: https://media.malachek.com/live/v2/059d22ebcd3abd7c34530f7bc92b02d4cc703678.mp4
             alt: "EXO: Laser hazards require pathing, and serve as a landmark to gauge speed."
             caption: Laser hazards require pathing, and serve as a landmark to gauge speed.
           - kind: video
-            src: https://media.malachek.com/live/c95ef8bd605da5872b650fedd386ec9920f309a1.mp4
+            src: https://media.malachek.com/live/v2/c95ef8bd605da5872b650fedd386ec9920f309a1.mp4
             alt: "EXO: Heal shooting down to spawn obelisk"
             caption: Heal shooting down to spawn obelisk
           - kind: video
-            src: https://media.malachek.com/live/df17c3bd045238af2db855a48b59de051fd9f278.mp4
+            src: https://media.malachek.com/live/v2/df17c3bd045238af2db855a48b59de051fd9f278.mp4
             alt: "EXO: Healing obelisk"
             caption: Healing obelisk
   - id: breakdowns
@@ -362,7 +362,7 @@ card:
   background: /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.webp
   media:
     kind: video
-    src: https://media.malachek.com/live/4dd3d3ae56b170bec92f22b4f777b5288b179c98.mp4
+    src: https://media.malachek.com/live/v2/4dd3d3ae56b170bec92f22b4f777b5288b179c98.mp4
     alt: 'EXO: Third-person movement shooter on spherical planets, where speed is the weapon.'
   logo: /art/live/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png.png
   blurb: Third-person movement shooter on spherical planets, where speed is the weapon.

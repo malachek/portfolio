@@ -50,7 +50,7 @@ sections:
         cols: 1
         items:
           - kind: video
-            src: https://media.malachek.com/live/2b11a8062517fd5f4ee7822fab28170affa696d8.mp4
+            src: https://media.malachek.com/live/v2/2b11a8062517fd5f4ee7822fab28170affa696d8.mp4
             alt: "The Fallen: C++ targeting, anim warping, direction camera shake, kockback"
             caption: C++ targeting, anim warping, direction camera shake, kockback
       - id: project-description-text-1
@@ -68,15 +68,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/16e5e08f9add5cf8188c2ca78020fe071cbd284b.mp4
+            src: https://media.malachek.com/live/v2/16e5e08f9add5cf8188c2ca78020fe071cbd284b.mp4
             alt: "The Fallen: Directional hitstop and cancel windows"
             caption: Directional hitstop and cancel windows
           - kind: video
-            src: https://media.malachek.com/live/7a2a5e02af751cc339118cd4832071912950dd70.mp4
+            src: https://media.malachek.com/live/v2/7a2a5e02af751cc339118cd4832071912950dd70.mp4
             alt: "The Fallen: Ultimate State"
             caption: Ultimate State
           - kind: video
-            src: https://media.malachek.com/live/f626bfff7116dddffce8bb0fda79cab97f633813.mp4
+            src: https://media.malachek.com/live/v2/f626bfff7116dddffce8bb0fda79cab97f633813.mp4
             alt: "The Fallen: Combo sequence"
             caption: Combo sequence
       - id: project-description-frame
@@ -107,7 +107,7 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/4a984b7cfbd967c42443d2284968b717a01196a2.mp4
+            src: https://media.malachek.com/live/v2/4a984b7cfbd967c42443d2284968b717a01196a2.mp4
             alt: "The Fallen: Standard damages"
             caption: Standard damages
           - kind: image
@@ -115,7 +115,7 @@ sections:
             alt: "The Fallen: ← Stats in this"
             caption: ← Stats in this
           - kind: video
-            src: https://media.malachek.com/live/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4.mp4
+            src: https://media.malachek.com/live/v2/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4.mp4
             alt: "The Fallen: Dark on Dark interaction"
             caption: Dark on Dark interaction
       - id: animation-system-and-feel
@@ -142,15 +142,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/17de6c169858c7c638b78c555e1d4d0a24782f2e.mp4
+            src: https://media.malachek.com/live/v2/17de6c169858c7c638b78c555e1d4d0a24782f2e.mp4
             alt: "The Fallen: Animation Cancelling Attack with Ability into Attack"
             caption: Animation Cancelling Attack with Ability into Attack
           - kind: video
-            src: https://media.malachek.com/live/e483936287537041290b8ce91483c0deed50d0a6.mp4
+            src: https://media.malachek.com/live/v2/e483936287537041290b8ce91483c0deed50d0a6.mp4
             alt: "The Fallen: Standard Attack Chain"
             caption: Standard Attack Chain
           - kind: video
-            src: https://media.malachek.com/live/3fddefcc065b9dd29801ef3a3e43b93a8287e11e.mp4
+            src: https://media.malachek.com/live/v2/3fddefcc065b9dd29801ef3a3e43b93a8287e11e.mp4
             alt: "The Fallen: Directional Hitstop and Camera Shake & Zoom"
             caption: Directional Hitstop and Camera Shake & Zoom
       - id: status-systems
@@ -171,15 +171,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/e9579fff6b7d174be741e9c179d34480e75c768c.mp4
+            src: https://media.malachek.com/live/v2/e9579fff6b7d174be741e9c179d34480e75c768c.mp4
             alt: "The Fallen: Decay"
             caption: Decay
           - kind: video
-            src: https://media.malachek.com/live/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4.mp4
+            src: https://media.malachek.com/live/v2/f69c05bfbf7fe833a7a0f835e7bd68bc5ae08be4.mp4
             alt: "The Fallen: Dark Attack on Decaying Enemy"
             caption: Dark Attack on Decaying Enemy
           - kind: video
-            src: https://media.malachek.com/live/5067a4afd95e78db1e90298e025300b1e834fce8.mp4
+            src: https://media.malachek.com/live/v2/5067a4afd95e78db1e90298e025300b1e834fce8.mp4
             alt: "The Fallen: Stunning Enemy with Daze"
             caption: Stunning Enemy with Daze
       - id: abilities-and-targeting
@@ -201,15 +201,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/38cee28fab7dc99050b3b414ec33ed4e4e4be10e.mp4
+            src: https://media.malachek.com/live/v2/38cee28fab7dc99050b3b414ec33ed4e4e4be10e.mp4
             alt: "The Fallen: Ultimate Ability State"
             caption: Ultimate Ability State
           - kind: video
-            src: https://media.malachek.com/live/bebceacd2f77e6cfb1ff7834d60bf5ec11afe87a.mp4
+            src: https://media.malachek.com/live/v2/bebceacd2f77e6cfb1ff7834d60bf5ec11afe87a.mp4
             alt: "The Fallen: Anim Warping"
             caption: Anim Warping
           - kind: video
-            src: https://media.malachek.com/live/be45ff33f9f0a78fd2644a1f9a59938b04ccd110.mp4
+            src: https://media.malachek.com/live/v2/be45ff33f9f0a78fd2644a1f9a59938b04ccd110.mp4
             alt: "The Fallen: Charged Attack Parry"
             caption: Charged Attack Parry
       - id: architecture
@@ -248,15 +248,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/e483936287537041290b8ce91483c0deed50d0a6.mp4
+            src: https://media.malachek.com/live/v2/e483936287537041290b8ce91483c0deed50d0a6.mp4
             alt: "The Fallen: Standard Combo Chain"
             caption: Standard Combo Chain
           - kind: video
-            src: https://media.malachek.com/live/60949edc904ff94b8d3bddc4bf5468def5d6b389.mp4
+            src: https://media.malachek.com/live/v2/60949edc904ff94b8d3bddc4bf5468def5d6b389.mp4
             alt: "The Fallen: Standard Combo Chain with Input Buffering"
             caption: Standard Combo Chain with Input Buffering
           - kind: video
-            src: https://media.malachek.com/live/e7b50b970e9efc3704779826d6f71115f31b04a6.mp4
+            src: https://media.malachek.com/live/v2/e7b50b970e9efc3704779826d6f71115f31b04a6.mp4
             alt: "The Fallen: Hitboxes authored on the timeline"
             caption: Hitboxes authored on the timeline
       - id: decay-and-daze
@@ -279,15 +279,15 @@ sections:
         cols: 3
         items:
           - kind: video
-            src: https://media.malachek.com/live/4a984b7cfbd967c42443d2284968b717a01196a2.mp4
+            src: https://media.malachek.com/live/v2/4a984b7cfbd967c42443d2284968b717a01196a2.mp4
             alt: "The Fallen: Attack + Decay Attack"
             caption: Attack + Decay Attack
           - kind: video
-            src: https://media.malachek.com/live/e9579fff6b7d174be741e9c179d34480e75c768c.mp4
+            src: https://media.malachek.com/live/v2/e9579fff6b7d174be741e9c179d34480e75c768c.mp4
             alt: "The Fallen: Decay DOT"
             caption: Decay DOT
           - kind: video
-            src: https://media.malachek.com/live/5067a4afd95e78db1e90298e025300b1e834fce8.mp4
+            src: https://media.malachek.com/live/v2/5067a4afd95e78db1e90298e025300b1e834fce8.mp4
             alt: "The Fallen: Daze to Stun"
             caption: Daze to Stun
   - id: design

@@ -207,3 +207,8 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Fonts are self-hosted from public/fonts (Latin subset, copied from @fontsource; the packages stay in package.json as the source). @font-face lives in src/styles/fonts.css.
 - First-visit jitter measured on the live site (cold cache, throttled): phone CLS 0.24 when fonts arrived ~1.1s, because the fallback (system-ui) wrapped the hero text differently; fonts only began downloading after the CSS finished.
 - Fix: preload Roboto 400/700 and Jersey 10 in <head>; metric-matched fallbacks ('Roboto Fallback' = Arial with Roboto's size/ascent/descent, 'Jersey Fallback' = Arial at 74%, matching line wraps on ~99% of heading/width combinations); Jersey uses font-display: block (no lookalike to flash), Roboto keeps swap.
+
+## Videos broken after launch: fixed (2026-09-30)
+- Cause: the Worker's custom domains were type "Production and Preview", which adds a *.malachek.com wildcard. It caught media.malachek.com, so every clip URL returned the site's 404 page (only same-origin GIFs kept working). Malachy switched all six domains to "Production" only; media.malachek.com serves from R2 again (206 + video/mp4 + byte ranges). Never use "Production and Preview" on these domains.
+- While at it: all 30 clips rewritten with `ffmpeg -c copy -movflags +faststart` (moov atom first, no re-encode; Safari starts faster) and re-uploaded to live/v2/<hash>.mp4 with an explicit video/mp4 type and a one-year immutable cache header (`npm run media:migrate -- reupload`, dev task `media-reupload`). Content points at live/v2/. Old live/<hash>.mp4 objects are left in the bucket.
+- scripts/media-check.mjs (`/__task?name=media-check`) prints what media.malachek.com returns for a clip, old and v2.

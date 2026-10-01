@@ -21,7 +21,7 @@ const { mp4, webm, poster: posterProp, label, width = 1920, height = 1080, class
 // Every clip on R2 has a still of its first second at /art/posters/<hash>.webp, so
 // something shows before playback and whenever a browser blocks autoplay
 // (Safari in Low Power Mode, data saver).
-const r2 = mp4.match(/media\.malachek\.com\/live\/([0-9a-f]+)\.mp4$/);
+const r2 = mp4.match(/media\.malachek\.com\/live\/(?:v2\/)?([0-9a-f]+)\.mp4$/);
 const poster = posterProp ?? (r2 ? `/art/posters/${r2[1]}.webp` : undefined);
 ---
 <video

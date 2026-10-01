@@ -64,6 +64,8 @@ const devTasks = {
       'media-setup': ['run', 'media:migrate', '--', 'setup'],
       'media-images': ['run', 'media:migrate', '--', 'images'],
       'media-videos': ['run', 'media:migrate', '--', 'videos'],
+      'media-reupload': ['run', 'media:migrate', '--', 'reupload'],
+      'media-check': ['run', 'media:check'],
     };
     server.middlewares.use('/__task', (req, res) => {
       const name = new URL(req.url ?? '', 'http://x').searchParams.get('name') ?? '';
