@@ -25,3 +25,17 @@ Old links keep working: /exo, /the-fallen, /kawaiian-isolation, /burning-out, /b
 
 ## Rollback (if anything is wrong)
 Remove the six custom domains from the Worker, then re-create the records from the step-1 screenshot. Figma Sites serves again within minutes.
+
+## Rollback record (captured 2026-09-30, before the apex swap)
+| Name | Type | Content | Proxy |
+|---|---|---|---|
+| malachek.com | A | 204.69.207.1 | DNS only |
+| www.malachek.com | CNAME | sites.figma.net | DNS only |
+| _figma_sites_verify.malachek.com | TXT | "v=faf18e28-91bd-4753-9b0b-7dee15125692" | DNS only (left in place) |
+| media.malachek.com | R2 | malachek-media | Proxied (left in place) |
+
+Progress: gameplay., tools., design., dev. added as Worker custom domains on 2026-09-30 and checked.
+
+## Done (2026-09-30, ~18:10 PT)
+Malachy deleted the apex A (204.69.207.1) and www CNAME (sites.figma.net) records and added malachek.com and www.malachek.com as Worker custom domains. Checked after propagation: malachek.com serves this site; www redirects to the apex keeping the path; gameplay., tools., design. serve their role sites; dev. redirects to the apex; /cora redirects to /taralumen-cora; /gameplay/exo on the apex redirects to gameplay.malachek.com; robots.txt and /sitemap.xml are served; videos play from media.malachek.com.
+Still to do (Malachy, later): remove the custom domain from Figma Sites once he's happy; the _figma_sites_verify TXT record can then be deleted.

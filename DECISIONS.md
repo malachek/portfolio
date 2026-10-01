@@ -188,3 +188,6 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - axe accessibility scan (WCAG 2.1 AA + best practice) on 17 pages: clean after three fixes. Project Overview labels use --muted-text (--nav was 4.42:1 on the panel); accent buttons darken to 4.6:1 before rounding (Burnt Out Games orange came out at 4.49); text-block titles are h3 unless a subsection heading precedes them (Limital skipped from h2 to h4).
 - The 13 heaviest still PNGs in public/art/live (hero backgrounds, avatar) converted to WebP: 7.4 MB to 0.75 MB. Originals moved to ../_to_delete/portfolio-old-pngs.
 - Dev-server note: editing a project _base.md while `npm run dev` runs can show a false "overlays → <slug>/_base" schema error (Astro's watcher ignores the '!*/_base.md' exclusion). Restart the dev server; `astro check` is the real test.
+
+## Launch (2026-09-30)
+- malachek.com, www, gameplay., tools., design. and dev. now point at the malachek-portfolio Worker. Rollback values and the check list are in docs/DNS-CUTOVER.md.
