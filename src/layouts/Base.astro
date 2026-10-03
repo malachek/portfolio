@@ -10,6 +10,7 @@ import { getEntry } from 'astro:content';
 import Header from '@/components/site/Header.astro';
 import Footer from '@/components/site/Footer.astro';
 import Lightbox from '@/components/media/Lightbox.astro';
+import Intro from '@/components/site/Intro.astro';
 import { APEX_ROLE, getRole, href } from '@/lib/content';
 import { accentVars } from '@/lib/color';
 
@@ -47,6 +48,8 @@ const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- First page of a visit: cover the page until fonts and hero art are in (Intro.astro). -->
+    <script is:inline>try{if(!sessionStorage.getItem('mk-intro'))document.documentElement.classList.add('is-intro')}catch(e){}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#010210" />
@@ -69,6 +72,7 @@ const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' 
     <slot name="head" />
   </head>
   <body style={accent ? accentVars(accent) : undefined}>
+    <Intro />
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header name={site.name} github={site.github} linkedin={site.linkedin} nav={nav} homeHref={homeHref} roleId={roleId} />
     <main id="main" tabindex="-1">

@@ -287,15 +287,17 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     .fcard--experience .fcard__titlebar, .fcard--experience .fcard__chips { padding-inline: 0; }
     .fcard__links :global(svg) { width: 24px; height: 24px; }
     .fcard__cta { justify-content: center; }
+    /* 8px between clip and hover ring, ring = clip radius + 8 (concentric), so the
+       ring never touches the video. */
     .fcard__media {
       flex: 0 0 280px;
-      padding: 0 0 16px;
-      border-radius: 16px;
+      padding: 8px 8px 16px;
+      border-radius: 24px;
       overflow: clip;
       background: var(--scrim-40);
       margin-top: 16px;
     }
-    .fcard--experience .fcard__media { flex: none; width: 320px; padding: 8px 0 0; background: none; margin: 0; }
+    .fcard--experience .fcard__media { flex: none; width: 320px; padding: 8px; background: none; margin: 0; }
     .fcard__text:hover, .fcard__media:hover { background-color: rgb(0 0 0 / 0.5); }
     .fcard__blurb { padding: 8px 8px 0; }
   }
@@ -324,8 +326,10 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     .fcard__titles { align-items: center; text-align: center; gap: 12px; }
     .fcard__chips { justify-content: center; gap: 6px; padding: 0; }
     .fcard__links :global(svg) { width: 24px; height: 24px; }
+    /* Phones: the whole capsule (24px corners) is the ring, so the clip sits 8px in
+       with 16px corners. */
     .fcard__media,
-    .fcard--experience .fcard__media { flex: none; width: 100%; padding: 0; margin: 0; background: none; }
+    .fcard--experience .fcard__media { flex: none; width: 100%; padding: 8px 8px 0; margin: 0; background: none; }
     .fcard__blurb { padding: 8px 16px 0; }
     /* Phones: text and media stack inside one capsule, so they hover as one.
        The title link stretches over the whole panel; one ring around it all. */

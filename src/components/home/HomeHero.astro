@@ -3,7 +3,8 @@
  * Homepage hero, "T1 chunked" (chosen 2026-09-29).
  * The four game images sit behind (4 across, 2x2 on phones). The name sits on
  * the art like a title logo; the two sentences and the "Role // Place" lines
- * each get their own translucent dark box. No buttons: the header carries
+ * each get their own translucent dark box; the roles box carries a small
+ * "Currently" label (the site shows no graduation date). No buttons: the header carries
  * Projects / About / Resume.
  */
 interface Props {
@@ -15,9 +16,10 @@ interface Props {
 }
 const { title, lines, bullets = [], tiles = [], background } = Astro.props;
 const art = tiles.length ? tiles.slice(0, 4) : background ? [background] : [];
+// " B.S." is shown on desktop and tablet only, so the degree line stays on one line on phones.
 const roles = bullets.map((b) => {
   const [t, org = ''] = b.split(' // ');
-  return { t, org };
+  return { t: t.split(/( B\.S\.)/), org };
 });
 ---
 <section class="home-hero">
@@ -30,15 +32,18 @@ const roles = bullets.map((b) => {
       {lines.map((l) => <p>{l}</p>)}
     </div>
     {roles.length > 0 && (
-      <ul class="home-hero__box home-hero__roles" role="list">
-        {roles.map((r) => (
-          <li>
-            <span>{r.t}</span>
-            {r.org && <span class="sl" aria-hidden="true">{'//'}</span>}
-            {r.org && <span>{r.org}</span>}
-          </li>
-        ))}
-      </ul>
+      <div class="home-hero__box home-hero__now">
+        <p class="home-hero__label" id="hero-now">Currently</p>
+        <ul class="home-hero__roles" role="list" aria-labelledby="hero-now">
+          {roles.map((r) => (
+            <li>
+              <span>{r.t.map((part) => (part === ' B.S.' ? <span class="home-hero__wide">{part}</span> : part))}</span>
+              {r.org && <span class="sl" aria-hidden="true">{'//'}</span>}
+              {r.org && <span>{r.org}</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
     )}
   </div>
 </section>
@@ -92,13 +97,23 @@ const roles = bullets.map((b) => {
   }
   .home-hero__lines { display: flex; flex-direction: column; gap: 8px; max-width: 720px; }
   .home-hero__lines p { margin: 0; font-size: 20px; line-height: 1.45; color: var(--text-body); }
-  .home-hero__roles { display: flex; flex-direction: column; gap: 2px; font-size: 17px; line-height: 1.5; color: var(--text); }
+  /* Roles box: same type as the sentences above (size, line height, white body
+     text). "Currently" is a muted label, like the Project Overview labels. */
+  .home-hero__lines p,
+  .home-hero__now { font-size: 20px; line-height: 1.45; }
+  .home-hero__now .home-hero__label { margin: 0 0 4px; font-size: inherit; line-height: inherit; color: var(--muted-text); }
+  /* " B.S." shows only when the hero column has room for the full degree line on one
+     line (about 380px of text at phone size, plus the box padding). */
+  .home-hero__in { container-type: inline-size; }
+  @container (max-width: 418px) { .home-hero__wide { display: none; } }
+  .home-hero__roles { display: flex; flex-direction: column; gap: 4px; color: var(--text-body); }
   .home-hero__roles li { display: flex; flex-wrap: wrap; column-gap: 8px; }
   .sl { color: var(--magenta); font-weight: 700; }
 
   @media (max-width: 1279.98px) {
     .home-hero__name { font-size: 72px; }
-    .home-hero__lines p { font-size: 18px; }
+    .home-hero__lines p,
+    .home-hero__now { font-size: 18px; }
   }
   @media (max-width: 799.98px) {
     .home-hero { min-height: 0; }
@@ -108,8 +123,8 @@ const roles = bullets.map((b) => {
     .home-hero__in { padding: 40px var(--section-pad-x) 48px; gap: 12px; }
     .home-hero__name { font-size: 54px; }
     .home-hero__box { padding: 16px 18px; border-radius: 24px; }
-    .home-hero__lines p { font-size: 17px; }
-    .home-hero__roles { font-size: 15px; gap: 4px; }
+    .home-hero__lines p,
+    .home-hero__now { font-size: 17px; }
   }
   @media (max-width: 359.98px) {
     .home-hero__name { font-size: 46px; }

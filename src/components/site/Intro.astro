@@ -1,0 +1,120 @@
+---
+/**
+ * First-load cover + scroll reveal. Mounted once in Base.astro.
+ *
+ * Cover (designable in Figma as one frame):
+ *   full-screen --ground, MK mark 88px centred, a 120×4 bar 28px below it
+ *   (track white 10%, fill --magenta sliding left to right). Fades out over 320ms.
+ * Shows only on the first page of a visit (sessionStorage), and only with JS
+ * (the head script adds html.is-intro), so it can never trap a page:
+ *   waits for fonts + hero art, at least 400ms, at most 1800ms.
+ *
+ * Reveal: capsules rise 16px and fade from 80% the first time they scroll into
+ * view (tune with --reveal-from / --reveal-shift). JS adds the class, so
+ * without JS nothing is hidden; with Reduce Motion on they fade without moving.
+ */
+---
+<div class="intro" aria-hidden="true">
+  <img class="intro__mark" src="/icons/icon-192.png" alt="" width="88" height="88" />
+  <span class="intro__bar"><span></span></span>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('is-intro')) return;
+    var start = performance.now();
+    var done = false;
+    function out() {
+      root.classList.remove('is-intro', 'is-intro-out');
+      document.dispatchEvent(new Event('mk-intro-done'));
+    }
+    function finish() {
+      if (done) return;
+      done = true;
+      var wait = Math.max(0, 400 - (performance.now() - start));
+      setTimeout(function () {
+        root.classList.add('is-intro-out');
+        try { sessionStorage.setItem('mk-intro', '1'); } catch (e) {}
+        setTimeout(out, 360);
+      }, wait);
+    }
+    // Hero art: the first background image on the page (homepage tiles, project hero).
+    function heroArt() {
+      var el = document.querySelector('.home-hero__bg i, .hero__bg, [style*="background-image"]');
+      if (!el) return Promise.resolve();
+      var m = (el.getAttribute('style') || getComputedStyle(el).backgroundImage || '').match(/url\(['"]?([^'")]+)/);
+      if (!m) return Promise.resolve();
+      return new Promise(function (res) { var i = new Image(); i.onload = i.onerror = res; i.src = m[1]; });
+    }
+    // This runs at the top of <body>, before the hero exists: look for it once the DOM is parsed.
+    document.addEventListener('DOMContentLoaded', function () {
+      var fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      Promise.all([fonts, heroArt()]).then(finish, finish);
+    });
+    setTimeout(finish, 1800);
+  })();
+</script>
+
+<script>
+  const SELECTOR = '.capsule, .fcard__panel, .wcard, .home-hero__box, .skills__list';
+  const els = [...document.querySelectorAll<HTMLElement>(SELECTOR)];
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      },
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.08 },
+    );
+    for (const el of els) el.classList.add('reveal');
+    // Start once the cover is gone, so the first capsules animate where you can see them.
+    const start = () => els.forEach((el) => io.observe(el));
+    if (document.documentElement.classList.contains('is-intro')) document.addEventListener('mk-intro-done', start, { once: true });
+    else start();
+  }
+</script>
+
+<style is:global>
+  .intro { display: none; }
+  html.is-intro .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 28px;
+    background: var(--ground);
+    transition: opacity 320ms ease, visibility 0s linear 320ms;
+  }
+  html.is-intro { overflow: hidden; }
+  html.is-intro-out .intro { opacity: 0; visibility: hidden; }
+  html.is-intro-out { overflow: auto; }
+  .intro__mark { width: 88px; height: 88px; border-radius: 50%; }
+  .intro__bar { position: relative; width: 120px; height: 4px; border-radius: 2px; background: rgb(255 255 255 / 0.1); overflow: hidden; }
+  .intro__bar span {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 40%;
+    border-radius: 2px;
+    background: var(--magenta);
+    animation: intro-bar 900ms cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  @keyframes intro-bar { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+
+  .reveal {
+    opacity: var(--reveal-from, 0.8);
+    transform: translateY(var(--reveal-shift, 16px));
+    transition: opacity 520ms ease, transform 620ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro__bar span { animation: none; width: 100%; }
+    .reveal { transform: none; } /* Reduce Motion: the fade stays, the movement goes */
+  }
+</style>

@@ -212,3 +212,14 @@ Goal from Malachy: keep 90-95% of the Figma design, fix what looks off, tidy to 
 - Cause: the Worker's custom domains were type "Production and Preview", which adds a *.malachek.com wildcard. It caught media.malachek.com, so every clip URL returned the site's 404 page (only same-origin GIFs kept working). Malachy switched all six domains to "Production" only; media.malachek.com serves from R2 again (206 + video/mp4 + byte ranges). Never use "Production and Preview" on these domains.
 - While at it: all 30 clips rewritten with `ffmpeg -c copy -movflags +faststart` (moov atom first, no re-encode; Safari starts faster) and re-uploaded to live/v2/<hash>.mp4 with an explicit video/mp4 type and a one-year immutable cache header (`npm run media:migrate -- reupload`, dev task `media-reupload`). Content points at live/v2/. Old live/<hash>.mp4 objects are left in the bucket.
 - scripts/media-check.mjs (`/__task?name=media-check`) prints what media.malachek.com returns for a clip, old and v2.
+
+## Intro cover and scroll reveal (2026-10-01)
+- src/components/site/Intro.astro, mounted at the top of <body> in Base.astro; a one-line head script adds html.is-intro.
+- Cover (one Figma frame): full-screen --ground, MK mark 88px centred, a 120×4px bar 28px below (track white 10%, fill --magenta 40% wide sliding across, 900ms loop). Fades out over 320ms.
+  Rules: first page of a visit only (sessionStorage 'mk-intro'); JS-only (no JS = no cover); lifts when fonts + the first hero image are ready, never sooner than 400ms, never later than 1800ms.
+- Reveal: .capsule, .fcard__panel, .wcard, .home-hero__box, .skills__list rise 16px and fade from 80% opacity (520/620ms) the first time they enter the view; starts after the cover lifts. Tunable via --reveal-from / --reveal-shift. Reduce Motion: fade only, no movement. Note: Malachy's Mac has Reduce Motion on, so locally he sees the fade-only version.
+- Tested in headless Chromium (standalone page): cover waits for slow hero art then fades; skipped on reload; reveals fire on scroll; no errors. The desktop app's preview pane doesn't run IntersectionObserver, so reveals can't be checked there.
+
+## No graduation date (2026-10-02)
+- Malachy may do a fifth year or a one-year master's, so the graduation date (Jun 2027 vs Jun 2028) is decided per application. Removed from the site: hero line "UC Irvine '27" → "UC Irvine" on all role sites; About intro no longer says "graduating in June 2027". Kept: "Open to Summer 2027 internships…" (availability, not graduation) and VGDC "President 2026 - 2027" (a term).
+- Resume PDFs embedded on /resume rebuilt without the date (resume-system output/portfolio-*/resume/20261002-2129, copied to final/); Malachy uploads them to the same Drive files via Manage versions so the IDs in roles/*.yaml stay valid. Resume-system rules updated to match (master/03-education.md).
