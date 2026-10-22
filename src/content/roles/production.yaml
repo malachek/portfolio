@@ -1,0 +1,69 @@
+# Production / project management site: production.malachek.com. Built 2026-10-21.
+# Sources: master/01-summaries.md [5], 5-1 VGDC [5], 6-3 Kawai'ian [5], 6-1 EXO [5], 4-1 Burnt Out Games [5].
+label: Production
+jobTitle: Technical Producer
+order: 6
+enabled: true
+host: production.malachek.com
+seo:
+  title: Malachy Kennedy | Technical Producer
+  description: 'Technical producer with two shipped Steam titles and a third approved for release. Led an 18-contributor technical department and runs a 600+ member game development organization.'
+resume: /resume
+resumeDriveId: 1xfNvlQHcWqvD_Pl2vQKWvbShr6beT6pN
+hero:
+  title: Malachy Kennedy
+  tiles:
+  - /art/live/9be49ad03c738b0097d663bfd53d30329406dbec.webp
+  - /art/live/de093ab5c6458b75392c96d2ee63ca5356f3c2ec.webp
+  - /art/live/d43cbfd72790816057b2b227ecb49fb376f08c41.webp
+  - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
+  lines:
+  - Technical producer with two shipped Steam titles and a third approved for release, who led an 18-contributor technical department across audio, design, programming, and writing.
+  - Builds the systems teams plan in, from custom Agile tooling to onboarding docs, so the work outlasts any one person.
+  bullets:
+  - President // Video Game Development Club at UC Irvine
+  - Co-Founder // Burnt Out Games, LLC
+  - Game Design B.S. & SWE B.S. Student // UC Irvine
+  credential: 2 SHIPPED STEAM TITLES · 1 APPROVED FOR RELEASE // 600+ MEMBER ORGANIZATION · 13 DEPARTMENTS
+  avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.webp
+featured:
+- kawaiian-isolation
+- exo
+- burning-out
+alsoBuilt:
+- resume-system
+- masks-on
+experience:
+- heading: Leadership & Experience
+  items:
+  - vgdc
+  - burnt-out-games-llc
+  - taralumen-cora
+skills:
+  heading: Skills
+  lines:
+  - label: Production
+    items:
+    - Agile & Scrum
+    - Waterfall
+    - Scheduling & milestones
+    - Scope management
+    - Risk management
+    - Release management
+    - Onboarding & documentation
+  - label: Tools
+    items:
+    - Jira
+    - Confluence
+    - Trello
+    - Airtable
+    - Miro
+    - Google Sheets & Apps Script
+    - Microsoft Office
+  - label: Pipeline
+    items:
+    - Perforce (AWS EC2)
+    - Steamworks publishing
+    - Unreal Engine 5
+    - Unity 6
+    - Figma

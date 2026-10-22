@@ -23,7 +23,7 @@ hero:
   - Game Design B.S. & SWE B.S. Student // UC Irvine
   lines:
   - Gameplay and systems engineer with shipped UE5 and Unity titles on Steam, specializing in combat systems, animation pipelines, and engine-level tooling.
-  - 'I design the systems and then build them, in C++ and UE5 Blueprints: ability kits, enemy rosters, movement, and the tools and pipelines the rest of the team works in.'
+  - 'Designs the systems, then builds them in C++ and UE5 Blueprints: ability kits, enemy rosters, movement, and the tools and pipelines the rest of the team works in.'
   title: Malachy Kennedy
   credential: 2 SHIPPED STEAM TITLES · 1 APPROVED FOR RELEASE // UNREAL ENGINE 5 · UNITY 6
   avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.webp
@@ -33,6 +33,7 @@ featured:
 - kawaiian-isolation
 - burning-out
 alsoBuilt:
+- masks-on
 - night-walk
 - loonage
 - little-rockstar

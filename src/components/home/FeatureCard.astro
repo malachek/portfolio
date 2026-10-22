@@ -212,7 +212,6 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
   .fcard__links a { transition: transform 120ms ease; }
   .fcard__links a:hover { transform: scale(1.1); }
   /* Kept under Reduce Motion: small, pointer-triggered, no looping (Malachy's call, like the autoplay clips). */
-  .fcard--experience .fcard__panel { gap: 32px; padding: 12px 16px 0 32px; max-width: 1080px; }
   .fcard__text {
     display: flex;
     flex-direction: column;
@@ -221,10 +220,11 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     max-width: 100%;
     padding: 16px 20px;
   }
-  .fcard--experience .fcard__text { flex: 1 1 0; width: auto; gap: 16px; }
   .fcard__titlebar { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 16px; }
   .fcard--experience .fcard__titlebar { align-items: flex-end; }
   .fcard__titles { display: flex; flex-direction: column; gap: 16px; }
+  /* Experience cards share the project layout; only the role + company stack differs. */
+  .fcard--experience .fcard__titles { gap: 8px; }
   .fcard__title {
     font-weight: 900;
     font-size: var(--fs-card-title);
@@ -252,7 +252,6 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     flex: 0 0 452px;
     padding: 12px;
   }
-  .fcard--experience .fcard__media { flex-basis: 412px; padding: 12px; }
   .fcard__media :global(.media) { width: 100%; gap: 0; }
   .fcard__media :global(.media__img),
   .fcard__media :global(.clip) { border-radius: 16px; object-fit: contain; background: none; }
@@ -265,16 +264,8 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
 
   @media (max-width: 1279.98px) {
     .fcard { gap: 4px; padding: 16px; }
-    .fcard--experience { gap: 12px; padding: 32px 64px; }
     .fcard__meta { max-width: var(--frame-max); padding-inline: var(--section-pad-x); } /* text lines up with the header and headings */
     .fcard__panel { gap: 8px; max-width: 768px; padding: 0 0 16px; background: none; }
-    .fcard--experience .fcard__panel {
-      flex-direction: column-reverse;
-      align-items: center;
-      max-width: 640px;
-      padding: 8px 32px;
-      background: var(--scrim-40);
-    }
     .fcard__text {
       flex: 1 1 0;
       width: auto;
@@ -282,9 +273,7 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
       border-radius: 32px;
       background: var(--scrim-40);
     }
-    .fcard--experience .fcard__text { padding: 0; background: none; gap: 8px; width: 100%; }
     .fcard__titlebar, .fcard__chips { padding-inline: 16px; }
-    .fcard--experience .fcard__titlebar, .fcard--experience .fcard__chips { padding-inline: 0; }
     .fcard__links :global(svg) { width: 24px; height: 24px; }
     .fcard__cta { justify-content: center; }
     /* 8px between clip and hover ring, ring = clip radius + 8 (concentric), so the
@@ -297,14 +286,12 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
       background: var(--scrim-40);
       margin-top: 16px;
     }
-    .fcard--experience .fcard__media { flex: none; width: 320px; padding: 8px; background: none; margin: 0; }
     .fcard__text:hover, .fcard__media:hover { background-color: rgb(0 0 0 / 0.5); }
     .fcard__blurb { padding: 8px 8px 0; }
   }
 
   @media (max-width: 799.98px) {
     .fcard, .fcard--experience { gap: 12px; padding: 20px var(--section-pad-x); }
-    .fcard--experience { padding-block: 32px; }
     .fcard__meta { justify-content: space-between; gap: 16px; max-width: none; padding-inline: 4px; font-size: 15px; }
     .fcard__panel,
     .fcard--experience .fcard__panel {
@@ -316,7 +303,6 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
       border-radius: 24px;
       background: var(--scrim-40);
     }
-    .fcard--experience .fcard__panel { gap: 24px; }
     .fcard__text,
     .fcard--experience .fcard__text { padding: 0 16px 20px; background: none; gap: 14px; }
     .fcard__rule { height: 3px; }

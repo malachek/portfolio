@@ -19,7 +19,7 @@ hero:
   - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
   lines:
   - Technical designer specializing in combat and narrative gameplay systems, with three Steam titles across Unreal Engine 5 and Unity 6, two shipped and one pending release.
-  - I implement my own designs in C++ and UE5 Blueprints, from ability kits and enemy rosters to scripted narrative scenes.
+  - Implements those designs in C++ and UE5 Blueprints, from ability kits and enemy rosters to scripted narrative scenes.
   bullets:
   - President // Video Game Development Club at UC Irvine
   - Co-Founder & Game Engineer // Burnt Out Games, LLC
@@ -35,6 +35,7 @@ alsoBuilt:
 - limital
 - comments
 - night-walk
+- masks-on
 - loonage
 experience:
 - heading: Professional Experience

@@ -19,7 +19,7 @@ hero:
   - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
   lines:
   - Gameplay and systems engineer with shipped titles across Unreal Engine 5 and Unity 6, specializing in combat systems, custom physics, and engine-level tooling.
-  - 'I build the architecture and pipelines other people work in: modular C# codebases, data-driven content pipelines, and the source control and release tooling behind them.'
+  - 'Builds the architecture and pipelines other people work in: modular C# codebases, data-driven content pipelines, and the source control and release tooling behind them.'
   bullets:
   - President // Video Game Development Club at UC Irvine
   - Co-Founder & Game Engineer // Burnt Out Games, LLC
@@ -30,8 +30,10 @@ featured:
 - exo
 - kawaiian-isolation
 - the-fallen
-- burning-out
+- masks-on
 alsoBuilt:
+- resume-system
+- burning-out
 - loonage
 - search-engine
 - pintos

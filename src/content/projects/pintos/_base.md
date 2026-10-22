@@ -1,7 +1,7 @@
 ---
 # Pintos: design write-up from master/06-projects/6-12 and threads/DESIGNDOC.txt (2026-09-29). Page on dev, tools and software. Code is NOT published (coursework); ask before changing that.
 title: Pintos Thread Scheduler
-accent: '#FFFFFF'
+accent: '#4F7CAC'
 path: /pintos
 seo:
   title: "Pintos Thread Scheduler | Malachy Kennedy"

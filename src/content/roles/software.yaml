@@ -1,14 +1,15 @@
-# Non-games Software Engineer site: software.malachek.com. PHASE 2, not published (enabled: false).
+# Non-games Software Engineer site: software.malachek.com. Published 2026-10-21.
 # Hero leads with shipped products (09-clarifications); project list leads with Pintos, then Search Engine.
 label: Software
 jobTitle: Software Engineer
 order: 5
-enabled: false
+enabled: true
 host: software.malachek.com
 seo:
   title: Malachy Kennedy | Software Engineer
   description: 'Software engineer with shipped commercial products in C++ and C#: real-time systems, networked multiplayer, and content pipeline automation.'
 resume: /resume
+resumeDriveId: 12aTSvySqTDgILP4903B3TGeBmc9kwZSx
 hero:
   title: Malachy Kennedy
   tiles:
@@ -18,7 +19,7 @@ hero:
   - /art/live/8c465e7c96003b6ee15585450a362f8bd8006dcc.webp
   lines:
   - Software engineer with shipped commercial products in C++ and C#, spanning real-time systems, networked multiplayer, and content pipeline automation.
-  - Two products shipped to a commercial storefront and a third approved for release.
+  - 'Two products shipped to a commercial storefront and a third approved for release. Builds with AI agents the way current teams do: specs, review, and testing on every change.'
   bullets:
   - President // Video Game Development Club at UC Irvine
   - Co-Founder & Game Engineer // Burnt Out Games, LLC
@@ -28,9 +29,11 @@ hero:
 featured:
 - pintos
 - search-engine
+- resume-system
 - exo
-- kawaiian-isolation
+- masks-on
 alsoBuilt:
+- kawaiian-isolation
 - loonage
 - little-rockstar
 experience:
@@ -58,6 +61,13 @@ skills:
     - Object pooling (O(1))
     - SOLID & Dependency Injection
     - Information retrieval (TF-IDF)
+  - label: AI & Automation
+    items:
+    - Claude Code
+    - Agentic workflows
+    - MCP
+    - Python automation
+    - REST APIs
   - label: Tools
     items:
     - Git
