@@ -218,6 +218,8 @@ const roles = defineCollection({
     /** Job title shown above the name in the header, e.g. "Gameplay Engineer". */
     jobTitle: z.string(),
     order: z.number().int(),
+    /** Other role ids to offer in the header's job-title dropdown, in order. Leave out to offer every role. */
+    related: z.array(z.string()).optional(),
     enabled: z.boolean().default(true),
     /** Production host for this role, e.g. gameplay.malachek.com */
     host: z.string(),

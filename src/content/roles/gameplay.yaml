@@ -3,6 +3,7 @@
 label: Gameplay
 jobTitle: Gameplay Engineer
 order: 1
+related: [dev, tools, design]
 enabled: true
 host: gameplay.malachek.com
 seo:

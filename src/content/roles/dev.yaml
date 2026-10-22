@@ -3,6 +3,7 @@
 label: Generalist
 jobTitle: Game Engineer
 order: 0
+related: [gameplay, tools, design]
 enabled: true
 host: malachek.com
 seo:

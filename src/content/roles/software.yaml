@@ -3,6 +3,7 @@
 label: Software
 jobTitle: Software Engineer
 order: 5
+related: [production, tools]
 enabled: true
 host: software.malachek.com
 seo:

@@ -33,10 +33,15 @@ const targets = await Promise.all(
   }),
 );
 const target = (id: string) => targets.find((t) => t.id === id)!;
+// The dropdown offers this role plus the roles its file lists under `related` (all roles if none).
+const related = current.data.related;
+const menuRoles = related
+  ? [current, ...related.map((id) => roles.find((r) => r.id === id)).filter((r): r is NonNullable<typeof r> => !!r)]
+  : roles;
 ---
 <header class="site-header">
   <div class="site-header__inner">
-    {roles.length > 1 ? (
+    {menuRoles.length > 1 ? (
         <details class="role" data-role-menu>
           <summary class="eyebrow role__label">
             <span class="visually-hidden">Portfolio focus: </span>{current.data.jobTitle}
@@ -44,7 +49,7 @@ const target = (id: string) => targets.find((t) => t.id === id)!;
           </summary>
           <div class="role__menu">
             <ul role="list">
-              {roles.map((r) => (
+              {menuRoles.map((r) => (
                 <li>
                   <a
                     class="eyebrow"

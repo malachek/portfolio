@@ -3,6 +3,7 @@
 label: Design
 jobTitle: Technical Game Designer
 order: 3
+related: [dev, gameplay, production]
 enabled: true
 host: design.malachek.com
 seo:

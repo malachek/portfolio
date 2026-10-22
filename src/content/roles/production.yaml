@@ -3,6 +3,7 @@
 label: Production
 jobTitle: Technical Producer
 order: 6
+related: [software, design]
 enabled: true
 host: production.malachek.com
 seo:

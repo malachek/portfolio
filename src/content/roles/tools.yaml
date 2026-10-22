@@ -3,6 +3,7 @@
 label: Tools
 jobTitle: Tools Engineer
 order: 2
+related: [dev, gameplay, software]
 enabled: true
 host: tools.malachek.com
 seo:
