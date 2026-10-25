@@ -71,12 +71,20 @@ skills:
     - Wwise
     - Perforce
     - Git
-    - Roblox Studio
+    - Steamworks
   - label: Systems
     items:
     - Combat systems
-    - Animation pipelines
+    - Animation systems
     - Enemy AI
-    - Networked multiplayer (Mirror)
+    - Networked multiplayer (Mirror, Steamworks)
     - Custom physics
     - Build & content pipelines
+  - label: Concepts
+    items:
+    - OOP & SOLID
+    - Strategy Pattern & Dependency Injection
+    - Data structures & algorithms
+    - Linear algebra & quaternions
+    - Object pooling (O(1))
+    - Multithreading

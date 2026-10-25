@@ -69,5 +69,13 @@ skills:
     - Animation systems
     - Enemy AI
     - Movement & custom physics
-    - Networked multiplayer (Mirror)
+    - Networked multiplayer (Mirror, Steamworks)
     - MVVM hooks for UI, Audio, VFX
+  - label: Concepts
+    items:
+    - Linear algebra & vector math
+    - Quaternions
+    - State machines
+    - Event-driven architecture
+    - OOP & SOLID
+    - Object pooling (O(1))

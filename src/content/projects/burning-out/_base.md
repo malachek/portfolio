@@ -176,7 +176,7 @@ card:
   logo: /art/live/cd20337cc83da35fcaab874e1990acfe1cc9ebad.png-w128.png
   blurb: Co-op horror maze escape, lit and lived only by sharing fire.
   category: Game Project
-  dates: Jan 2025 - Sep 2026
+  dates: Jan 2025 - Aug 2025
   links:
   - icon: steam
     href: https://store.steampowered.com/app/3795170/Burning_Out

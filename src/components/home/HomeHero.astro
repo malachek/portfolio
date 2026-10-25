@@ -5,7 +5,7 @@
  * the art like a title logo; the two sentences and the "Role // Place" lines
  * each get their own translucent dark box; the roles box carries a small
  * "Currently" label (the site shows no graduation date). No buttons: the header carries
- * Projects / About / Resume.
+ * Projects / About / Resume. The name links to the About page.
  */
 interface Props {
   title: string;
@@ -13,8 +13,10 @@ interface Props {
   bullets?: string[];
   tiles?: string[];
   background?: string;
+  /** Where the name links (the role's About page). */
+  nameHref?: string;
 }
-const { title, lines, bullets = [], tiles = [], background } = Astro.props;
+const { title, lines, bullets = [], tiles = [], background, nameHref } = Astro.props;
 const art = tiles.length ? tiles.slice(0, 4) : background ? [background] : [];
 // " B.S." is shown on desktop and tablet only, so the degree line stays on one line on phones.
 const roles = bullets.map((b) => {
@@ -27,7 +29,7 @@ const roles = bullets.map((b) => {
     {art.map((src) => <i style={`background-image:url('${src}')`}></i>)}
   </div>
   <div class="home-hero__in">
-    <h1 class="home-hero__name">{title}</h1>
+    <h1 class="home-hero__name">{nameHref ? <a href={nameHref}>{title}</a> : title}</h1>
     <div class="home-hero__box home-hero__lines">
       {lines.map((l) => <p>{l}</p>)}
     </div>
@@ -88,6 +90,8 @@ const roles = bullets.map((b) => {
     color: var(--text);
     text-shadow: 0 4px 0 rgb(0 0 0 / 0.5), 0 0 24px rgb(0 0 0 / 0.45);
   }
+  .home-hero__name a { color: inherit; text-decoration: none; text-underline-offset: 8px; text-decoration-thickness: 4px; }
+  .home-hero__name a:hover { text-decoration: underline; }
   .home-hero__box {
     background: rgb(1 2 16 / 0.55);
     backdrop-filter: blur(10px);

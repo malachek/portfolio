@@ -65,11 +65,21 @@ skills:
     - Perforce (AWS EC2)
     - Git
     - Steamworks
+    - Visual Studio
+    - Rider
+    - Claude Code
   - label: Systems
+    items:
+    - Content pipelines (CSV to Wwise)
+    - Custom editor tooling
+    - Build & release management
+    - Networked multiplayer (Mirror, Steamworks)
+    - Custom physics
+  - label: Concepts
     items:
     - SOLID & Strategy Pattern
     - Dependency Injection
+    - C# Generics & delegates
+    - Event-driven architecture
+    - Data-oriented design
     - Object pooling (O(1))
-    - Content pipelines
-    - Build & release management
-    - Custom physics

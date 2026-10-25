@@ -9,14 +9,14 @@ import Section from '@/components/layout/Section.astro';
 import FeatureCard from '@/components/home/FeatureCard.astro';
 import AlsoBuilt from '@/components/home/AlsoBuilt.astro';
 import Skills from '@/components/home/Skills.astro';
-import { absUrl, resolveHome, type Role } from '@/lib/content';
+import { absUrl, href, resolveHome, type Role } from '@/lib/content';
 
 interface Props { role: Role }
 const { role } = Astro.props;
 const home = await resolveHome(role);
 ---
 <Base title={role.data.seo.title} description={role.data.seo.description} canonical={absUrl(role, '/')} roleId={role.id}>
-  <HomeHero title={home.hero.title} lines={home.hero.lines} bullets={home.hero.bullets} tiles={home.hero.tiles} background={home.hero.background} />
+  <HomeHero title={home.hero.title} lines={home.hero.lines} bullets={home.hero.bullets} tiles={home.hero.tiles} background={home.hero.background} nameHref={href(role.id, '/about')} />
 
   <Section heading={home.selectedWorkHeading} id="projects" fullBleed>
     <div class="cards">

@@ -59,16 +59,24 @@ skills:
     items:
     - Concurrency & synchronization
     - Data structures & algorithms
-    - Object pooling (O(1))
-    - SOLID & Dependency Injection
     - Information retrieval (TF-IDF)
+    - Networked multiplayer (Mirror, Steamworks)
+    - REST APIs
+    - OAuth2 with PKCE
+  - label: Concepts
+    items:
+    - OOP & SOLID
+    - Strategy Pattern & Dependency Injection
+    - Object pooling (O(1))
+    - Event-driven architecture
+    - Memory management
+    - Multithreading
   - label: AI & Automation
     items:
     - Claude Code
     - Agentic workflows
     - MCP
     - Python automation
-    - REST APIs
   - label: Tools
     items:
     - Git

@@ -367,7 +367,7 @@ card:
   logo: /art/live/ce44e07dc887d4f99a6bfd0db1a8a922f3908549.png.png
   blurb: Third-person movement shooter on spherical planets, where speed is the weapon.
   category: Game Project
-  dates: Aug 2024 - Present
+  dates: Aug 2025 - Present
   links:
   - icon: steam
     href: https://store.steampowered.com/app/4587490/EXO

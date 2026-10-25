@@ -23,13 +23,13 @@ overview:
     - label: Role
       value: President
     - label: Board
-      value: 44 (60+ during turnover0
+      value: 44 (60+ during turnover)
     - label: Members
       value: 600+ Yearly Active
     - label: Depts
       value: "13"
     - label: Term
-      value: President 2026 - 2027
+      value: President since Jan 2026
     - label: Tools
       value: Apps Script, Sheets, Figma
 sections:

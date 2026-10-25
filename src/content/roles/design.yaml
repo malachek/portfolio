@@ -55,6 +55,13 @@ skills:
     - Game Loops
     - Encounter & pacing design
     - Narrative design
+  - label: Systems
+    items:
+    - Stat & damage formula modeling
+    - Resource economy design
+    - Diminishing-returns balancing
+    - Game feel & juice
+    - Onboarding & tutorialization
   - label: Research
     items:
     - Playtesting

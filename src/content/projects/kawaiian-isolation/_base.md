@@ -262,7 +262,7 @@ card:
   logo: /art/live/5e20111865f706bd15b7d90449d40bb7373405d0.png-w128.png
   blurb: First-person narrative adventure horror. 30+ contributors.
   category: Game Project
-  dates: Apr 2024 - Jan 2026
+  dates: Apr 2024 - May 2026
   links:
   - icon: steam
     href: https://store.steampowered.com/app/3812810/Kawaiian_Isolation

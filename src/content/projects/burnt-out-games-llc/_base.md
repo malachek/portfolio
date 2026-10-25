@@ -56,11 +56,11 @@ sections:
       - id: why-we-incorporated-text-1
         type: text
         md: |-
-          The other reason was positioning. Conner and I both wanted to be developers, not student developers. Our games are meant to reach people, and "student project" is a box that decides how far something travels before anyone has played it.
+          The other reason was positioning. My co-founder and I both wanted to be developers, not student developers. Our games are meant to reach people, and "student project" is a box that decides how far something travels before anyone has played it.
 
           We also wanted to be in the business of the business. You learn the industry faster as a verified contributor inside it than as someone studying it.
 
-          Conner is a business major and handled the legal side with the UCI law clinic. We're a full entity, Schedule Bs and all.
+          My co-founder is a business major and handled the legal side with the UCI law clinic. We're a full entity, Schedule Bs and all.
   - id: what-i-built
     heading: What I Built
     lead: The technical side of three releases. Why it works this way is in How Incorporating Changed the Work, below.
@@ -81,7 +81,7 @@ sections:
       - id: studio-logistics-text
         type: text
         md: |-
-          Conner and I drafted the revenue model. Developer share is points-based:
+          My co-founder and I drafted the revenue model. Developer share is points-based:
 
           - Role points scale with seniority and quarters involved.
           - Active points come from standups attended against standups expected, with grace.
@@ -132,7 +132,7 @@ sections:
         md: |-
           It changed how we work with people. Non-studio members joining a project sign NDAs and contracts now.
 
-          Conner and I drafted the revenue model. Developer share is points-based:
+          My co-founder and I drafted the revenue model. Developer share is points-based:
 
           - Role points scale with seniority and quarters involved.
           - Active points come from standups attended against standups expected, with grace for missed ones.
