@@ -55,6 +55,7 @@ sections:
             caption: C++ targeting, anim warping, direction camera shake, kockback
       - id: project-description-text-1
         type: text
+        collapse: true
         md: |-
           Animation cancelling is the core of the whole thing. My special doubles as an attack-chain reset, so pressing it keeps you attacking.
 
@@ -94,6 +95,7 @@ sections:
         md: I rewrote GAS’s damage pipeline to account for custom interactions and complex systematic interactions.
       - id: damage-and-stats-list
         type: bullets
+        peek: 2
         items:
           - "Rewrote the GAS damage pipeline in C++: custom damage types, formula-driven resolution, layered modifiers, split callbacks"
           - "Nine derived stats over four exposed resources: health, stamina, energy, daze"
@@ -126,6 +128,7 @@ sections:
         md: Where the variety comes from. Input-driven Animation System.
       - id: animation-system-and-feel-list
         type: bullets
+        peek: 2
         items:
           - Four-hit chain into charged attack, special and ultimate, sequenced through AnimNotify hitboxes
           - "Input buffering: inputs sent mid-action queue and fire the instant recovery ends"
@@ -161,6 +164,7 @@ sections:
         md: What decides which route through the kit is right for this enemy.
       - id: status-systems-list
         type: bullets
+        peek: 2
         items:
           - "Decay : A damage-over-time debuff that re-resolves the entire kit against that target, with bonus dark damage scaling off current health, energy returned on dark damage, healing on kill, and mass detonation by the ultimate"
           - "Daze: a stagger meter. Stuns at max, increases damage taken, strips 50% defense, doubles pierced damage. Mine is the implementation and the tuning."
@@ -190,6 +194,7 @@ sections:
         md: An ability has to give value and variety to the kit.
       - id: abilities-and-targeting-list
         type: bullets
+        peek: 2
         items:
           - Special ability doubling as an auto-attack reset
           - "Ultimate: detonates every active decay instance, refunds energy per pop, then drains health and converts all dark damage to lifesteal; self-extending on correct sequencing, early recast refunds health equal to decay damage dealt"
@@ -220,6 +225,7 @@ sections:
         md: Seven people building against combat without breaking it
       - id: architecture-list
         type: bullets
+        peek: 2
         items:
           - C++ combat core bridged to UE5 Blueprints with typed callbacks used to spawn damage numbers consistently
           - C++ classes for UI hooks to optimize stat check calls and provide to UI Designer
@@ -227,6 +233,60 @@ sections:
           - Data Structures to store player and enemy stats to test scaling
           - Save system to save and load player stats as they progress run-to-run
           - Designers could build against combat without being able to break it
+  - id: tech-process
+    heading: Tech Process
+    lead: Specced in a GDD first, then built and tested against it.
+    blocks:
+      - id: tech-process-damage
+        type: media
+        md: "Every hit runs through one C++ execution: read the tags and stats, roll crits (Normal and Pierce share a roll, Dark rolls alone, Decay copies a Dark crit or rolls its own), resolve each damage type, apply stun and Fallen modifiers, then output. Each hit fires one of 8 events to Blueprint, so UI, audio and VFX hook in without touching the math."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/the-fallen/fallen-damage.webp
+            alt: "Diagram: one hit through the damage pipeline: damage type, scaling, mitigation, decay bonuses, and resources, ending in 8 Blueprint events"
+            caption: One hit through the rewritten damage pipeline.
+      - id: tech-process-ult
+        type: media
+        md: "Pressing Q bursts (popping every Decay, refunding energy, resetting the special) and enters The Fallen, a gameplay-tag state that changes how every hit resolves. Recasting or running out exits and heals for the decay damage stored during it."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/the-fallen/fallen-ult.webp
+            alt: "State machine: neutral, burst, The Fallen state and exit, gated by the State.Status.TheFallen gameplay tag"
+            caption: The ultimate as a state machine.
+      - id: tech-process-levels
+        type: media
+        md: "The GDD's 28 level-up bundles, each spending exactly 3 stars across the 11 stats, so no pick is strictly better and each one points a build in a direction."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/the-fallen/fallen-levels.webp
+            alt: "Matrix: 28 level-up bundles against 11 stats, each bundle worth exactly 3 stars"
+            caption: All 28 level-up bundles on one budget.
+      - id: tech-process-docs
+        type: subsection
+        title: Spec & Test Harness
+      - id: tech-process-docs-media
+        type: media
+        cols: 2
+        items:
+          - kind: image
+            src: /art/process/the-fallen/gdd-spec.webp
+            alt: "The Fallen combat GDD: attack chain, special, ultimate, and stat definitions"
+            caption: The combat spec
+          - kind: image
+            src: /art/process/the-fallen/gdd-formulas.webp
+            alt: "The Fallen GDD formulas for decay, pierce, lifesteal and cooldown refunds"
+            caption: The formulas, written before the code
+          - kind: image
+            src: /art/process/the-fallen/blueprint-harness.webp
+            alt: "Unreal Editor: BP_Enemy_Test1 with the combat component and the eight damage and crit events"
+            caption: Test enemy wired to all 8 damage events
+          - kind: image
+            src: /art/process/the-fallen/debug-overlay.webp
+            alt: "In-game debug overlay showing every live stat, decay ticks and resource bars"
+            caption: Live stat overlay for tuning
   - id: breakdowns
     heading: Breakdowns
     blocks:
@@ -235,6 +295,7 @@ sections:
         title: How one character can hold the field (animations)
       - id: how-one-character-can-hold-the-field-animations-text
         type: text
+        collapse: true
         md: |-
           The challenge was one character, and the genre I was borrowing from builds variety by swapping. So the variety had to come from somewhere else, and at its core it came from the animation system.
 
@@ -264,6 +325,7 @@ sections:
         title: Decay & Daze
       - id: decay-and-daze-text
         type: text
+        collapse: true
         md: |-
           The systems layer on top of cancelling. It decides which of those routes is right for the enemy in front of you.
 
@@ -306,6 +368,7 @@ sections:
           That constraint drove everything after it. If the player never swaps, every source of variety has to live in one kit, and that kit has to stay interesting for a whole fight instead of a four-second window.
       - id: designing-variety-into-one-character-text-3
         type: text
+        collapse: true
         title: What makes an ability feel like an ability
         md: |-
           An ability is an attack that can't behave like one. It can't be spammable, it needs a reason to press that a basic attack never needs, and it has to give value to the kit and take value back out.
@@ -315,6 +378,7 @@ sections:
           That's an animation-layer mechanic. I wanted a systems layer on top of it.
       - id: designing-variety-into-one-character-text-4
         type: text
+        collapse: true
         title: So what is dark, actually
         md: |-
           Genshin is my main inspiration, so the character needed an element. I picked dark, because I don't think games have really explored it.
@@ -330,6 +394,7 @@ sections:
         md: "The dark overlord version of the power fantasy is specific: sacrifice your own life force to destroy theirs and take it for yourself. So the ultimate drains your health the whole time it's active, converts your dark damage to lifesteal, and pays you back at the end for every point of decay damage it dealt."
       - id: designing-variety-into-one-character-text-6
         type: text
+        collapse: true
         title: Bundling the level-ups
         md: |-
           The usual problem with stat upgrades is that one of them is always correct, so the pick isn't really a pick. So I bundled them: roughly 25 options, most granting a weighted mix of two or three stats. Taking the stat you want usually means taking something else with it, and there's no always-choose-crit answer.

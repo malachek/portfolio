@@ -43,6 +43,7 @@ alsoBuilt:
 - trick-or-treat
 - search-engine
 - pintos
+- resume-system
 experience:
 - heading: Professional Experience
   items:

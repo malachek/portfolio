@@ -61,7 +61,7 @@ sections:
       - id: job-watch-text
         type: text
         md: |-
-          Twice a day it checks 161 studios' own job boards through their public APIs (Greenhouse, Workday, Lever and Ashby), keeps only internships and entry-level roles I'm eligible for, and sorts them by how well they fit.
+          Twice a day it checks 33 studios' own job boards through their public APIs (Greenhouse, Workday, Lever and Ashby), keeps only internships and entry-level roles I'm eligible for, and sorts them by how well they fit.
 
           It never writes a resume on its own: a strong match comes to me as a question, and I decide.
   - id: how-i-built-it
@@ -73,6 +73,15 @@ sections:
           I built it with Claude Code, and the rules file it follows is the real product: every time a run got something wrong, I traced why and wrote a rule so it can't happen again.
 
           The master file is split into an index plus small entry files, so each run reads only what that posting needs.
+      - id: how-i-built-it-diagram
+        type: media
+        md: "Job Watch finds postings, the index routes each run to the 5–7 entry files it needs, every bullet passes the truth gates, the layout engine fits it to one page, and I approve it. Every wrong run becomes a new rule."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/resume-system/resume-pipeline.webp
+            alt: "Diagram: job watch, routing through the index, gated writing, layout fit, and my approval"
+            caption: From posting to PDF.
 card:
   kind: project
   category: Software Project
@@ -86,7 +95,7 @@ card:
   bullets:
   - Builds one-page resumes from a verified master file, with rules that block any claim it can't trace to a fact.
   - Measures real line wraps by rendering with LibreOffice, so no bullet leaves a word hanging.
-  - Polls 161 studios' own job boards (Greenhouse, Workday, Lever, Ashby) twice a day and sorts postings by fit.
+  - Polls 33 studios' own job boards (Greenhouse, Workday, Lever, Ashby) twice a day and sorts postings by fit.
   media:
     kind: image
     src: /art/resume-system/resume-page.webp

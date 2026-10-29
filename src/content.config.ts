@@ -17,6 +17,9 @@ import { parse } from 'yaml';
 
 const url = z.string().url();
 
+const aboutPhoto = z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() });
+const aboutRow = z.object({ title: z.string(), md: z.string(), photos: z.array(aboutPhoto).default([]) });
+
 const site = defineCollection({
   loader: file('src/content/site.yaml', { parser: (text) => ({ site: parse(text) }) }),
   schema: z.object({
@@ -32,16 +35,11 @@ const site = defineCollection({
       description: z.string(),
       portrait: z.object({ src: z.string(), alt: z.string() }),
       intro: z.array(z.string()),
+      portfoliosText: z.string().optional(),
+      /** Topic rows: heading + text on the left, photos on the right. */
+      rows: z.array(aboutRow).default([]),
       whyHeading: z.string(),
-      why: z.array(z.string()),
-      profileHeading: z.string(),
-      profile: z.array(z.object({ label: z.string(), value: z.string() })),
-      topHeading: z.string(),
-      top: z.array(z.string()),
-      favoritesHeading: z.string(),
-      favorites: z.array(z.string()),
-      photosHeading: z.string(),
-      photos: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() })),
+      whyBlocks: z.array(z.any()).default([]),
     }),
   }),
 });
@@ -68,14 +66,17 @@ const block = z.discriminatedUnion('type', [
     title: z.string().optional(),
     md: z.string(),
     wide: z.boolean().optional(),
+    /** Show only the first paragraph; the rest sits behind a "Read more" toggle. */
+    collapse: z.boolean().optional(),
     /** An embedded page shown under the copy (e.g. a press article). */
     embed: z.object({ src: url, title: z.string(), width: z.number(), height: z.number() }).optional(),
   }),
   // (wide: the copy spans the full capsule instead of the 680px reading measure, as in Design sections)
   // A capsule holding one bullet list at the compact measure.
-  z.object({ ...blockBase, type: z.literal('bullets'), items: z.array(z.string()).min(1) }),
+  // peek: show only the first N items; the rest sit behind a "Show N more" toggle.
+  z.object({ ...blockBase, type: z.literal('bullets'), items: z.array(z.string()).min(1), peek: z.number().int().min(1).optional() }),
   // A capsule of media: 1, 2 or 3 across (3 collapses to 2 on tablet, 1 on phone).
-  z.object({ ...blockBase, type: z.literal('media'), cols: z.union([z.literal(1), z.literal(2), z.literal(3)]), items: z.array(mediaItem).min(1) }),
+  z.object({ ...blockBase, type: z.literal('media'), cols: z.union([z.literal(1), z.literal(2), z.literal(3)]), items: z.array(mediaItem).min(1), /** Text shown in the same capsule, above the media, when the media depends on it. */ md: z.string().optional() }),
   // An embedded player (YouTube trailer), 16:9 inside a capsule.
   z.object({ ...blockBase, type: z.literal('embed'), src: url, title: z.string(), caption: z.string().optional() }),
   // A centred magenta link pill (code samples, store pages).

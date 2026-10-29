@@ -1,5 +1,5 @@
 # Non-games Software Engineer site: software.malachek.com. Published 2026-10-21.
-# Hero leads with shipped products (09-clarifications); project list leads with Pintos, then Search Engine.
+# Hero leads with shipped products (09-clarifications). Project list: Pintos first, then the Unreal C++ work (EXO, The Fallen), Search Engine, Kawai'ian Isolation (2026-10-27).
 label: Software
 jobTitle: Software Engineer
 order: 5
@@ -29,14 +29,17 @@ hero:
   avatar: /art/live/bafbd8cfbbf7a720648ba79f2fe3a29903f4b8e2.webp
 featured:
 - pintos
-- search-engine
-- resume-system
 - exo
+- the-fallen
+- search-engine
+- kawaiian-isolation
+- resume-system
 - masks-on
 alsoBuilt:
-- kawaiian-isolation
+- night-walk
 - loonage
 - little-rockstar
+- trick-or-treat
 experience:
 - heading: Professional Experience
   items:

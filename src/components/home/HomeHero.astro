@@ -1,11 +1,13 @@
 ---
+import LinkPill from '@/components/project/LinkPill.astro';
 /**
  * Homepage hero, "T1 chunked" (chosen 2026-09-29).
  * The four game images sit behind (4 across, 2x2 on phones). The name sits on
  * the art like a title logo; the two sentences and the "Role // Place" lines
  * each get their own translucent dark box; the roles box carries a small
  * "Currently" label (the site shows no graduation date). No buttons: the header carries
- * Projects / About / Resume. The name links to the About page.
+ * Projects / About / Resume. An "About Me" pill sits beside the name (2026-10-27).
+ * The four tiles slowly cycle through key art from every project (`pool`); off under Reduce Motion.
  */
 interface Props {
   title: string;
@@ -13,11 +15,14 @@ interface Props {
   bullets?: string[];
   tiles?: string[];
   background?: string;
-  /** Where the name links (the role's About page). */
-  nameHref?: string;
+  /** The role's About page, shown as a pill beside the name. */
+  aboutHref?: string;
+  /** Key art from every project, cycled through the tiles. */
+  pool?: string[];
 }
-const { title, lines, bullets = [], tiles = [], background, nameHref } = Astro.props;
+const { title, lines, bullets = [], tiles = [], background, aboutHref, pool = [] } = Astro.props;
 const art = tiles.length ? tiles.slice(0, 4) : background ? [background] : [];
+const cycle = art.length === 4 ? [...art, ...pool.filter((p) => !art.includes(p))] : [];
 // " B.S." is shown on desktop and tablet only, so the degree line stays on one line on phones.
 const roles = bullets.map((b) => {
   const [t, org = ''] = b.split(' // ');
@@ -25,11 +30,14 @@ const roles = bullets.map((b) => {
 });
 ---
 <section class="home-hero">
-  <div class:list={['home-hero__bg', { 'home-hero__bg--one': art.length === 1 }]} aria-hidden="true">
-    {art.map((src) => <i style={`background-image:url('${src}')`}></i>)}
+  <div class:list={['home-hero__bg', { 'home-hero__bg--one': art.length === 1 }]} aria-hidden="true" data-pool={cycle.length > 4 ? JSON.stringify(cycle) : undefined}>
+    {art.map((src) => <i style={`background-image:url('${src}')`}><b></b><b></b></i>)}
   </div>
   <div class="home-hero__in">
-    <h1 class="home-hero__name">{nameHref ? <a href={nameHref}>{title}</a> : title}</h1>
+    <div class="home-hero__titlebar">
+      <h1 class="home-hero__name">{title}</h1>
+      {aboutHref && <LinkPill href={aboutHref} size="sm">About Me</LinkPill>}
+    </div>
     <div class="home-hero__box home-hero__lines">
       {lines.map((l) => <p>{l}</p>)}
     </div>
@@ -60,7 +68,10 @@ const roles = bullets.map((b) => {
   }
   .home-hero__bg { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: repeat(4, 1fr); }
   .home-hero__bg--one { grid-template-columns: 1fr; }
-  .home-hero__bg i { background: center / cover no-repeat; }
+  /* The tile shows its first image itself; the two <b> layers above it carry the crossfade. */
+  .home-hero__bg i { position: relative; overflow: hidden; background: center / cover no-repeat; }
+  .home-hero__bg b { position: absolute; inset: 0; display: block; background: center / cover no-repeat; opacity: 0; transition: opacity 1.6s ease; }
+  .home-hero__titlebar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 0 0 6px; }
   /* Light shade only: the boxes carry legibility, so the games stay visible. */
   .home-hero::before {
     content: '';
@@ -82,7 +93,7 @@ const roles = bullets.map((b) => {
     gap: 14px;
   }
   .home-hero__name {
-    margin: 0 0 6px;
+    margin: 0;
     font-family: var(--font-display);
     font-weight: 400;
     font-size: 88px;
@@ -90,8 +101,6 @@ const roles = bullets.map((b) => {
     color: var(--text);
     text-shadow: 0 4px 0 rgb(0 0 0 / 0.5), 0 0 24px rgb(0 0 0 / 0.45);
   }
-  .home-hero__name a { color: inherit; text-decoration: none; text-underline-offset: 8px; text-decoration-thickness: 4px; }
-  .home-hero__name a:hover { text-decoration: underline; }
   .home-hero__box {
     background: rgb(1 2 16 / 0.55);
     backdrop-filter: blur(10px);
@@ -134,3 +143,34 @@ const roles = bullets.map((b) => {
     .home-hero__name { font-size: 46px; }
   }
 </style>
+
+<script>
+  // Slow crossfade: every few seconds one tile (in turn) fades to the next unseen
+  // project image. Skipped under Reduce Motion and when the tab is hidden.
+  const bg = document.querySelector<HTMLElement>('.home-hero__bg[data-pool]');
+  if (bg && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const pool: string[] = JSON.parse(bg.dataset.pool!);
+    const tiles = [...bg.querySelectorAll<HTMLElement>('i')];
+    const shown = tiles.map((_, i) => i);
+    let next = tiles.length;
+    let turn = 0;
+    const order = [0, 2, 1, 3];
+    setInterval(() => {
+      if (document.hidden) return;
+      const t = order[turn++ % tiles.length];
+      while (shown.includes(next % pool.length)) next++;
+      const idx = next++ % pool.length;
+      const img = new Image();
+      img.onload = () => {
+        const layers = tiles[t].querySelectorAll<HTMLElement>('b');
+        const k = Number(tiles[t].dataset.k ?? 1) ^ 1; // alternate between the two layers
+        layers[k].style.backgroundImage = `url('${pool[idx]}')`;
+        layers[k].style.opacity = '1';
+        layers[k ^ 1].style.opacity = '0';
+        tiles[t].dataset.k = String(k);
+        shown[t] = idx;
+      };
+      img.src = pool[idx];
+    }, 4000);
+  }
+</script>

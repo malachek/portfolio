@@ -6,6 +6,7 @@ sections:
 - project-description
 - design
 - what-i-built
+- tech-process
 - breakdowns
 - reception
 - code

@@ -2,18 +2,24 @@
 /**
  * About page, one per role site (same content everywhere; only the header's
  * role and the links differ). Content: the `about` block in src/content/site.yaml.
+ * Topic sections use the project-page blocks (Blocks.astro), so type, captions and
+ * padding match the rest of the site.
  */
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/layout/Section.astro';
 import Capsule from '@/components/layout/Capsule.astro';
-import Chip from '@/components/project/Chip.astro';
-import { absUrl, type Role } from '@/lib/content';
+import Blocks from '@/components/project/Blocks.astro';
+import MediaRow from '@/components/media/MediaRow.astro';
+import Media from '@/components/media/Media.astro';
+import { absUrl, getRoles, href, resolveProject, type Role } from '@/lib/content';
+import { renderMarkdown } from '@/lib/markdown';
 
 interface Props { role: Role }
 const { role } = Astro.props;
 const site = (await getEntry('site', 'site'))!.data;
 const a = site.about;
+const portfolios = (await getRoles()).map((r) => ({ id: r.id, sub: r.data.host === 'malachek.com' ? 'main' : r.data.host.split('.')[0], href: href(r.id, '/'), current: r.id === role.id }));
 ---
 <Base title={`About | ${site.name}`} description={a.description} canonical={absUrl(role, '/about')} roleId={role.id}>
   <Section heading={a.heading} id="about" level={2}>
@@ -24,129 +30,106 @@ const a = site.about;
       </button>
       <div class="about-intro__text">
         {a.intro.map((p) => <p>{p}</p>)}
+        {a.portfoliosText && (
+          <p class="ports">{a.portfoliosText}{' '}
+            {portfolios.map((p, i) => (
+              <Fragment>{i > 0 && " "}<span class="ports__item">{i > 0 && <span class="ports__sl" aria-hidden="true">// </span>}<a href={p.href} aria-current={p.current ? 'page' : undefined}>{p.sub}</a></span></Fragment>
+            ))}
+          </p>
+        )}
       </div>
     </Capsule>
-  </Section>
-
-  {a.why.length > 0 && (
-    <Section heading={a.whyHeading} id="why-games">
-      <Capsule>
-        <div class="why">{a.why.map((p) => <p>{p}</p>)}</div>
-      </Capsule>
-    </Section>
-  )}
-
-  <Section heading={a.profileHeading} id="player-profile">
-    <Capsule>
-      <dl class="profile">
-        {a.profile.map((r) => (
-          <div class="profile__row"><dt>{r.label}</dt><dd>{r.value}</dd></div>
-        ))}
-      </dl>
-      {a.top.length > 0 && (
-        <div class="favs">
-          <h3 class="favs__h">{a.topHeading}</h3>
-          <ol class="top" role="list">
-            {a.top.map((g, i) => <li><span class="top__n" aria-hidden="true">{i + 1}</span>{g}</li>)}
-          </ol>
+    {a.rows.map((r) => (
+      <Capsule class="row">
+        <div class="row__text">
+          <h3 class="row__h">{r.title}</h3>
+          <div class="prose row__prose"><Fragment set:html={renderMarkdown(r.md)} /></div>
         </div>
-      )}
-      {a.favorites.length > 0 && (
-        <div class="favs">
-          <h3 class="favs__h">{a.favoritesHeading}</h3>
-          <ul class="favs__list" role="list">
-            {a.favorites.map((g, i) => <Chip index={i}>{g}</Chip>)}
-          </ul>
-        </div>
-      )}
-    </Capsule>
-  </Section>
-
-  {a.photos.length > 0 && (
-    <Section heading={a.photosHeading} id="around-the-industry">
-      <Capsule media>
-        <ul class="photos" role="list">
-          {a.photos.map((ph) => (
-            <li>
-              <figure>
-                <button type="button" class="photos__zoom" data-zoom aria-label={`View larger: ${ph.alt}`}>
-                  <img src={ph.src} alt={ph.alt} loading="lazy" />
-                </button>
-                {ph.caption && <figcaption>{ph.caption}</figcaption>}
-              </figure>
-            </li>
+        <ul class:list={['row__photos', `row__photos--${r.photos.length}`]} role="list">
+          {r.photos.map((ph) => (
+            <li><figure>
+              <button type="button" class="row__zoom" data-zoom aria-label={`View larger: ${ph.alt}`}><img src={ph.src} alt={ph.alt} loading="lazy" /></button>
+              {ph.caption && <figcaption>{ph.caption}</figcaption>}
+            </figure></li>
           ))}
         </ul>
       </Capsule>
-    </Section>
-  )}
+    ))}
+  </Section>
+
+  <Section heading={a.whyHeading} id="why-games">
+    {a.whyBlocks.map((b) => b.masonry ? (
+      <Capsule media>
+        <ul class="masonry" role="list">
+          {b.items.map((ph: { src: string; alt: string; caption?: string }) => (
+            <li><figure>
+              <button type="button" class="masonry__zoom" data-zoom aria-label={`View larger: ${ph.alt}`}>
+                <img src={ph.src} alt={ph.alt} loading="lazy" />
+              </button>
+              {ph.caption && <figcaption class="media__caption">{ph.caption}</figcaption>}
+            </figure></li>
+          ))}
+        </ul>
+      </Capsule>
+    ) : <Blocks blocks={[b]} />)}
+  </Section>
+
 </Base>
 
 <style>
-  .about-intro__zoom,
-  .photos__zoom { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 24px; }
-  .about-intro__zoom { flex: 0 0 auto; align-self: center; }
-  .photos__zoom { width: 100%; border-radius: 16px; }
-  .about-intro__zoom img,
-  .photos__zoom img { display: block; transition: opacity 150ms ease; }
-  .about-intro__zoom:hover img,
-  .photos__zoom:hover img { opacity: 0.88; }
-  .about-intro__zoom:focus-visible,
-  .photos__zoom:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .about-intro__zoom { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 24px; flex: 0 0 auto; align-self: center; }
+  .about-intro__zoom img { display: block; transition: opacity 150ms ease; }
+  .about-intro__zoom:hover img { opacity: 0.88; }
+  .about-intro__zoom:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   :global(.about-intro) { flex-direction: row !important; align-items: center; gap: 40px !important; }
-  .about-intro__photo {
-    flex: 0 0 300px;
-    width: 300px;
-    height: auto;
-    aspect-ratio: 651 / 700;
-    object-fit: cover;
-    border-radius: 24px;
-  }
-  .about-intro__text { display: flex; flex-direction: column; gap: 14px; max-width: var(--text-w); }
+  .about-intro__photo { flex: 0 0 280px; width: 280px; height: auto; aspect-ratio: 651 / 700; object-fit: cover; border-radius: 24px; }
+  .about-intro__text { display: flex; flex-direction: column; gap: var(--para-gap); max-width: var(--text-w); }
   .about-intro__text p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-prose); color: var(--text-body); }
-
-  .why { display: flex; flex-direction: column; gap: 14px; max-width: var(--text-w); }
-  .why p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-prose); color: var(--text-body); }
-
-  .profile { display: grid; grid-template-columns: max-content 1fr; margin: 0; }
-  .profile__row { display: contents; }
-  .profile dt, .profile dd { margin: 0; padding: 8px 0; font-size: var(--fs-body); line-height: var(--lh-compact); }
-  .profile dt { padding-right: 16px; border-right: 1px solid var(--text); color: var(--text); }
-  .profile dd { padding-left: 16px; color: var(--text-body); }
-
-  .favs { display: flex; flex-direction: column; gap: 12px; }
-  .favs__h { margin: 0; font: 900 var(--fs-subsection) / 1 var(--font-body); color: var(--text); } /* same as subsection headings */
-  .top { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
-  .top li { display: flex; align-items: baseline; gap: 10px; font-size: var(--fs-body); color: var(--text); }
-  .top__n { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--magenta); }
-
-  .favs__list { display: flex; flex-wrap: wrap; gap: 8px; }
-  /* Favorite-game tags: solid (not translucent), and a gentler hover than the
-     homepage chips: a small grow with a very slight tilt, alternating sides. */
-  .favs__list :global(.chip) { background: var(--accent-btn, #ca2dbd); color: #fff; }
-  .favs__list :global(.chip:hover) { background: color-mix(in srgb, var(--accent-btn, #ca2dbd), #fff 10%); }
-  .favs__list :global(.chip:nth-child(odd):hover) { transform: rotate(-1.5deg) scale(1.06); }
-  .favs__list :global(.chip:nth-child(even):hover) { transform: rotate(1.5deg) scale(1.06); }
-
-  /* Masonry by columns so every photo shows whole (content media scale to fit). */
-  .photos { columns: 3; column-gap: 16px; }
-  .photos li { break-inside: avoid; margin-bottom: 16px; }
-  .photos figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
-  .photos img { width: 100%; height: auto; display: block; border-radius: 16px; }
-  .photos figcaption { font-size: 15px; color: var(--muted-text); text-align: center; }
+  .ports a { color: var(--text); text-decoration: none; }
+  .ports a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+  .ports a[aria-current] { color: var(--muted-text); }
+  .ports__item { white-space: nowrap; }
+  .ports__sl { color: var(--magenta); font-weight: 700; }
+  /* Topic rows: text left, photos right (stack on phones). Type matches the project pages. */
+  :global(.row) { flex-direction: row !important; align-items: center; gap: 32px !important; }
+  .row__text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .row__h { margin: 0; font: 900 var(--fs-subsection) / 1 var(--font-body); color: var(--text); }
+  .row__prose :global(p) { margin: 0; }
+  .row__prose { display: flex; flex-direction: column; gap: var(--para-gap); }
+  .row__photos { flex: 0 0 50%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .row__photos--1 { flex-basis: 34%; grid-template-columns: 1fr; }
+  .row__photos--3 li:first-child { grid-column: 1 / -1; }
+  .row__photos figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .row__zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .row__photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+  .row__photos--3 li:first-child img { aspect-ratio: 16 / 9; }
+  .row__photos--1 img { aspect-ratio: 3 / 4; }
+  .row__photos figcaption { text-align: center; font-size: 16px; line-height: var(--lh-compact); color: var(--text-body); }
+  /* Whole photos, no crop (portraits stay whole), captions in the site's caption style. */
+  .masonry { columns: 3; column-gap: var(--grid-gap); margin: 0; padding: 0; list-style: none; }
+  .masonry li { break-inside: avoid; margin-bottom: var(--grid-gap); }
+  .masonry figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .masonry__zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .masonry img { width: 100%; height: auto; display: block; }
+  .masonry figcaption { text-align: center; font-size: var(--fs-body); line-height: var(--lh-compact); color: var(--text-body); }
+  .made { display: block; color: inherit; text-decoration: none; border-radius: 4px; }
+  .made:hover :global(.media__img) { opacity: 0.85; }
+  .made:hover :global(.media__caption) { text-decoration: underline; text-underline-offset: 4px; }
+  .made:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
 
   @media (max-width: 1279.98px) {
     :global(.about-intro) { gap: 28px !important; }
-    .about-intro__photo { flex-basis: 240px; width: 240px; }
+    .about-intro__photo { flex-basis: 220px; width: 220px; }
   }
   @media (max-width: 799.98px) {
     :global(.about-intro) { flex-direction: column !important; align-items: stretch; gap: 20px !important; }
-    .about-intro__photo { width: min(280px, 100%); flex-basis: auto; align-self: center; }
-    .profile { grid-template-columns: 1fr; }
-    .profile dt { border-right: 0; padding: 10px 0 0; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .profile dd { padding: 2px 0 8px; }
-    .photos { columns: 2; column-gap: 10px; }
-    .photos li { margin-bottom: 10px; }
-    .photos figcaption { font-size: 13px; }
+    .about-intro__zoom { align-self: center; width: min(260px, 100%); }
+    .about-intro__photo { width: 100%; flex-basis: auto; }
+    :global(.row) { flex-direction: column !important; align-items: stretch; gap: 16px !important; }
+    .row__photos, .row__photos--1 { flex-basis: auto; }
+    .row__photos--1 { max-width: 320px; align-self: center; }
+    .masonry { columns: 2; column-gap: 12px; }
+    .masonry li { margin-bottom: 12px; }
+    .masonry figcaption { font-size: 15px; }
   }
 </style>

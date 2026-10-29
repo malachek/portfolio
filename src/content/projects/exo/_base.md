@@ -60,6 +60,7 @@ sections:
               (in Unreal Editor, showing Hit Debugs to compensate for no audio)
       - id: project-description-text-1
         type: text
+        collapse: true
         md: |-
           Unreal launches you into the stratosphere at 300 MPH, so I rebuilt the velocity and physics model underneath as a parallel transport.
 
@@ -83,6 +84,7 @@ sections:
         md: Rebuilt from the velocity model up, because the stock one breaks at speed.
       - id: movement-and-physics-list
         type: bullets
+        peek: 2
         items:
           - "Spherical force component: a named force registry with parallel transport, impulse and continuous forces, local or world space, surface-locked or free 3D"
           - Rebuilt Unreal's directional gravity for spherical traversal at 300 MPH
@@ -115,6 +117,7 @@ sections:
         md: Frame-level control, because at this speed, ordering is visible.
       - id: architecture-and-performance-list
         type: bullets
+        peek: 2
         items:
           - "Player logic split across four tick groups with a one-way dependency chain: Pre-Physics, During Physics, Post Physics, Post Physics Work"
           - Used tick groups to do intensive operations parallel to Unreal’s physics engine, ensure core calculations came first, and schedule visceral systems before visual for player feel and game performance.
@@ -131,6 +134,7 @@ sections:
         md: Conveying speed without costing the player the ability to aim.
       - id: camera-and-aiming-list
         type: bullets
+        peek: 2
         items:
           - "Decoupled facing and reticle, modeled on spaceship combat: you steer along one line and fire along another"
           - Predictive look-ahead, speed-scaled pullback, Dutch angle, roll, camera lag, and shake that grows with velocity
@@ -163,6 +167,7 @@ sections:
         md: Modular on GAS, because the ability list is still growing.
       - id: combat-systems-list
         type: bullets
+        peek: 2
         items:
           - "Every weapon and ability built on GAS: tags, commit-on-execute, attribute sets, gameplay effects, gameplay cues"
           - "Hit detection component with three regions: mesh raytrace, socketed weakspot sphere, proximity sphere, all four outcomes routed into GAS as tags"
@@ -194,6 +199,7 @@ sections:
         md: "Built against one question: what still reads at 300 MPH?"
       - id: enemy-ai-list
         type: bullets
+        peek: 2
         items:
           - Two shipped archetypes. Boss and Turret in progress.
           - "Drone: five-state machine, predictive lead targeting, a telegraphed frozen ground marker, and holding windows that hand back reaction time"
@@ -246,6 +252,75 @@ sections:
             src: https://media.malachek.com/live/v2/df17c3bd045238af2db855a48b59de051fd9f278.mp4
             alt: "EXO: Healing obelisk"
             caption: Healing obelisk
+  - id: tech-process
+    heading: Tech Process
+    lead: Prototype first, playtest it, then write down what survived.
+    blocks:
+      - id: tech-process-loop
+        type: media
+        md: "I prototype a feature in the engine first, push a build to itch.io (1–2 a week), playtest it in structured rounds and at public sessions, and only then write what survived into the GDD. Early on we whiteboarded in Miro first; now ideas start in the engine."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/exo/exo-process.webp
+            alt: "EXO's feature loop: prototype in Unreal, weekly itch.io builds, playtests, and the GDD recording what survived"
+            caption: Every feature goes around this loop.
+      - id: tech-process-architecture
+        type: subsection
+        title: Architecture
+      - id: tech-process-ticks
+        type: media
+        md: "At 300 MPH a frame of camera lag is visible, so the player runs across four tick groups and every dependency points one way: speed and gravity before the move, the move before the camera, and the VFX read the final state of all of it."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/exo/exo-ticks.webp
+            alt: "Diagram: the EXO player character split across four Unreal tick groups, PrePhysics, DuringPhysics, PostPhysics and PostUpdateWork"
+            caption: One frame, split across four tick groups.
+      - id: tech-process-velocity
+        type: media
+        md: "Steering and external forces ride in separate velocity channels. Every frame both are rotated from last frame's surface normal to this one's (parallel transport), and they're summed once at the final write into Unreal's character movement, so a knockback can't bend the acceleration curve."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/exo/exo-velocity.webp
+            alt: "Diagram: steering and force velocity channels, parallel-transported across the sphere each frame and summed once at the final write"
+            caption: The velocity model under spherical movement.
+      - id: tech-process-boost
+        type: media
+        md: "A boost caches your speed and pushes toward 1.5× it; releasing falls to your peak ÷ 1.5, so every boost re-bases from a higher floor. Holding past empty Soul enters Overdrive (×2 speed, draining health), followed by a burn-out as long as you stayed in."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/exo/exo-boost.webp
+            alt: "Chart: speed over time through boost, release, a re-based boost, Overdrive and burn-out"
+            caption: The acceleration design, drawn as a speed curve.
+      - id: tech-process-boards
+        type: subsection
+        title: Early Boards & the GDD
+      - id: tech-process-boards-frame
+        type: text
+        md: From pre-production, when ideas started on a whiteboard. Most of these designs have since been replaced by what prototyping found.
+      - id: tech-process-boards-media
+        type: media
+        cols: 2
+        items:
+          - kind: image
+            src: /art/process/exo/miro-sphere-math.webp
+            alt: "Miro whiteboard: enemy intercept paths and vision cones sketched on a sphere"
+            caption: Working out enemy paths on a sphere
+          - kind: image
+            src: /art/process/exo/miro-framework.webp
+            alt: "Miro board: design framework mapping fun to fantasies, mechanics and player experiences"
+            caption: Design framework, from FUN to mechanics
+          - kind: image
+            src: /art/process/exo/miro-camera.webp
+            alt: "Miro board: camera references for spherical traversal, outer space, huge enemies and speed"
+            caption: Camera reference board
+          - kind: image
+            src: /art/process/exo/gdd-spread.webp
+            alt: "Pages from the EXO game design document: cover, game flow, and mechanics"
+            caption: The GDD, kept current at version 3.1
   - id: breakdowns
     heading: Breakdowns
     blocks:
@@ -254,6 +329,7 @@ sections:
         title: USphericalForceComponent
       - id: usphericalforcecomponent-text
         type: text
+        collapse: true
         md: |-
           Unreal assumes the world has one down. On a planet, every point has a different one, and UE5's character movement still stores velocity as a world-space vector. Travel far enough around a sphere and that vector no longer lies on the surface you're standing on. At walking pace nobody notices. At 300 MPH it throws you off the planet.
 
@@ -263,6 +339,7 @@ sections:
         title: One frame, by tick phase
       - id: one-frame-by-tick-phase-text
         type: text
+        collapse: true
         md: |-
           The player runs across four tick groups instead of one, and the order is the architecture.
 
@@ -294,6 +371,7 @@ sections:
         wide: true
       - id: designing-combat-and-feel-at-speed-text-3
         type: text
+        collapse: true
         title: Two halves pulling opposite directions
         md: |-
           Everything on the perceived side raises the sensation: speed lines, motion streaks, edge warping, dynamic FOV, camera pullback, a small player against a huge world, sweeping environment pieces, shake that scales with velocity, chromatic aberration, hazards, and an MPH readout that goes up. Built across me, the 3D artist, the VFX artist and the audio engineer.
@@ -302,6 +380,7 @@ sections:
         wide: true
       - id: designing-combat-and-feel-at-speed-text-4
         type: text
+        collapse: true
         title: Designing around acceleration
         md: |-
           The first version was hold shift, spend soul, go faster. Players held it constantly. It worked, and it had no danger in it.
@@ -316,6 +395,7 @@ sections:
         wide: true
       - id: designing-combat-and-feel-at-speed-text-5
         type: text
+        collapse: true
         title: Choice without stopping the game
         md: "Designed on paper, not yet built. Roguelike progression usually stops the game to present a choice, which in a game about momentum is the worst possible moment to take momentum away. So: level up, two or three stat options appear in the sky at a set distance, and you shoot the one you want. No pause, no slowdown. Five ticks ranks a stat up, and the first three permutations of two ranked stats unlock abilities matching that pairing. Mystery, but not a lottery; you should be able to predict roughly what fantasy a combination feeds."
         wide: true

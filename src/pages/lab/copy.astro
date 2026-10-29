@@ -34,13 +34,11 @@ const data = await Promise.all(
     <section class="role">
       <h2>About page <small>(same on every role site)</small></h2>
       {site.about.intro.map((p) => <p>{p}</p>)}
-      <h3>{site.about.whyHeading}</h3>
-      {site.about.why.map((p) => <p>{p}</p>)}
-      <h3>{site.about.profileHeading}</h3>
-      <dl>{site.about.profile.map((r) => <><dt>{r.label}</dt><dd>{r.value}</dd></>)}</dl>
-      <p><b>{site.about.topHeading}:</b> {site.about.top.join(' · ')}</p>
-      <p><b>{site.about.favoritesHeading}:</b> {site.about.favorites.join(' · ')}</p>
-      <p><b>Photo captions:</b> {site.about.photos.map((p) => p.caption).join(' · ')}</p>
+      {[...site.about.rows.flatMap((r) => [{ type: 'subsection', title: r.title }, { type: 'text', md: r.md }]), ...site.about.whyBlocks].map((b: any) => (
+        b.type === 'subsection' ? <h3>{b.title}</h3>
+        : b.type === 'text' ? <pre style="white-space:pre-wrap;font:inherit">{b.md}</pre>
+        : b.type === 'media' ? <p><b>Captions:</b> {b.items.map((i: any) => i.caption).join(' · ')}</p> : null
+      ))}
       <p><b>Footer:</b> {site.availability}</p>
     </section>
   )}

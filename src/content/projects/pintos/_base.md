@@ -62,6 +62,15 @@ sections:
           The stock timer made sleeping threads spin in a loop, checking the clock. I replaced that with a sleep list kept in order of wake-up time. A sleeping thread records when it should wake, inserts itself into the list and blocks, so it costs nothing while it waits.
 
           On every timer tick the interrupt handler only looks at the front of the list, waking threads until it reaches one that isn't due. Keeping the list sorted is what keeps the time spent inside the interrupt handler short. Interrupts are disabled while a thread inserts itself, so a tick can never land halfway through.
+      - id: design-donation-diagram
+        type: media
+        md: "Thread H waits on a lock held by M, which waits on a lock held by L. H's priority (63) is donated down the chain so L can finish and release, up to a depth of 8."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/pintos/pintos-donation.webp
+            alt: "Diagram: thread H waits on lock A held by M, which waits on lock B held by L; priority 63 is donated down the chain"
+            caption: Donation down a chain of lock holders.
       - id: design-donation
         type: text
         title: Priority donation

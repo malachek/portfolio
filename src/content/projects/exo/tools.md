@@ -4,6 +4,7 @@
 sections:
 - project-description
 - what-i-built
+- tech-process
 - breakdowns
 - code
 - design

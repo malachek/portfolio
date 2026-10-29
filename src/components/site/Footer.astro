@@ -15,9 +15,10 @@ interface Props {
   availability: string;
   nav: { label: string; href: string }[];
   homeHref?: string;
+  portfolios?: { label: string; href: string; current: boolean }[];
 }
 
-const { name, email, github, linkedin, availability, nav, homeHref = '/' } = Astro.props;
+const { name, email, github, linkedin, availability, nav, homeHref = '/', portfolios = [] } = Astro.props;
 const bare = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 const year = new Date().getFullYear();
 ---
@@ -29,6 +30,13 @@ const year = new Date().getFullYear();
       <ul class="site-footer__quick" role="list">
         {nav.filter((n) => n.label !== 'Resume').reverse().map((n) => <li><a class="eyebrow" href={n.href}>{n.label}</a></li>)}
       </ul>
+      {portfolios.length > 1 && (
+        <p class="site-footer__ports">A portfolio for each role:{' '}
+          {portfolios.map((p, i) => (
+            <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={p.href} aria-current={p.current ? 'page' : undefined}>{p.label}</a></>
+          ))}
+        </p>
+      )}
     </div>
     <ul class="site-footer__contact" role="list" aria-label="Contact">
       <li><a href={`mailto:${email}`}><Icon name="mail" size={18} />{email}</a></li>
@@ -75,6 +83,10 @@ const year = new Date().getFullYear();
     text-decoration: none;
   }
   .site-footer__avail { font-size: 16px; line-height: 1.5; color: var(--muted-text); }
+  .site-footer__ports { margin: 4px 0 0; font-size: 15px; line-height: 1.6; color: var(--muted-text); }
+  .site-footer__ports a { color: var(--text); text-decoration: none; }
+  .site-footer__ports a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .site-footer__ports a[aria-current] { color: var(--muted-text); }
   .site-footer__contact { display: flex; flex-direction: column; gap: 12px; }
   .site-footer__contact a {
     display: inline-flex;

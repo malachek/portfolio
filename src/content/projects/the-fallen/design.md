@@ -5,6 +5,7 @@ roleTitle: Combat & Systems Designer   # from the design resume
 sections:
 - project-description
 - design
+- tech-process
 - breakdowns
 - what-i-built
 - reception

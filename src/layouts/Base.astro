@@ -11,7 +11,7 @@ import Header from '@/components/site/Header.astro';
 import Footer from '@/components/site/Footer.astro';
 import Lightbox from '@/components/media/Lightbox.astro';
 import Intro from '@/components/site/Intro.astro';
-import { APEX_ROLE, getRole, href } from '@/lib/content';
+import { APEX_ROLE, getRole, getRoles, href } from '@/lib/content';
 import { accentVars } from '@/lib/color';
 
 interface Props {
@@ -42,6 +42,7 @@ const {
 const site = (await getEntry('site', 'site'))!.data;
 const role = await getRole(roleId);
 const homeHref = href(roleId, '/');
+const portfolios = (await getRoles()).map((r) => ({ label: r.data.label, href: href(r.id, '/'), current: r.id === roleId }));
 const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' ? role.data.resume : n.href) }));
 ---
 <!doctype html>
@@ -86,6 +87,7 @@ const nav = site.nav.map((n) => ({ ...n, href: href(roleId, n.href === 'resume' 
       availability={site.availability}
       nav={nav}
       homeHref={homeHref}
+      portfolios={portfolios}
     />
     <Lightbox />
   </body>

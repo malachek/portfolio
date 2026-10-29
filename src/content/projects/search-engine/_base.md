@@ -47,6 +47,15 @@ sections:
   - id: what-i-built
     heading: What I Built
     blocks:
+      - id: what-i-built-diagram
+        type: media
+        md: "The index is built once offline (crawl, tokenize, flush partial indexes within RAM, K-way merge into one file with byte offsets). Queries never load it: they seek straight to each term's line and score with TF-IDF and cosine normalization."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/search-engine/search-pipeline.webp
+            alt: "Diagram: offline build of crawl, tokenize, partial indexes and K-way merge; queries seek by byte offset and score with TF-IDF"
+            caption: Build once, answer from disk.
       - id: ranking
         type: subsection
         title: Ranking & Relevance

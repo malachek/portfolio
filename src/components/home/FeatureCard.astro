@@ -142,7 +142,13 @@ const chipBg = `color-mix(in srgb, ${accent} 60%, transparent)`;
     color: #fff;
   }
   .fcard--experience { border-radius: 0; }
-  .fcard--nobg { background: none; }
+  /* No key art (the software projects): the card sits on the black page, so the
+     40% black scrims would vanish. Tint the card and its panels with the
+     project's own accent instead. */
+  .fcard--nobg {
+    --scrim-40: color-mix(in srgb, var(--accent) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
   .fcard--pattern {
     background:
       linear-gradient(var(--scrim-40), var(--scrim-40)),

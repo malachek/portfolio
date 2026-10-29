@@ -9,14 +9,19 @@ import Section from '@/components/layout/Section.astro';
 import FeatureCard from '@/components/home/FeatureCard.astro';
 import AlsoBuilt from '@/components/home/AlsoBuilt.astro';
 import Skills from '@/components/home/Skills.astro';
+import { getCollection } from 'astro:content';
 import { absUrl, href, resolveHome, type Role } from '@/lib/content';
 
 interface Props { role: Role }
 const { role } = Astro.props;
 const home = await resolveHome(role);
+// Key art from every project, for the hero's slow cycle.
+// Games only: not the club, the studio page, or Limital's app screenshots.
+const NOT_GAME_ART = ['vgdc', 'burnt-out-games-llc', 'limital', 'comments'];
+const pool = [...new Set((await getCollection('projects')).filter((p) => !NOT_GAME_ART.includes(p.id)).map((p) => p.data.hero?.background).filter((b): b is string => !!b && !b.endsWith('.gif')))];
 ---
 <Base title={role.data.seo.title} description={role.data.seo.description} canonical={absUrl(role, '/')} roleId={role.id}>
-  <HomeHero title={home.hero.title} lines={home.hero.lines} bullets={home.hero.bullets} tiles={home.hero.tiles} background={home.hero.background} nameHref={href(role.id, '/about')} />
+  <HomeHero title={home.hero.title} lines={home.hero.lines} bullets={home.hero.bullets} tiles={home.hero.tiles} background={home.hero.background} aboutHref={href(role.id, '/about')} pool={pool} />
 
   <Section heading={home.selectedWorkHeading} id="projects" fullBleed>
     <div class="cards">

@@ -74,8 +74,17 @@ sections:
             caption: Playing it live at the Fall ZotJam 2026 showcase
   - id: ai-pipeline
     heading: The AI Pipeline
-    lead: How two devs built an online shooter in 2 days by directing Claude
+    lead: How a team of 2 built an online shooter in 2 days by directing Claude
     blocks:
+      - id: ai-pipeline-loop
+        type: media
+        md: "I wrote each feature as a spec with the numbers in it, ran parallel Claude Code sessions on it, kept everything in C++ so no system needed an editor asset, reviewed every diff, and tested builds by hand and through MCP. Playtest bugs became sharper specs."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/masks-on/masks-loop.webp
+            alt: "Diagram: spec, parallel Claude agents, C++ only, review, playtest, with bugs feeding the next spec"
+            caption: Every feature went around this loop.
       - id: why-cpp
         type: subsection
         title: "Why Everything Is C++"
@@ -163,6 +172,15 @@ sections:
       - id: loot-director
         type: subsection
         title: Loot Director
+      - id: loot-director-diagram
+        type: media
+        md: "Shots, kills and players running dry fill an activity meter; each fill places one item. Crowds get rifles and grenade launchers nearby (never on top), isolated spots get snipers and the EMP, and ammo goes near whoever is short."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/masks-on/masks-loot.webp
+            alt: "Diagram: the loot director fills a meter from action, picks a spot, rolls the item and pings only the players it matters to"
+            caption: How one item gets placed.
       - id: loot-director-list
         type: bullets
         items:

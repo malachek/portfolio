@@ -34,7 +34,19 @@ const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px
           <div class:list={['text-block', { 'text-block--embed': b.embed }]}>
             <div class:list={['prose', { 'prose--wide': b.wide }]} data-block={b.id}>
               {b.title && <TitleTag class="capsule-title">{b.title}</TitleTag>}
-              <Fragment set:html={renderMarkdown(b.md)} />
+              {(() => {
+                const paras = b.md.split(/\n\s*\n/);
+                if (!b.collapse || paras.length < 2) return <Fragment set:html={renderMarkdown(b.md)} />;
+                return (
+                  <>
+                    <Fragment set:html={renderMarkdown(paras[0])} />
+                    <details class="more">
+                      <summary><span class="more__open">Read more</span><span class="more__close">Show less</span></summary>
+                      <div class="more__body prose"><Fragment set:html={renderMarkdown(paras.slice(1).join('\n\n'))} /></div>
+                    </details>
+                  </>
+                );
+              })()}
             </div>
             {b.embed && (
               <iframe class="embed-page" src={b.embed.src} title={b.embed.title} width={b.embed.width} height={b.embed.height} loading="lazy"></iframe>
@@ -45,14 +57,31 @@ const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px
     case 'bullets':
       return (
         <Capsule>
-          <ul class="bullets" data-block={b.id}>
-            {b.items.map((i) => <li set:html={renderInline(i)} />)}
-          </ul>
+          {(() => {
+            const shown = b.peek && b.peek < b.items.length ? b.items.slice(0, b.peek) : b.items;
+            const rest = b.items.slice(shown.length);
+            return (
+              <div data-block={b.id}>
+                <ul class="bullets">
+                  {shown.map((i) => <li set:html={renderInline(i)} />)}
+                </ul>
+                {rest.length > 0 && (
+                  <details class="more">
+                    <summary><span class="more__open">Show {rest.length} more</span><span class="more__close">Show less</span></summary>
+                    <ul class="bullets more__body">
+                      {rest.map((i) => <li set:html={renderInline(i)} />)}
+                    </ul>
+                  </details>
+                )}
+              </div>
+            );
+          })()}
         </Capsule>
       );
     case 'media':
       return (
         <Capsule media>
+          {b.md && <div class="prose media-lead"><Fragment set:html={renderMarkdown(b.md)} /></div>}
           <MediaRow cols={b.cols}>
             {b.items.map((m) =>
               m.kind === 'video'
@@ -93,4 +122,28 @@ const mediaSizes = { 1: '(max-width: 799px) 100vw, 888px', 2: '(max-width: 799px
     .text-block--embed { flex-direction: column; }
   }
   .block-link { display: flex; justify-content: center; }
+  /* Text that belongs to a diagram or clip sits in its capsule, above it. */
+  .media-lead { max-width: var(--text-w); margin-bottom: var(--stack-gap); }
+
+  /* Read more / Show N more: plain underlined text toggle, no arrows or buttons. */
+  .more { margin-top: var(--list-gap); }
+  .more > summary {
+    display: inline-block;
+    cursor: pointer;
+    list-style: none;
+    color: var(--muted-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: var(--fs-body);
+  }
+  .more > summary::-webkit-details-marker { display: none; }
+  .more > summary:hover { color: var(--text); }
+  .more > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  .more .more__close { display: none; }
+  .more[open] .more__open { display: none; }
+  .more[open] .more__close { display: inline; }
+  .more[open] > summary { margin-top: var(--list-gap); order: 2; }
+  .more[open] { display: flex; flex-direction: column; }
+  .more__body { margin-top: var(--list-gap); }
+  .bullets.more__body { margin-top: 0; } /* .more already carries one list-gap, so opened items keep the normal bullet spacing */
 </style>

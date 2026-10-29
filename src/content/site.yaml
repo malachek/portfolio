@@ -27,61 +27,98 @@ about:
     src: /art/about/portrait.webp
     alt: Malachy Kennedy
   intro:
-    - My name is Malachy Kennedy, a double major in Game Design and Software Engineering at UC Irvine. I fell in love with game development at the age of 5 and have chased that passion ever since.
-    - "Two ways I am applying that drive: Burnt Out Games, LLC, the studio I co-founded, where I engineer our Unreal and Unity titles alongside 10 brilliant developers (two shipped on Steam, a third approved), and the Video Game Development Club at UC Irvine, where I'm President and 600+ members make games together every year."
-    - "As a player I'm an explorer and an achiever: I want to see every corner of a world, then master it. My favorites span story, adventure, action and puzzle, and each one gave me something I couldn't have gotten anywhere else."
-  whyHeading: Why Games
-  why:
-    - "I played Tomb Raider (2013) over a winter break, and the moment the credits rolled and showed the team photos, I knew: \"I need to be on a team like that.\""
-    - Games like Superliminal, Portal and What Remains of Edith Finch are why I love this medium. I stepped into each of those worlds and it answered back in a way only a game can, and that's what I want to spend my career making.
-    - "Next, I want to learn and get involved in everything I possibly can: working with talented people on bigger projects, building industry-standard workflows and skills, and meeting the community that made me fall in love with games in the first place."
-  profileHeading: Player Profile
-  profile:
-    - label: Player type
-      value: Explorer / Achiever
-    - label: Genres
-      value: Story, adventure, action, puzzle
-    - label: Based in
-      value: Irvine, CA
-    - label: Looking for
-      value: Summer 2027 internships and new-grad gameplay engineering & design roles
-  topHeading: Top 5
-  top:
-    - Superliminal
-    - 'The Elder Scrolls V: Skyrim'
-    - Portal
-    - What Remains of Edith Finch
-    - League of Legends
-  favoritesHeading: All-time favorites
-  favorites:
-    - Genshin Impact
-    - Tomb Raider (2013)
-    - "Tony Hawk's Downhill Jam"
-    - Fortnite
-    - Hades
-    - Hollow Knight
-    - Baba Is You
-    - Firewatch
-    - Virginia
-  photosHeading: Around the Industry
-  photos:
-    - src: /art/about/blizzcon.webp
-      alt: Malachy taking a selfie outside the Anaheim Convention Center at BlizzCon 2026
-      caption: BlizzCon 2026
-    - src: /art/about/gdc.webp
-      alt: Malachy sitting under the giant red GDC letters
-      caption: GDC
-    - src: /art/about/obsidian.webp
-      alt: Malachy giving a thumbs up under the Obsidian Entertainment sign
-      caption: Obsidian Entertainment
-    - src: /art/about/riot.webp
-      alt: Malachy standing in front of a large painted mural of characters
-      caption: Riot Games
-    - src: /art/about/blizzcon-diablo.webp
-      alt: Malachy with a plush at the Diablo display at BlizzCon 2026
-      caption: BlizzCon 2026
-    - src: /art/about/blizzard.webp
-      alt: Malachy giving a thumbs up beside the orc statue outside Blizzard Entertainment
-      caption: Blizzard Entertainment
+    - I'm Malachy Kennedy and I love making games. I fell in love with game development at 5, and have chased it ever since.
+  portfoliosText: "I do a lot, so I made a portfolio for each:"
+  rows:
+    - title: Developing
+      md: |-
+        3 games on Steam and 20+ game projects, built by following the fun.
 
+        I experiment in Unreal to make things that haven't been made, especially game feel through camerawork and systems, and I keep up with the newest engine versions and AI tools.
+      photos:
+        - src: /art/about/bog-booth.webp
+          alt: "Malachy and two Burnt Out Games teammates pointing at the logo on their shirts at the Z3 Student Games Showcase, with EXO running"
+          caption: EXO at the Z3 Student Games Showcase
+        - src: /art/about/unreal-claude.webp
+          alt: "A laptop running Unreal Editor beside a monitor with a Claude Code terminal connected to the editor, during Masks On"
+          caption: Unreal x Claude (Masks On)
+        - src: /art/about/late-night-dev.webp
+          alt: "Teammates working on EXO on laptops around a kitchen table at night"
+          caption: Late-night devving on EXO
+    - title: Leading
+      md: |-
+        President of VGDC at UCI, which I grew into North America's largest collegiate game dev club: 600+ active members, 44 officers, and 200+ workshops a year. I'm working to make it a nonprofit.
 
+        I also co-founded Burnt Out Games, LLC, where I lead tech.
+      photos:
+        - src: /art/about/vgdc-meeting.webp
+          alt: "Malachy presenting the workshop departments to a full lecture hall at a VGDC general meeting"
+          caption: Leading a VGDC general meeting
+        - src: /art/about/vgdc-booth.webp
+          alt: "Malachy handing out flyers at the VGDC booth, beside a tier list board of games"
+          caption: VGDC boothing
+        - src: /art/about/vgdc-riot.webp
+          alt: "A group selfie of Burnt Out Games and EXO contributors in front of the Riot Games sign"
+          caption: Burnt Out Games and EXO contributors at Riot
+    - title: Studying
+      md: |-
+        Game Design and Software Engineering at UC Irvine, with a 3.73 major GPA. My favorite classes have been Games Engineering, Storytelling in Interactive Media, and Games and Emotion.
+
+        I'm also a course reader for a game design class every quarter.
+      photos:
+        - src: /art/about/exo-expo.webp
+          alt: "Malachy with two Burnt Out Games teammates and an EXO contributor at the EXO station, ICS Project Expo"
+          caption: EXO at the ICS Project Expo
+        - src: /art/about/masks-on-ics.webp
+          alt: "Malachy and his teammate showcasing Masks On on a projector at Fall ZotJam 2026"
+          caption: Masks On at Fall ZotJam 2026
+    - title: Gaming
+      md: |-
+        An explorer and an achiever: I want to see every corner of a world, then master it.
+
+        **Top 5:** Superliminal, The Elder Scrolls V: Skyrim, Portal, What Remains of Edith Finch, League of Legends.
+
+        **All-time favorites:** Genshin Impact, Tomb Raider (2013), Tony Hawk's Downhill Jam, Fortnite, Hades, Hollow Knight, Baba Is You, Firewatch, and Virginia.
+      photos:
+          - src: /art/about/pc-build.webp
+            alt: "A newly built PC with an RTX graphics card and RGB lighting beside a backlit keyboard"
+            caption: The rig
+  whyHeading: Why Games?
+  whyBlocks:
+    - id: why-text
+      type: text
+      md: |-
+        Games are the one medium that uses everything I love. I grew up in art classes, chess club, and a lot of instruments (I still play piano, and bass clarinet in UCI's Euphonic Video Game Ensemble). I took every coding class I could (CS track, cybersecurity club, robotics), made short films and wrote scripts, and picked up information design from my mom.
+
+        And I made games the whole way through... papercraft, Kano on a Raspberry Pi, Scratch (including a working cardboard DDR machine on Makey Makeys), BlueJ, Pygame, Unity, then Unreal, plus more GDDs than I can count.
+
+        That's why gameplay engineering fits me. I have a strong technical foundation with a designer's mind, so the systems I build work, feel intuitive, and are fun. I'm involved in every area of a project, and I trust my intuition.
+    - id: why-media
+      type: media
+      cols: 3
+      masonry: true
+      items:
+        - kind: image
+          src: /art/about/evge-clarinet.webp
+          alt: Malachy playing bass clarinet with the Euphonic Video Game Ensemble
+          caption: Bass clarinetting at an EVGE concert
+        - kind: image
+          src: /art/about/gdc.webp
+          alt: Malachy sitting under the giant red GDC letters
+          caption: GDC
+        - kind: image
+          src: /art/about/blizzcon.webp
+          alt: Malachy taking a selfie outside the Anaheim Convention Center at BlizzCon 2026
+          caption: BlizzCon 2026
+        - kind: image
+          src: /art/about/riot.webp
+          alt: Malachy standing in front of a large painted mural of characters at Riot Games
+          caption: Riot Games
+        - kind: image
+          src: /art/about/obsidian.webp
+          alt: Malachy giving a thumbs up under the Obsidian Entertainment sign
+          caption: Obsidian Entertainment
+        - kind: image
+          src: /art/about/blizzard.webp
+          alt: Malachy giving a thumbs up beside the orc statue outside Blizzard Entertainment
+          caption: Blizzard Entertainment
