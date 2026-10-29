@@ -19,6 +19,11 @@ interface Props { role: Role }
 const { role } = Astro.props;
 const site = (await getEntry('site', 'site'))!.data;
 const a = site.about;
+const PORT_GROUPS: { label: string; items: [string, string][]; note?: string }[] = [
+  { label: 'General', items: [['dev', 'main']], note: '(across all roles)' },
+  { label: 'Games', items: [['gameplay', 'gameplay engineering'], ['tools', 'tools engineering'], ['design', 'game design']] },
+  { label: 'Software', items: [['software', 'software engineering'], ['production', 'technical production']] },
+];
 const portfolios = (await getRoles()).map((r) => ({ id: r.id, sub: r.data.host === 'malachek.com' ? 'main' : r.data.host.split('.')[0], href: href(r.id, '/'), current: r.id === role.id }));
 ---
 <Base title={`About | ${site.name}`} description={a.description} canonical={absUrl(role, '/about')} roleId={role.id}>
@@ -30,13 +35,6 @@ const portfolios = (await getRoles()).map((r) => ({ id: r.id, sub: r.data.host =
       </button>
       <div class="about-intro__text">
         {a.intro.map((p) => <p>{p}</p>)}
-        {a.portfoliosText && (
-          <p class="ports">{a.portfoliosText}{' '}
-            {portfolios.map((p, i) => (
-              <Fragment>{i > 0 && " "}<span class="ports__item">{i > 0 && <span class="ports__sl" aria-hidden="true">// </span>}<a href={p.href} aria-current={p.current ? 'page' : undefined}>{p.sub}</a></span></Fragment>
-            ))}
-          </p>
-        )}
       </div>
     </Capsule>
     {a.rows.map((r) => (
@@ -74,6 +72,24 @@ const portfolios = (await getRoles()).map((r) => ({ id: r.id, sub: r.data.host =
     ) : <Blocks blocks={[b]} />)}
   </Section>
 
+  <Section heading="More Portfolios" id="more-portfolios">
+    {a.portfoliosText && (
+        <Capsule>
+        <p class="ports">{a.portfoliosText}</p>
+        <ul class="ports-list">
+          {PORT_GROUPS.map((g) => (
+            <li><b>{g.label}:</b>{' '}
+              {g.items.map(([id, name], i) => {
+                const p = portfolios.find((x) => x.id === id);
+                return p && <Fragment>{i > 0 && ' '}<span class="ports__item">{i > 0 && <span class="ports__sep" aria-hidden="true">• </span>}<a href={p.href} aria-current={p.current ? 'page' : undefined}>{name}</a></span></Fragment>;
+              })}
+              {g.note && <span class="ports__note"> {g.note}</span>}
+            </li>
+          ))}
+        </ul>
+        </Capsule>
+      )}
+  </Section>
 </Base>
 
 <style>
@@ -88,6 +104,14 @@ const portfolios = (await getRoles()).map((r) => ({ id: r.id, sub: r.data.host =
   .ports a { color: var(--text); text-decoration: none; }
   .ports a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
   .ports a[aria-current] { color: var(--muted-text); }
+  .ports-list { margin: calc(var(--para-gap) - var(--stack-gap)) 0 0; padding-left: var(--list-indent); font-size: var(--fs-body); line-height: var(--lh-prose); color: var(--text-body); }
+  .ports-list li + li { margin-top: var(--list-gap); }
+  .ports-list b { color: var(--text); }
+  .ports-list a { color: var(--text); text-decoration: none; }
+  .ports-list a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+  .ports-list a[aria-current] { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+  .ports__sep { color: var(--muted-text); }
+  .ports__note { color: var(--muted-text); }
   .ports__item { white-space: nowrap; }
   .ports__sl { color: var(--magenta); font-weight: 700; }
   /* Topic rows: text left, photos right (stack on phones). Type matches the project pages. */
