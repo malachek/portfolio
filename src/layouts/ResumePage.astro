@@ -10,15 +10,42 @@ const { role } = Astro.props;
 const fallback = (await getRole(APEX_ROLE)).data.resumeDriveId;
 const driveId = role.data.resumeDriveId ?? fallback;
 const drivePreview = `https://drive.google.com/file/d/${driveId}/preview`;
+/** All-roles CV, built by resume-system (output/portfolio-cv). */
+const CV_PDF = '/cv/Malachy_Kennedy_CV.pdf';
 ---
 <Base title="Resume | Malachy Kennedy" description="Malachy Kennedy's resume: gameplay and systems engineer, UE5 and Unity, two titles shipped on Steam." canonical={absUrl(role, '/resume')} roleId={role.id}>
   <section class="wrap resume">
     <h1 class="visually-hidden">Resume</h1>
     <iframe src={drivePreview} title="Malachy Kennedy resume (PDF)" loading="eager"></iframe>
+    <details class="cv">
+      <summary>
+        <span class="cv__text"><span class="cv__label">Full CV</span> <span class="cv__note">Every role and project in one document, 4 pages</span></span>
+        <span class="cv__chev" aria-hidden="true"></span>
+      </summary>
+      <div class="cv__body">
+        <iframe src={CV_PDF} title="Malachy Kennedy full CV (PDF)" loading="lazy"></iframe>
+        <a class="cv__open" href={CV_PDF} target="_blank" rel="noopener">Open the CV as a PDF</a>
+      </div>
+    </details>
   </section>
 </Base>
 
 <style>
   .resume { padding-block: 24px 48px; }
   .resume iframe { width: 100%; height: min(1200px, 85vh); border: 0; border-radius: 8px; background: #fff; }
+  .cv { margin-top: var(--stack-gap, 32px); border-radius: var(--capsule-radius); background: var(--panel); }
+  .cv > summary { display: flex; align-items: center; gap: 16px; padding: var(--capsule-pad-y) var(--capsule-pad-x); cursor: pointer; list-style: none; }
+  .cv > summary::-webkit-details-marker { display: none; }
+  .cv > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--capsule-radius); }
+  .cv__label { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+  .cv__text { flex: 1 1 auto; }
+  .cv__note { color: var(--muted-text); margin-left: 8px; }
+  @media (max-width: 600px) { .cv__note { display: block; margin-left: 0; margin-top: 4px; } }
+  .cv__chev { width: 10px; height: 10px; border-right: 2px solid var(--muted-text); border-bottom: 2px solid var(--muted-text); transform: rotate(45deg); flex: none; transition: transform .2s; }
+  .cv[open] .cv__chev { transform: rotate(-135deg); }
+  .cv > summary:hover .cv__chev { border-color: var(--text); }
+  .cv__body { padding: 0 var(--capsule-pad-x) var(--capsule-pad-y); }
+  .cv__open { display: inline-block; margin-top: 12px; color: var(--muted-text); text-decoration: underline; text-underline-offset: 4px; }
+  .cv__open:hover { color: var(--text); }
+  @media (prefers-reduced-motion: reduce) { .cv__chev { transition: none; } }
 </style>

@@ -298,11 +298,22 @@ sections:
       - id: tech-process-boards
         type: subsection
         title: Early Boards & the GDD
-      - id: tech-process-boards-frame
-        type: text
-        md: From pre-production, when ideas started on a whiteboard. Most of these designs have since been replaced by what prototyping found.
+      - id: tech-process-whiteboards
+        type: media
+        md: "Fall 2025, the first sessions. The loop map already holds the economy that shipped: killing fills Soul, and Soul buys speed. The Husk board is the first enemy, one body that scales in size and speed from small fast hordes to one huge AoE enemy per planet. That range later split into the drones, chargers and boss."
+        cols: 1
+        items:
+          - kind: image
+            src: /art/process/exo/exo-whiteboard-loop.webp
+            alt: "Whiteboard mind map: running, speed, shooting, planets, gravity and camera, with killing feeding Soul, Soul feeding speed, and a speed cap"
+            caption: The first core-loop map
+          - kind: image
+            src: /art/process/exo/exo-whiteboard-husk.webp
+            alt: "Whiteboard: the Husk enemy scaling from small and fast to gargantuan and slow, auto-lock references, and a sketch of a target-lock HUD"
+            caption: The Husk, the first enemy design
       - id: tech-process-boards-media
         type: media
+        md: Then pre-production moved to Miro. Most of these designs have since been replaced by what prototyping found.
         cols: 2
         items:
           - kind: image
