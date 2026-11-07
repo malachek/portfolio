@@ -13,7 +13,7 @@ hero:
     - Online stealth arena shooter, and the gun-feel prototype for my capstone.
     - Gameplay Engineer & Level Designer · Team of 2 · Unreal Engine 5.8
     - Fall ZotJam 2026 · 2 days · Built with Claude Code and Unreal MCP
-  background: /art/masks-on/arena.webp
+  background: /art/masks-on/mask-channel-wide.webp
 overview:
   heading: Project Overview
   rows:
@@ -255,7 +255,7 @@ card:
   - Directed parallel Claude agents from written specs to a playable online FPS in 2 days on a team of 2.
   - Used Epic's experimental UE 5.8 MCP plugin to validate a hand-built greybox level and run in-depth game-feel and edge-case tests.
   - Reviewed every AI diff and tested each build, catching agent bugs in recoil, sensitivity and the HUD.
-  background: /art/masks-on/arena.webp
+  background: /art/masks-on/mask-channel-wide.webp
   media:
     kind: video
     src: https://media.malachek.com/masks-on/guns-rifle.mp4
