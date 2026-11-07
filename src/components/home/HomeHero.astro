@@ -70,7 +70,11 @@ const roles = bullets.map((b) => {
   .home-hero__bg--one { grid-template-columns: 1fr; }
   /* The tile shows its first image itself; the two <b> layers above it carry the crossfade. */
   .home-hero__bg i { position: relative; overflow: hidden; background: center / cover no-repeat; }
-  .home-hero__bg b { position: absolute; inset: 0; display: block; background: center / cover no-repeat; opacity: 0; transition: opacity 1.6s ease; }
+  .home-hero__bg b { position: absolute; inset: 0; display: block; background: center / cover no-repeat; opacity: 0; transition: opacity 1.6s ease; will-change: opacity; }
+  /* Keep the fading layers and the text on their own permanent GPU layers. Without this, mobile
+     WebKit/Blink rebuilds the hero's layers each time a fade starts and ends, and the name and
+     About Me pill blink out for a frame (2026-11-06). */
+  .home-hero__bg { transform: translateZ(0); }
   .home-hero__titlebar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 0 0 6px; }
   /* Light shade only: the boxes carry legibility, so the games stay visible. */
   .home-hero::before {
@@ -83,6 +87,9 @@ const roles = bullets.map((b) => {
       linear-gradient(0deg, rgb(1 2 16 / 0.85), transparent 22%);
   }
   .home-hero__in {
+    position: relative;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     width: 100%;
     max-width: var(--frame-max);
     margin-inline: auto;
