@@ -268,7 +268,7 @@ card:
     label: Masks On on itch.io
 small:
   blurb: An AI-agent Unreal FPS built in 2 days with Claude Code and Epic's MCP plugin. UE5.8
-  image: /art/masks-on/rifle.webp
+  image: /art/masks-on/stealth-ads.webp
   links:
   - icon: itch
     href: https://malachek.itch.io/masks-on

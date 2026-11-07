@@ -6,6 +6,6 @@ card:
   - Reviewed every AI diff and tested each build, catching agent bugs in recoil, sensitivity and the HUD.
   - Avoided merge conflicts with a teammate's Perforce pushes by holding agent edits until each pull landed.
 small:
-  image: /art/masks-on/rifle.webp
+  image: /art/masks-on/stealth-ads.webp
   blurb: 'Agentic development in Unreal: parallel Claude agents, MCP, Perforce coordination, and review on every change.'
 ---
